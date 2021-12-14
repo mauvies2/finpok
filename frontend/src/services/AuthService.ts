@@ -3,7 +3,7 @@ import { IUserSession } from 'finpok-core/domain'
 import { AuthCredentials } from 'finpok/store/auth/AuthContext'
 
 export const auth = {
-  _user: (user?: IUserSession): IUserSession | undefined => {
+  user: (user?: IUserSession): IUserSession | undefined => {
     if (typeof user !== 'undefined') {
       localStorage.setItem('user', JSON.stringify(user))
 
@@ -24,7 +24,7 @@ export const auth = {
       )
       .then((res) => res.data.data)
     if (user) {
-      auth._user(user)
+      auth.user(user)
       return user
     }
 
@@ -37,7 +37,7 @@ export const auth = {
 
   isLoggedIn: async (): Promise<boolean> => {
     try {
-      const user = auth._user()
+      const user = auth.user()
       if (!user) return false
 
       return await axios

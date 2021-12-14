@@ -20,7 +20,7 @@ export interface IAuthDispatch {
 }
 
 // initial state
-export let initialState = {
+let initialState = {
   authUser: null,
   isLoggedIn: false,
   credentials: { email: '', password: '' },

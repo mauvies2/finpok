@@ -19,7 +19,7 @@
     "typescript": "4.1.5"
   },
   "lint-staged": {
-    "*.{ts,tsx,css,scss,js}": "prettier --config .prettierrc.json --check",
+    "*.{ts,tsx,css,js}": "prettier --config .prettierrc.json --check",
     "*.{ts,tsx,js}": "eslint --max-warnings 0"
   }
 }

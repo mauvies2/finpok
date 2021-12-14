@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios'
 import {
   TransacionPayload,
   EditTransactionPayload,
@@ -8,9 +9,10 @@ import {
 import { auth } from './AuthService'
 import { api } from './http'
 
-export const fetchCryptos = async () => await api.get<ICrypto[]>('/cryptocurrencies').then(res => res.data)
+export const fetchCryptos = async (): Promise<ICrypto[]> =>
+  await api.get<ICrypto[]>('/cryptocurrencies').then((res) => res.data)
 
-export const fetchPortfolio = async () => {
+export const fetchPortfolio = async (): Promise<IPortfolio> => {
   const parsedUser = localStorage.getItem('user')
   const user = parsedUser && JSON.parse(parsedUser)
 
@@ -20,10 +22,12 @@ export const fetchPortfolio = async () => {
         Authorization: user?.token || '',
       },
     })
-    .then(res => res.data)
+    .then((res) => res.data)
 }
 
-export const addNewTransaction = async (transaction: TransacionPayload) => {
+export const addNewTransaction = async (
+  transaction: TransacionPayload
+): Promise<AxiosResponse<TransacionPayload>> => {
   const user = auth._user()
   if (!user) throw new Error()
 
@@ -31,7 +35,7 @@ export const addNewTransaction = async (transaction: TransacionPayload) => {
     .post('/portfolio/cryptocurrency', transaction, {
       headers: { authorization: user?.token },
     })
-    .then(data => data)
+    .then((data) => data)
 }
 
 export const updateTransaction = async (transaction: EditTransactionPayload) => {
@@ -42,7 +46,7 @@ export const updateTransaction = async (transaction: EditTransactionPayload) => 
     .patch('/portfolio/cryptocurrency', transaction, {
       headers: { authorization: user?.token },
     })
-    .then(data => data)
+    .then((data) => data)
 }
 
 export const removeTransaction = async (transaction: RemoveTransactionPayload) => {
@@ -53,7 +57,7 @@ export const removeTransaction = async (transaction: RemoveTransactionPayload) =
     .post('/portfolio/cryptocurrency/remove', transaction, {
       headers: { authorization: user?.token },
     })
-    .then(data => data)
+    .then((data) => data)
 }
 
 export const removeAsset = async (id: string) => {
@@ -64,5 +68,5 @@ export const removeAsset = async (id: string) => {
     .delete(`/portfolio/cryptocurrency/${id}`, {
       headers: { authorization: user?.token },
     })
-    .then(data => data)
+    .then((data) => data)
 }

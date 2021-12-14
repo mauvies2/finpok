@@ -1,0 +1,46 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "extends": ["airbnb-base", "plugin:@typescript-eslint/recommended", "prettier", "react-app"],
+  "rules": {
+    "no-console": "error",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/camelcase": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/prefer-interface": "off",
+    "@typescript-eslint/no-object-literal-type-assertion": "off",
+    "@typescript-eslint/explicit-member-accessibility": "off",
+    "@typescript-eslint/no-inferrable-types": "off",
+    "no-underscore-dangle": ["error", { "allow": ["foo_", "_bar"] }],
+    "import/prefer-default-export": "off",
+    "import/no-unresolved": "off",
+    "import/order": "off",
+    "lines-between-class-members": "off",
+    "prefer-destructuring": "off",
+    "no-shadow": "off",
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-await-in-loop": "off",
+    "no-continue": "off",
+    "no-case-declarations": "off",
+    "no-return-await": "off",
+    "no-restricted-syntax": "off",
+    "consistent-return": "off",
+    "no-dupe-class-members": "off",
+    "no-useless-constructor": "off",
+    "default-case": "off",
+    "camelcase": "off",
+    "arrow-body-style": "off",
+    "import/extensions": "off",
+    "import/first": "off",
+    "no-use-before-define": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["./src", "./tests"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  }
+}

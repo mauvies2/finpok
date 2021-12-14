@@ -27,7 +27,7 @@ const AddNewSearch: FC = () => {
   }
 
   const handleKeyPress = (key: any, index: number) => {
-    if (key == 40) {
+    if (key === 40) {
       const nextListItem = document.getElementById(`item-${index + 1}`)
       nextListItem?.focus()
     }
