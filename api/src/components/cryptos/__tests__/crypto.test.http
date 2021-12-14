@@ -1,0 +1,21 @@
+@api = http://localhost:5000
+@cmcApi = https://pro-api.coinmarketcap.com/v1
+
+### Get cryptos
+GET {{cmcApi}}/cryptocurrency/map
+Accept: application/json
+X-CMC_PRO_API_KEY: d5bd8462-ee1a-4816-9f02-c9cac813cca5
+Accept-Encoding: deflate, gzip
+
+### Get global metrics
+GET pro-api.coinmarketcap.com/v1/global-metrics/quotes/latest
+Accept: application/json
+X-CMC_PRO_API_KEY: d5bd8462-ee1a-4816-9f02-c9cac813cca5
+Accept-Encoding: deflate, gzip
+
+### Get cryptos finpok
+GET {{api}}/cryptocurrencies
+
+### Update cryptos finpok
+GET {{api}}/cryptocurrencies/update
+

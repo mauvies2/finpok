@@ -1,0 +1,6 @@
+@api = http://localhost:5000
+
+### get savings
+GET {{api}}/savings
+Content-Type: application/json
+Authorization:

@@ -1,0 +1,12 @@
+{
+	"extends": "../tsconfig.json",
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["es2015", "dom", "es5"],
+    "baseUrl": ".",
+    "outDir": "./dist",
+		"listFiles": true,
+		"composite": true
+  },
+  "include": ["src"],
+}

@@ -1,0 +1,4 @@
+{"message":"Something went wrong: ValidationError: assets.cryptos.0.buyAvgPrice: Path `buyAvgPrice` is required.","level":"error","timestamp":"2021-08-22T16:25:01.716Z"}
+{"message":"Something went wrong: ValidationError: assets.cryptos.0.buyAvgPrice: Path `buyAvgPrice` is required.","level":"error","timestamp":"2021-08-22T16:25:04.462Z"}
+{"message":"Something went wrong: ValidationError: assets.cryptos.0.buyAvgPrice: Path `buyAvgPrice` is required.","level":"error","timestamp":"2021-08-22T16:25:15.190Z"}
+{"message":"Something went wrong: ValidationError: assets.cryptos.0.buyAvgPrice: Path `buyAvgPrice` is required.","level":"error","timestamp":"2021-08-22T16:25:23.649Z"}

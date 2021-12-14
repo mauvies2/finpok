@@ -1,0 +1,22 @@
+@api = http://localhost:5000
+
+### Register user
+POST {{api}}/auth
+Content-Type: application/json
+
+{
+    "name": "mau",
+    "surname": "vie",
+    "email": "mauricio.viera@gmail.com",
+    "password": "12345",
+    "role": "admin"
+}
+
+### Login user
+POST {{api}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "mauricio.viera6@gmail.com",
+    "password": "12345"
+}

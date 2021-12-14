@@ -1,0 +1,34 @@
+@api = http://localhost:5000
+
+### Portfolio
+GET {{api}}/portfolio
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdhZDg3NzlkY2E5YjM2NDcwNjU1ZGMiLCJlbWFpbCI6Im1hdXJpY2lvLnZpZXJhNkBnbWFpbC5jb20iLCJpYXQiOjE2MzU3OTA4NDcsImV4cCI6MTYzNTk2MzY0N30.Hwima3WWHX1_L4x8rLOvfRf9JEBOPbUvd9lxGpi__Uo
+
+### Add transaction
+POST {{api}}/portfolio/cryptocurrency
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxM2Y2NTE5NGU3YjhiNmFmNjQyZTczZSIsIm5hbWUiOiJtYXUiLCJpYXQiOjE2MzE1NDQ2MTIsImV4cCI6MTYzMTcxNzQxMn0.1zlR4QOfxwtCfGCh33JyuDgreag8AfT24_jwkGl-hNM
+
+{
+	"symbol": "btc",
+	"amount": 5,
+	"price": 18,
+	"time": "2021/08/23"
+}
+
+
+### Remove transaction
+POST {{api}}/portfolio/cryptocurrency/remove-transaction
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxM2Y2NTE5NGU3YjhiNmFmNjQyZTczZSIsIm5hbWUiOiJtYXUiLCJpYXQiOjE2MzE1NDQ2MTIsImV4cCI6MTYzMTcxNzQxMn0.1zlR4QOfxwtCfGCh33JyuDgreag8AfT24_jwkGl-hNM
+
+{
+	"assetId": "613f65364e7b8b6af642e745",
+	"transactionId": "613f685b08244a6c5f22759f"
+}
+
+### Remove crypto
+DELETE {{api}}/portfolio/cryptocurrency/613f9cc7a63682758c163938
+Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxM2Y2NTE5NGU3YjhiNmFmNjQyZTczZSIsIm5hbWUiOiJtYXUiLCJpYXQiOjE2MzE1NDQ2MTIsImV4cCI6MTYzMTcxNzQxMn0.1zlR4QOfxwtCfGCh33JyuDgreag8AfT24_jwkGl-hNM
