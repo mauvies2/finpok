@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import {
   addNewTransaction,
@@ -21,6 +22,7 @@ export const usePortfolio = () => useQuery<IPortfolio, Error>('portfolio', fetch
 
 export const useAddTransaction = () => {
   const queryCache = useQueryClient()
+
   return useMutation((transaction: TransacionPayload) => addNewTransaction(transaction), {
     onSuccess: () => {
       queryCache.invalidateQueries('portfolio')

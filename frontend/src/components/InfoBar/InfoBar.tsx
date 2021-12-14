@@ -1,4 +1,6 @@
-const InfoBar = () => {
+import { FC } from 'react'
+
+const InfoBar: FC = () => {
   return (
     <section className="border-b flex flex-shrink-0 text-xs p-3 w-full overflow-x-scroll scrollbar-hide">
       <div className="flex mr-4 flex-nowrap">

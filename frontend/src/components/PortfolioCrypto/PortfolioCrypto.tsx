@@ -25,7 +25,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
   return (
     <div className="flex border-b py-5 ">
       <div className="flex-1 flex  items-center">
-        <img src={crypto.logoUrl} className="mr-3" width="20" />
+        <img src={crypto.logoUrl} className="mr-3" width="20" alt="logo" />
         <div>
           <p className="font-bold">{ownedCrypto.name}</p>
           <p>{ownedCrypto.symbol}</p>

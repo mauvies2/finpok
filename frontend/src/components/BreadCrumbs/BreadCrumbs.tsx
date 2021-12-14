@@ -1,16 +1,17 @@
-import React from 'react'
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 
-const BreadCrumbs = () => {
+const BreadCrumbs: FC = () => {
   const { closeOwnedCryptoDetail } = useUiDispatch()
   return (
     <section className="text-sm breadcrumbs">
       <ul>
         <li>
-          <a>Home</a>
+          <Link to="/">Home</Link>
         </li>
         <li onClick={() => closeOwnedCryptoDetail()}>
-          <a>Portfolio</a>
+          <Link to="/portfolio">Portfolio</Link>
         </li>
       </ul>
     </section>

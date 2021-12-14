@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { FC, KeyboardEvent, MouseEvent, useState } from 'react'
 import searchFilter from 'finpok/utils/searchFilter'
 import useGetCryptos from 'finpok/store/server/selectors/useGetCryptos'
 import { ICrypto } from 'finpok-core/domain'
@@ -14,24 +14,25 @@ const AddNewSearch: FC = () => {
   const { openModal, selectCrypto } = useUiDispatch()
 
   // methods
-  const handleSubmit = (crypto: string) => {
+  const handleSubmit = (e: MouseEvent<HTMLDivElement>, crypto: string) => {
+    e.preventDefault()
     selectCrypto(crypto)
     openModal('add-transaction')
   }
 
-  const hanldeInputKeyDown = (e: any) => {
+  const hanldeInputKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     const firstListItem = document.getElementById('item-0')
-    if (e.which === 40 && firstListItem) {
+    if (e.key === '40' && firstListItem) {
       firstListItem.focus()
     }
   }
 
-  const handleKeyPress = (key: any, index: number) => {
-    if (key === 40) {
+  const handleKeyPress = (e: KeyboardEvent<HTMLDivElement>, index: number) => {
+    if (e.key === '40') {
       const nextListItem = document.getElementById(`item-${index + 1}`)
       nextListItem?.focus()
     }
-    if (key === 38) {
+    if (e.key === '38') {
       if (index === 0) {
         const input = document.getElementById('addNewSearch')
         input?.focus()
@@ -39,7 +40,7 @@ const AddNewSearch: FC = () => {
       const previousListItem = document.getElementById(`item-${index - 1}`)
       previousListItem?.focus()
     }
-    if (key === 13) {
+    if (e.key === '13') {
       const listItem = document.getElementById(`item-${index}`)
       listItem?.click()
     }
@@ -84,8 +85,8 @@ const AddNewSearch: FC = () => {
             id={`item-${index}`}
             key={`${index}-${crypto.symbol}`}
             className="flex py-2 pl-3 items-center  rounded-lg my-1 hover:bg-gray-100 cursor-pointer"
-            onClick={() => handleSubmit(crypto.symbol)}
-            onKeyDown={(e) => handleKeyPress(e.which, index)}
+            onClick={(e) => handleSubmit(e, crypto.symbol)}
+            onKeyDown={(e) => handleKeyPress(e, index)}
             tabIndex={0}
           >
             <img src={crypto.logoUrl} className="mr-3" width="17" alt="hola" />

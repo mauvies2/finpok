@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import Head from 'finpok/components/Shared/Head'
 import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 
@@ -6,7 +6,7 @@ const Login: React.FC = () => {
   const { email, password } = useAuthState().credentials
   const { login, updateField } = useAuthDispatch()
 
-  const submitAuth = async (e: any) => {
+  const submitAuth = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     await login()
   }

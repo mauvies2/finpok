@@ -1,16 +1,18 @@
-import { AxiosResponse } from 'axios'
 import {
   TransacionPayload,
   EditTransactionPayload,
   ICrypto,
   IPortfolio,
   RemoveTransactionPayload,
+  RegisterUserCredentials,
 } from 'finpok-core/domain'
 import { auth } from './AuthService'
 import { api } from './http'
 
-export const fetchCryptos = async (): Promise<ICrypto[]> =>
-  await api.get<ICrypto[]>('/cryptocurrencies').then((res) => res.data)
+export const register = async (credentials: RegisterUserCredentials) =>
+  await api.post('/register', credentials).then((res) => res.data)
+
+export const fetchCryptos = async (): Promise<ICrypto[]> => await api.get('/cryptocurrencies').then((res) => res.data)
 
 export const fetchPortfolio = async (): Promise<IPortfolio> => {
   const parsedUser = localStorage.getItem('user')
@@ -25,9 +27,7 @@ export const fetchPortfolio = async (): Promise<IPortfolio> => {
     .then((res) => res.data)
 }
 
-export const addNewTransaction = async (
-  transaction: TransacionPayload
-): Promise<AxiosResponse<TransacionPayload>> => {
+export const addNewTransaction = async (transaction: TransacionPayload): Promise<TransacionPayload> => {
   const user = auth._user()
   if (!user) throw new Error()
 
@@ -35,10 +35,10 @@ export const addNewTransaction = async (
     .post('/portfolio/cryptocurrency', transaction, {
       headers: { authorization: user?.token },
     })
-    .then((data) => data)
+    .then((res) => res.data)
 }
 
-export const updateTransaction = async (transaction: EditTransactionPayload) => {
+export const updateTransaction = async (transaction: EditTransactionPayload): Promise<EditTransactionPayload> => {
   const user = auth._user()
   if (!user) throw new Error()
 
@@ -46,10 +46,10 @@ export const updateTransaction = async (transaction: EditTransactionPayload) => 
     .patch('/portfolio/cryptocurrency', transaction, {
       headers: { authorization: user?.token },
     })
-    .then((data) => data)
+    .then((res) => res.data)
 }
 
-export const removeTransaction = async (transaction: RemoveTransactionPayload) => {
+export const removeTransaction = async (transaction: RemoveTransactionPayload): Promise<RemoveTransactionPayload> => {
   const user = auth._user()
   if (!user) throw new Error()
 
@@ -57,10 +57,10 @@ export const removeTransaction = async (transaction: RemoveTransactionPayload) =
     .post('/portfolio/cryptocurrency/remove', transaction, {
       headers: { authorization: user?.token },
     })
-    .then((data) => data)
+    .then((res) => res.data)
 }
 
-export const removeAsset = async (id: string) => {
+export const removeAsset = async (id: string): Promise<never> => {
   const user = auth._user()
   if (!user) throw new Error()
 
@@ -68,5 +68,45 @@ export const removeAsset = async (id: string) => {
     .delete(`/portfolio/cryptocurrency/${id}`, {
       headers: { authorization: user?.token },
     })
-    .then((data) => data)
+    .then((res) => res.data)
 }
+
+// const authRequest = async <T>(
+//   method: 'get' | 'post' | 'put' | 'delete',
+//   url: string,
+//   body?: Record<string, unknown> | string
+// ): Promise<T> => {
+//   const user = auth._user()
+//   if (!user) throw new Error()
+
+//   const headers = {
+//     headers: { authorization: user?.token },
+//   }
+
+//   let response: AxiosResponse
+
+//   try {
+//     switch (method) {
+//       case 'get':
+//         response = await api.get(url, headers)
+//         break
+
+//       case 'post':
+//         response = await api.post(url, body, headers)
+//         break
+
+//       case 'put':
+//         response = await api.put(url, body, headers)
+//         break
+
+//       case 'delete':
+//         response = await api.delete(url, headers)
+//     }
+
+//     if (!response) throw new Error()
+
+//     return response.data
+//   } catch (error) {
+//     return error
+//   }
+// }

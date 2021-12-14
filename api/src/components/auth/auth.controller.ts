@@ -26,11 +26,7 @@ export const registerUser: RequestHandler = async (req: Request, res: Response) 
     const user = new User({ name, email, password: encryptedPassword })
     await user.save()
 
-    return res.json({
-      status: 200,
-      msg: 'User registered',
-      data: user,
-    })
+    return res.json({ status: 200, msg: 'User registered', data: user })
   } catch (error) {
     console.error(error)
     return res.status(500).json({ status: 500, error: 'User could not be registered' })

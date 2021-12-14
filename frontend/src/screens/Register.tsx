@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { ChangeEvent, FormEvent, useState } from 'react'
 import Head from 'finpok/components/Shared/Head'
-import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import { register } from 'finpok/services/ApiService'
 
 type FormValues = {
   name: string
@@ -20,7 +20,7 @@ const Register = () => {
   const [showPasswordAlert, setShowPasswordAlert] = useState<boolean>(false)
   const history = useHistory()
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     setFormValues({ ...formValues, [e.target.id]: e.target.value })
 
     if (formValues.password === e.target.value) {
@@ -28,22 +28,22 @@ const Register = () => {
     }
   }
 
-  const register = async () => {
+  const handleRegister = async () => {
     const { email, password, name } = formValues
     const credentials = { email, password, name }
 
     try {
-      const response = await axios.post<any>('http://localhost:5000/auth/register', credentials)
+      const response = await register(credentials)
       if (response) history.push('/login')
     } catch (e) {
-      console.log(e)
+      return e
     }
   }
 
-  const submitAuth = (e: any) => {
+  const submitAuth = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (formValues.password === formValues.repeatedPassword) {
-      register()
+      handleRegister()
       return
     }
 
@@ -65,37 +65,19 @@ const Register = () => {
             <label className="label" htmlFor="email">
               <span className="label-text">Email</span>
             </label>
-            <input
-              id="email"
-              type="email"
-              placeholder="email"
-              className="input"
-              onChange={onChange}
-            />
+            <input id="email" type="email" placeholder="email" className="input" onChange={onChange} />
           </div>
           <div className="form-control">
             <label className="label" htmlFor="password">
               <span className="label-text">Password</span>
             </label>
-            <input
-              id="password"
-              type="password"
-              placeholder="password"
-              className="input"
-              onChange={onChange}
-            />
+            <input id="password" type="password" placeholder="password" className="input" onChange={onChange} />
           </div>
           <div className="form-control">
             <label className="label" htmlFor="repeatedPassword">
               <span className="label-text">Repeat password</span>
             </label>
-            <input
-              id="repeatedPassword"
-              type="password"
-              placeholder="password"
-              className="input"
-              onChange={onChange}
-            />
+            <input id="repeatedPassword" type="password" placeholder="password" className="input" onChange={onChange} />
           </div>
           {showPasswordAlert && <p className="text-red-500">Password do not match</p>}
           <button type="submit" className="btn btn-primary mt-4">

@@ -48,8 +48,7 @@ const OwnedCryptoDetail = () => {
     100
 
   const balance =
-    currentOwnedCrypto.amount * crypto.quote.USD.price -
-    currentOwnedCrypto.buyAvgPrice * currentOwnedCrypto.amount
+    currentOwnedCrypto.amount * crypto.quote.USD.price - currentOwnedCrypto.buyAvgPrice * currentOwnedCrypto.amount
   const profitTextColor = balance > 0 ? 'text-green-400' : 'text-red-400'
 
   return (
@@ -83,16 +82,14 @@ const OwnedCryptoDetail = () => {
 
       <div className="flex items-center justify-between mt-2">
         <div className="flex items-center">
-          <img src={crypto.logoUrl.replace('16x16', '32x32')} className="mr-3 flex-shrink-0 w-10" />
+          <img src={crypto.logoUrl.replace('16x16', '32x32')} className="mr-3 flex-shrink-0 w-10" alt="logo" />
           {crypto.quote.USD.price && currentOwnedCrypto && (
             <p className="font-bold text-3xl text-black">
               {formatNumber(currentOwnedCrypto.amount * crypto.quote.USD.price, { symbol: '$' })}
             </p>
           )}
         </div>
-        <div className="bg-green-400 rounded-lg flex items-center p-2 text-white font-bold">
-          1.11%
-        </div>
+        <div className="bg-green-400 rounded-lg flex items-center p-2 text-white font-bold">1.11%</div>
       </div>
 
       <div className="mt-10 text-xs">
@@ -104,9 +101,7 @@ const OwnedCryptoDetail = () => {
         </div>
         <div className="flex justify-between border-b border-gray-100 py-5">
           <p>Avg. buy price</p>
-          <p className="font-semibold text-sm">
-            {formatNumber(currentOwnedCrypto.buyAvgPrice, { symbol: '$' })}
-          </p>
+          <p className="font-semibold text-sm">{formatNumber(currentOwnedCrypto.buyAvgPrice, { symbol: '$' })}</p>
         </div>
         <div className="flex justify-between border-b border-gray-100 py-5">
           <p>Total profit / loss</p>
@@ -146,11 +141,7 @@ const OwnedCryptoDetail = () => {
         {portfolio.cryptocurrencies
           .find((crypto) => crypto._id === currentOwnedCrypto._id)
           ?.transactions.map((transaction) => (
-            <Transaction
-              key={transaction._id}
-              transaction={transaction}
-              cryptoSymbol={currentOwnedCrypto.symbol}
-            />
+            <Transaction key={transaction._id} transaction={transaction} cryptoSymbol={currentOwnedCrypto.symbol} />
           ))}
       </section>
 

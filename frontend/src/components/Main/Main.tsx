@@ -2,6 +2,7 @@ import { useIsFetching } from 'react-query'
 import ClipLoader from 'react-spinners/ClipLoader'
 import { Router } from 'finpok/router/Router'
 import { css } from '@emotion/react'
+import { FC } from 'react'
 
 const override = css`
   position: fixed;
@@ -13,7 +14,7 @@ const override = css`
   margin: 0 auto;
 `
 
-const Main = () => {
+const Main: FC = () => {
   const isFetching = useIsFetching()
 
   return (

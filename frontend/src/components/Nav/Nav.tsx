@@ -1,7 +1,8 @@
+import { FC } from 'react'
 import Navbar from './Navbar'
 import NavMenu from './NavMenu'
 
-const Nav = () => {
+const Nav: FC = () => {
   return (
     <>
       <Navbar />

@@ -9,9 +9,10 @@ export const api = axios.create({
 })
 
 api.interceptors.response.use(
-  response => response.data,
-  error => {
-    if (error.response.status == 401) {
+  (response) => response.data,
+  (error) => {
+    if (error.response.status === 401) {
+      // eslint-disable-next-line
       location.reload()
     }
     throw error

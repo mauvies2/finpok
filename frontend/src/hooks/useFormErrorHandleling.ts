@@ -1,5 +1,5 @@
-import validator from 'validator'
 import { useEffect } from 'react'
+import validator from 'validator'
 import { IUiState } from 'finpok/store/ui/UiContext'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
 
@@ -17,17 +17,18 @@ const fieldValidation = {
 }
 
 export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
-  const { setFormFieldError, setFormFieldShowError, clearFormFieldError, clearFormFieldShowError } =
-    useUiDispatch()
+  const { setFormFieldError, setFormFieldShowError, clearFormFieldError, clearFormFieldShowError } = useUiDispatch()
   const { error } = useUiState().forms.addTransaction
 
   const errorValidation = () => {
     for (const field in fields) {
-      const inputField = fields[field]
-      const passesValidation = fieldValidation[inputField.type]
+      if (field) {
+        const inputField = fields[field]
+        const passesValidation = fieldValidation[inputField.type]
 
-      if (!passesValidation(inputField.value as string | number)) {
-        setFormFieldShowError(fields[field].name)
+        if (!passesValidation(inputField.value as string | number)) {
+          setFormFieldShowError(fields[field].name)
+        }
       }
     }
   }
@@ -46,16 +47,18 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
         }
       }
     }
-  }, [fields])
+  }, [fields, clearFormFieldError, setFormFieldError, clearFormFieldShowError, error])
 
   useEffect(() => {
     return () => {
       for (const field in fields) {
-        const inputField = fields[field]
-        clearFormFieldShowError(inputField.name)
+        if (field) {
+          const inputField = fields[field]
+          clearFormFieldShowError(inputField.name)
+        }
       }
     }
-  }, [])
+  }, [clearFormFieldShowError, fields])
 
   return { error, errorValidation }
 }

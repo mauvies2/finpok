@@ -1,14 +1,14 @@
 import formatDate from 'finpok-core/utils/formatDate'
 import formatNumber from 'finpok-core/utils/formatNumber'
 import FormInput from '../Shared/FormInput/FormInput'
-import { FormEvent, useState } from 'react'
+import { FormEvent, useState, FC } from 'react'
 import { EditTransactionPayload } from 'finpok-core/domain'
 import { useEditTransaction } from 'finpok/hooks/useApi'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
 import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
 import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
 
-const EditTransaction = () => {
+const EditTransaction: FC = () => {
   const { currentTransaction } = useUiState().portfolio
   const { closeModal, clearSelectedAsset } = useUiDispatch()
 

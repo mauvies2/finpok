@@ -103,7 +103,7 @@ const AddNewTransaction: FC = () => {
         >
           <div className="flex py-2 pl-3 items-center  rounded-lg my-1  cursor-pointer">
             <div>
-              <img src={currentCrypto.logoUrl} className="mr-3" width="17" />
+              <img src={currentCrypto.logoUrl} className="mr-3" width="17" alt="logo" />
             </div>
             <div className="mr-3 font-bold text-sm">
               {currentCrypto.name === 'XRP' ? 'Ripple' : currentCrypto.name}

@@ -22,7 +22,7 @@ export const Router = () => {
     })
 
     return () => unlisten()
-  }, [])
+  }, [clearErrors, error, history])
 
   return (
     <Suspense fallback={<Loading />}>
@@ -30,14 +30,8 @@ export const Router = () => {
         <Route exact path="/">
           <Home />
         </Route>
-        <Route
-          path="/login"
-          render={() => (isLoggedIn ? <Redirect to="/portfolio" /> : <Login />)}
-        />
-        <Route
-          path="/register"
-          render={() => (isLoggedIn ? <Redirect to="/portfolio" /> : <Register />)}
-        />
+        <Route path="/login" render={() => (isLoggedIn ? <Redirect to="/portfolio" /> : <Login />)} />
+        <Route path="/register" render={() => (isLoggedIn ? <Redirect to="/portfolio" /> : <Register />)} />
         <ProtectedRoute path="/portfolio" redirectTo="/login">
           <Portfolio />
         </ProtectedRoute>
