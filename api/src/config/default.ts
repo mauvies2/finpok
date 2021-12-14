@@ -13,8 +13,9 @@ const config = {
 
   mongoPassword: process.env.MONGO_PASSWORD || 'finpok123',
 
-  mongoHost: process.env.MONGO_HOST || process.env.NODE_ENV === 'dev' ? 'finpok.tvwve.mongodb.net' : 'finpok.tvwve.mongodb.net',
-  
+  mongoHost:
+    process.env.MONGO_HOST || process.env.NODE_ENV === 'dev' ? 'finpok.tvwve.mongodb.net' : 'finpok.tvwve.mongodb.net',
+
   mongoPort: process.env.MONGO_HOST || process.env.NODE_ENV === 'dev' ? 27017 : 27015,
 
   port: process.env.PORT || 5000,

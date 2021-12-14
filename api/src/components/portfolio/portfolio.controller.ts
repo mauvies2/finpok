@@ -21,9 +21,10 @@ export const getPortfolio: RequestHandler = async (req: Request, res: Response) 
 
   if (portfolio.cryptocurrencies) {
     total = portfolio.cryptocurrencies
-      .map(ownedCrypto => {
-        const crypto = cryptos?.find(crypto => ownedCrypto.symbol === crypto.symbol)
-        if (crypto) return crypto.quote.USD.price * ownedCrypto.amount
+      .map((ownedCrypto) => {
+        const crypto = cryptos?.find((crypto) => ownedCrypto.symbol === crypto.symbol)
+        if (!crypto) return 0
+        return crypto.quote.USD.price * ownedCrypto.amount
       })
       .reduce((a = 0, b = 0) => a + b, 0)
   }
@@ -94,9 +95,9 @@ export const removeTransaction: RequestHandler = async (req: Request, res: Respo
 
   try {
     user.portfolio.cryptocurrencies.forEach((cryptocurrency: OwnedCryptoModel) => {
-      if (cryptocurrency.symbol == cryptoSymbol) {
-        cryptocurrency.transactions.forEach(transaction => {
-          if (transaction._id != transactionId) {
+      if (cryptocurrency.symbol === cryptoSymbol) {
+        cryptocurrency.transactions.forEach((transaction) => {
+          if (transaction._id !== transactionId) {
             amount += transaction.amount
             price += transaction.price
           }

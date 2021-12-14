@@ -13,7 +13,7 @@ export const addAssetOrTransaction = (user: IUser, newCryptoToOwned: IOwnedCrypt
   // check if it's already owned and just add transaction
   if (!owned) {
     user.portfolio.cryptocurrencies.forEach((ownedCrypto: IOwnedCrypto) => {
-      if (ownedCrypto.symbol == newCryptoToOwned.symbol) {
+      if (ownedCrypto.symbol === newCryptoToOwned.symbol) {
         owned = true
         ownedCrypto.amount += transaction.amount
         ownedCrypto.buyAvgPrice =
@@ -34,12 +34,12 @@ export const updateCryptoTransaction = (user: IUser, editTransactionPayload: Edi
   const { id, symbol, amount, fee, notes, price, time } = editTransactionPayload
 
   user.portfolio.cryptocurrencies.forEach((ownedCrypto: IOwnedCrypto) => {
-    if (ownedCrypto.symbol == symbol) {
+    if (ownedCrypto.symbol === symbol) {
       let newAmount = 0
       let transactionPrice = 0
 
       ownedCrypto.transactions.forEach((transaction: ITransaction) => {
-        if (transaction._id == id) {
+        if (transaction._id === id) {
           transactionPrice += price
           newAmount += amount
 
