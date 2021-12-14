@@ -1,8 +1,7 @@
+import produce from 'immer'
 import React, { ChangeEvent, useReducer } from 'react'
-import { IUserSession } from 'finpok-core/domain'
+import { AuthCredentials, IUserSession } from 'finpok-core/domain'
 import { auth } from 'finpok/services/AuthService'
-
-export type AuthCredentials = { email: string; password: string }
 
 export interface IAuthState {
   authUser: IUserSession | null
@@ -35,69 +34,60 @@ try {
 }
 
 // reducer
+// eslint-disable-next-line
 const AuthReducer = (state: IAuthState, event: { type: string; payload?: any }) => {
   switch (event.type) {
     case 'LOGIN_SUCCESS':
-      return {
-        ...state,
-        isLoggedIn: true,
-        authUser: event.payload,
-      }
+      return produce(state, (draft) => {
+        draft.isLoggedIn = true
+        draft.authUser = event.payload
+      })
 
     case 'AUTH_USER':
-      return {
-        ...state,
-        isLoggedIn: event.payload,
-      }
+      return produce(state, (draft) => {
+        draft.isLoggedIn = event.payload
+      })
 
     case 'AUTH_ERROR':
-      return {
-        ...state,
-        authUser: null,
-        isLoggedIn: false,
-        error: event.payload.error as string,
-      }
+      return produce(state, (draft) => {
+        draft.authUser = null
+        draft.isLoggedIn = false
+        draft.error = event.payload.error
+      })
 
     case 'ERROR':
-      return {
-        ...state,
-        error: event.payload.error as string,
-      }
+      return produce(state, (draft) => {
+        draft.error = event.payload.error
+      })
 
     case 'LOGOUT':
-      return {
-        ...state,
-        authUser: null,
-        isLoggedIn: false,
-        error: '',
-      }
+      return produce(state, (draft) => {
+        draft.authUser = null
+        draft.isLoggedIn = false
+        draft.error = ''
+      })
 
     case 'CLEAR_ERRORS':
-      return {
-        ...state,
-        error: '',
-      }
+      return produce(state, (draft) => {
+        draft.error = ''
+      })
 
     case 'CLEAR_LOGIN_INPUTS':
-      return {
-        ...state,
-        credentials: { email: '', password: '' },
-      }
+      return produce(state, (draft) => {
+        draft.credentials = { email: '', password: '' }
+      })
 
     case 'UPDATE_FIELD':
-      return {
-        ...state,
-        credentials: {
-          ...state.credentials,
-          ...event.payload.credentials,
-        },
-      }
+      return produce(state, (draft) => {
+        draft.credentials = event.payload.credentials
+      })
 
     default:
       return state
   }
 }
 
+// eslint-disable-next-line
 const reducer = (state: IAuthState, event: { type: string; payload?: any }) => {
   const newState = AuthReducer(state, event)
   localStorage.setItem('auth', JSON.stringify(newState))

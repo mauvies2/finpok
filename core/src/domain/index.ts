@@ -111,13 +111,9 @@ export interface IUserSession {
   token: string
 }
 
-export type LoginUserCredentials = {
+export type AuthCredentials = {
   email: string
   password: string
 }
 
-export type RegisterUserCredentials = {
-  email: string
-  password: string
-  name: string
-}
+export type RegisterUserCredentials = AuthCredentials & { name: string }

@@ -1,6 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { IUserSession } from 'finpok-core/domain'
-import { AuthCredentials } from 'finpok/store/auth/AuthContext'
+import { AuthCredentials, IUserSession } from 'finpok-core/domain'
 
 export const auth = {
   _user: (user?: IUserSession): IUserSession | undefined => {
@@ -17,11 +16,8 @@ export const auth = {
 
   login: async (credentials: AuthCredentials): Promise<IUserSession | null> => {
     const user = await axios
-      .post<AuthCredentials, AxiosResponse<{ error: any; data: IUserSession }>>(
-        'http://localhost:5000/auth/login',
-        credentials
-      )
-      .then((res) => res.data.data)
+      .post<AuthCredentials, AxiosResponse<IUserSession>>('http://localhost:5000/auth/login', credentials)
+      .then((res) => res.data)
     if (user) {
       auth._user(user)
       return user
@@ -40,7 +36,7 @@ export const auth = {
       if (!user) return false
 
       return await axios
-        .get<any>('http://localhost:5000/auth/validate', {
+        .get<boolean>('http://localhost:5000/auth/validate', {
           headers: { authorization: user.token },
         })
         .then((res) => res.data)
