@@ -22,20 +22,23 @@ const Portfolio: FC = () => {
 
   return (
     <div>
-      <div className='p-4 text-sm'>
+      <div className="p-4 text-sm">
         <BreadCrumbs />
 
         {!isPortfolioCryptoDetailSection ? (
-          <PortfolioCryptoIndex isLoadingPortfolio={isLoadingPortfolio} isLoadingCryptos={isLoadingCryptos} />
+          <PortfolioCryptoIndex
+            isLoadingPortfolio={isLoadingPortfolio}
+            isLoadingCryptos={isLoadingCryptos}
+          />
         ) : (
           <PortfolioCryptoDetail />
         )}
 
         {/* Modals */}
-        <Modal section='add-new-search'>
+        <Modal section="add-new-search">
           <AddNewSearch />
         </Modal>
-        <Modal section='add-transaction'>
+        <Modal section="add-transaction">
           <AddNewTransaction />
         </Modal>
       </div>

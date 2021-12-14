@@ -30,7 +30,9 @@ export let initialState = {
 try {
   initialState = JSON.parse(localStorage.getItem('auth') || '') || initialState
   initialState.credentials = { email: '', password: '' }
-} catch (error) {}
+} catch (error) {
+  console.log(error)
+}
 
 // reducer
 const AuthReducer = (state: IAuthState, event: { type: string; payload?: any }) => {

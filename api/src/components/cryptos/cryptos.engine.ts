@@ -14,8 +14,8 @@ export const updateCryptosPrice = async (): Promise<boolean> => {
 
     const cryptos = await Crypto.find()
 
-    cryptos.forEach(async crypto => {
-      fetchedCryptos.forEach(async fetchedCrypto => {
+    cryptos.forEach(async (crypto) => {
+      fetchedCryptos.forEach(async (fetchedCrypto) => {
         if (crypto.cmcId == fetchedCrypto.id) {
           crypto.quote = fetchedCrypto.quote
           await crypto.save()

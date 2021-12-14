@@ -6,7 +6,7 @@ const useGetCrypto = (symbol: string | undefined) => {
   const cryptos = queryClient.getQueryData<ICrypto[]>(['cryptocurrencies'])
 
   if (cryptos && symbol) {
-    return cryptos.find(crypto => crypto.symbol === symbol.toUpperCase())
+    return cryptos.find((crypto) => crypto.symbol === symbol.toUpperCase())
   }
 }
 

@@ -10,7 +10,7 @@ export const useGetCurrentOwnedCrypto = (): IOwnedCrypto | undefined => {
 
   if (!portfolio || !currentOwnedCrypto) return
 
-  return portfolio.cryptocurrencies.find(ownedCrypto => ownedCrypto.symbol === currentOwnedCrypto)
+  return portfolio.cryptocurrencies.find((ownedCrypto) => ownedCrypto.symbol === currentOwnedCrypto)
 }
 
 export const useGetCurrentCrypto = (): ICrypto | undefined => {
@@ -21,5 +21,5 @@ export const useGetCurrentCrypto = (): ICrypto | undefined => {
 
   if (!cryptocurrencies || !currentCrypto) return
 
-  return cryptocurrencies.find(crypto => crypto.symbol === currentCrypto)
+  return cryptocurrencies.find((crypto) => crypto.symbol === currentCrypto)
 }

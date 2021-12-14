@@ -33,8 +33,9 @@ const Button: FC<ButtonProps> = forwardRef(
         disabled={disabled}
         onClick={onClick}
         style={style}
-        className={classNames(className, buttonHeight[height])}>
-        {icon ? <span className='mr-2'>{icon}</span> : null}
+        className={classNames(className, buttonHeight[height])}
+      >
+        {icon ? <span className="mr-2">{icon}</span> : null}
         <p>{children}</p>
       </button>
     )

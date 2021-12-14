@@ -17,14 +17,15 @@ const fieldValidation = {
 }
 
 export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
-  const { setFormFieldError, setFormFieldShowError, clearFormFieldError, clearFormFieldShowError } = useUiDispatch()
+  const { setFormFieldError, setFormFieldShowError, clearFormFieldError, clearFormFieldShowError } =
+    useUiDispatch()
   const { error } = useUiState().forms.addTransaction
 
   const errorValidation = () => {
     for (const field in fields) {
       const inputField = fields[field]
       const passesValidation = fieldValidation[inputField.type]
-      
+
       if (!passesValidation(inputField.value as string | number)) {
         setFormFieldShowError(fields[field].name)
       }

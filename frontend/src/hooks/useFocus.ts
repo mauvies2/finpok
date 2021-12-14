@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const useFocus = <T extends HTMLElement>(condition: boolean = true) => {
+const useFocus = <T extends HTMLElement>(condition = true) => {
   const element = useRef<T | null>(null)
 
   useEffect(() => {

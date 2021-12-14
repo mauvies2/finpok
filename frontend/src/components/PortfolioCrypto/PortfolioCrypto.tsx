@@ -23,28 +23,37 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
   })
 
   return (
-    <div className='flex border-b py-5 '>
-      <div className='flex-1 flex  items-center'>
-        <img src={crypto.logoUrl} className='mr-3' width='20' />
+    <div className="flex border-b py-5 ">
+      <div className="flex-1 flex  items-center">
+        <img src={crypto.logoUrl} className="mr-3" width="20" />
         <div>
-          <p className='font-bold'>{ownedCrypto.name}</p>
+          <p className="font-bold">{ownedCrypto.name}</p>
           <p>{ownedCrypto.symbol}</p>
         </div>
       </div>
-      <div className='flex-1 text-right justify-end font-semibold'>
-        <p className='mb-1'>{formatNumber(cryptoPrices.price, { symbol: '$', fractionDigits: 2 })}</p>
+      <div className="flex-1 text-right justify-end font-semibold">
+        <p className="mb-1">
+          {formatNumber(cryptoPrices.price, { symbol: '$', fractionDigits: 2 })}
+        </p>
         <p className={change24hStyle}>{change24h}</p>
       </div>
       <div
-        className='flex-1 text-right justify-end cursor-pointer'
-        onClick={() => openOwnedCryptoDetail(ownedCrypto.symbol)}>
-        <p className='font-semibold mb-1'>
+        className="flex-1 text-right justify-end cursor-pointer"
+        onClick={() => openOwnedCryptoDetail(ownedCrypto.symbol)}
+      >
+        <p className="font-semibold mb-1">
           {cryptoPrices.price
-            ? formatNumber(ownedCrypto.amount * cryptoPrices.price, { symbol: '$', fractionDigits: 2 })
+            ? formatNumber(ownedCrypto.amount * cryptoPrices.price, {
+                symbol: '$',
+                fractionDigits: 2,
+              })
             : 0}
         </p>
-        <p className='text-xs'>
-          {formatNumber(ownedCrypto.amount, { maximumSignificantDigits: 4, unit: ownedCrypto.symbol })}
+        <p className="text-xs">
+          {formatNumber(ownedCrypto.amount, {
+            maximumSignificantDigits: 4,
+            unit: ownedCrypto.symbol,
+          })}
         </p>
       </div>
     </div>

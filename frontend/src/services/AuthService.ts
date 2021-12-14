@@ -22,7 +22,7 @@ export const auth = {
         'http://localhost:5000/auth/login',
         credentials
       )
-      .then(res => res.data.data)
+      .then((res) => res.data.data)
     if (user) {
       auth._user(user)
       return user
@@ -44,7 +44,7 @@ export const auth = {
         .get<any>('http://localhost:5000/auth/validate', {
           headers: { authorization: user.token },
         })
-        .then(res => res.data)
+        .then((res) => res.data)
     } catch (e) {
       return false
     }

@@ -5,7 +5,7 @@
 					"path": "core"
 			},
 			{
-					"path": "client"
+				"path": "frontend"
 			},
 			{
 					"path": "api"

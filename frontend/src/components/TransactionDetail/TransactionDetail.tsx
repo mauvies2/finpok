@@ -3,8 +3,9 @@ import formatNumber from 'finpok-core/utils/formatNumber'
 import { useRemoveTransaction } from 'finpok/hooks/useApi'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
 import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
+import { FC } from 'react'
 
-const TransactionDetail = () => {
+const TransactionDetail: FC = () => {
   const { currentTransaction } = useUiState().portfolio
   const { openModal, closeModal } = useUiDispatch()
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()
@@ -68,7 +69,7 @@ const TransactionDetail = () => {
         <button className='btn btn-secondary w-full md:w-auto' onClick={() => openModal('edit-transaction')}>
           Edit transaction
         </button>
-        
+
         <button
           className='btn bg-white border-none text-red-500 w-full mt-2 md:w-auto hover:bg-gray-50 hover:text-gray-800'
           onClick={handleRemoveTransaction}>

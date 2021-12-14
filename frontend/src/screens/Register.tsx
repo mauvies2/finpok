@@ -11,7 +11,12 @@ type FormValues = {
 }
 
 const Register = () => {
-  const [formValues, setFormValues] = useState<FormValues>({ name: '', email: '', password: '', repeatedPassword: '' })
+  const [formValues, setFormValues] = useState<FormValues>({
+    name: '',
+    email: '',
+    password: '',
+    repeatedPassword: '',
+  })
   const [showPasswordAlert, setShowPasswordAlert] = useState<boolean>(false)
   const history = useHistory()
 
@@ -47,35 +52,53 @@ const Register = () => {
 
   return (
     <>
-      <Head title='Register user' />
-      <div className='hero min-h-screen'>
-        <form className='p-10 card bg-base-200' onSubmit={submitAuth}>
-          <div className='form-control'>
-            <label className='label' htmlFor='name'>
-              <span className='label-text'>Name</span>
+      <Head title="Register user" />
+      <div className="hero min-h-screen">
+        <form className="p-10 card bg-base-200" onSubmit={submitAuth}>
+          <div className="form-control">
+            <label className="label" htmlFor="name">
+              <span className="label-text">Name</span>
             </label>
-            <input id='name' type='name' placeholder='name' className='input' onChange={onChange} />
+            <input id="name" type="name" placeholder="name" className="input" onChange={onChange} />
           </div>
-          <div className='form-control'>
-            <label className='label' htmlFor='email'>
-              <span className='label-text'>Email</span>
+          <div className="form-control">
+            <label className="label" htmlFor="email">
+              <span className="label-text">Email</span>
             </label>
-            <input id='email' type='email' placeholder='email' className='input' onChange={onChange} />
+            <input
+              id="email"
+              type="email"
+              placeholder="email"
+              className="input"
+              onChange={onChange}
+            />
           </div>
-          <div className='form-control'>
-            <label className='label' htmlFor='password'>
-              <span className='label-text'>Password</span>
+          <div className="form-control">
+            <label className="label" htmlFor="password">
+              <span className="label-text">Password</span>
             </label>
-            <input id='password' type='password' placeholder='password' className='input' onChange={onChange} />
+            <input
+              id="password"
+              type="password"
+              placeholder="password"
+              className="input"
+              onChange={onChange}
+            />
           </div>
-          <div className='form-control'>
-            <label className='label' htmlFor='repeatedPassword'>
-              <span className='label-text'>Repeat password</span>
+          <div className="form-control">
+            <label className="label" htmlFor="repeatedPassword">
+              <span className="label-text">Repeat password</span>
             </label>
-            <input id='repeatedPassword' type='password' placeholder='password' className='input' onChange={onChange} />
+            <input
+              id="repeatedPassword"
+              type="password"
+              placeholder="password"
+              className="input"
+              onChange={onChange}
+            />
           </div>
-          {showPasswordAlert && <p className='text-red-500'>Password do not match</p>}
-          <button type='submit' className='btn btn-primary mt-4'>
+          {showPasswordAlert && <p className="text-red-500">Password do not match</p>}
+          <button type="submit" className="btn btn-primary mt-4">
             Register
           </button>
         </form>

@@ -49,7 +49,7 @@ export interface IUiDispatch {
   closeModal: () => void
   selectCrypto: (cryptoSymbol: string) => void
   clearSelectedAsset: () => void
-  openOwnedCryptoDetail: (ownedCrypto: IOwnedCrypto) => void
+  openOwnedCryptoDetail: (ownedCrypto: string) => void
   closeOwnedCryptoDetail: () => void
   selectCurrentTransaction: (transaction: ITransaction) => void
   setFormFieldError: (field: string) => void
@@ -59,7 +59,7 @@ export interface IUiDispatch {
 }
 
 // initial state
-let initialState: IUiState = {
+const initialState: IUiState = {
   isMobileMenuOpen: false,
   modal: null,
 
@@ -120,7 +120,7 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
       }
 
     case 'CLOSE_MODAL':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         draft.modal = null
       })
 
@@ -179,29 +179,28 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
       }
 
     case 'SET_FORM_FIELD_ERROR':
-      
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         const field = event.payload as keyof IUiState['forms']['addTransaction']['error']
 
         draft.forms.addTransaction.error[field].isValid = true
       })
 
     case 'CLEAR_FORM_FIELD_ERROR':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         const field = event.payload as keyof IUiState['forms']['addTransaction']['error']
 
         draft.forms.addTransaction.error[field].isValid = false
       })
 
     case 'SET_FORM_FIELD_SHOW_ERROR':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         const field = event.payload as keyof IUiState['forms']['addTransaction']['error']
 
         draft.forms.addTransaction.error[field].shouldShow = true
       })
 
     case 'CLEAR_FORM_FIELD_SHOW_ERROR':
-      return produce(state, draft => {
+      return produce(state, (draft) => {
         const field = event.payload as keyof IUiState['forms']['addTransaction']['error']
 
         draft.forms.addTransaction.error[field].shouldShow = false
@@ -242,7 +241,7 @@ export const useUiActions = () => {
     dispatch({ type: 'CLEAR_SELECTED_ASSET' })
   }
 
-  const openOwnedCryptoDetail = (ownedCrypto: IOwnedCrypto) => {
+  const openOwnedCryptoDetail = (ownedCrypto: string) => {
     dispatch({ type: 'OPEN_OWNED_CRYPTO_DETAIL' })
     dispatch({ type: 'SELECT_OWNED_CRYPTO', payload: ownedCrypto })
   }

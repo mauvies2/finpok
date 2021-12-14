@@ -4,7 +4,7 @@ import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 const BreadCrumbs = () => {
   const { closeOwnedCryptoDetail } = useUiDispatch()
   return (
-    <section className='text-sm breadcrumbs'>
+    <section className="text-sm breadcrumbs">
       <ul>
         <li>
           <a>Home</a>

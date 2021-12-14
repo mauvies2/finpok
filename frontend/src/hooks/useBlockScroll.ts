@@ -12,7 +12,8 @@ const useBlockScroll = (condition: boolean) => {
     if (!body || !body.style || scroll.current) return
 
     const scrollBarWidth = window.innerWidth - html.clientWidth
-    const bodyPaddingRight = parseInt(window.getComputedStyle(body).getPropertyValue('padding-right')) || 0
+    const bodyPaddingRight =
+      parseInt(window.getComputedStyle(body).getPropertyValue('padding-right')) || 0
 
     html.style.overflow = 'hidden'
     body.style.paddingRight = `${bodyPaddingRight + scrollBarWidth}px`

@@ -17,7 +17,7 @@ const Main = () => {
   const isFetching = useIsFetching()
 
   return (
-    <main className='max-w-screen mt-16 overscroll-x-hidden'>
+    <main className="max-w-screen mt-16 overscroll-x-hidden">
       <ClipLoader loading={!!isFetching} size={30} css={override} />
       <Router />
     </main>
