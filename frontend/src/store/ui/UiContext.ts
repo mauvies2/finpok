@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { IOwnedCrypto, ITransaction } from 'finpok-core/domain'
+import { ITransaction } from 'finpok-core/domain'
 import { produce } from 'immer'
 
 export interface IUiState {
@@ -80,7 +80,7 @@ const initialState: IUiState = {
       },
       error: {
         amount: {
-          isValid: true,
+          isValid: false,
           shouldShow: false,
         },
         price: {

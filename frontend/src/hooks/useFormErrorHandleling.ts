@@ -7,6 +7,7 @@ type FormField = {
   type: 'numeric' | 'text'
   name: keyof IUiState['forms']['addTransaction']['error']
   value: string | number | undefined
+  required?: boolean
 }
 
 type FormErrorHandleling = { [field: string]: FormField }
@@ -26,7 +27,9 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
         const inputField = fields[field]
         const passesValidation = fieldValidation[inputField.type]
 
-        if (!passesValidation(inputField.value as string | number)) {
+        if (!inputField.required && inputField.value === '') continue
+
+        if (inputField.value !== undefined && !passesValidation(inputField.value)) {
           setFormFieldShowError(fields[field].name)
         }
       }
@@ -35,15 +38,22 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
 
   useEffect(() => {
     for (const field in fields) {
-      if (!fields[field].value) {
-        setFormFieldError(fields[field].name)
-      } else {
-        if (error[fields[field].name].shouldShow) {
-          clearFormFieldShowError(fields[field].name)
-        }
+      if (field) {
+        const inputField = fields[field]
+        const passesValidation = fieldValidation[inputField.type]
 
-        if (error[fields[field].name].isValid) {
-          clearFormFieldError(fields[field].name)
+        if (!inputField.required && inputField.value === '') continue
+
+        if (inputField.value !== undefined && !passesValidation(inputField.value)) {
+          setFormFieldError(fields[field].name)
+        } else {
+          if (error[fields[field].name].shouldShow) {
+            clearFormFieldShowError(fields[field].name)
+          }
+
+          if (error[fields[field].name].isValid) {
+            clearFormFieldError(fields[field].name)
+          }
         }
       }
     }
@@ -58,7 +68,7 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
         }
       }
     }
-  }, [clearFormFieldShowError, fields])
+  }, [])
 
   return { error, errorValidation }
 }

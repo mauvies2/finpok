@@ -35,8 +35,8 @@ const AddNewTransaction: FC = () => {
   })
 
   const { error, errorValidation } = useFormErrorHandleling({
-    field1: { name: 'amount', type: 'numeric', value: transactionPayload?.amount },
-    field2: { name: 'price', type: 'numeric', value: transactionPayload?.price },
+    field1: { name: 'amount', type: 'numeric', value: transactionPayload?.amount, required: true },
+    field2: { name: 'price', type: 'numeric', value: transactionPayload?.price, required: true },
     field4: { name: 'fee', type: 'numeric', value: transactionPayload?.fee },
     field3: { name: 'notes', type: 'text', value: transactionPayload?.notes },
   })
@@ -85,17 +85,12 @@ const AddNewTransaction: FC = () => {
 
   if (!currentCrypto || !transactionPayload) return null
 
-  const transactionTotal =
-    ((transactionPayload.price as number) || 0) * ((transactionPayload.amount as number) || 0)
+  const transactionTotal = ((transactionPayload.price as number) || 0) * ((transactionPayload.amount as number) || 0)
 
   return (
     <form className="flex flex-col justify-between h-full" onSubmit={handleSubmit}>
       <div className="flex-1">
-        <TabSelect
-          tabs={['buy', 'sell', 'transfer']}
-          value={transactionPayload.type}
-          onClick={selectTransactionType}
-        />
+        <TabSelect tabs={['buy', 'sell', 'transfer']} value={transactionPayload.type} onClick={selectTransactionType} />
 
         <div
           className="select select-bordered w-full max-w-xs mb-4 cursor-pointer"
@@ -105,9 +100,7 @@ const AddNewTransaction: FC = () => {
             <div>
               <img src={currentCrypto.logoUrl} className="mr-3" width="17" alt="logo" />
             </div>
-            <div className="mr-3 font-bold text-sm">
-              {currentCrypto.name === 'XRP' ? 'Ripple' : currentCrypto.name}
-            </div>
+            <div className="mr-3 font-bold text-sm">{currentCrypto.name === 'XRP' ? 'Ripple' : currentCrypto.name}</div>
             <div className="text-xs font-bold text-gray-400">{currentCrypto.symbol}</div>
           </div>
         </div>
@@ -189,10 +182,7 @@ const AddNewTransaction: FC = () => {
         <div className="bg-gray-100 rounded-lg items-center p-4 text-xs">
           <label className="text-sm font-semibold">Total spent</label>
           <div className="form-control relative ">
-            <div
-              placeholder="0.00"
-              className="input mt-2 border bg-gray-100  pl-6 text-xl font-bold h-8"
-            >
+            <div placeholder="0.00" className="input mt-2 border bg-gray-100  pl-6 text-xl font-bold h-8">
               {formatNumber(transactionTotal)}
             </div>
             <p className="absolute  top-[10px] left-2 text-xl font-bold">$</p>
