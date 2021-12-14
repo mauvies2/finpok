@@ -105,6 +105,7 @@ const initialState: IUiState = {
 // } catch (error) {}
 
 // reducer
+// eslint-disable-next-line
 const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUiState => {
   switch (event.type) {
     case 'TOGGLE_MENU':
@@ -211,6 +212,7 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
   }
 }
 
+// eslint-disable-next-line
 const reducer = (state: IUiState, event: { type: string; payload?: any }) => {
   const newState = UiReducer(state, event)
   localStorage.setItem('ui', JSON.stringify(newState))

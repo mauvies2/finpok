@@ -45,7 +45,9 @@ export const loginUser: RequestHandler = async (req: Request, res: Response) => 
   const token = jwt.sign({ _id, email }, config.jwt, { expiresIn: '2 days' })
 
   return res.status(200).header('auth-token', token).json({
-    error: null,
-    data: { _id, name, email, token },
+    _id,
+    name,
+    email,
+    token,
   })
 }

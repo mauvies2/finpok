@@ -27,8 +27,12 @@ let initialState = {
 }
 
 try {
-  initialState = JSON.parse(localStorage.getItem('auth') || '') || initialState
-  initialState.credentials = { email: '', password: '' }
+  const authLocalStorageState = localStorage.getItem('auth')
+  if (authLocalStorageState && typeof authLocalStorageState === 'string') {
+    initialState = JSON.parse(authLocalStorageState)
+  } else {
+    initialState.credentials = { email: '', password: '' }
+  }
 } catch (error) {
   console.log(error)
 }
