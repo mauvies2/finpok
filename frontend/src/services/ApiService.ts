@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios'
 import {
   TransacionPayload,
   EditTransactionPayload,
@@ -10,7 +11,7 @@ import { auth } from './AuthService'
 import { api } from './http'
 
 export const register = async (credentials: RegisterUserCredentials) =>
-  await api.post('/register', credentials).then((res) => res.data)
+  await api.post('/auth/register', credentials).then((res) => res.data)
 
 export const fetchCryptos = async (): Promise<ICrypto[]> => await api.get('/cryptocurrencies').then((res) => res.data)
 

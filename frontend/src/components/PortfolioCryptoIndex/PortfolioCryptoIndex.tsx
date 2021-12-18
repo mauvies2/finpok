@@ -11,10 +11,7 @@ interface PortfolioCryptoIndexProps {
   isLoadingCryptos: boolean
 }
 
-const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({
-  isLoadingPortfolio,
-  isLoadingCryptos,
-}) => {
+const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({ isLoadingPortfolio, isLoadingCryptos }) => {
   // computed
   const portfolio = useGetPortfolio()
   const cryptos = useGetCryptos()
@@ -43,9 +40,7 @@ const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({
           <p className="font-bold text-3xl text-black">
             {formatNumber(portfolio.total, { fractionDigits: 2, symbol: '$' })}
           </p>
-          <div className="bg-green-400 rounded-lg flex items-center p-2 text-white font-bold">
-            1.11%
-          </div>
+          <div className="bg-green-400 rounded-lg flex items-center p-2 text-white font-bold">1.11%</div>
         </div>
         <div className="flex items-center">
           <p className="text-green-400 font-bold">+ $147.69</p>
@@ -58,12 +53,7 @@ const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({
         <>
           <section className="flex justify-between items-center my-8">
             <p className="font-bold text-black text-lg">Your assets</p>
-            <Button
-              className="btn btn-secondary"
-              onClick={() => openModal('add-new-search')}
-              icon="+"
-              height="s"
-            >
+            <Button className="btn btn-secondary" onClick={() => openModal('add-new-search')} icon="+" height="s">
               Add new
             </Button>
           </section>
@@ -76,9 +66,7 @@ const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({
 
             {portfolio.cryptocurrencies?.map((ownedCrypto) => {
               const crypto = cryptos.find((crypto) => ownedCrypto.symbol === crypto.symbol)
-              return (
-                <PortfolioCrypto key={ownedCrypto._id} ownedCrypto={ownedCrypto} crypto={crypto} />
-              )
+              return <PortfolioCrypto key={ownedCrypto._id} ownedCrypto={ownedCrypto} crypto={crypto} />
             })}
           </section>
         </>

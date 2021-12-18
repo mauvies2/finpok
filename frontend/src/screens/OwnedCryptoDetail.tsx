@@ -35,7 +35,7 @@ const OwnedCryptoDetail = () => {
 
   const handleAddTransaction = () => {
     if (currentOwnedCrypto && crypto) {
-      selectCrypto(crypto.symbol)
+      selectCrypto(currentOwnedCrypto.symbol)
     }
     openModal('add-transaction')
   }
@@ -82,7 +82,7 @@ const OwnedCryptoDetail = () => {
 
       <div className="flex items-center justify-between mt-2">
         <div className="flex items-center">
-          <img src={crypto.logoUrl.replace('16x16', '32x32')} className="mr-3 flex-shrink-0 w-10" alt="logo" />
+          <img src={crypto.logoUrl.replace('16x16', '32x32')} className="mr-3 flex-shrink-0 w-10" alt="logox" />
           {crypto.quote.USD.price && currentOwnedCrypto && (
             <p className="font-bold text-3xl text-black">
               {formatNumber(currentOwnedCrypto.amount * crypto.quote.USD.price, { symbol: '$' })}

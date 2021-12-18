@@ -1,8 +1,8 @@
-import useMediaQuery from 'finpok/hooks/useMediaQuery'
-import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
+import { FC } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import classNames from 'classnames'
-import { FC } from 'react'
+import useMediaQuery from 'finpok/hooks/useMediaQuery'
+import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
 import useBlockScroll from 'finpok/hooks/useBlockScroll'
 // import useScroll from 'finpok/hooks/useScroll'
@@ -32,10 +32,7 @@ const NavMenu: FC = () => {
         // scrollingUp ? 'fixed animate-nav' : 'absolute',
       )}
     >
-      <div
-        className="relative md:flex md:justify-between md:w-full"
-        onClick={() => toggleMobileMenu()}
-      >
+      <div className="relative md:flex md:justify-between md:w-full" onClick={() => toggleMobileMenu()}>
         <div className="flex-row justify-start items-center md:flex-1 md:flex">
           <Link
             to="/portfolio"
@@ -44,22 +41,26 @@ const NavMenu: FC = () => {
             Portfolio
           </Link>
           <Link
-            to=""
+            to="about"
             className="btn btn-ghost btn-sm rounded-btn justify-start pl-6 h-16 w-full md:w-auto md:px-6"
           >
             About
           </Link>
           <Link
-            to=""
+            to="contact"
             className="btn btn-ghost btn-sm rounded-btn justify-start pl-6 h-16 w-full md:w-auto md:px-6"
           >
             Contact
           </Link>
         </div>
         <div className="px-6 mt-8 w-full md:px-0 md:mt-0 md:flex-1 md:h-16 flex flex-col md:flex-row items-center md:justify-end md:mr-4">
-          {!isLoggedIn ? (
+          {isLoggedIn ? (
+            <button onClick={logout} className="btn btn-primary w-full md:w-auto">
+              Logout
+            </button>
+          ) : (
             <>
-              {!isCurrentLocation('login') && (
+              {isCurrentLocation('register') && (
                 <Link to="/login" className="w-full md:w-auto mb-4 md:mb-0 md:mr-4">
                   <button
                     className={classNames(
@@ -71,16 +72,12 @@ const NavMenu: FC = () => {
                   </button>
                 </Link>
               )}
-              {!isCurrentLocation('register') && (
+              {isCurrentLocation('login') && (
                 <Link to="/register" className="w-full md:w-auto">
                   <button className="btn btn-primary w-full md:w-auto">Register</button>
                 </Link>
               )}
             </>
-          ) : (
-            <button onClick={logout} className="btn btn-primary w-full md:w-auto">
-              Logout
-            </button>
           )}
         </div>
       </div>
