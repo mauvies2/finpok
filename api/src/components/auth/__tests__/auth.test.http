@@ -1,15 +1,13 @@
 @api = http://localhost:5000
 
 ### Register user
-POST {{api}}/auth
+POST {{api}}/auth/register
 Content-Type: application/json
 
 {
-    "name": "mau",
-    "surname": "vie",
-    "email": "mauricio.viera@gmail.com",
-    "password": "12345",
-    "role": "admin"
+    "name": "maur",
+    "email": "mauricio.viera6@gmail.com",
+    "password": "12345"
 }
 
 ### Login user
