@@ -16,23 +16,32 @@ import {
 
 export const getPortfolio: RequestHandler = async (req: Request, res: Response) => {
   const { portfolio }: { portfolio: IPortfolio } = req.body.user
-  const cryptos = await Crypto.find()
-  let total = 0
+  try {
+    const cryptos = await Crypto.find()
 
-  if (portfolio.cryptocurrencies) {
-    total = portfolio.cryptocurrencies
-      .map((ownedCrypto) => {
-        const crypto = cryptos?.find((crypto) => ownedCrypto.symbol === crypto.symbol)
-        if (!crypto) return 0
-        return crypto.quote.USD.price * ownedCrypto.amount
-      })
-      .reduce((a = 0, b = 0) => a + b, 0)
+    if (!cryptos) throw new Error()
+    if (!portfolio.cryptocurrencies) return res.status(200).json({ status: 200, msg: 'portfolio', data: {} })
+
+    let total = 0
+
+    if (portfolio.cryptocurrencies) {
+      total = portfolio.cryptocurrencies
+        .map((ownedCrypto) => {
+          const crypto = cryptos?.find((crypto) => ownedCrypto.symbol === crypto.symbol)
+          if (!crypto) return 0
+          return crypto.quote.USD.price * ownedCrypto.amount
+        })
+        .reduce((a = 0, b = 0) => a + b, 0)
+    }
+
+    portfolio.total = total
+
+    console.log({ domain: 'Api', msg: 'Portoflio' })
+    return res.status(200).json({ status: 200, msg: 'portfolio', data: portfolio })
+  } catch (error) {
+    console.error({ domain: 'Api', error })
+    return res.status(200).json({ status: 500, msg: 'Server error' })
   }
-
-  portfolio.total = total
-
-  console.log({ domain: 'Api', msg: 'Portoflio' })
-  return res.status(200).json({ status: 200, msg: 'portfolio', data: portfolio })
 }
 
 export const addTransaction: RequestHandler = async (req: Request, res: Response) => {
