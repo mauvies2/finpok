@@ -38,9 +38,9 @@ const FormInput: FC<FormInputProps> = ({
   onChange,
 }) => {
   return (
-    <label className='text-sm font-semibold'>
+    <label className="text-sm font-semibold">
       {label}
-      <div className='form-control relative mb-4'>
+      <div className="form-control relative mb-4">
         <input
           id={id}
           name={name}
@@ -59,7 +59,7 @@ const FormInput: FC<FormInputProps> = ({
           ])}
           onChange={onChange}
         />
-        {symbol && <p className='absolute top-[23px] left-3 '>{symbol}</p>}
+        {symbol && <p className="absolute top-[23px] left-3 ">{symbol}</p>}
         <FieldError condition={shouldShowError}>{labelOnError}</FieldError>
       </div>
     </label>

@@ -10,7 +10,7 @@ type FormField = {
 }
 
 type FormFieldData = {
-  [field: string]: { value: string | number | undefined; isValid: boolean; shouldShow: boolean }
+  [field: string]: { isValid: boolean; shouldShow: boolean }
 }
 
 type FormErrorHandleling = FormField[]
@@ -24,7 +24,7 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
   const initialState = (): FormFieldData => {
     const formData: FormFieldData = {}
     for (const field of fields) {
-      formData[field.name] = { value: field.value, isValid: false, shouldShow: false }
+      formData[field.name] = { isValid: false, shouldShow: false }
     }
     return formData
   }
@@ -57,12 +57,6 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
             draft[field].shouldShow = false
           })
 
-        case 'SET_FIELD_VALUE':
-          return produce(state, (draft) => {
-            const field = event.payload as { field: string; value: string | number | undefined }
-            draft[field.field].value = field.value
-          })
-
         default:
           return state
       }
@@ -72,7 +66,6 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
 
   // validate form data
   const errorValidation = () => {
-    console.log('error validation')
     for (const field of fields) {
       const passesValidation = fieldValidation[field.type]
 
@@ -117,27 +110,3 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
 
   return { formData, errorValidation }
 }
-
-// () => {
-//   const formData: FormFieldData | Record<string, unknown> = {}
-//   for (const field of fields) {
-//     formData[field.name] = { isValid: false, shouldShow: false }
-//   }
-//   return formData
-// }
-
-// const setFieldError = (payload: string) => {
-//   dispatch({ type: 'SET_FORM_FIELD_ERROR', payload })
-// }
-
-// const clearFieldError = (payload: string) => {
-//   dispatch({ type: 'CLEAR_FORM_FIELD_ERROR', payload })
-// }
-
-// const setFormFieldShowError = (payload: string) => {
-//   dispatch({ type: 'SET_FORM_FIELD_SHOW_ERROR', payload })
-// }
-
-// const clearFieldShowError = (payload: string) => {
-//   dispatch({ type: 'CLEAR_FORM_FIELD_SHOW_ERROR', payload })
-// }

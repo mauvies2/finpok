@@ -1,4 +1,4 @@
-import { FC, FormEvent, useState } from 'react'
+import { FC, FormEvent, useEffect, useState } from 'react'
 import formatNumber from 'finpok-core/utils/formatNumber'
 import formatDate from 'finpok-core/utils/formatDate'
 import Button from '../Shared/Button'
@@ -19,39 +19,44 @@ const AddNewTransaction: FC = () => {
 
   // local state
   const [extraFields, setExtraFields] = useState({ date: false, fee: false, notes: false })
-  const [transactionPayload, setTransactionPayload] = useState<TransacionPayload | null>(() => {
-    if (currentCrypto) {
-      return {
-        type: 'buy',
-        symbol: currentCrypto.symbol,
-        amount: '',
-        price: parseFloat(currentCrypto.quote.USD.price.toFixed(2)),
-        notes: '',
-        fee: '',
-        time: new Date(),
-      }
-    }
-    return null
+  const [transactionPayload, setTransactionPayload] = useState<TransacionPayload>({
+    type: 'buy',
+    symbol: '',
+    amount: '',
+    price: '',
+    notes: '',
+    fee: '',
+    time: new Date(),
   })
 
-  const { formData: error, errorValidation } = useFormErrorHandleling([
-    { name: 'amount', type: 'numeric', value: transactionPayload?.amount, required: true },
-    { name: 'price', type: 'numeric', value: transactionPayload?.price, required: true },
-    { name: 'fee', type: 'numeric', value: transactionPayload?.fee },
-    { name: 'notes', type: 'text', value: transactionPayload?.notes },
+  useEffect(() => {
+    if (currentCrypto && !transactionPayload.price && !transactionPayload.symbol) {
+      setTransactionPayload({
+        ...transactionPayload,
+        price: parseFloat(currentCrypto.quote.USD.price.toFixed(2)),
+        symbol: currentCrypto.symbol,
+      })
+    }
+  }, [currentCrypto, transactionPayload])
+
+  const { formData, errorValidation } = useFormErrorHandleling([
+    { name: 'amount', type: 'numeric', value: transactionPayload.amount, required: true },
+    { name: 'price', type: 'numeric', value: transactionPayload.price, required: true },
+    { name: 'fee', type: 'numeric', value: transactionPayload.fee },
+    { name: 'notes', type: 'text', value: transactionPayload.notes },
   ])
+
+  if (!currentCrypto || !transactionPayload) return null
 
   // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     errorValidation()
 
-    if (transactionPayload) {
-      if (!error.amount.isValid && !error.price.isValid) {
-        addTransaction.mutate(transactionPayload)
-        closeModal()
-        clearSelectedAsset()
-      }
+    if (!formData.amount.isValid && !formData.price.isValid) {
+      addTransaction.mutate(transactionPayload)
+      closeModal()
+      clearSelectedAsset()
     }
   }
 
@@ -60,25 +65,19 @@ const AddNewTransaction: FC = () => {
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (transactionPayload) {
-      setTransactionPayload({
-        ...transactionPayload,
-        [e.target.name]: e.target.type === 'text' ? e.target.value : handleNumber(e.target.value),
-      })
-    }
+    setTransactionPayload({
+      ...transactionPayload,
+      [e.target.name]: e.target.type === 'text' ? e.target.value : handleNumber(e.target.value),
+    })
   }
 
   const selectTransactionType = (type: TransacionPayload['type']) => {
-    if (transactionPayload) {
-      setTransactionPayload({ ...transactionPayload, type })
-    }
+    setTransactionPayload({ ...transactionPayload, type })
   }
 
   const addField = (field: string) => {
     setExtraFields({ ...extraFields, [field]: true })
   }
-
-  if (!currentCrypto || !transactionPayload) return null
 
   const transactionTotal = ((transactionPayload.price as number) || 0) * ((transactionPayload.amount as number) || 0)
 
@@ -109,7 +108,7 @@ const AddNewTransaction: FC = () => {
           min="0.00"
           step=".01"
           value={transactionPayload.amount}
-          shouldShowError={error.amount.shouldShow}
+          shouldShowError={formData.amount.shouldShow}
           onChange={handleChange}
           autoFocus
         />
@@ -125,7 +124,7 @@ const AddNewTransaction: FC = () => {
           min="0.00"
           step=".01"
           value={transactionPayload.price}
-          shouldShowError={error.price.shouldShow}
+          shouldShowError={formData.price.shouldShow}
           onChange={handleChange}
         />
 
@@ -141,7 +140,7 @@ const AddNewTransaction: FC = () => {
             min="0.00"
             step=".01"
             value={transactionPayload.fee}
-            shouldShowError={error.fee.shouldShow}
+            shouldShowError={formData.fee.shouldShow}
             onChange={handleChange}
           />
         )}
@@ -155,7 +154,7 @@ const AddNewTransaction: FC = () => {
             labelOnError="Notes is required"
             placeholder="Write your note here"
             value={transactionPayload.notes}
-            shouldShowError={error.notes.shouldShow}
+            shouldShowError={formData.notes.shouldShow}
             onChange={handleChange}
           />
         )}
