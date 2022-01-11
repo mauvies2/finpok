@@ -12,35 +12,6 @@ export interface IUiState {
     currentCrypto: string | null
     currentTransaction: ITransaction | null
   }
-
-  forms: {
-    addTransaction: {
-      values: {
-        price: number | null
-        amount: number | null
-        fee: number | null
-        notes: string | null
-      }
-      error: {
-        amount: {
-          isValid: boolean
-          shouldShow: boolean
-        }
-        price: {
-          isValid: boolean
-          shouldShow: boolean
-        }
-        fee: {
-          isValid: boolean
-          shouldShow: boolean
-        }
-        notes: {
-          isValid: boolean
-          shouldShow: boolean
-        }
-      }
-    }
-  }
 }
 
 export interface IUiDispatch {
@@ -52,10 +23,6 @@ export interface IUiDispatch {
   openOwnedCryptoDetail: (ownedCrypto: string) => void
   closeOwnedCryptoDetail: () => void
   selectCurrentTransaction: (transaction: ITransaction) => void
-  setFormFieldError: (field: string) => void
-  clearFormFieldError: (field: string) => void
-  setFormFieldShowError: (field: string) => void
-  clearFormFieldShowError: (field: string) => void
 }
 
 // initial state
@@ -68,35 +35,6 @@ const initialState: IUiState = {
     currentCrypto: null,
     currentOwnedCrypto: null,
     currentTransaction: null,
-  },
-
-  forms: {
-    addTransaction: {
-      values: {
-        price: null,
-        amount: null,
-        fee: null,
-        notes: null,
-      },
-      error: {
-        amount: {
-          isValid: false,
-          shouldShow: false,
-        },
-        price: {
-          isValid: false,
-          shouldShow: false,
-        },
-        fee: {
-          isValid: false,
-          shouldShow: false,
-        },
-        notes: {
-          isValid: false,
-          shouldShow: false,
-        },
-      },
-    },
   },
 }
 
@@ -179,34 +117,6 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
         },
       }
 
-    case 'SET_FORM_FIELD_ERROR':
-      return produce(state, (draft) => {
-        const field = event.payload as keyof IUiState['forms']['addTransaction']['error']
-
-        draft.forms.addTransaction.error[field].isValid = true
-      })
-
-    case 'CLEAR_FORM_FIELD_ERROR':
-      return produce(state, (draft) => {
-        const field = event.payload as keyof IUiState['forms']['addTransaction']['error']
-
-        draft.forms.addTransaction.error[field].isValid = false
-      })
-
-    case 'SET_FORM_FIELD_SHOW_ERROR':
-      return produce(state, (draft) => {
-        const field = event.payload as keyof IUiState['forms']['addTransaction']['error']
-
-        draft.forms.addTransaction.error[field].shouldShow = true
-      })
-
-    case 'CLEAR_FORM_FIELD_SHOW_ERROR':
-      return produce(state, (draft) => {
-        const field = event.payload as keyof IUiState['forms']['addTransaction']['error']
-
-        draft.forms.addTransaction.error[field].shouldShow = false
-      })
-
     default:
       return state
   }
@@ -257,21 +167,6 @@ export const useUiActions = () => {
     dispatch({ type: 'SELECT_SINGLE_TRANSACTION', payload: transaction })
   }
 
-  const setFormFieldError = (payload: string) => {
-    dispatch({ type: 'SET_FORM_FIELD_ERROR', payload })
-  }
-
-  const clearFormFieldError = (payload: string) => {
-    dispatch({ type: 'CLEAR_FORM_FIELD_ERROR', payload })
-  }
-  const setFormFieldShowError = (payload: string) => {
-    dispatch({ type: 'SET_FORM_FIELD_SHOW_ERROR', payload })
-  }
-
-  const clearFormFieldShowError = (payload: string) => {
-    dispatch({ type: 'CLEAR_FORM_FIELD_SHOW_ERROR', payload })
-  }
-
   const events = {
     toggleMobileMenu,
     openModal,
@@ -281,10 +176,6 @@ export const useUiActions = () => {
     openOwnedCryptoDetail,
     closeOwnedCryptoDetail,
     selectCurrentTransaction,
-    setFormFieldError,
-    clearFormFieldError,
-    setFormFieldShowError,
-    clearFormFieldShowError,
   }
 
   return { state, events }

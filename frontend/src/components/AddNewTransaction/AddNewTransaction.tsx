@@ -34,12 +34,12 @@ const AddNewTransaction: FC = () => {
     return null
   })
 
-  const { error, errorValidation } = useFormErrorHandleling({
-    field1: { name: 'amount', type: 'numeric', value: transactionPayload?.amount, required: true },
-    field2: { name: 'price', type: 'numeric', value: transactionPayload?.price, required: true },
-    field4: { name: 'fee', type: 'numeric', value: transactionPayload?.fee },
-    field3: { name: 'notes', type: 'text', value: transactionPayload?.notes },
-  })
+  const { formData: error, errorValidation } = useFormErrorHandleling([
+    { name: 'amount', type: 'numeric', value: transactionPayload?.amount, required: true },
+    { name: 'price', type: 'numeric', value: transactionPayload?.price, required: true },
+    { name: 'fee', type: 'numeric', value: transactionPayload?.fee },
+    { name: 'notes', type: 'text', value: transactionPayload?.notes },
+  ])
 
   // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -55,21 +55,16 @@ const AddNewTransaction: FC = () => {
     }
   }
 
+  const handleNumber = (value: string) => {
+    return isNaN(parseFloat(value)) ? '' : parseFloat(value)
+  }
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (transactionPayload) {
-      if (e.target.type === 'text') {
-        setTransactionPayload({
-          ...transactionPayload,
-          [e.target.name]: e.target.value,
-        })
-      }
-
-      if (e.target.type === 'number') {
-        setTransactionPayload({
-          ...transactionPayload,
-          [e.target.name]: isNaN(parseFloat(e.target.value)) ? '' : parseFloat(e.target.value),
-        })
-      }
+      setTransactionPayload({
+        ...transactionPayload,
+        [e.target.name]: e.target.type === 'text' ? e.target.value : handleNumber(e.target.value),
+      })
     }
   }
 

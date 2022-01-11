@@ -1,16 +1,19 @@
-import { useEffect } from 'react'
+import { useEffect, useReducer } from 'react'
 import validator from 'validator'
-import { IUiState } from 'finpok/store/ui/UiContext'
-import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
+import produce from 'immer'
 
 type FormField = {
   type: 'numeric' | 'text'
-  name: keyof IUiState['forms']['addTransaction']['error']
+  name: string
   value: string | number | undefined
   required?: boolean
 }
 
-type FormErrorHandleling = { [field: string]: FormField }
+type FormFieldData = {
+  [field: string]: { value: string | number | undefined; isValid: boolean; shouldShow: boolean }
+}
+
+type FormErrorHandleling = FormField[]
 
 const fieldValidation = {
   numeric: (value: string | number) => validator.isNumeric(value.toString()),
@@ -18,57 +21,123 @@ const fieldValidation = {
 }
 
 export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
-  const { setFormFieldError, setFormFieldShowError, clearFormFieldError, clearFormFieldShowError } = useUiDispatch()
-  const { error } = useUiState().forms.addTransaction
+  const initialState = (): FormFieldData => {
+    const formData: FormFieldData = {}
+    for (const field of fields) {
+      formData[field.name] = { value: field.value, isValid: false, shouldShow: false }
+    }
+    return formData
+  }
 
+  const [formData, dispatch] = useReducer(
+    (state: FormFieldData, event: { type: string; payload?: unknown }): FormFieldData => {
+      switch (event.type) {
+        case 'SET_FORM_FIELD_ERROR':
+          return produce(state, (draft) => {
+            const field = event.payload as string
+
+            draft[field].isValid = true
+          })
+
+        case 'CLEAR_FORM_FIELD_ERROR':
+          return produce(state, (draft) => {
+            const field = event.payload as string
+            draft[field].isValid = false
+          })
+
+        case 'SET_FORM_FIELD_SHOW_ERROR':
+          return produce(state, (draft) => {
+            const field = event.payload as string
+            draft[field].shouldShow = true
+          })
+
+        case 'CLEAR_FORM_FIELD_SHOW_ERROR':
+          return produce(state, (draft) => {
+            const field = event.payload as string
+            draft[field].shouldShow = false
+          })
+
+        case 'SET_FIELD_VALUE':
+          return produce(state, (draft) => {
+            const field = event.payload as { field: string; value: string | number | undefined }
+            draft[field.field].value = field.value
+          })
+
+        default:
+          return state
+      }
+    },
+    initialState()
+  )
+
+  // validate form data
   const errorValidation = () => {
-    for (const field in fields) {
-      if (field) {
-        const inputField = fields[field]
-        const passesValidation = fieldValidation[inputField.type]
+    console.log('error validation')
+    for (const field of fields) {
+      const passesValidation = fieldValidation[field.type]
 
-        if (!inputField.required && inputField.value === '') continue
+      if (!field.required && field.value === '') continue
 
-        if (inputField.value !== undefined && !passesValidation(inputField.value)) {
-          setFormFieldShowError(fields[field].name)
-        }
+      if (field.value !== undefined && !passesValidation(field.value)) {
+        dispatch({ type: 'SET_FORM_FIELD_SHOW_ERROR', payload: field.name })
       }
     }
   }
 
+  // validate form data on change
   useEffect(() => {
-    for (const field in fields) {
-      if (field) {
-        const inputField = fields[field]
-        const passesValidation = fieldValidation[inputField.type]
+    for (const field of fields) {
+      const passesValidation = fieldValidation[field.type]
 
-        if (!inputField.required && inputField.value === '') continue
+      if (!field.required && field.value === '') continue
 
-        if (inputField.value !== undefined && !passesValidation(inputField.value)) {
-          setFormFieldError(fields[field].name)
-        } else {
-          if (error[fields[field].name].shouldShow) {
-            clearFormFieldShowError(fields[field].name)
-          }
+      if (field.value !== undefined && !passesValidation(field.value)) {
+        dispatch({ type: 'SET_FORM_FIELD_ERROR', payload: field.name })
+      } else {
+        if (formData[field.name].shouldShow) {
+          dispatch({ type: 'CLEAR_FORM_FIELD_SHOW_ERROR', payload: field.name })
+        }
 
-          if (error[fields[field].name].isValid) {
-            clearFormFieldError(fields[field].name)
-          }
+        if (formData[field.name].isValid) {
+          dispatch({ type: 'CLEAR_FORM_FIELD_ERROR', payload: field.name })
         }
       }
     }
-  }, [fields, clearFormFieldError, setFormFieldError, clearFormFieldShowError, error])
+  }, [fields, formData])
 
+  // clear field errors when component unmounts
   useEffect(() => {
     return () => {
-      for (const field in fields) {
-        if (field) {
-          const inputField = fields[field]
-          clearFormFieldShowError(inputField.name)
-        }
+      for (const field of fields) {
+        dispatch({ type: 'CLEAR_FORM_FIELD_SHOW_ERROR', payload: field.name })
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { error, errorValidation }
+  return { formData, errorValidation }
 }
+
+// () => {
+//   const formData: FormFieldData | Record<string, unknown> = {}
+//   for (const field of fields) {
+//     formData[field.name] = { isValid: false, shouldShow: false }
+//   }
+//   return formData
+// }
+
+// const setFieldError = (payload: string) => {
+//   dispatch({ type: 'SET_FORM_FIELD_ERROR', payload })
+// }
+
+// const clearFieldError = (payload: string) => {
+//   dispatch({ type: 'CLEAR_FORM_FIELD_ERROR', payload })
+// }
+
+// const setFormFieldShowError = (payload: string) => {
+//   dispatch({ type: 'SET_FORM_FIELD_SHOW_ERROR', payload })
+// }
+
+// const clearFieldShowError = (payload: string) => {
+//   dispatch({ type: 'CLEAR_FORM_FIELD_SHOW_ERROR', payload })
+// }
