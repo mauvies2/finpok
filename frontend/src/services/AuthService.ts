@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { AuthCredentials, IUserSession } from 'finpok-core/domain'
+import { LoginCredentials, IUserSession } from 'finpok-core/domain'
 
 export const auth = {
   _user: (user?: IUserSession): IUserSession | undefined => {
@@ -14,9 +14,9 @@ export const auth = {
     return JSON.parse(storedUser)
   },
 
-  login: async (credentials: AuthCredentials): Promise<IUserSession | null> => {
+  login: async (credentials: LoginCredentials): Promise<IUserSession | null> => {
     const user = await axios
-      .post<AuthCredentials, AxiosResponse<IUserSession>>('http://localhost:5000/auth/login', credentials)
+      .post<LoginCredentials, AxiosResponse<IUserSession>>('http://localhost:5000/auth/login', credentials)
       .then((res) => res.data)
     if (user) {
       auth._user(user)

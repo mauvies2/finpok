@@ -1,28 +1,25 @@
 import produce from 'immer'
-import React, { ChangeEvent, useReducer } from 'react'
-import { AuthCredentials, IUserSession } from 'finpok-core/domain'
+import { useReducer } from 'react'
+import { LoginCredentials, IUserSession } from 'finpok-core/domain'
 import { auth } from 'finpok/services/AuthService'
 
 export interface IAuthState {
   authUser: IUserSession | null
   isLoggedIn: boolean
-  credentials: AuthCredentials
   error: string
 }
 
 export interface IAuthDispatch {
-  login: () => Promise<void>
+  login: (credentials: LoginCredentials) => Promise<void>
   logout: () => void
   checkAuth: () => Promise<void>
   clearErrors: () => void
-  updateField: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
 // initial state
 let initialState = {
   authUser: null,
   isLoggedIn: false,
-  credentials: { email: '', password: '' },
   error: '',
 }
 
@@ -30,8 +27,6 @@ try {
   const authLocalStorageState = localStorage.getItem('auth')
   if (authLocalStorageState && typeof authLocalStorageState === 'string') {
     initialState = JSON.parse(authLocalStorageState)
-  } else {
-    initialState.credentials = { email: '', password: '' }
   }
 } catch (error) {
   console.log(error)
@@ -76,16 +71,6 @@ const AuthReducer = (state: IAuthState, event: { type: string; payload?: any }) 
         draft.error = ''
       })
 
-    case 'CLEAR_LOGIN_INPUTS':
-      return produce(state, (draft) => {
-        draft.credentials = { email: '', password: '' }
-      })
-
-    case 'UPDATE_FIELD':
-      return produce(state, (draft) => {
-        draft.credentials = event.payload.credentials
-      })
-
     default:
       return state
   }
@@ -102,9 +87,9 @@ const reducer = (state: IAuthState, event: { type: string; payload?: any }) => {
 export const useAuthActions = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
-  const login = async () => {
+  const login = async (credentials: LoginCredentials) => {
     try {
-      const authUser = await auth.login(state.credentials)
+      const authUser = await auth.login(credentials)
       if (authUser) dispatch({ type: 'LOGIN_SUCCESS', payload: authUser })
     } catch ({ message }) {
       dispatch({ type: 'AUTH_ERROR', payload: { error: message } })
@@ -127,12 +112,6 @@ export const useAuthActions = () => {
     }
   }
 
-  const updateField = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const credentials = { ...state.credentials, [e.target.name]: e.target.value }
-
-    dispatch({ type: 'UPDATE_FIELD', payload: { credentials } })
-  }
-
   const clearErrors = () => {
     dispatch({ type: 'CLEAR_ERRORS' })
   }
@@ -142,7 +121,6 @@ export const useAuthActions = () => {
     logout,
     checkAuth,
     clearErrors,
-    updateField,
   }
 
   return { state, events }
