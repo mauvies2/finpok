@@ -1,7 +1,9 @@
-import React, { ChangeEvent, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import Head from 'finpok/components/Shared/Head'
+import FormInput from '../components/Shared/FormInput/FormInput'
 import { useHistory } from 'react-router-dom'
 import { register } from 'finpok/services/ApiService'
+import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 
 type FormValues = {
   name: string
@@ -20,8 +22,14 @@ const Register = () => {
   const [showPasswordAlert, setShowPasswordAlert] = useState<boolean>(false)
   const history = useHistory()
 
+  const { formData, errorValidation } = useFormErrorHandleling([
+    { name: 'name', type: 'text', value: formValues.name, required: true },
+    { name: 'email', type: 'email', value: formValues.email, required: true },
+    { name: 'password', type: 'password', value: formValues.password, required: true },
+  ])
+
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setFormValues({ ...formValues, [e.target.id]: e.target.value })
+    setFormValues({ ...formValues, [e.target.name]: e.target.value })
 
     if (formValues.password === e.target.value) {
       setShowPasswordAlert(false)
@@ -42,7 +50,14 @@ const Register = () => {
 
   const submitAuth = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (formValues.password === formValues.repeatedPassword) {
+    errorValidation()
+
+    if (
+      formValues.password === formValues.repeatedPassword &&
+      !formData.name.isValid &&
+      !formData.email.isValid &&
+      !formData.password.isValid
+    ) {
       handleRegister()
       return
     }
@@ -55,31 +70,51 @@ const Register = () => {
       <Head title="Register user" />
       <div className="hero min-h-screen">
         <form className="p-10 card bg-base-200" onSubmit={submitAuth}>
-          <div className="form-control">
-            <label className="label" htmlFor="name">
-              <span className="label-text">Name</span>
-            </label>
-            <input id="name" type="name" placeholder="name" className="input" onChange={onChange} />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="email">
-              <span className="label-text">Email</span>
-            </label>
-            <input id="email" type="email" placeholder="email" className="input" onChange={onChange} />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="password">
-              <span className="label-text">Password</span>
-            </label>
-            <input id="password" type="password" placeholder="password" className="input" onChange={onChange} />
-          </div>
-          <div className="form-control">
-            <label className="label" htmlFor="repeatedPassword">
-              <span className="label-text">Repeat password</span>
-            </label>
-            <input id="repeatedPassword" type="password" placeholder="password" className="input" onChange={onChange} />
-          </div>
-          {showPasswordAlert && <p className="text-red-500">Password do not match</p>}
+          <FormInput
+            id="register-name"
+            name="name"
+            label="Name"
+            labelOnError="Name is required"
+            placeholder="Write your name here"
+            type="name"
+            value={formValues.name}
+            shouldShowError={formData.name.shouldShow}
+            onChange={onChange}
+            autoFocus
+          />
+          <FormInput
+            id="register-email"
+            name="email"
+            label="Email"
+            labelOnError="Email is required"
+            placeholder="Write your email here"
+            type="email"
+            value={formValues.email}
+            shouldShowError={formData.email.shouldShow}
+            onChange={onChange}
+          />
+          <FormInput
+            id="register-password"
+            name="password"
+            label="Password"
+            labelOnError="Password is required"
+            placeholder="Write your password here"
+            type="password"
+            value={formValues.password}
+            shouldShowError={formData.password.shouldShow}
+            onChange={onChange}
+          />
+          <FormInput
+            id="register-repeated-password"
+            name="repeatedPassword"
+            label="Repeat password"
+            labelOnError="Password do not match"
+            placeholder="Write your password again"
+            type="password"
+            value={formValues.repeatedPassword}
+            shouldShowError={showPasswordAlert}
+            onChange={onChange}
+          />
           <button type="submit" className="btn btn-primary mt-4">
             Register
           </button>

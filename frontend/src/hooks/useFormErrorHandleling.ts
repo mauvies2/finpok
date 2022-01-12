@@ -3,7 +3,7 @@ import validator from 'validator'
 import produce from 'immer'
 
 type FormField = {
-  type: 'numeric' | 'text'
+  type: 'numeric' | 'text' | 'email' | 'password'
   name: string
   value: string | number | undefined
   required?: boolean
@@ -18,6 +18,8 @@ type FormErrorHandleling = FormField[]
 const fieldValidation = {
   numeric: (value: string | number) => validator.isNumeric(value.toString()),
   text: (value: string | number) => validator.isAscii(value.toString()),
+  email: (value: string | number) => validator.isEmail(value.toString()),
+  password: (value: string | number) => validator.isStrongPassword(value.toString()),
 }
 
 export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
