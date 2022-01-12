@@ -5,9 +5,13 @@ import useMediaQuery from 'finpok/hooks/useMediaQuery'
 import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
 import useBlockScroll from 'finpok/hooks/useBlockScroll'
-// import useScroll from 'finpok/hooks/useScroll'
+import useScroll from 'finpok/hooks/useScroll'
 
-const NavMenu: FC = () => {
+type NavMenuProps = {
+  showOnScroll?: boolean
+}
+
+const NavMenu: FC<NavMenuProps> = ({ showOnScroll = false }) => {
   // client state
   const { isMobileMenuOpen } = useUiState()
   const { isLoggedIn } = useAuthState()
@@ -17,6 +21,7 @@ const NavMenu: FC = () => {
   const { logout } = useAuthDispatch()
 
   // computed
+  const { scrollingUp } = useScroll()
   const { isMobile } = useMediaQuery()
   const currentLocation = useLocation()
   const isCurrentLocation = (path: string): boolean => currentLocation.pathname === `/${path}`
@@ -28,8 +33,8 @@ const NavMenu: FC = () => {
       className={classNames(
         !isMobile || (isMobile && isMobileMenuOpen)
           ? 'fixed left-0 right-0 top-0 h-screen flex flex-col z-10 md:h-16 md:z-40 pt-20 md:pt-0 bg-neutral text-white md:ml-32 md:flex-row md:justify-between'
-          : 'hidden'
-        // scrollingUp ? 'fixed animate-nav' : 'absolute',
+          : 'hidden',
+        showOnScroll && scrollingUp ? 'fixed animate-nav' : 'absolute'
       )}
     >
       <div className="relative md:flex md:justify-between md:w-full" onClick={() => toggleMobileMenu()}>
