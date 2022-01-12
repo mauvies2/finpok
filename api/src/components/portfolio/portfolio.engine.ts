@@ -39,7 +39,9 @@ export const updateCryptoTransaction = (user: IUser, editTransactionPayload: Edi
       let transactionPrice = 0
 
       ownedCrypto.transactions.forEach((transaction: ITransaction) => {
-        if (transaction._id === id) {
+        const transactionId = transaction._id.toString()
+
+        if (transactionId === id) {
           transactionPrice += price
           newAmount += amount
 

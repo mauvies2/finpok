@@ -16,27 +16,25 @@ const EditTransaction: FC = () => {
   const updateTransaction = useEditTransaction()
 
   // local state
-  const [transactionPayload, setTransactionPayload] = useState<EditTransactionPayload | null>(
-    () => {
-      if (currentOwnedCrypto && currentTransaction) {
-        return {
-          id: currentTransaction._id,
-          symbol: currentOwnedCrypto.symbol,
-          amount: currentTransaction.amount,
-          price: currentTransaction.price,
-          notes: '',
-          fee: 0,
-          time: new Date(),
-        }
+  const [transactionPayload, setTransactionPayload] = useState<EditTransactionPayload | null>(() => {
+    if (currentOwnedCrypto && currentTransaction) {
+      return {
+        id: currentTransaction._id,
+        symbol: currentOwnedCrypto.symbol,
+        amount: currentTransaction.amount,
+        price: currentTransaction.price,
+        notes: '',
+        fee: 0,
+        time: new Date(),
       }
-      return null
     }
-  )
-
-  const { error, errorValidation } = useFormErrorHandleling({
-    field1: { name: 'amount', type: 'numeric', value: transactionPayload?.amount },
-    field2: { name: 'price', type: 'numeric', value: transactionPayload?.price },
+    return null
   })
+
+  const { formData, errorValidation } = useFormErrorHandleling([
+    { name: 'amount', type: 'numeric', value: transactionPayload?.amount, required: true },
+    { name: 'price', type: 'numeric', value: transactionPayload?.price, required: true },
+  ])
 
   // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
@@ -44,7 +42,7 @@ const EditTransaction: FC = () => {
     errorValidation()
 
     if (transactionPayload) {
-      if (!error.amount.isValid && !error.price.isValid) {
+      if (!formData.amount.isValid && !formData.price.isValid) {
         updateTransaction.mutate(transactionPayload)
         closeModal()
         clearSelectedAsset()
@@ -75,7 +73,7 @@ const EditTransaction: FC = () => {
           min="0.00"
           step=".01"
           value={transactionPayload.amount}
-          shouldShowError={error.amount.shouldShow}
+          shouldShowError={formData.amount.shouldShow}
           onChange={handleChange}
           autoFocus
         />
@@ -91,7 +89,7 @@ const EditTransaction: FC = () => {
           min="0.00"
           step=".01"
           value={transactionPayload.price}
-          shouldShowError={error.price.shouldShow}
+          shouldShowError={formData.price.shouldShow}
           onChange={handleChange}
         />
         <div className="flex mb-4">
@@ -108,10 +106,7 @@ const EditTransaction: FC = () => {
         <div className="bg-gray-100 rounded-lg items-center p-4 text-xs">
           <label className="text-sm font-semibold">Total spent</label>
           <div className="form-control relative ">
-            <div
-              placeholder="0.00"
-              className="input mt-2 border bg-gray-100  pl-2 text-xl font-bold h-8"
-            >
+            <div placeholder="0.00" className="input mt-2 border bg-gray-100  pl-2 text-xl font-bold h-8">
               {formatNumber(currentTransaction.price * currentTransaction.amount, { symbol: '$' })}
             </div>
           </div>
