@@ -39,7 +39,8 @@ export const loginUser: RequestHandler = async (req: Request, res: Response) => 
 
   const { _id, name, email } = user
 
-  const validPassword = validatePassword(req.body.password, user.password)
+  const validPassword = await validatePassword(req.body.password, user.password)
+
   if (!validPassword) return res.status(400).json({ error: 'Password is incorrect' })
 
   const token = jwt.sign({ _id, email }, config.jwt, { expiresIn: '2 days' })
