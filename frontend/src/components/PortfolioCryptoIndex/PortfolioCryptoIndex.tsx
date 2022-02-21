@@ -1,24 +1,26 @@
-import { FC } from 'react'
+import { FC, ReactNode } from 'react'
 import PortfolioCrypto from 'finpok/components/PortfolioCrypto/PortfolioCrypto'
 import useGetCryptos from 'finpok/store/server/selectors/useGetCryptos'
 import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
-import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import Button from '../Shared/Button'
 import formatNumber from 'finpok-core/utils/formatNumber'
+import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 
 interface PortfolioCryptoIndexProps {
-  isLoadingPortfolio: boolean
-  isLoadingCryptos: boolean
+  children?: ReactNode
 }
 
-const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({ isLoadingPortfolio, isLoadingCryptos }) => {
+const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({ children }) => {
   // computed
   const portfolio = useGetPortfolio()
   const cryptos = useGetCryptos()
-
-  // methods
   const { openModal } = useUiDispatch()
 
+  const handleSelect = () => {
+    openModal('/portfolio/transaction-operation/select')
+  }
+
+  // methods
   if (!portfolio || !cryptos) return null
 
   return (
@@ -47,30 +49,34 @@ const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({ isLoadingPortfoli
           <p className="bg-light-gray ml-2 p-1">24h</p>
         </div>
       </section>
-      {isLoadingCryptos || isLoadingPortfolio ? (
-        <p>Loading...</p>
-      ) : (
-        <>
-          <section className="flex justify-between items-center my-8">
-            <p className="font-bold text-black text-lg">Your assets</p>
-            <Button className="btn btn-secondary" onClick={() => openModal('add-new-search')} icon="+" height="s">
-              Add new
-            </Button>
-          </section>
-          <section>
+
+      <section className="flex justify-between items-center my-8">
+        <p className="font-bold text-black text-lg">Your assets</p>
+        <Button className="btn btn-secondary" icon="+" height="s" onClick={handleSelect}>
+          Add new
+        </Button>
+      </section>
+      <section>
+        {portfolio.cryptocurrencies && portfolio.cryptocurrencies.length ? (
+          <>
             <div className="flex border-b border-t py-2 font-bold">
               <div className="flex-1 flex ">Name</div>
               <div className="flex-1 flex justify-end">Price</div>
               <div className="flex-1 flex justify-end">Holdings</div>
             </div>
-
-            {portfolio.cryptocurrencies?.map((ownedCrypto) => {
+            {portfolio.cryptocurrencies.map((ownedCrypto) => {
               const crypto = cryptos.find((crypto) => ownedCrypto.symbol === crypto.symbol)
               return <PortfolioCrypto key={ownedCrypto._id} ownedCrypto={ownedCrypto} crypto={crypto} />
             })}
-          </section>
-        </>
-      )}
+          </>
+        ) : (
+          <div className="mt-20">
+            <div className="w-full flex justify-center font-bold">Your portfolio is empty</div>
+            <div className="w-full flex justify-center">Start adding some coins</div>
+          </div>
+        )}
+      </section>
+      {children}
     </>
   )
 }

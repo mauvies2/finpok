@@ -1,13 +1,12 @@
 import { useReducer } from 'react'
 import { ITransaction } from 'finpok-core/domain'
-import { produce } from 'immer'
+import { useNavigate } from 'react-router-dom'
 
 export interface IUiState {
   isMobileMenuOpen: boolean
-  modal: string | null
+  modalRouteProgress: number
 
   portfolio: {
-    isPortfolioCryptoDetailSection: boolean
     currentOwnedCrypto: string | null
     currentCrypto: string | null
     currentTransaction: ITransaction | null
@@ -16,31 +15,25 @@ export interface IUiState {
 
 export interface IUiDispatch {
   toggleMobileMenu: () => void
-  openModal: (section: string) => void
-  closeModal: () => void
   selectCrypto: (cryptoSymbol: string) => void
-  clearSelectedAsset: () => void
-  openOwnedCryptoDetail: (ownedCrypto: string) => void
-  closeOwnedCryptoDetail: () => void
+  clearSelectedCrypto: () => void
+  selectOwnedCryptoDetail: (ownedCrypto: string) => void
   selectCurrentTransaction: (transaction: ITransaction) => void
+  openModal: (route: string) => void
+  closeModal: () => void
 }
 
 // initial state
 const initialState: IUiState = {
   isMobileMenuOpen: false,
-  modal: null,
+  modalRouteProgress: 0,
 
   portfolio: {
-    isPortfolioCryptoDetailSection: false,
     currentCrypto: null,
     currentOwnedCrypto: null,
     currentTransaction: null,
   },
 }
-
-// try {
-//   initialState = JSON.parse(localStorage.getItem('ui') || '') || initialState
-// } catch (error) {}
 
 // reducer
 // eslint-disable-next-line
@@ -51,17 +44,6 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
         ...state,
         isMobileMenuOpen: !state.isMobileMenuOpen,
       }
-
-    case 'OPEN_MODAL':
-      return {
-        ...state,
-        modal: event.payload,
-      }
-
-    case 'CLOSE_MODAL':
-      return produce(state, (draft) => {
-        draft.modal = null
-      })
 
     case 'SELECT_ASSET_TO_ADD':
       return {
@@ -78,24 +60,6 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
         portfolio: {
           ...state.portfolio,
           currentCrypto: null,
-        },
-      }
-
-    case 'OPEN_OWNED_CRYPTO_DETAIL':
-      return {
-        ...state,
-        portfolio: {
-          ...state.portfolio,
-          isPortfolioCryptoDetailSection: true,
-        },
-      }
-
-    case 'CLOSE_TRANSACTIONS_DETAIL':
-      return {
-        ...state,
-        portfolio: {
-          ...state.portfolio,
-          isPortfolioCryptoDetailSection: false,
         },
       }
 
@@ -117,6 +81,19 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
         },
       }
 
+    case 'USE_MODAL':
+      const modalRouteProgress = state.modalRouteProgress + 1
+      return {
+        ...state,
+        modalRouteProgress,
+      }
+
+    case 'CLOSE_MODAL':
+      return {
+        ...state,
+        modalRouteProgress: 0,
+      }
+
     default:
       return state
   }
@@ -132,50 +109,46 @@ const reducer = (state: IUiState, event: { type: string; payload?: any }) => {
 // events
 export const useUiActions = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const navigate = useNavigate()
 
   const toggleMobileMenu = () => {
     dispatch({ type: 'TOGGLE_MENU' })
-  }
-
-  const openModal = (section: string) => {
-    dispatch({ type: 'OPEN_MODAL', payload: section })
-  }
-
-  const closeModal = () => {
-    dispatch({ type: 'CLOSE_MODAL' })
   }
 
   const selectCrypto = (cryptoSymbol: string) => {
     dispatch({ type: 'SELECT_ASSET_TO_ADD', payload: cryptoSymbol })
   }
 
-  const clearSelectedAsset = () => {
+  const clearSelectedCrypto = () => {
     dispatch({ type: 'CLEAR_SELECTED_ASSET' })
   }
 
-  const openOwnedCryptoDetail = (ownedCrypto: string) => {
-    dispatch({ type: 'OPEN_OWNED_CRYPTO_DETAIL' })
+  const selectOwnedCryptoDetail = (ownedCrypto: string) => {
     dispatch({ type: 'SELECT_OWNED_CRYPTO', payload: ownedCrypto })
-  }
-
-  const closeOwnedCryptoDetail = () => {
-    dispatch({ type: 'CLOSE_TRANSACTIONS_DETAIL' })
-    dispatch({ type: 'SELECT_OWNED_CRYPTO', payload: null })
   }
 
   const selectCurrentTransaction = (transaction: ITransaction) => {
     dispatch({ type: 'SELECT_SINGLE_TRANSACTION', payload: transaction })
   }
 
+  const openModal = (route: string) => {
+    navigate(route)
+    dispatch({ type: 'USE_MODAL' })
+  }
+
+  const closeModal = () => {
+    navigate(-state.modalRouteProgress)
+    dispatch({ type: 'CLOSE_MODAL' })
+  }
+
   const events = {
     toggleMobileMenu,
-    openModal,
-    closeModal,
     selectCrypto,
-    clearSelectedAsset,
-    openOwnedCryptoDetail,
-    closeOwnedCryptoDetail,
+    clearSelectedCrypto,
+    selectOwnedCryptoDetail,
     selectCurrentTransaction,
+    closeModal,
+    openModal,
   }
 
   return { state, events }

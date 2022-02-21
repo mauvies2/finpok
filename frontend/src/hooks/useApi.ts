@@ -26,7 +26,7 @@ export const useAddTransaction = () => {
   return useMutation((transaction: TransacionPayload) => addNewTransaction(transaction), {
     onSuccess: () => {
       queryCache.invalidateQueries('portfolio')
-      queryCache.invalidateQueries('cryptocurrencies')
+      // queryCache.invalidateQueries('cryptocurrencies')
     },
   })
 }
@@ -36,7 +36,7 @@ export const useEditTransaction = () => {
   return useMutation((transaction: EditTransactionPayload) => updateTransaction(transaction), {
     onSuccess: () => {
       queryCache.invalidateQueries('portfolio')
-      queryCache.invalidateQueries('cryptocurrencies')
+      // queryCache.invalidateQueries('cryptocurrencies')
     },
   })
 }
@@ -46,7 +46,6 @@ export const useRemoveTransaction = () => {
   return useMutation((transaction: RemoveTransactionPayload) => removeTransaction(transaction), {
     onSuccess: () => {
       queryCache.invalidateQueries('portfolio')
-      queryCache.invalidateQueries('cryptocurrencies')
     },
   })
 }
@@ -56,8 +55,8 @@ export const useRemoveAsset = () => {
 
   return useMutation((id: string) => removeAsset(id), {
     onSuccess: () => {
-      queryCache.invalidateQueries('cryptocurrencies')
-      queryCache.invalidateQueries(['portfolio'])
+      // queryCache.invalidateQueries('cryptocurrencies')
+      queryCache.invalidateQueries('portfolio')
     },
   })
 }

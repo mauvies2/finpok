@@ -2,6 +2,7 @@ import { FC } from 'react'
 import formatNumber from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import { ICrypto, IOwnedCrypto } from 'finpok-core/domain'
+import { Link } from 'react-router-dom'
 
 interface PortfolioCryptoProps {
   ownedCrypto: IOwnedCrypto
@@ -9,7 +10,7 @@ interface PortfolioCryptoProps {
 }
 
 const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
-  const { openOwnedCryptoDetail } = useUiDispatch()
+  const { selectOwnedCryptoDetail } = useUiDispatch()
 
   if (!ownedCrypto || !crypto) return null
 
@@ -32,14 +33,13 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
         </div>
       </div>
       <div className="flex-1 text-right justify-end font-semibold">
-        <p className="mb-1">
-          {formatNumber(cryptoPrices.price, { symbol: '$', fractionDigits: 2 })}
-        </p>
+        <p className="mb-1">{formatNumber(cryptoPrices.price, { symbol: '$', fractionDigits: 2 })}</p>
         <p className={change24hStyle}>{change24h}</p>
       </div>
-      <div
+      <Link
+        to={`/portfolio/${ownedCrypto.symbol}`}
         className="flex-1 text-right justify-end cursor-pointer"
-        onClick={() => openOwnedCryptoDetail(ownedCrypto.symbol)}
+        onClick={() => selectOwnedCryptoDetail(ownedCrypto.symbol)}
       >
         <p className="font-semibold mb-1">
           {cryptoPrices.price
@@ -55,7 +55,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
             unit: ownedCrypto.symbol,
           })}
         </p>
-      </div>
+      </Link>
     </div>
   )
 }

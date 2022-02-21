@@ -11,11 +11,11 @@ interface TransactionProps {
 }
 
 const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
-  const { openModal, selectCurrentTransaction } = useUiDispatch()
+  const { selectCurrentTransaction, openModal } = useUiDispatch()
 
-  const openTransactionDetails = () => {
+  const openTransactionDetail = () => {
     selectCurrentTransaction(transaction)
-    openModal('transaction-detail')
+    openModal(`/portfolio/${cryptoSymbol}/transaction-detail`)
   }
 
   if (!transaction || !transaction.createdAt) return null
@@ -25,10 +25,7 @@ const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
   const transactionDate = formatDate(transaction.createdAt)
 
   return (
-    <div
-      className="flex border-b py-5 justify-between cursor-pointer"
-      onClick={openTransactionDetails}
-    >
+    <div className="flex border-b py-5 justify-between cursor-pointer" onClick={openTransactionDetail}>
       <div className="flex-1 flex items-center">
         <img
           src={`https://s2.coinmarketcap.com/static/cloud/img/portfolio/${transaction.type}.svg?_=e3a8309`}

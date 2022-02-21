@@ -3,6 +3,8 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import { Router } from 'finpok/router/Router'
 import { css } from '@emotion/react'
 import { FC } from 'react'
+import { useUiState } from 'finpok/store/ui/UiProvider'
+import useBlockScroll from 'finpok/hooks/useBlockScroll'
 
 const override = css`
   position: fixed;
@@ -16,6 +18,8 @@ const override = css`
 
 const Main: FC = () => {
   const isFetching = useIsFetching()
+  const { modalRouteProgress } = useUiState()
+  useBlockScroll(!!modalRouteProgress)
 
   return (
     <main className="max-w-screen mt-16 overscroll-x-hidden">

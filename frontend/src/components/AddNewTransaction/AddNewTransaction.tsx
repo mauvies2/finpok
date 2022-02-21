@@ -12,7 +12,7 @@ import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
 
 const AddNewTransaction: FC = () => {
   // computed
-  const { closeModal, clearSelectedAsset, openModal } = useUiDispatch()
+  const { clearSelectedCrypto, closeModal } = useUiDispatch()
   const addTransaction = useAddTransaction()
   const currentCrypto = useGetCurrentCrypto()
   const transactionDate = formatDate()
@@ -56,7 +56,7 @@ const AddNewTransaction: FC = () => {
     if (!formData.amount.isValid && !formData.price.isValid) {
       addTransaction.mutate(transactionPayload)
       closeModal()
-      clearSelectedAsset()
+      clearSelectedCrypto()
     }
   }
 
@@ -86,10 +86,7 @@ const AddNewTransaction: FC = () => {
       <div className="flex-1">
         <TabSelect tabs={['buy', 'sell', 'transfer']} value={transactionPayload.type} onClick={selectTransactionType} />
 
-        <div
-          className="select select-bordered w-full max-w-xs mb-4 cursor-pointer"
-          onClick={() => openModal('add-new-search')}
-        >
+        <div className="select select-bordered w-full max-w-xs mb-4 cursor-pointer">
           <div className="flex py-2 pl-3 items-center  rounded-lg my-1  cursor-pointer">
             <div>
               <img src={currentCrypto.logoUrl} className="mr-3" width="17" alt="logo" />

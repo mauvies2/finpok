@@ -1,25 +1,25 @@
 import { useQueryClient } from 'react-query'
 import { ICrypto, IOwnedCrypto, IPortfolio } from 'finpok-core/domain'
-import { useUiState } from './UiProvider'
+import { useParams } from 'react-router-dom'
 
 export const useGetCurrentOwnedCrypto = (): IOwnedCrypto | undefined => {
   const queryClient = useQueryClient()
+  const params = useParams()
 
-  const { currentOwnedCrypto } = useUiState().portfolio
   const portfolio = queryClient.getQueryData<IPortfolio>(['portfolio'])
 
-  if (!portfolio || !currentOwnedCrypto) return
+  if (!portfolio) return
 
-  return portfolio.cryptocurrencies.find((ownedCrypto) => ownedCrypto.symbol === currentOwnedCrypto)
+  return portfolio.cryptocurrencies?.find((ownedCrypto) => ownedCrypto.symbol === params.symbol)
 }
 
 export const useGetCurrentCrypto = (): ICrypto | undefined => {
   const queryClient = useQueryClient()
+  const params = useParams()
 
-  const { currentCrypto } = useUiState().portfolio
   const cryptocurrencies = queryClient.getQueryData<ICrypto[]>(['cryptocurrencies'])
 
-  if (!cryptocurrencies || !currentCrypto) return
+  if (!cryptocurrencies) return
 
-  return cryptocurrencies.find((crypto) => crypto.symbol === currentCrypto)
+  return cryptocurrencies.find((crypto) => crypto.symbol === params.symbol)
 }

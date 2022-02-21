@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { FC, ReactNode, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import useGetCrypto from 'finpok/store/server/selectors/useGetCrypto'
 
@@ -7,22 +8,23 @@ import formatNumber from 'finpok-core/utils/formatNumber'
 import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
 import Button from 'finpok/components/Shared/Button'
 import Transaction from '../components/Transaction'
-import TransactionDetail from '../components/TransactionDetail'
-import Modal from '../components/Shared/Modal'
 import classNames from 'classnames'
-import EditTransaction from 'finpok/components/EditTransaction'
 import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
 
-const OwnedCryptoDetail = () => {
+interface OwnedCryptoDetailProps {
+  children?: ReactNode
+}
+
+const OwnedCryptoDetail: FC<OwnedCryptoDetailProps> = ({ children }) => {
   // local state
   const [isRemoveAssetPromptOpen, setIsRemoveAssetPromptOpen] = useState<boolean>(false)
-
   // computed
   const portfolio = useGetPortfolio()
   const removeAsset = useRemoveAsset()
+  const navigate = useNavigate()
 
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()
-  const { closeOwnedCryptoDetail, openModal, selectCrypto } = useUiDispatch()
+  const { selectCrypto, openModal } = useUiDispatch()
   const crypto = useGetCrypto(currentOwnedCrypto?.symbol)
 
   // methods
@@ -30,33 +32,40 @@ const OwnedCryptoDetail = () => {
     if (currentOwnedCrypto) {
       removeAsset.mutate(currentOwnedCrypto._id || '')
     }
-    closeOwnedCryptoDetail()
+    navigate(-1)
   }
 
   const handleAddTransaction = () => {
     if (currentOwnedCrypto && crypto) {
       selectCrypto(currentOwnedCrypto.symbol)
     }
-    openModal('add-transaction')
+    openModal(`/portfolio/${currentOwnedCrypto?.symbol}/transaction-operation`)
   }
 
   if (!currentOwnedCrypto || !crypto || !portfolio) return null
 
   const balancePorcentage =
-    ((currentOwnedCrypto.buyAvgPrice * currentOwnedCrypto.amount) /
+    ((currentOwnedCrypto.buyAvgPrice * currentOwnedCrypto.amount - currentOwnedCrypto.amount * crypto.quote.USD.price) /
       (currentOwnedCrypto.amount * crypto.quote.USD.price)) *
     100
 
+  // const balance =
+  //   currentOwnedCrypto.amount * crypto.quote.USD.price - currentOwnedCrypto.buyAvgPrice * currentOwnedCrypto.amount
+
   const balance =
-    currentOwnedCrypto.amount * crypto.quote.USD.price - currentOwnedCrypto.buyAvgPrice * currentOwnedCrypto.amount
+    currentOwnedCrypto.amount * crypto.quote.USD.price -
+    currentOwnedCrypto.transactions.reduce((total, transaction) => total + transaction.amount * transaction.price, 0)
+
   const profitTextColor = balance > 0 ? 'text-green-400' : 'text-red-400'
 
   return (
     <>
       <section className="flex justify-between mt-8">
-        <Button className="btn btn-light" onClick={() => closeOwnedCryptoDetail()} icon="<-">
-          Back
-        </Button>
+        <Link to="/portfolio">
+          <Button className="btn btn-light" icon="<-">
+            Back
+          </Button>
+        </Link>
         <div className="relative">
           <Button
             className="btn btn-light relative"
@@ -89,7 +98,7 @@ const OwnedCryptoDetail = () => {
             </p>
           )}
         </div>
-        <div className="bg-green-400 rounded-lg flex items-center p-2 text-white font-bold">1.11%</div>
+        {/* <div className="bg-green-400 rounded-lg flex items-center p-2 text-white font-bold">1.11%</div> */}
       </div>
 
       <div className="mt-10 text-xs">
@@ -109,7 +118,7 @@ const OwnedCryptoDetail = () => {
             {formatNumber(balancePorcentage, {
               symbol: '%',
               symbolPosition: 'after',
-              sign: balancePorcentage > 0,
+              sign: balance > 0,
               fractionDigits: 2,
             })}
             &nbsp;
@@ -139,19 +148,12 @@ const OwnedCryptoDetail = () => {
         </div>
 
         {portfolio.cryptocurrencies
-          .find((crypto) => crypto._id === currentOwnedCrypto._id)
+          ?.find((crypto) => crypto._id === currentOwnedCrypto._id)
           ?.transactions.map((transaction) => (
             <Transaction key={transaction._id} transaction={transaction} cryptoSymbol={currentOwnedCrypto.symbol} />
           ))}
       </section>
-
-      <Modal section="transaction-detail" modalTitle="Transaction details" closeModalIcon={false}>
-        <TransactionDetail />
-      </Modal>
-
-      <Modal section="edit-transaction" modalTitle="Edit transaction" closeModalIcon={false}>
-        <EditTransaction />
-      </Modal>
+      {children}
     </>
   )
 }

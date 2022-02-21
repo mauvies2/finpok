@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import Head from 'finpok/components/Shared/Head'
 import FormInput from '../components/Shared/FormInput/FormInput'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { register } from 'finpok/services/ApiService'
 import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 
@@ -13,14 +13,16 @@ type FormValues = {
 }
 
 const Register = () => {
+  const navigate = useNavigate()
+
   const [formValues, setFormValues] = useState<FormValues>({
     name: '',
     email: '',
     password: '',
     repeatedPassword: '',
   })
+
   const [showPasswordAlert, setShowPasswordAlert] = useState<boolean>(false)
-  const history = useHistory()
 
   const { formData, errorValidation } = useFormErrorHandleling([
     { name: 'name', type: 'text', value: formValues.name, required: true },
@@ -42,7 +44,7 @@ const Register = () => {
 
     try {
       const response = await register(credentials)
-      if (response) history.push('/login')
+      if (response) navigate('/login')
     } catch (e) {
       return e
     }

@@ -14,17 +14,13 @@ export const auth = {
     return JSON.parse(storedUser)
   },
 
-  login: async (credentials: LoginCredentials): Promise<IUserSession | null> => {
-    const user = await axios
+  login: async (credentials: LoginCredentials): Promise<IUserSession | null> =>
+    await axios
       .post<LoginCredentials, AxiosResponse<IUserSession>>('http://localhost:5000/auth/login', credentials)
-      .then((res) => res.data)
-    if (user) {
-      auth._user(user)
-      return user
-    }
-
-    return null
-  },
+      .then((res) => {
+        auth._user(res.data)
+        return res.data
+      }),
 
   logout: (): void => {
     localStorage.removeItem('user')

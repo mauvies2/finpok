@@ -10,14 +10,14 @@ import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
 
 const EditTransaction: FC = () => {
   const { currentTransaction } = useUiState().portfolio
-  const { closeModal, clearSelectedAsset } = useUiDispatch()
+  const { clearSelectedCrypto, closeModal } = useUiDispatch()
 
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()
   const updateTransaction = useEditTransaction()
 
   // local state
   const [transactionPayload, setTransactionPayload] = useState<EditTransactionPayload | null>(() => {
-    if (currentOwnedCrypto && currentTransaction) {
+    if (currentOwnedCrypto && currentTransaction && currentTransaction._id) {
       return {
         id: currentTransaction._id,
         symbol: currentOwnedCrypto.symbol,
@@ -44,8 +44,8 @@ const EditTransaction: FC = () => {
     if (transactionPayload) {
       if (!formData.amount.isValid && !formData.price.isValid) {
         updateTransaction.mutate(transactionPayload)
+        clearSelectedCrypto()
         closeModal()
-        clearSelectedAsset()
       }
     }
   }

@@ -1,7 +1,7 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import Head from 'finpok/components/Shared/Head'
 import FormInput from '../components/Shared/FormInput/FormInput'
-import { useAuthDispatch } from 'finpok/store/auth/AuthProvider'
+import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 import { LoginCredentials } from 'finpok-core/domain'
 
@@ -11,7 +11,8 @@ const Login: FC = () => {
     password: '',
   })
 
-  const { login } = useAuthDispatch()
+  const { login, clearAuthErrors } = useAuthDispatch()
+  const { error } = useAuthState()
 
   const { formData, errorValidation } = useFormErrorHandleling([
     { name: 'email', type: 'email', value: loginForm.email, required: true },
@@ -19,6 +20,7 @@ const Login: FC = () => {
   ])
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+    clearAuthErrors()
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value })
   }
 
@@ -28,6 +30,7 @@ const Login: FC = () => {
 
     if (!formData.email.isValid && !formData.password.isValid) {
       await login(loginForm)
+      setLoginForm({ ...loginForm, password: '' })
     }
   }
 
@@ -41,12 +44,12 @@ const Login: FC = () => {
             id="login-email"
             name="email"
             label="Email"
-            labelOnError="Email is required"
+            labelOnError={error ? 'The email or password is incorrect.' : 'Email is required.'}
             placeholder="Write your email here"
             type="email"
             autoComplete="on"
             value={loginForm.email}
-            shouldShowError={formData.email.shouldShow}
+            shouldShowError={formData.email.shouldShow || !!error}
             onChange={onChange}
           />
           <FormInput

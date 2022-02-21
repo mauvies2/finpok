@@ -13,7 +13,7 @@ export interface IAuthDispatch {
   login: (credentials: LoginCredentials) => Promise<void>
   logout: () => void
   checkAuth: () => Promise<void>
-  clearErrors: () => void
+  clearAuthErrors: () => void
 }
 
 // initial state
@@ -27,6 +27,7 @@ try {
   const authLocalStorageState = localStorage.getItem('auth')
   if (authLocalStorageState && typeof authLocalStorageState === 'string') {
     initialState = JSON.parse(authLocalStorageState)
+    initialState.error = ''
   }
 } catch (error) {
   console.log(error)
@@ -90,11 +91,9 @@ export const useAuthActions = () => {
   const login = async (credentials: LoginCredentials) => {
     try {
       const authUser = await auth.login(credentials)
-      if (authUser) dispatch({ type: 'LOGIN_SUCCESS', payload: authUser })
-    } catch ({ message }) {
-      dispatch({ type: 'AUTH_ERROR', payload: { error: message } })
-    } finally {
-      dispatch({ type: 'CLEAR_LOGIN_INPUTS' })
+      dispatch({ type: 'LOGIN_SUCCESS', payload: authUser })
+    } catch (e) {
+      dispatch({ type: 'AUTH_ERROR', payload: { error: e.response.data.error } })
     }
   }
 
@@ -107,12 +106,12 @@ export const useAuthActions = () => {
     try {
       const authUser = await auth.isLoggedIn()
       dispatch({ type: 'AUTH_USER', payload: authUser })
-    } catch ({ message }) {
-      dispatch({ type: 'AUTH_ERROR', payload: { error: message } })
+    } catch (e) {
+      dispatch({ type: 'AUTH_ERROR', payload: { error: e.response.data.error } })
     }
   }
 
-  const clearErrors = () => {
+  const clearAuthErrors = () => {
     dispatch({ type: 'CLEAR_ERRORS' })
   }
 
@@ -120,7 +119,7 @@ export const useAuthActions = () => {
     login,
     logout,
     checkAuth,
-    clearErrors,
+    clearAuthErrors,
   }
 
   return { state, events }

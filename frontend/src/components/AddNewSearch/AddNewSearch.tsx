@@ -11,13 +11,13 @@ const AddNewSearch: FC = () => {
   // computed
   const cryptos = useGetCryptos()
   const filteredCryptos = searchFilter<ICrypto>(cryptos, searchInput)
-  const { openModal, selectCrypto } = useUiDispatch()
+  const { selectCrypto, openModal } = useUiDispatch()
 
   // methods
-  const handleSubmit = (e: MouseEvent<HTMLDivElement>, crypto: string) => {
+  const handleSubmit = (e: MouseEvent<HTMLDivElement>, cryptoSymbol: string) => {
     e.preventDefault()
-    selectCrypto(crypto)
-    openModal('add-transaction')
+    selectCrypto(cryptoSymbol)
+    openModal(`/portfolio/transaction-operation/${cryptoSymbol}`)
   }
 
   const hanldeInputKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -90,9 +90,7 @@ const AddNewSearch: FC = () => {
             tabIndex={0}
           >
             <img src={crypto.logoUrl} className="mr-3" width="17" alt="hola" />
-            <div className="mr-3 font-bold text-sm">
-              {crypto?.name === 'XRP' ? 'Ripple' : crypto.name}
-            </div>
+            <div className="mr-3 font-bold text-sm">{crypto?.name === 'XRP' ? 'Ripple' : crypto.name}</div>
             <div className="text-xs font-bold text-gray-400">{crypto?.symbol}</div>
           </div>
         ))}
