@@ -18,7 +18,7 @@ const formatNumber = (
     maximumSignificantDigits?: number
   } = {}
 ) => {
-  const absValue = Math.abs(value)
+  const absValue = value ? Math.abs(value) : 0
 
   const number = new Intl.NumberFormat('en-US', {
     maximumSignificantDigits,
@@ -28,10 +28,11 @@ const formatNumber = (
 
   const parenthesisBeginningBuilder = parenthesis ? '(' : ''
   const parenthesisFinalBuilder = parenthesis ? ')' : ''
+  // eslint-disable-next-line no-nested-ternary
   const signBuilder = sign !== undefined ? (sign ? '+' : '-') : ''
   const symbolBeforeBuilder = symbolPosition === 'before' || symbolPosition === undefined ? symbol : ''
   const symbolAfterBuilder = symbolPosition === 'after' ? symbol : ''
-  const unitBuilder = unit ? ' ' + unit : ''
+  const unitBuilder = unit ? ` ${unit}` : ''
 
   return `${parenthesisBeginningBuilder}${signBuilder}${symbolBeforeBuilder}${number}${symbolAfterBuilder}${unitBuilder}${parenthesisFinalBuilder}`
 }

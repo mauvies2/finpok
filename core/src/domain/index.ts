@@ -1,12 +1,12 @@
 export interface IPortfolio {
-  currency: []
-  business: []
-  realState: []
-  bonds: []
-  stocks: []
-  commodities: []
-  cryptocurrencies: IOwnedCrypto[]
-  other: []
+  currency?: []
+  business?: []
+  realState?: []
+  bonds?: []
+  stocks?: []
+  commodities?: []
+  cryptocurrencies?: IOwnedCrypto[]
+  other?: []
   total: number
   createdAt?: string
   updatedAt?: string
@@ -80,7 +80,7 @@ export type TransacionPayload = {
 }
 
 export type EditTransactionPayload = Omit<TransacionPayload, 'type'> & {
-  id: ITransaction['_id']
+  id: string
   symbol: ICrypto['symbol']
   amount: ITransaction['amount']
   price: ITransaction['price']

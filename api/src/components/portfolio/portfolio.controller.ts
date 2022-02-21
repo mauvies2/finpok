@@ -52,14 +52,7 @@ export const addTransaction: RequestHandler = async (req: Request, res: Response
     const crypto = await Crypto.findOne({ symbol })
     if (!crypto) return new Error('Cryptocurrency was not found')
 
-    const transaction: ITransaction = formatTransaction(
-      type,
-      amount as number,
-      price as number,
-      notes,
-      fee as number,
-      time
-    )
+    const transaction = formatTransaction(type, amount as number, price as number, notes, fee as number, time)
     const newOwnedCrypto: IOwnedCrypto = formatNewOwnedCrypto(crypto, transaction)
 
     addAssetOrTransaction(user, newOwnedCrypto, transaction)
@@ -106,7 +99,7 @@ export const removeTransaction: RequestHandler = async (req: Request, res: Respo
     user.portfolio.cryptocurrencies.forEach((cryptocurrency: OwnedCryptoModel) => {
       if (cryptocurrency.symbol === cryptoSymbol) {
         cryptocurrency.transactions.forEach((transaction) => {
-          if (transaction._id !== transactionId) {
+          if (JSON.stringify(transaction._id) !== JSON.stringify(transactionId)) {
             amount += transaction.amount
             price += transaction.price
           }
