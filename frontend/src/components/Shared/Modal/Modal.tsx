@@ -1,6 +1,5 @@
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import { ReactNode, FC } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 interface ModalProps {
   baseRoute?: string
@@ -21,14 +20,13 @@ const Modal: FC<ModalProps> = ({
 }) => {
   const { closeModal } = useUiDispatch()
 
-  const navigate = useNavigate()
-  const goBack = () => navigate(-1)
+  if (!children) return null
 
   return (
     <section className="fixed top-0 left-0 right-0 h-screen bg-white z-50 flex flex-col items-center">
       <div className="flex justify-between items-center h-16 px-6 w-full flex-shrink-0">
         {arrowBack ? (
-          <button onClick={goBack}>
+          <button onClick={closeModal}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -57,7 +55,7 @@ const Modal: FC<ModalProps> = ({
           <div />
         )}
       </div>
-      <div className="bg-light-gray w-full h-full p-4">{children}</div>
+      <div className="bg-light-gray w-full h-full p-4 overflow-y-scroll">{children}</div>
     </section>
   )
 }

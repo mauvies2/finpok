@@ -94,7 +94,10 @@ const OwnedCryptoDetail: FC<OwnedCryptoDetailProps> = ({ children }) => {
           <img src={crypto.logoUrl.replace('16x16', '32x32')} className="mr-3 flex-shrink-0 w-10" alt="logox" />
           {crypto.quote.USD.price && currentOwnedCrypto && (
             <p className="font-bold text-3xl text-black">
-              {formatNumber(currentOwnedCrypto.amount * crypto.quote.USD.price, { symbol: '$' })}
+              {formatNumber(currentOwnedCrypto.amount * crypto.quote.USD.price, {
+                symbol: '$',
+                sign: currentOwnedCrypto.amount > 0 ? undefined : false,
+              })}
             </p>
           )}
         </div>

@@ -46,6 +46,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
             ? formatNumber(ownedCrypto.amount * cryptoPrices.price, {
                 symbol: '$',
                 fractionDigits: 2,
+                sign: ownedCrypto.amount > 0 ? undefined : false,
               })
             : 0}
         </p>
@@ -53,6 +54,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
           {formatNumber(ownedCrypto.amount, {
             maximumSignificantDigits: 4,
             unit: ownedCrypto.symbol,
+            sign: ownedCrypto.amount > 0 ? undefined : false,
           })}
         </p>
       </Link>

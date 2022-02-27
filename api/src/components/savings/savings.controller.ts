@@ -15,6 +15,7 @@ export const getSaving: RequestHandler = async (req: Request, res: Response) => 
   try {
     const saving = await Saving.findById(req.params.id)
     if (!saving) return res.status(204).json()
+
     return res.status(200).json(saving)
   } catch (error) {
     throw new Error('saving was not found')

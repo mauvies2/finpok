@@ -1,4 +1,4 @@
-import { FC, ReactNode } from 'react'
+import { FC } from 'react'
 import PortfolioCrypto from 'finpok/components/PortfolioCrypto/PortfolioCrypto'
 import useGetCryptos from 'finpok/store/server/selectors/useGetCryptos'
 import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
@@ -6,11 +6,7 @@ import Button from '../Shared/Button'
 import formatNumber from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 
-interface PortfolioCryptoIndexProps {
-  children?: ReactNode
-}
-
-const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({ children }) => {
+const PortfolioCryptoIndex: FC = ({ children }) => {
   // computed
   const portfolio = useGetPortfolio()
   const cryptos = useGetCryptos()
@@ -76,7 +72,6 @@ const PortfolioCryptoIndex: FC<PortfolioCryptoIndexProps> = ({ children }) => {
           </div>
         )}
       </section>
-      {children}
     </>
   )
 }

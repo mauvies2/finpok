@@ -84,7 +84,7 @@ const AddNewTransaction: FC = () => {
   return (
     <form className="flex flex-col justify-between h-full" onSubmit={handleSubmit}>
       <div className="flex-1">
-        <TabSelect tabs={['buy', 'sell', 'transfer']} value={transactionPayload.type} onClick={selectTransactionType} />
+        <TabSelect tabs={['buy', 'sell']} value={transactionPayload.type} onClick={selectTransactionType} />
 
         <div className="select select-bordered w-full max-w-xs mb-4 cursor-pointer">
           <div className="flex py-2 pl-3 items-center  rounded-lg my-1  cursor-pointer">
@@ -181,7 +181,7 @@ const AddNewTransaction: FC = () => {
         </div>
       </div>
 
-      <Button className="btn btn-secondary w-full md:w-auto" height="l">
+      <Button className="btn btn-secondary w-full md:w-auto mt-8" height="l">
         Add transaction
       </Button>
     </form>

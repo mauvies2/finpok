@@ -31,7 +31,8 @@ export const addAssetOrTransaction = (user: IUser, newCryptoToOwned: IOwnedCrypt
 }
 
 export const updateCryptoTransaction = (user: IUser, editTransactionPayload: EditTransactionPayload): void => {
-  const { id, symbol, amount, fee, notes, price, time } = editTransactionPayload
+  const { id, symbol, amount, fee, notes, price, time, type } = editTransactionPayload
+  const correctAmount = type === 'buy' ? amount : -amount
 
   user.portfolio.cryptocurrencies.forEach((ownedCrypto: IOwnedCrypto) => {
     if (ownedCrypto.symbol === symbol) {
@@ -42,14 +43,15 @@ export const updateCryptoTransaction = (user: IUser, editTransactionPayload: Edi
         const transactionId = transaction._id.toString()
 
         if (transactionId === id) {
-          transactionPrice += price
-          newAmount += amount
+          transactionPrice += Number(price)
+          newAmount += Number(correctAmount)
 
-          transaction.amount = amount
-          transaction.price = price
+          transaction.amount = Number(correctAmount)
+          transaction.price = Number(price)
+          transaction.fee = Number(fee)
           transaction.notes = notes
-          transaction.fee = fee
           transaction.time = time
+          transaction.type = type
         } else {
           transactionPrice += transaction.price
           newAmount += transaction.amount

@@ -14,7 +14,7 @@ export interface IPortfolio {
 
 export interface ITransaction {
   _id?: string
-  type: 'buy' | 'sell' | 'transfer'
+  type: 'buy' | 'sell'
   amount: number
   price: number
   notes?: string
@@ -70,7 +70,7 @@ export type Quote = {
 export type Cryptos = Crypto[]
 
 export type TransacionPayload = {
-  type: 'buy' | 'sell' | 'transfer'
+  type: 'buy' | 'sell'
   symbol: string
   amount: number | string
   price: number | string
@@ -79,14 +79,8 @@ export type TransacionPayload = {
   time: Date
 }
 
-export type EditTransactionPayload = Omit<TransacionPayload, 'type'> & {
+export type EditTransactionPayload = TransacionPayload & {
   id: string
-  symbol: ICrypto['symbol']
-  amount: ITransaction['amount']
-  price: ITransaction['price']
-  notes: ITransaction['notes']
-  fee: number
-  time: Date
 }
 
 export interface IUser {

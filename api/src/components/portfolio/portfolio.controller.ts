@@ -7,7 +7,6 @@ import { addAssetOrTransaction, updateCryptoTransaction } from './portfolio.engi
 import { formatNewOwnedCrypto } from '../ownedAssets/ownedAssets.engine'
 import {
   IPortfolio,
-  ITransaction,
   TransacionPayload,
   RemoveTransactionPayload,
   IOwnedCrypto,
