@@ -10,7 +10,7 @@ type FormField = {
 }
 
 type FormFieldData = {
-  [field: string]: { isValid: boolean; shouldShow: boolean }
+  [field: string]: { hasError: boolean; shouldShow: boolean }
 }
 
 type FormErrorHandleling = FormField[]
@@ -26,7 +26,7 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
   const initialState = (): FormFieldData => {
     const formData: FormFieldData = {}
     for (const field of fields) {
-      formData[field.name] = { isValid: false, shouldShow: false }
+      formData[field.name] = { hasError: false, shouldShow: false }
     }
     return formData
   }
@@ -38,13 +38,13 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
           return produce(state, (draft) => {
             const field = event.payload as string
 
-            draft[field].isValid = true
+            draft[field].hasError = true
           })
 
         case 'CLEAR_FORM_FIELD_ERROR':
           return produce(state, (draft) => {
             const field = event.payload as string
-            draft[field].isValid = false
+            draft[field].hasError = false
           })
 
         case 'SET_FORM_FIELD_SHOW_ERROR':
@@ -93,7 +93,7 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
           dispatch({ type: 'CLEAR_FORM_FIELD_SHOW_ERROR', payload: field.name })
         }
 
-        if (formData[field.name].isValid) {
+        if (formData[field.name].hasError) {
           dispatch({ type: 'CLEAR_FORM_FIELD_ERROR', payload: field.name })
         }
       }

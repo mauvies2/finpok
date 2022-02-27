@@ -18,7 +18,7 @@ const AddNewTransaction: FC = () => {
   const transactionDate = formatDate()
 
   // local state
-  const [extraFields, setExtraFields] = useState({ date: false, fee: false, notes: false })
+  const [showExtraFields, setShowExtraFields] = useState({ date: false, fee: false, notes: false })
   const [transactionPayload, setTransactionPayload] = useState<TransacionPayload>({
     type: 'buy',
     symbol: '',
@@ -46,14 +46,14 @@ const AddNewTransaction: FC = () => {
     { name: 'notes', type: 'text', value: transactionPayload.notes },
   ])
 
-  if (!currentCrypto || !transactionPayload) return null
+  if (!currentCrypto) return null
 
   // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     errorValidation()
 
-    if (!formData.amount.isValid && !formData.price.isValid) {
+    if (!formData.amount.hasError && !formData.price.hasError) {
       addTransaction.mutate(transactionPayload)
       closeModal()
       clearSelectedCrypto()
@@ -75,14 +75,14 @@ const AddNewTransaction: FC = () => {
     setTransactionPayload({ ...transactionPayload, type })
   }
 
-  const addField = (field: string) => {
-    setExtraFields({ ...extraFields, [field]: true })
+  const addExtraField = (field: string) => {
+    setShowExtraFields({ ...showExtraFields, [field]: true })
   }
 
   const transactionTotal = ((transactionPayload.price as number) || 0) * ((transactionPayload.amount as number) || 0)
 
   return (
-    <form className="flex flex-col justify-between h-full" onSubmit={handleSubmit}>
+    <form className="flex flex-col justify-between min-h-full" onSubmit={handleSubmit}>
       <div className="flex-1">
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload.type} onClick={selectTransactionType} />
 
@@ -125,7 +125,7 @@ const AddNewTransaction: FC = () => {
           onChange={handleChange}
         />
 
-        {extraFields.fee && (
+        {showExtraFields.fee && (
           <FormInput
             id="transaction-fee"
             name="fee"
@@ -142,7 +142,7 @@ const AddNewTransaction: FC = () => {
           />
         )}
 
-        {extraFields.notes && (
+        {showExtraFields.notes && (
           <FormInput
             id="transaction-notes"
             name="notes"
@@ -158,13 +158,13 @@ const AddNewTransaction: FC = () => {
 
         <div className="flex mb-4">
           <Button className="btn btn-light">{transactionDate}</Button>
-          {!extraFields.fee && (
-            <Button className="btn btn-light ml-2" onClick={() => addField('fee')}>
+          {!showExtraFields.fee && (
+            <Button className="btn btn-light ml-2" onClick={() => addExtraField('fee')}>
               Fee
             </Button>
           )}
-          {!extraFields.notes && (
-            <Button className="btn btn-light ml-2" onClick={() => addField('notes')}>
+          {!showExtraFields.notes && (
+            <Button className="btn btn-light ml-2" onClick={() => addExtraField('notes')}>
               Notes
             </Button>
           )}
@@ -181,7 +181,7 @@ const AddNewTransaction: FC = () => {
         </div>
       </div>
 
-      <Button className="btn btn-secondary w-full md:w-auto mt-8" height="l">
+      <Button className="btn btn-secondary w-full md:w-auto mt-6" height="l">
         Add transaction
       </Button>
     </form>

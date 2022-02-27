@@ -49,7 +49,7 @@ const EditTransaction: FC = () => {
     errorValidation()
 
     if (transactionPayload) {
-      if (!formData.amount.isValid && !formData.price.isValid) {
+      if (!formData.amount.hasError && !formData.price.hasError) {
         updateTransaction.mutate(transactionPayload)
         clearSelectedCrypto()
         closeModal()
