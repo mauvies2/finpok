@@ -4,7 +4,7 @@ import { ReactQueryDevtools } from 'react-query/devtools'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
 import Main from 'finpok/components/Main/Main'
-import Nav from 'finpok/components/Nav'
+import Nav from 'finpok/components/Nav/Nav'
 import { AuthProvider } from 'finpok/store/auth/AuthProvider'
 import { UiProvider } from 'finpok/store/ui/UiProvider'
 
@@ -23,7 +23,7 @@ export const App = () => {
         <BrowserRouter>
           <AuthProvider>
             <UiProvider>
-              <Nav />
+              <Nav showOnScroll />
               <Main />
             </UiProvider>
           </AuthProvider>

@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 
 module.exports = {
   mode: 'jit',
@@ -36,11 +37,18 @@ module.exports = {
 				navMobileMenu: {
 					'0%': { top: '-250px' },
 					'100%': { top: '0' },
+				},
+				navMobileLinks: {
+					'0%': { opacity: 0 },
+					'50%': { opacity: 0.1 },
+					'80%': { opacity: 0.5 },
+					'100%': { opacity: 1 },
 				}
 			 },
 			animation: {
 				nav: 'nav .5s ease-in-out',
-				navMobileMenu: 'navMobileMenu .2s ease-in-out',
+				navMobileMenu: 'navMobileMenu .2s linear',
+				navMobileLinks: 'navMobileLinks .3s linear',
 			 }
 		},
   },

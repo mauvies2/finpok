@@ -20,7 +20,7 @@ const useMediaQuery = () => {
     }
   }, [])
 
-  return { isMobile }
+  return isMobile
 }
 
 export default useMediaQuery
