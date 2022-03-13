@@ -7,7 +7,7 @@ import formatNumber from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import usePortfolioYield from 'finpok/hooks/usePortfolioYield'
 
-const PortfolioCryptoIndex: FC = ({ children: routes }) => {
+const PortfolioCryptoIndex: FC = () => {
   // computed
   const portfolio = useGetPortfolio()
   const cryptos = useGetCryptos()
@@ -21,8 +21,19 @@ const PortfolioCryptoIndex: FC = ({ children: routes }) => {
   // methods
   if (!portfolio || !cryptos) return null
 
-  const textColor = total > 0 ? 'text-green-400' : 'text-red-400'
-  const bgColor = total > 0 ? 'bg-green-400' : 'bg-red-500'
+  let textColor = null
+  let bgColor = null
+
+  if (total > 0.09999) {
+    textColor = 'text-green-400'
+    bgColor = 'bg-green-400'
+  } else if (total < -0.09999) {
+    textColor = 'text-red-400'
+    bgColor = 'bg-red-400'
+  } else {
+    textColor = 'text-gray-400'
+    bgColor = 'bg-gray-400'
+  }
 
   return (
     <>
