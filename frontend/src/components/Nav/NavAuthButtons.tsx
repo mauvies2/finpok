@@ -4,21 +4,25 @@ import Button from '../Shared/Button'
 import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 import { useLocation, Link } from 'react-router-dom'
 import useMediaQuery from 'finpok/hooks/useMediaQuery'
-import { useUiDispatch } from 'finpok/store/ui/UiProvider'
+import { FC } from 'react'
 
-const NavAuthButtons = () => {
+interface Props {
+  toggleMobileMenu: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
   const { isLoggedIn } = useAuthState()
   const { logout } = useAuthDispatch()
-  const { toggleMobileMenu } = useUiDispatch()
 
   const currentLocation = useLocation()
+
   const isMobile = useMediaQuery()
   const isCurrentLocation = (path: string): boolean => currentLocation.pathname === `/${path}`
 
   return (
     <div
       className="md:flex md:items-center md:justify-end md:px-0 md:mt-0 md:flex-1 md:h-12 md:flex-row md:mr-4"
-      onClick={() => toggleMobileMenu()}
+      onClick={() => toggleMobileMenu(false)}
     >
       {isLoggedIn ? (
         <Button onClick={logout} className="btn btn-primary w-full md:w-auto" height="m">

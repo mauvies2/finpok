@@ -3,7 +3,6 @@ import { ITransaction } from 'finpok-core/domain'
 import { useNavigate } from 'react-router-dom'
 
 export interface IUiState {
-  isMobileMenuOpen: boolean
   modalRouteProgress: number
 
   portfolio: {
@@ -14,7 +13,6 @@ export interface IUiState {
 }
 
 export interface IUiDispatch {
-  toggleMobileMenu: () => void
   selectCrypto: (cryptoSymbol: string) => void
   clearSelectedCrypto: () => void
   selectOwnedCryptoDetail: (ownedCrypto: string) => void
@@ -25,7 +23,6 @@ export interface IUiDispatch {
 
 // initial state
 const initialState: IUiState = {
-  isMobileMenuOpen: false,
   modalRouteProgress: 0,
 
   portfolio: {
@@ -39,12 +36,6 @@ const initialState: IUiState = {
 // eslint-disable-next-line
 const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUiState => {
   switch (event.type) {
-    case 'TOGGLE_MENU':
-      return {
-        ...state,
-        isMobileMenuOpen: !state.isMobileMenuOpen,
-      }
-
     case 'SELECT_ASSET_TO_ADD':
       return {
         ...state,
@@ -111,10 +102,6 @@ export const useUiActions = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const navigate = useNavigate()
 
-  const toggleMobileMenu = () => {
-    dispatch({ type: 'TOGGLE_MENU' })
-  }
-
   const selectCrypto = (cryptoSymbol: string) => {
     dispatch({ type: 'SELECT_ASSET_TO_ADD', payload: cryptoSymbol })
   }
@@ -142,7 +129,6 @@ export const useUiActions = () => {
   }
 
   const events = {
-    toggleMobileMenu,
     selectCrypto,
     clearSelectedCrypto,
     selectOwnedCryptoDetail,
