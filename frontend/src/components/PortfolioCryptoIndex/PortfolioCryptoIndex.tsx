@@ -5,11 +5,13 @@ import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
 import Button from '../Shared/Button'
 import formatNumber from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
+import usePortfolioYield from 'finpok/hooks/usePortfolioYield'
 
-const PortfolioCryptoIndex: FC = ({ children }) => {
+const PortfolioCryptoIndex: FC = ({ children: routes }) => {
   // computed
   const portfolio = useGetPortfolio()
   const cryptos = useGetCryptos()
+  const { total, totalPercentage } = usePortfolioYield(portfolio, cryptos)
   const { openModal } = useUiDispatch()
 
   const handleSelect = () => {
@@ -18,6 +20,9 @@ const PortfolioCryptoIndex: FC = ({ children }) => {
 
   // methods
   if (!portfolio || !cryptos) return null
+
+  const textColor = total > 0 ? 'text-green-400' : 'text-red-400'
+  const bgColor = total > 0 ? 'bg-green-400' : 'bg-red-500'
 
   return (
     <>
@@ -29,7 +34,7 @@ const PortfolioCryptoIndex: FC = ({ children }) => {
         </div>
         <div>
           <p className="font-bold">My Main Portfolio</p>
-          <p>={formatNumber(portfolio.total, { fractionDigits: 2, symbol: '$' })}</p>
+          <p>{formatNumber(portfolio.total, { fractionDigits: 2, symbol: '$' })}</p>
         </div>
       </section>
       <section>
@@ -38,11 +43,20 @@ const PortfolioCryptoIndex: FC = ({ children }) => {
           <p className="font-bold text-3xl text-black">
             {formatNumber(portfolio.total, { fractionDigits: 2, symbol: '$' })}
           </p>
-          <div className="bg-green-400 rounded-lg flex items-center p-2 text-white font-bold">1.11%</div>
+          <div className={`${bgColor} rounded-lg flex items-center p-2 text-white font-bold`}>
+            {formatNumber(totalPercentage, {
+              fractionDigits: 2,
+              symbol: '%',
+              symbolPosition: 'after',
+              sign: total > 0,
+            })}
+          </div>
         </div>
         <div className="flex items-center">
-          <p className="text-green-400 font-bold">+ $147.69</p>
-          <p className="bg-light-gray ml-2 p-1">24h</p>
+          <p className={`font-bold ${textColor}`}>
+            {formatNumber(total, { fractionDigits: 2, symbol: '$', sign: total > 0 })}
+          </p>
+          {/* <p className="bg-light-gray ml-2 p-1">24h</p> */}
         </div>
       </section>
 
