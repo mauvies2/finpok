@@ -1,2 +1,0 @@
-* Gestion del modal mediante un custom hook quizas
-* Extraer rutas a javascript para verlo de forma mas clara

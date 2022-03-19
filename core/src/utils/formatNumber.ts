@@ -5,17 +5,21 @@ const formatNumber = (
     symbol = '',
     symbolPosition = 'before',
     sign = undefined,
+    noPositiveSign = false,
     unit = '',
     parenthesis = false,
     maximumSignificantDigits = undefined,
+    abs = false,
   }: {
     fractionDigits?: number
     symbol?: string
     sign?: boolean
+    noPositiveSign?: boolean
     unit?: string
     symbolPosition?: 'before' | 'after'
     parenthesis?: boolean
     maximumSignificantDigits?: number
+    abs?: boolean
   } = {}
 ) => {
   const absValue = value ? Math.abs(value) : 0
@@ -29,7 +33,7 @@ const formatNumber = (
   const parenthesisBeginningBuilder = parenthesis ? '(' : ''
   const parenthesisFinalBuilder = parenthesis ? ')' : ''
   // eslint-disable-next-line no-nested-ternary
-  const signBuilder = sign !== undefined ? (sign ? '+' : '-') : ''
+  const signBuilder = sign !== undefined ? (sign ? (noPositiveSign ? '' : '+') : '-') : ''
   const symbolBeforeBuilder = symbolPosition === 'before' || symbolPosition === undefined ? symbol : ''
   const symbolAfterBuilder = symbolPosition === 'after' ? symbol : ''
   const unitBuilder = unit ? ` ${unit}` : ''

@@ -22,33 +22,35 @@ export const registerUser: RequestHandler = async (req: Request, res: Response) 
     if (userAlreadyExists) throw new Error(`User with email ${email} already exists`)
 
     const encryptedPassword = await encryptPassword(password)
-
     const user = new User({ name, email, password: encryptedPassword })
     await user.save()
 
     return res.json({ status: 200, msg: 'User registered', data: user })
   } catch (error) {
     console.error(error)
-    return res.status(500).json({ status: 500, error: 'User could not be registered' })
+    return res.status(400).json({ status: 400, error: 'User could not be registered' })
   }
 }
 
 export const loginUser: RequestHandler = async (req: Request, res: Response) => {
-  const user = await User.findOne({ email: req.body.email })
-  if (!user) return res.status(400).json({ error: 'Email is not registered' })
+  try {
+    const user = await User.findOne({ email: req.body.email })
+    if (!user) throw Error('Email is not registered')
 
-  const { _id, name, email } = user
+    const validPassword = await validatePassword(req.body.password, user.password)
+    if (!validPassword) throw new Error('User or password is incorrect')
 
-  const validPassword = await validatePassword(req.body.password, user.password)
+    const { _id, name, email } = user
+    const token = jwt.sign({ _id, email }, config.jwt, { expiresIn: '2 days' })
 
-  if (!validPassword) return res.status(400).json({ error: 'Password is incorrect' })
-
-  const token = jwt.sign({ _id, email }, config.jwt, { expiresIn: '2 days' })
-
-  return res.status(200).header('auth-token', token).json({
-    _id,
-    name,
-    email,
-    token,
-  })
+    return res.status(200).header('auth-token', token).json({
+      _id,
+      name,
+      email,
+      token,
+    })
+  } catch (error) {
+    console.error(error)
+    return res.status(400).json({ status: 400, error: error.message })
+  }
 }

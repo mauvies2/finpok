@@ -47,6 +47,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
                 symbol: '$',
                 fractionDigits: 2,
                 sign: ownedCrypto.amount > 0 ? undefined : false,
+                abs: true,
               })
             : 0}
         </p>

@@ -4,6 +4,7 @@ import FormInput from '../components/Shared/FormInput/FormInput'
 import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 import { LoginCredentials } from 'finpok-core/domain'
+import FieldError from 'finpok/components/Shared/FieldError/FieldError'
 
 const Login: FC = () => {
   const [loginForm, setLoginForm] = useState<LoginCredentials>({
@@ -37,19 +38,18 @@ const Login: FC = () => {
   return (
     <>
       <Head title="TOP PAGE" />
-      <div className="hero min-h-screen">
-        <div className="text-center hero-content">Welcome</div>
-        <form className="p-10 card bg-base-200" onSubmit={submitAuth}>
+      <div className="hero min-h-[85vh]">
+        <form className="p-10 card" onSubmit={submitAuth}>
           <FormInput
             id="login-email"
             name="email"
             label="Email"
-            labelOnError={error ? 'The email or password is incorrect.' : 'Email is required.'}
+            labelOnError="Email is required."
             placeholder="Write your email here"
             type="email"
             autoComplete="on"
             value={loginForm.email}
-            shouldShowError={formData.email.shouldShow || !!error}
+            shouldShowError={formData.email.shouldShow}
             onChange={onChange}
           />
           <FormInput
@@ -63,6 +63,7 @@ const Login: FC = () => {
             shouldShowError={formData.password.shouldShow}
             onChange={onChange}
           />
+          <FieldError condition={!!error}>Email or password is incorrect</FieldError>
           <button type="submit" className="btn btn-primary mt-4">
             Log in
           </button>

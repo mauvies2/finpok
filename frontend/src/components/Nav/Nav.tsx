@@ -37,12 +37,12 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
         <div
           className={
             shouldShowNavMenu
-              ? 'animate-navMobileMenu fixed left-0 right-0 top-0 h-screen flex flex-col flex-1 bg-neutral justify-between p-4 md:static md:h-12 md:z-40 pt-20 md:pt-0 md:flex-row md:justify-between'
+              ? 'animate-navMobileMenu fixed left-0 right-0 top-0 h-screen flex flex-col flex-1 bg-neutral justify-between p-4 pt-20 md:static md:h-12 md:z-40 md:p-0 md:flex-row md:justify-between'
               : 'hidden'
           }
         >
           <div
-            className="animate-navMobileLinks flex flex-col justify-between items-start md:flex-row"
+            className="flex flex-col justify-between items-start md:flex-row"
             onClick={() => toggleMobileMenu(false)}
           >
             <NavLink to="portfolio" icon={<Suitcase2 size="24" />}>

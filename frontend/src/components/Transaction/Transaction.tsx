@@ -25,7 +25,7 @@ const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
   const transactionDate = formatDate(transaction.createdAt)
 
   return (
-    <div className="flex border-b py-5 justify-between cursor-pointer" onClick={openTransactionDetail}>
+    <li className="flex border-b py-5 justify-between cursor-pointer" onClick={openTransactionDetail}>
       <div className="flex-1 flex items-center">
         <img
           src={`https://s2.coinmarketcap.com/static/cloud/img/portfolio/${transaction.type}.svg?_=e3a8309`}
@@ -54,7 +54,7 @@ const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
           })}
         </p>
       </div>
-    </div>
+    </li>
   )
 }
 

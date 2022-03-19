@@ -9,57 +9,54 @@ module.exports = {
   },
   theme: {
     minWidth: {
-      '40': '10rem',
-      '60': '15rem',
-      '80': '20rem',
-      '100': '25rem',
+      40: '10rem',
+      60: '15rem',
+      80: '20rem',
+      100: '25rem',
     },
     maxWidth: {
-      '120': '30rem',
-      '160': '40rem',
-      '200': '50rem',
+      120: '30rem',
+      160: '40rem',
+      200: '50rem',
     },
-		extend: {
-			colors: {
-				'primary-green': '#49cc68',
-				'primary-dark': '#202936',
-				'primary-dark-hover': '#303d50',
-				'light-gray': '#FAFAFA'
-			},
-			boxShadow: {
-        input:'0 0 0 4px rgb(230, 240, 255)'
-			},
-			keyframes: {
-				nav: {
-					'0%': { top: '-80px' },
-					'100%': { top: '0' },
-				},
-				navMobileMenu: {
-					'0%': { top: '-250px' },
-					'100%': { top: '0' },
-				},
-				navMobileLinks: {
-					'0%': { opacity: 0 },
-					'50%': { opacity: 0.1 },
-					'80%': { opacity: 0.5 },
-					'100%': { opacity: 1 },
-				}
-			 },
-			animation: {
-				nav: 'nav .5s ease-in-out',
-				navMobileMenu: 'navMobileMenu .2s linear',
-				navMobileLinks: 'navMobileLinks .3s linear',
-			 }
-		},
+    extend: {
+      colors: {
+        'primary-green': '#49cc68',
+        'primary-dark': '#202936',
+        'primary-dark-hover': '#303d50',
+        'light-gray': '#FAFAFA',
+      },
+      boxShadow: {
+        input: '0 0 0 4px rgb(230, 240, 255)',
+      },
+      keyframes: {
+        nav: {
+          '0%': { top: '-80px' },
+          '100%': { top: '0' },
+        },
+        navMobileMenu: {
+          '0%': { opacity: 0 },
+          // '50%': { opacity: 0.1 },
+          // '80%': { opacity: 0.5 },
+          '100%': { opacity: 1 },
+        },
+        navMobileLinks: {
+          '0%': { opacity: 0 },
+          '50%': { opacity: 0.1 },
+          '80%': { opacity: 0.5 },
+          '100%': { opacity: 1 },
+        },
+      },
+      animation: {
+        nav: 'nav .5s ease-in-out',
+        navMobileMenu: 'navMobileMenu .15s linear',
+        navMobileLinks: 'navMobileLinks .3s linear',
+      },
+    },
   },
   variants: {},
-  plugins: [
-    require('daisyui'),
-		require('tailwind-scrollbar-hide')
-  ],
+  plugins: [require('daisyui'), require('tailwind-scrollbar-hide')],
   daisyui: {
-    themes: [
-      'emerald'
-    ],
-  }
+    themes: ['emerald'],
+  },
 }

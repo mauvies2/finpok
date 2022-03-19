@@ -5,13 +5,13 @@ import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
 import Button from '../Shared/Button'
 import formatNumber from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
-import usePortfolioYield from 'finpok/hooks/usePortfolioYield'
+// import usePortfolioYield from 'finpok/hooks/usePortfolioYield'
 
 const PortfolioCryptoIndex: FC = () => {
   // computed
   const portfolio = useGetPortfolio()
   const cryptos = useGetCryptos()
-  const { total, totalPercentage } = usePortfolioYield(portfolio, cryptos)
+  // const { total, totalPercentage } = usePortfolioYield(portfolio, cryptos)
   const { openModal } = useUiDispatch()
 
   const handleSelect = () => {
@@ -21,19 +21,19 @@ const PortfolioCryptoIndex: FC = () => {
   // methods
   if (!portfolio || !cryptos) return null
 
-  let textColor = null
-  let bgColor = null
+  // let textColor = null
+  // let bgColor = null
 
-  if (total > 0.09999) {
-    textColor = 'text-green-400'
-    bgColor = 'bg-green-400'
-  } else if (total < -0.09999) {
-    textColor = 'text-red-400'
-    bgColor = 'bg-red-400'
-  } else {
-    textColor = 'text-gray-400'
-    bgColor = 'bg-gray-400'
-  }
+  // if (total > 0.09999) {
+  //   textColor = 'text-green-400'
+  //   bgColor = 'bg-green-400'
+  // } else if (total < -0.09999) {
+  //   textColor = 'text-red-400'
+  //   bgColor = 'bg-red-400'
+  // } else {
+  //   textColor = 'text-gray-400'
+  //   bgColor = 'bg-gray-400'
+  // }
 
   return (
     <>
@@ -52,23 +52,28 @@ const PortfolioCryptoIndex: FC = () => {
         <p className="mb-2">Current balance</p>
         <div className="flex justify-between mb-1 mt-3">
           <p className="font-bold text-3xl text-black">
-            {formatNumber(portfolio.total, { fractionDigits: 2, symbol: '$' })}
+            {formatNumber(portfolio.total, {
+              fractionDigits: 2,
+              symbol: '$',
+              sign: portfolio.total === 0 ? undefined : portfolio.total > 0,
+              noPositiveSign: true,
+            })}
           </p>
-          <div className={`${bgColor} rounded-lg flex items-center p-2 text-white font-bold`}>
+          {/* <div className={`${bgColor} rounded-lg flex items-center p-2 text-white font-bold`}>
             {formatNumber(totalPercentage, {
               fractionDigits: 2,
               symbol: '%',
               symbolPosition: 'after',
-              sign: total > 0,
+              sign: totalPercentage === 0 ? undefined : totalPercentage > 0,
             })}
-          </div>
+          </div> */}
         </div>
-        <div className="flex items-center">
+        {/* <div className="flex items-center">
           <p className={`font-bold ${textColor}`}>
-            {formatNumber(total, { fractionDigits: 2, symbol: '$', sign: total > 0 })}
+            {formatNumber(total, { fractionDigits: 2, symbol: '$', sign: total === 0 ? undefined : total > 0 })}
           </p>
-          {/* <p className="bg-light-gray ml-2 p-1">24h</p> */}
-        </div>
+          <p className="bg-light-gray ml-2 p-1">24h</p>
+        </div> */}
       </section>
 
       <section className="flex justify-between items-center my-8">

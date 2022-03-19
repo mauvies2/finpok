@@ -11,13 +11,10 @@ const Portfolio: FC<PortfolioProps> = ({ children }) => {
   useCryptos()
 
   return (
-    <div>
-      <div className="p-4 text-sm">
-        <BreadCrumbs />
-
-        {children}
-      </div>
-    </div>
+    <>
+      <BreadCrumbs />
+      {children}
+    </>
   )
 }
 

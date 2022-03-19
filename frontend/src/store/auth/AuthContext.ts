@@ -6,7 +6,7 @@ import { auth } from 'finpok/services/AuthService'
 export interface IAuthState {
   authUser: IUserSession | null
   isLoggedIn: boolean
-  error: string
+  error: Error | null
 }
 
 export interface IAuthDispatch {
@@ -20,14 +20,14 @@ export interface IAuthDispatch {
 let initialState = {
   authUser: null,
   isLoggedIn: false,
-  error: '',
+  error: null,
 }
 
 try {
   const authLocalStorageState = localStorage.getItem('auth')
   if (authLocalStorageState && typeof authLocalStorageState === 'string') {
     initialState = JSON.parse(authLocalStorageState)
-    initialState.error = ''
+    initialState.error = null
   }
 } catch (error) {
   console.log(error)
@@ -64,12 +64,12 @@ const AuthReducer = (state: IAuthState, event: { type: string; payload?: any }) 
       return produce(state, (draft) => {
         draft.authUser = null
         draft.isLoggedIn = false
-        draft.error = ''
+        draft.error = null
       })
 
     case 'CLEAR_ERRORS':
       return produce(state, (draft) => {
-        draft.error = ''
+        draft.error = null
       })
 
     default:
@@ -106,8 +106,8 @@ export const useAuthActions = () => {
     try {
       const authUser = await auth.isLoggedIn()
       dispatch({ type: 'AUTH_USER', payload: authUser })
-    } catch (e) {
-      dispatch({ type: 'AUTH_ERROR', payload: { error: e } })
+    } catch (error) {
+      dispatch({ type: 'AUTH_ERROR', payload: { error } })
     }
   }
 
