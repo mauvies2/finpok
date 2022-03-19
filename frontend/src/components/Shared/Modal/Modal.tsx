@@ -2,22 +2,13 @@ import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import { ReactNode, FC } from 'react'
 
 interface ModalProps {
-  baseRoute?: string
-  arrowBack?: boolean
+  goBack?: number
   closeModalIcon?: boolean
   modalTitle?: string
-  section?: string
   children: ReactNode
 }
 
-const Modal: FC<ModalProps> = ({
-  arrowBack = true,
-  closeModalIcon = true,
-  modalTitle,
-  children,
-  section = '',
-  baseRoute,
-}) => {
+const Modal: FC<ModalProps> = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }) => {
   const { closeModal } = useUiDispatch()
 
   if (!children) return null
@@ -25,8 +16,8 @@ const Modal: FC<ModalProps> = ({
   return (
     <section className="fixed top-0 left-0 right-0 h-screen bg-white z-50 flex flex-col items-center">
       <div className="flex justify-between items-center h-16 px-6 w-full flex-shrink-0">
-        {arrowBack ? (
-          <button onClick={closeModal}>
+        {goBack > 1 ? (
+          <button onClick={() => closeModal(1)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -41,7 +32,7 @@ const Modal: FC<ModalProps> = ({
         )}
         <div className="font-bold text-black text-lg">{modalTitle}</div>
         {closeModalIcon ? (
-          <button onClick={closeModal}>
+          <button onClick={() => closeModal(goBack)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

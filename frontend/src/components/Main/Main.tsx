@@ -18,8 +18,8 @@ const override = css`
 
 const Main: FC = () => {
   const isFetching = useIsFetching()
-  const { modalRouteProgress } = useUiState()
-  useBlockScroll(!!modalRouteProgress)
+  const { isModalOpen } = useUiState()
+  useBlockScroll(isModalOpen)
 
   return (
     <main className="max-w-screen mt-16 overscroll-x-hidden">

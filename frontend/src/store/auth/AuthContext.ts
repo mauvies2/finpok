@@ -93,7 +93,7 @@ export const useAuthActions = () => {
       const authUser = await auth.login(credentials)
       dispatch({ type: 'LOGIN_SUCCESS', payload: authUser })
     } catch (e) {
-      dispatch({ type: 'AUTH_ERROR', payload: { error: e.response.data.error } })
+      dispatch({ type: 'AUTH_ERROR', payload: { error: e } })
     }
   }
 
@@ -107,7 +107,7 @@ export const useAuthActions = () => {
       const authUser = await auth.isLoggedIn()
       dispatch({ type: 'AUTH_USER', payload: authUser })
     } catch (e) {
-      dispatch({ type: 'AUTH_ERROR', payload: { error: e.response.data.error } })
+      dispatch({ type: 'AUTH_ERROR', payload: { error: e } })
     }
   }
 

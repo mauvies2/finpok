@@ -1,5 +1,4 @@
 import { FC, useState } from 'react'
-import useScroll from 'finpok/hooks/useScroll'
 import NavAuthButtons from './NavAuthButtons'
 import Button from '../Shared/Button'
 import { Link } from 'react-router-dom'
@@ -9,6 +8,7 @@ import useMediaQuery from 'finpok/hooks/useMediaQuery'
 import { Suitcase2 } from '@styled-icons/remix-line/Suitcase2'
 import { InfoSquare } from '@styled-icons/boxicons-regular/InfoSquare'
 import { PermContactCalendar } from '@styled-icons/material-outlined/PermContactCalendar'
+import useShowOnScroll from 'finpok/hooks/useShowOnScroll'
 
 type NavProps = {
   showOnScroll?: boolean
@@ -18,16 +18,16 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
   const [isMobileMenuOpen, toggleMobileMenu] = useState(false)
 
   // computed
+  const { top, position } = useShowOnScroll(showOnScroll)
   const isMobile = useMediaQuery()
-  const { scrollingUp } = useScroll()
   useBlockScroll(isMobileMenuOpen)
 
-  const shouldShowOnScroll = showOnScroll && scrollingUp ? 'animate-nav' : 'absolute'
   const shouldShowNavMenu = !isMobile || (isMobile && isMobileMenuOpen)
 
   return (
     <nav
-      className={`fixed navbar z-40 shadow-lg bg-neutral text-neutral-content w-screen flex justify-center top-0 left-0 right-0 ${shouldShowOnScroll}`}
+      className="absolute navbar z-40 shadow-lg bg-neutral text-neutral-content w-screen flex justify-center top-0 left-0 right-0"
+      style={{ top, position }}
     >
       <div className="w-full max-w-[1200px] flex justify-between items-center">
         <Link to="/" className="navbar-start ml-4 text-lg font-bold z-20 md:w-1/3">

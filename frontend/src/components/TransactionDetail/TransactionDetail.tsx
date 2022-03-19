@@ -23,7 +23,7 @@ const TransactionDetail: FC = () => {
       cryptoSymbol: currentOwnedCrypto.symbol,
       transactionId: currentTransaction._id || '',
     })
-    closeModal()
+    closeModal(1)
   }
 
   const { type, createdAt, price, amount, fee, notes } = currentTransaction

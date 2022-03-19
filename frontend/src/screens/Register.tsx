@@ -56,9 +56,9 @@ const Register = () => {
 
     if (
       formValues.password === formValues.repeatedPassword &&
-      !formData.name.isValid &&
-      !formData.email.isValid &&
-      !formData.password.isValid
+      !formData.name.hasError &&
+      !formData.email.hasError &&
+      !formData.password.hasError
     ) {
       handleRegister()
       return

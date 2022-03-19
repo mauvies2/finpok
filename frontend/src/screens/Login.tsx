@@ -28,7 +28,7 @@ const Login: FC = () => {
     e.preventDefault()
     errorValidation()
 
-    if (!formData.email.isValid && !formData.password.isValid) {
+    if (!formData.email.hasError && !formData.password.hasError) {
       await login(loginForm)
       setLoginForm({ ...loginForm, password: '' })
     }

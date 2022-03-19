@@ -13,9 +13,7 @@ interface Props {
 const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
   const { isLoggedIn } = useAuthState()
   const { logout } = useAuthDispatch()
-
   const currentLocation = useLocation()
-
   const isMobile = useMediaQuery()
   const isCurrentLocation = (path: string): boolean => currentLocation.pathname === `/${path}`
 

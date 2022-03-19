@@ -10,7 +10,11 @@ import { TransacionPayload } from 'finpok-core/domain'
 import { useGetCurrentCrypto } from 'finpok/store/ui/UiSelectors'
 import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
 
-const AddNewTransaction: FC = () => {
+interface Props {
+  goBack: number
+}
+
+const AddNewTransaction: FC<Props> = ({ goBack }) => {
   // computed
   const { clearSelectedCrypto, closeModal } = useUiDispatch()
   const addTransaction = useAddTransaction()
@@ -55,8 +59,8 @@ const AddNewTransaction: FC = () => {
 
     if (!formData.amount.hasError && !formData.price.hasError) {
       addTransaction.mutate(transactionPayload)
-      closeModal()
       clearSelectedCrypto()
+      closeModal(goBack)
     }
   }
 
@@ -79,7 +83,7 @@ const AddNewTransaction: FC = () => {
     setShowExtraFields({ ...showExtraFields, [field]: true })
   }
 
-  const transactionTotal = ((transactionPayload.price as number) || 0) * ((transactionPayload.amount as number) || 0)
+  const transactionTotal = (Number(transactionPayload.price) || 0) * (Number(transactionPayload.amount) || 0)
 
   return (
     <form className="flex flex-col justify-between min-h-full" onSubmit={handleSubmit}>

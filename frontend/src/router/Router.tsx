@@ -1,4 +1,4 @@
-import { Route, Navigate, Routes } from 'react-router-dom'
+import { Route, Navigate, Routes, useLocation } from 'react-router-dom'
 import { useAuthState } from 'finpok/store/auth/AuthProvider'
 import ProtectedRoute from '../components/Shared/ProtectedRoute'
 import TransactionDetail from '../components/TransactionDetail'
@@ -39,53 +39,58 @@ export const Router = () => {
   )
 }
 
-const PortfolioRoutes = () => (
-  <Routes>
-    <Route index element={<PortfolioCryptoIndex />} />
+const PortfolioRoutes = () => {
+  const { pathname } = useLocation()
 
-    <Route
-      path="transaction-operation/*"
-      element={
-        <>
-          <PortfolioCryptoIndex />
-          <Modal>
-            <Routes>
-              <Route path="select" element={<AddNewSearch />} />
-              <Route path=":symbol" element={<AddNewTransaction />} />
-            </Routes>
-          </Modal>
-        </>
-      }
-    />
-
-    <Route path=":symbol/*" element={<OwnedCryptoRoutes />} />
-  </Routes>
-)
-
-const OwnedCryptoRoutes = () => (
-  <>
-    <OwnedCryptoDetail />
+  return (
     <Routes>
+      <Route index element={<PortfolioCryptoIndex />} />
       <Route
-        path="transaction-operation"
+        path="transaction-operation/*"
         element={
-          <Modal>
-            <AddNewTransaction />
-          </Modal>
+          <>
+            <PortfolioCryptoIndex />
+            <Modal goBack={pathname.includes('select') ? 1 : 2}>
+              <Routes>
+                <Route path="select" element={<AddNewSearch />} />
+                <Route path=":symbol" element={<AddNewTransaction goBack={2} />} />
+              </Routes>
+            </Modal>
+          </>
         }
       />
-
-      <Route
-        path="transaction-detail/*"
-        element={
-          <Modal closeModalIcon={false}>
-            <Routes>
-              <Route index element={<TransactionDetail />} />
-              <Route path="edit" element={<EditTransaction />} />
-            </Routes>
-          </Modal>
-        }
-      />
+      <Route path=":symbol/*" element={<OwnedCryptoRoutes />} />
     </Routes>
-  </>
-)
+  )
+}
+
+const OwnedCryptoRoutes = () => {
+  const { pathname } = useLocation()
+  return (
+    <>
+      <OwnedCryptoDetail />
+      <Routes>
+        <Route
+          path="transaction-operation"
+          element={
+            <Modal>
+              <AddNewTransaction goBack={1} />
+            </Modal>
+          }
+        />
+
+        <Route
+          path="transaction-detail/*"
+          element={
+            <Modal goBack={pathname.includes('edit') ? 2 : 1}>
+              <Routes>
+                <Route index element={<TransactionDetail />} />
+                <Route path="edit" element={<EditTransaction />} />
+              </Routes>
+            </Modal>
+          }
+        />
+      </Routes>
+    </>
+  )
+}

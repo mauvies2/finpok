@@ -3,7 +3,7 @@ import { ITransaction } from 'finpok-core/domain'
 import { useNavigate } from 'react-router-dom'
 
 export interface IUiState {
-  modalRouteProgress: number
+  isModalOpen: boolean
 
   portfolio: {
     currentOwnedCrypto: string | null
@@ -18,12 +18,12 @@ export interface IUiDispatch {
   selectOwnedCryptoDetail: (ownedCrypto: string) => void
   selectCurrentTransaction: (transaction: ITransaction) => void
   openModal: (route: string) => void
-  closeModal: () => void
+  closeModal: (goBack: number) => void
 }
 
 // initial state
 const initialState: IUiState = {
-  modalRouteProgress: 0,
+  isModalOpen: false,
 
   portfolio: {
     currentCrypto: null,
@@ -72,17 +72,16 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
         },
       }
 
-    case 'USE_MODAL':
-      const modalRouteProgress = state.modalRouteProgress + 1
+    case 'OPEN_MODAL':
       return {
         ...state,
-        modalRouteProgress,
+        isModalOpen: true,
       }
 
     case 'CLOSE_MODAL':
       return {
         ...state,
-        modalRouteProgress: 0,
+        isModalOpen: false,
       }
 
     default:
@@ -120,11 +119,11 @@ export const useUiActions = () => {
 
   const openModal = (route: string) => {
     navigate(route)
-    dispatch({ type: 'USE_MODAL' })
+    dispatch({ type: 'OPEN_MODAL' })
   }
 
-  const closeModal = () => {
-    navigate(-state.modalRouteProgress)
+  const closeModal = (goBack: number) => {
+    navigate(-goBack)
     dispatch({ type: 'CLOSE_MODAL' })
   }
 
