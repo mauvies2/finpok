@@ -21,6 +21,8 @@ const config = {
   port: process.env.PORT || 5000,
 
   jwt: process.env.JWT_SECRET,
+
+  clientId: process.env.GOOGLE_CLIENT_ID,
 }
 
 export default config

@@ -2,13 +2,11 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import useGetCrypto from 'finpok/store/server/selectors/useGetCrypto'
-
 import { useRemoveAsset } from 'finpok/hooks/useApi'
 import formatNumber from 'finpok-core/utils/formatNumber'
 import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
 import Button from 'finpok/components/Shared/Button'
 import Transaction from '../components/Transaction'
-// import classNames from 'classnames'
 import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
 
 const OwnedCryptoDetail = () => {
@@ -39,20 +37,6 @@ const OwnedCryptoDetail = () => {
   }
 
   if (!currentOwnedCrypto || !crypto || !portfolio) return null
-
-  // const balancePorcentage =
-  //   ((currentOwnedCrypto.buyAvgPrice * currentOwnedCrypto.amount - currentOwnedCrypto.amount * crypto.quote.USD.price) /
-  //     (currentOwnedCrypto.amount * crypto.quote.USD.price)) *
-  //   100
-
-  // const balance =
-  //   currentOwnedCrypto.amount * crypto.quote.USD.price - currentOwnedCrypto.buyAvgPrice * currentOwnedCrypto.amount
-
-  // const balance =
-  //   currentOwnedCrypto.amount * crypto.quote.USD.price -
-  //   currentOwnedCrypto.transactions.reduce((total, transaction) => total + transaction.amount * transaction.price, 0)
-
-  // const profitTextColor = balance > 0 ? 'text-green-400' : 'text-red-400'
 
   return (
     <>
@@ -100,7 +84,6 @@ const OwnedCryptoDetail = () => {
             </p>
           }
         </div>
-        {/* <div className="bg-green-400 rounded-lg flex items-center p-2 text-white font-bold">1.11%</div> */}
       </section>
 
       <section className="mt-10 text-xs">
@@ -115,24 +98,6 @@ const OwnedCryptoDetail = () => {
             <p>Avg. buy price</p>
             <p className="font-semibold text-sm">{formatNumber(currentOwnedCrypto.buyAvgPrice, { symbol: '$' })}</p>
           </li>
-          {/* <li className="flex justify-between border-b border-gray-100 py-5">
-            <p>Total profit / loss</p>
-            <p className={classNames(profitTextColor, 'font-semibold text-sm')}>
-              {formatNumber(balancePorcentage, {
-                symbol: '%',
-                symbolPosition: 'after',
-                sign: balance > 0,
-                fractionDigits: 2,
-              })}
-              &nbsp;
-              {formatNumber(balance, {
-                symbol: '$',
-                parenthesis: true,
-                sign: balance > 0,
-                fractionDigits: 2,
-              })}
-            </p>
-          </li> */}
         </ul>
       </section>
 
@@ -152,9 +117,16 @@ const OwnedCryptoDetail = () => {
         <ul>
           {portfolio.cryptocurrencies
             ?.find((crypto) => crypto._id === currentOwnedCrypto._id)
-            ?.transactions.map((transaction) => (
-              <Transaction key={transaction._id} transaction={transaction} cryptoSymbol={currentOwnedCrypto.symbol} />
-            ))}
+            ?.transactions.map(
+              (transaction) =>
+                transaction && (
+                  <Transaction
+                    key={transaction._id}
+                    transaction={transaction}
+                    cryptoSymbol={currentOwnedCrypto.symbol}
+                  />
+                )
+            )}
         </ul>
       </section>
     </>

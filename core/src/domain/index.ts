@@ -39,6 +39,7 @@ export interface IOwnedCrypto {
 }
 
 export interface ICrypto {
+  _id: string
   cmcId: string
   name: string
   symbol: string
@@ -87,7 +88,7 @@ export interface IUser {
   _id: string
   name: string
   email: string
-  password: string
+  password?: string
   portfolio: IPortfolio
   createdAt: string
   updatedAt: string

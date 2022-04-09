@@ -14,6 +14,14 @@ export const auth = {
     return JSON.parse(storedUser)
   },
 
+  googleLogin: async (googleCredentials: IUserSession): Promise<IUserSession | null> =>
+    await axios
+      .post<IUserSession, AxiosResponse<IUserSession>>('http://localhost:5000/auth/google-login', googleCredentials)
+      .then((res) => {
+        auth._user(res.data)
+        return res.data
+      }),
+
   login: async (credentials: LoginCredentials): Promise<IUserSession | null> =>
     await axios
       .post<LoginCredentials, AxiosResponse<IUserSession>>('http://localhost:5000/auth/login', credentials)

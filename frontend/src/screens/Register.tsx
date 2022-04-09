@@ -4,6 +4,9 @@ import FormInput from '../components/Shared/FormInput/FormInput'
 import { useNavigate } from 'react-router-dom'
 import { register } from 'finpok/services/ApiService'
 import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
+import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
+import { useAuthDispatch } from 'finpok/store/auth/AuthProvider'
+import FieldError from 'finpok/components/Shared/FieldError/FieldError'
 
 type FormValues = {
   name: string
@@ -12,8 +15,31 @@ type FormValues = {
   repeatedPassword: string
 }
 
+export const useAuthWithGoogle = () => {
+  const [couldAuth, setCouldAuth] = useState<null | boolean>(null)
+  const { googleLogin } = useAuthDispatch()
+
+  const handleGoogleAuth = async (googleData: GoogleLoginResponse | GoogleLoginResponseOffline) => {
+    if ('tokenId' in googleData) {
+      await googleLogin({
+        _id: googleData.googleId,
+        name: googleData.profileObj.name,
+        email: googleData.profileObj.email,
+        token: googleData.tokenId,
+      })
+    }
+  }
+
+  const handleGoogleFailure = () => {
+    setCouldAuth(false)
+  }
+
+  return { handleGoogleAuth, handleGoogleFailure, couldAuth }
+}
+
 const Register = () => {
   const navigate = useNavigate()
+  const { handleGoogleAuth, handleGoogleFailure, couldAuth } = useAuthWithGoogle()
 
   const [formValues, setFormValues] = useState<FormValues>({
     name: '',
@@ -70,10 +96,23 @@ const Register = () => {
   return (
     <>
       <Head title="Register user" />
-      <div className="hero min-h-screen">
-        <form className="p-10 card bg-base-200" onSubmit={submitAuth}>
+      <div className="min-h-[85vh] flex flex-col justify-center items-center pt-10">
+        <p>Continue with a Google account.</p>
+        <GoogleLogin
+          clientId={
+            typeof import.meta.env.VITE_GOOGLE_CLIENT_ID === 'string' ? import.meta.env.VITE_GOOGLE_CLIENT_ID : ''
+          }
+          buttonText="Log in with google"
+          onSuccess={handleGoogleAuth}
+          onFailure={handleGoogleFailure}
+          className="block my-4 p-0 w-[240px]"
+        ></GoogleLogin>
+        <FieldError condition={couldAuth === false}>Google authentication failed</FieldError>
+        <form className="p-10 card w-[20rem]" onSubmit={submitAuth}>
+          <p className="text-center">Or use your info.</p>
           <FormInput
             id="register-name"
+            className="mt-4"
             name="name"
             label="Name"
             labelOnError="Name is required"
@@ -82,7 +121,6 @@ const Register = () => {
             value={formValues.name}
             shouldShowError={formData.name.shouldShow}
             onChange={onChange}
-            autoFocus
           />
           <FormInput
             id="register-email"

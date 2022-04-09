@@ -5,35 +5,18 @@ import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
 import Button from '../Shared/Button'
 import formatNumber from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
-// import usePortfolioYield from 'finpok/hooks/usePortfolioYield'
 
 const PortfolioCryptoIndex: FC = () => {
   // computed
   const portfolio = useGetPortfolio()
   const cryptos = useGetCryptos()
-  // const { total, totalPercentage } = usePortfolioYield(portfolio, cryptos)
   const { openModal } = useUiDispatch()
-
   const handleSelect = () => {
     openModal('/portfolio/transaction-operation/select')
   }
 
   // methods
   if (!portfolio || !cryptos) return null
-
-  // let textColor = null
-  // let bgColor = null
-
-  // if (total > 0.09999) {
-  //   textColor = 'text-green-400'
-  //   bgColor = 'bg-green-400'
-  // } else if (total < -0.09999) {
-  //   textColor = 'text-red-400'
-  //   bgColor = 'bg-red-400'
-  // } else {
-  //   textColor = 'text-gray-400'
-  //   bgColor = 'bg-gray-400'
-  // }
 
   return (
     <>
@@ -59,21 +42,7 @@ const PortfolioCryptoIndex: FC = () => {
               noPositiveSign: true,
             })}
           </p>
-          {/* <div className={`${bgColor} rounded-lg flex items-center p-2 text-white font-bold`}>
-            {formatNumber(totalPercentage, {
-              fractionDigits: 2,
-              symbol: '%',
-              symbolPosition: 'after',
-              sign: totalPercentage === 0 ? undefined : totalPercentage > 0,
-            })}
-          </div> */}
         </div>
-        {/* <div className="flex items-center">
-          <p className={`font-bold ${textColor}`}>
-            {formatNumber(total, { fractionDigits: 2, symbol: '$', sign: total === 0 ? undefined : total > 0 })}
-          </p>
-          <p className="bg-light-gray ml-2 p-1">24h</p>
-        </div> */}
       </section>
 
       <section className="flex justify-between items-center my-8">

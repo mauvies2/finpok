@@ -5,12 +5,16 @@ import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 import { LoginCredentials } from 'finpok-core/domain'
 import FieldError from 'finpok/components/Shared/FieldError/FieldError'
+import GoogleLogin from 'react-google-login'
+import { useAuthWithGoogle } from './Register'
 
 const Login: FC = () => {
   const [loginForm, setLoginForm] = useState<LoginCredentials>({
     email: '',
     password: '',
   })
+
+  const { handleGoogleAuth, handleGoogleFailure, couldAuth } = useAuthWithGoogle()
 
   const { login, clearAuthErrors } = useAuthDispatch()
   const { error } = useAuthState()
@@ -38,8 +42,19 @@ const Login: FC = () => {
   return (
     <>
       <Head title="TOP PAGE" />
-      <div className="hero min-h-[85vh]">
-        <form className="p-10 card" onSubmit={submitAuth}>
+      <div className="min-h-[85vh] pt-10 w-[240px] mx-auto">
+        <p>Continue with a Google account.</p>
+        <GoogleLogin
+          clientId={
+            typeof import.meta.env.VITE_GOOGLE_CLIENT_ID === 'string' ? import.meta.env.VITE_GOOGLE_CLIENT_ID : ''
+          }
+          buttonText="Log in with google"
+          onSuccess={handleGoogleAuth}
+          onFailure={handleGoogleFailure}
+          className="block my-4 p-0 w-[240px]"
+        ></GoogleLogin>
+        <FieldError condition={couldAuth === false}>Google authentication failed</FieldError>
+        <form onSubmit={submitAuth}>
           <FormInput
             id="login-email"
             name="email"
@@ -64,7 +79,7 @@ const Login: FC = () => {
             onChange={onChange}
           />
           <FieldError condition={!!error}>Email or password is incorrect</FieldError>
-          <button type="submit" className="btn btn-primary mt-4">
+          <button type="submit" className="btn btn-primary mt-4 w-full">
             Log in
           </button>
         </form>
