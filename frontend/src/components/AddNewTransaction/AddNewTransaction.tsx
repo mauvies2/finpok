@@ -86,16 +86,16 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
   const transactionTotal = (Number(transactionPayload.price) || 0) * (Number(transactionPayload.amount) || 0)
 
   return (
-    <form className="flex flex-col justify-between min-h-full" onSubmit={handleSubmit}>
+    <form className="flex min-h-full flex-col justify-between" onSubmit={handleSubmit}>
       <div className="flex-1">
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload.type} onClick={selectTransactionType} />
 
-        <div className="select select-bordered w-full max-w-xs mb-4 cursor-pointer">
-          <div className="flex py-2 pl-3 items-center  rounded-lg my-1  cursor-pointer">
+        <div className="select select-bordered mb-4 w-full max-w-xs cursor-pointer">
+          <div className="my-1 flex cursor-pointer items-center  rounded-lg py-2  pl-3">
             <div>
               <img src={currentCrypto.logoUrl} className="mr-3" width="17" alt="logo" />
             </div>
-            <div className="mr-3 font-bold text-sm">{currentCrypto.name === 'XRP' ? 'Ripple' : currentCrypto.name}</div>
+            <div className="mr-3 text-sm font-bold">{currentCrypto.name === 'XRP' ? 'Ripple' : currentCrypto.name}</div>
             <div className="text-xs font-bold text-gray-400">{currentCrypto.symbol}</div>
           </div>
         </div>
@@ -160,7 +160,7 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
           />
         )}
 
-        <div className="flex mb-4">
+        <div className="mb-4 flex">
           <Button className="btn btn-light">{transactionDate}</Button>
           {!showExtraFields.fee && (
             <Button className="btn btn-light ml-2" onClick={() => addExtraField('fee')}>
@@ -174,10 +174,10 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
           )}
         </div>
 
-        <div className="bg-gray-100 rounded-lg items-center p-4 text-xs">
+        <div className="items-center rounded-lg bg-gray-100 p-4 text-xs">
           <label className="text-sm font-semibold">Total spent</label>
           <div className="form-control relative ">
-            <div placeholder="0.00" className="input mt-2 border bg-gray-100  pl-6 text-xl font-bold h-8">
+            <div placeholder="0.00" className="input mt-2 h-8 border  bg-gray-100 pl-6 text-xl font-bold">
               {formatNumber(transactionTotal)}
             </div>
             <p className="absolute  top-[10px] left-2 text-xl font-bold">$</p>
@@ -185,7 +185,7 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
         </div>
       </div>
 
-      <Button className="btn btn-secondary w-full md:w-auto mt-6" height="l">
+      <Button className="btn btn-secondary mt-6 w-full md:w-auto" height="l">
         Add transaction
       </Button>
     </form>

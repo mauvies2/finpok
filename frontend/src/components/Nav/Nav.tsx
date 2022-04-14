@@ -26,23 +26,23 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
 
   return (
     <nav
-      className="absolute navbar z-40 shadow-lg bg-neutral text-neutral-content w-screen flex justify-center top-0 left-0 right-0"
+      className="navbar bg-neutral text-neutral-content absolute top-0 left-0 right-0 z-40 flex w-screen justify-center shadow-lg"
       style={{ top, position }}
     >
-      <div className="w-full max-w-[1200px] flex justify-between items-center">
-        <Link to="/" className="navbar-start ml-4 text-lg font-bold z-20 md:w-1/3">
+      <div className="flex w-full max-w-[1200px] items-center justify-between">
+        <Link to="/" className="navbar-start z-20 ml-4 text-lg font-bold md:w-1/3">
           Finpok
         </Link>
 
         <div
           className={
             shouldShowNavMenu
-              ? 'animate-navMobileMenu fixed left-0 right-0 top-0 h-screen flex flex-col flex-1 bg-neutral justify-between p-4 pt-20 md:static md:h-12 md:z-40 md:p-0 md:flex-row md:justify-between'
+              ? 'animate-navMobileMenu bg-neutral fixed left-0 right-0 top-0 flex h-screen flex-1 flex-col justify-between p-4 pt-20 md:static md:z-40 md:h-12 md:flex-row md:justify-between md:p-0'
               : 'hidden'
           }
         >
           <div
-            className="flex flex-col justify-between items-start md:flex-row"
+            className="flex flex-col items-start justify-between md:flex-row"
             onClick={() => toggleMobileMenu(false)}
           >
             <NavLink to="portfolio" icon={<Suitcase2 size="24" />}>
@@ -58,13 +58,13 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
           <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
         </div>
 
-        <div className="navbar-end mr-4 w-full flex md:hidden">
-          <Button name="search-btn" className="btn btn-square btn-ghost w-auto h-auto">
+        <div className="navbar-end mr-4 flex w-full md:hidden">
+          <Button name="search-btn" className="btn btn-square btn-ghost h-auto w-auto">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              className="inline-block w-6 h-6 stroke-current"
+              className="inline-block h-6 w-6 stroke-current"
             >
               <path
                 strokeLinecap="round"
@@ -76,14 +76,14 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
           </Button>
           <Button
             name="menu-open-close-btn"
-            className="btn btn-square btn-ghost w-auto ml-4 h-auto z-50"
+            className="btn btn-square btn-ghost z-50 ml-4 h-auto w-auto"
             onClick={() => toggleMobileMenu(!isMobileMenuOpen)}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              className="inline-block w-6 h-6 stroke-current"
+              className="inline-block h-6 w-6 stroke-current"
             >
               <path
                 strokeLinecap="round"

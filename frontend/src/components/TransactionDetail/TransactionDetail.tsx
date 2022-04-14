@@ -29,11 +29,11 @@ const TransactionDetail: FC = () => {
   const { type, createdAt, price, amount, fee, notes } = currentTransaction
 
   return (
-    <div className="flex flex-col justify-between h-full p-2">
+    <div className="flex h-full flex-col justify-between p-2">
       <div>
         <div className="flex justify-between border-b border-gray-100 py-5">
           <p>Type</p>
-          <p className="font-semibold text-sm capitalize">{type}</p>
+          <p className="text-sm font-semibold capitalize">{type}</p>
         </div>
 
         <div className="flex justify-between border-b border-gray-100 py-5">
@@ -76,7 +76,7 @@ const TransactionDetail: FC = () => {
         </Button>
 
         <Button
-          className="btn bg-white border-none text-red-500 w-full mt-2 md:w-auto hover:bg-gray-50 hover:text-gray-800"
+          className="btn mt-2 w-full border-none bg-white text-red-500 hover:bg-gray-50 hover:text-gray-800 md:w-auto"
           onClick={handleRemoveTransaction}
         >
           Remove transaction

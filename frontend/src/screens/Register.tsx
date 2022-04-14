@@ -96,7 +96,7 @@ const Register = () => {
   return (
     <>
       <Head title="Register user" />
-      <div className="min-h-[85vh] flex flex-col justify-center items-center pt-10">
+      <div className="flex min-h-[85vh] flex-col items-center justify-center pt-10">
         <p>Continue with a Google account.</p>
         <GoogleLogin
           clientId={
@@ -105,10 +105,10 @@ const Register = () => {
           buttonText="Log in with google"
           onSuccess={handleGoogleAuth}
           onFailure={handleGoogleFailure}
-          className="block my-4 p-0 w-[240px]"
+          className="my-4 block w-[240px] p-0"
         ></GoogleLogin>
         <FieldError condition={couldAuth === false}>Google authentication failed</FieldError>
-        <form className="p-10 card w-[20rem]" onSubmit={submitAuth}>
+        <form className="card w-[20rem] p-10" onSubmit={submitAuth}>
           <p className="text-center">Or use your info.</p>
           <FormInput
             id="register-name"

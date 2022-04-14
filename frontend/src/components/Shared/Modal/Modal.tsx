@@ -14,15 +14,15 @@ const Modal: FC<ModalProps> = ({ closeModalIcon = true, modalTitle, children, go
   if (!children) return null
 
   return (
-    <section className="fixed top-0 left-0 right-0 h-screen bg-white z-50 flex flex-col items-center">
-      <div className="flex justify-between items-center h-16 px-6 w-full flex-shrink-0">
+    <section className="fixed top-0 left-0 right-0 z-50 flex h-screen flex-col items-center bg-white">
+      <div className="flex h-16 w-full flex-shrink-0 items-center justify-between px-6">
         {goBack > 1 ? (
           <button onClick={() => closeModal(1)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              className="inline-block w-5 h-5 stroke-current text-gray-400"
+              className="inline-block h-5 w-5 stroke-current text-gray-400"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
             </svg>
@@ -30,14 +30,14 @@ const Modal: FC<ModalProps> = ({ closeModalIcon = true, modalTitle, children, go
         ) : (
           <div />
         )}
-        <div className="font-bold text-black text-lg">{modalTitle}</div>
+        <div className="text-lg font-bold text-black">{modalTitle}</div>
         {closeModalIcon ? (
           <button onClick={() => closeModal(goBack)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              className="inline-block w-5 h-5 stroke-current text-gray-300"
+              className="inline-block h-5 w-5 stroke-current text-gray-300"
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -46,7 +46,7 @@ const Modal: FC<ModalProps> = ({ closeModalIcon = true, modalTitle, children, go
           <div />
         )}
       </div>
-      <div className="bg-light-gray w-full h-full p-4 overflow-y-scroll">{children}</div>
+      <div className="bg-light-gray h-full w-full overflow-y-scroll p-4">{children}</div>
     </section>
   )
 }

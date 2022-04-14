@@ -42,7 +42,7 @@ const Login: FC = () => {
   return (
     <>
       <Head title="TOP PAGE" />
-      <div className="min-h-[85vh] pt-10 w-[240px] mx-auto">
+      <div className="mx-auto min-h-[85vh] w-[240px] pt-10">
         <p>Continue with a Google account.</p>
         <GoogleLogin
           clientId={
@@ -51,7 +51,7 @@ const Login: FC = () => {
           buttonText="Log in with google"
           onSuccess={handleGoogleAuth}
           onFailure={handleGoogleFailure}
-          className="block my-4 p-0 w-[240px]"
+          className="my-4 block w-[240px] p-0"
         ></GoogleLogin>
         <FieldError condition={couldAuth === false}>Google authentication failed</FieldError>
         <form onSubmit={submitAuth}>

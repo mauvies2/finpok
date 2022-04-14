@@ -7,7 +7,7 @@ interface FieldErrorProps {
 const FieldError: FC<FieldErrorProps> = ({ children, condition }) => {
   if (!condition) return null
 
-  return <p className="text-red-500 font-normal mt-1">{children}</p>
+  return <p className="mt-1 font-normal text-red-500">{children}</p>
 }
 
 export default FieldError

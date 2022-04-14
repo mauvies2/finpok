@@ -25,8 +25,8 @@ const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
   const transactionDate = formatDate(transaction.createdAt)
 
   return (
-    <li className="flex border-b py-5 justify-between cursor-pointer" onClick={openTransactionDetail}>
-      <div className="flex-1 flex items-center">
+    <li className="flex cursor-pointer justify-between border-b py-5" onClick={openTransactionDetail}>
+      <div className="flex flex-1 items-center">
         <img
           src={`https://s2.coinmarketcap.com/static/cloud/img/portfolio/${transaction.type}.svg?_=e3a8309`}
           className="mr-3"
@@ -38,8 +38,8 @@ const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
           <p className="text-xs">{transactionDate}</p>
         </div>
       </div>
-      <div className="flex-1 text-right justify-end ">
-        <p className="font-semibold mb-1">
+      <div className="flex-1 justify-end text-right ">
+        <p className="mb-1 font-semibold">
           {formatNumber(transactionValue, {
             symbol: '$',
             sign: transaction.type === 'buy',

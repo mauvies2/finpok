@@ -20,9 +20,9 @@ const PortfolioCryptoIndex: FC = () => {
 
   return (
     <>
-      <section className="flex items-center ml-4 my-10">
+      <section className="my-10 ml-4 flex items-center">
         <div className="avatar placeholder  mr-4">
-          <div className="bg-gray-300 text-neutral-content rounded-full w-12 h-12">
+          <div className="text-neutral-content h-12 w-12 rounded-full bg-gray-300">
             <span className="text-lg">MX</span>
           </div>
         </div>
@@ -33,8 +33,8 @@ const PortfolioCryptoIndex: FC = () => {
       </section>
       <section>
         <p className="mb-2">Current balance</p>
-        <div className="flex justify-between mb-1 mt-3">
-          <p className="font-bold text-3xl text-black">
+        <div className="mb-1 mt-3 flex justify-between">
+          <p className="text-3xl font-bold text-black">
             {formatNumber(portfolio.total, {
               fractionDigits: 2,
               symbol: '$',
@@ -45,8 +45,8 @@ const PortfolioCryptoIndex: FC = () => {
         </div>
       </section>
 
-      <section className="flex justify-between items-center my-8">
-        <p className="font-bold text-black text-lg">Your assets</p>
+      <section className="my-8 flex items-center justify-between">
+        <p className="text-lg font-bold text-black">Your assets</p>
         <Button className="btn btn-secondary" icon="+" height="s" onClick={handleSelect}>
           Add new
         </Button>
@@ -55,9 +55,9 @@ const PortfolioCryptoIndex: FC = () => {
         {portfolio.cryptocurrencies && portfolio.cryptocurrencies.length ? (
           <>
             <div className="flex border-b border-t py-2 font-bold">
-              <div className="flex-1 flex ">Name</div>
-              <div className="flex-1 flex justify-end">Price</div>
-              <div className="flex-1 flex justify-end">Holdings</div>
+              <div className="flex flex-1 ">Name</div>
+              <div className="flex flex-1 justify-end">Price</div>
+              <div className="flex flex-1 justify-end">Holdings</div>
             </div>
             {portfolio.cryptocurrencies.map((ownedCrypto) => {
               const crypto = cryptos.find((crypto) => ownedCrypto.symbol === crypto.symbol)
@@ -66,8 +66,8 @@ const PortfolioCryptoIndex: FC = () => {
           </>
         ) : (
           <div className="mt-20">
-            <div className="w-full flex justify-center font-bold">Your portfolio is empty</div>
-            <div className="w-full flex justify-center">Start adding some coins</div>
+            <div className="flex w-full justify-center font-bold">Your portfolio is empty</div>
+            <div className="flex w-full justify-center">Start adding some coins</div>
           </div>
         )}
       </section>

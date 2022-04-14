@@ -25,23 +25,23 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
 
   return (
     <div className="flex border-b py-5 ">
-      <div className="flex-1 flex  items-center">
+      <div className="flex flex-1  items-center">
         <img src={crypto.logoUrl} className="mr-3" width="20" alt="logo" />
         <div>
           <p className="font-bold">{ownedCrypto.name}</p>
           <p>{ownedCrypto.symbol}</p>
         </div>
       </div>
-      <div className="flex-1 text-right justify-end font-semibold">
+      <div className="flex-1 justify-end text-right font-semibold">
         <p className="mb-1">{formatNumber(cryptoPrices.price, { symbol: '$', fractionDigits: 2 })}</p>
         <p className={change24hStyle}>{change24h}</p>
       </div>
       <Link
         to={`/portfolio/${ownedCrypto.symbol}`}
-        className="flex-1 text-right justify-end cursor-pointer"
+        className="flex-1 cursor-pointer justify-end text-right"
         onClick={() => selectOwnedCryptoDetail(ownedCrypto.symbol)}
       >
-        <p className="font-semibold mb-1">
+        <p className="mb-1 font-semibold">
           {cryptoPrices.price
             ? formatNumber(ownedCrypto.amount * cryptoPrices.price, {
                 symbol: '$',

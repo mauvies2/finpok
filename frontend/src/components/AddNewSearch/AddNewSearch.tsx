@@ -58,7 +58,7 @@ const AddNewSearch: FC = () => {
             placeholder="Search"
             autoFocus
             autoComplete="off"
-            className="input bg-[#F0F0F0] rounded-lg h-10 pl-10"
+            className="input h-10 rounded-lg bg-[#F0F0F0] pl-10"
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={hanldeInputKeyDown}
           />
@@ -67,7 +67,7 @@ const AddNewSearch: FC = () => {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              className="inline-block w-5 h-5 stroke-current"
+              className="inline-block h-5 w-5 stroke-current"
             >
               <path
                 strokeLinecap="round"
@@ -79,18 +79,18 @@ const AddNewSearch: FC = () => {
           </button>
         </div>
       </form>
-      <div className="relative overflow-y-scroll h-full p-2">
+      <div className="relative h-full overflow-y-scroll p-2">
         {filteredCryptos.map((crypto, index) => (
           <div
             id={`item-${index}`}
             key={`${index}-${crypto.symbol}`}
-            className="flex py-2 pl-3 items-center  rounded-lg my-1 hover:bg-gray-100 cursor-pointer"
+            className="my-1 flex cursor-pointer items-center rounded-lg py-2 pl-3 hover:bg-gray-100"
             onClick={(e) => handleSubmit(e, crypto.symbol)}
             onKeyDown={(e) => handleKeyPress(e, index)}
             tabIndex={0}
           >
             <img src={crypto.logoUrl} className="mr-3" width="17" alt="hola" />
-            <div className="mr-3 font-bold text-sm">{crypto?.name === 'XRP' ? 'Ripple' : crypto.name}</div>
+            <div className="mr-3 text-sm font-bold">{crypto?.name === 'XRP' ? 'Ripple' : crypto.name}</div>
             <div className="text-xs font-bold text-gray-400">{crypto?.symbol}</div>
           </div>
         ))}

@@ -79,7 +79,7 @@ const EditTransaction: FC = () => {
   if (!currentOwnedCrypto || !transactionPayload || !currentTransaction) return null
 
   return (
-    <form className="flex flex-col justify-between h-full" onSubmit={handleSubmit}>
+    <form className="flex h-full flex-col justify-between" onSubmit={handleSubmit}>
       <div>
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload?.type} onClick={selectTransactionType} />
         <FormInput
@@ -142,7 +142,7 @@ const EditTransaction: FC = () => {
           />
         )}
 
-        <div className="flex mb-4">
+        <div className="mb-4 flex">
           <Button className="btn btn-light">{transactionDate}</Button>
           {!extraFields.fee && (
             <Button className="btn btn-light ml-2" onClick={() => addField('fee')}>
@@ -156,17 +156,17 @@ const EditTransaction: FC = () => {
           )}
         </div>
 
-        <div className="bg-gray-100 rounded-lg items-center p-4 text-xs">
+        <div className="items-center rounded-lg bg-gray-100 p-4 text-xs">
           <label className="text-sm font-semibold">Total spent</label>
           <div className="form-control relative ">
-            <div placeholder="0.00" className="input mt-2 border bg-gray-100  pl-2 text-xl font-bold h-8">
+            <div placeholder="0.00" className="input mt-2 h-8 border  bg-gray-100 pl-2 text-xl font-bold">
               {formatNumber(currentTransaction.price * currentTransaction.amount, { symbol: '$' })}
             </div>
           </div>
         </div>
       </div>
       <div>
-        <button className="btn btn-secondary w-full md:w-auto mt-8 mb-4">Edit transaction</button>
+        <button className="btn btn-secondary mt-8 mb-4 w-full md:w-auto">Edit transaction</button>
       </div>
     </form>
   )
