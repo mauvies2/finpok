@@ -42,12 +42,14 @@ export const useAddTransaction = () => {
       }
 
       const transaction = {
+        _id: Math.random().toString(),
         type,
         amount: type === 'buy' ? amount : -amount,
         price,
         notes,
         fee,
         time,
+        createdAt: new Date().toString(),
       }
 
       const newOwnedCrypto = {
@@ -64,7 +66,6 @@ export const useAddTransaction = () => {
 
       let owned = false
       const ownedCryptos = portfolioUpdated.cryptocurrencies
-
       // don't have cryptocurrencies yet
       if (!ownedCryptos) {
         portfolioUpdated.cryptocurrencies = [newOwnedCrypto]
@@ -103,7 +104,6 @@ export const useAddTransaction = () => {
           })
           .reduce((a = 0, b = 0) => a + b, 0)
       }
-
       portfolioUpdated.total = total
 
       queryCache.setQueryData('portfolio', () => portfolioUpdated)
