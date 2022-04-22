@@ -26,10 +26,10 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
 
   return (
     <nav
-      className="navbar bg-neutral text-neutral-content absolute top-0 left-0 right-0 z-40 flex w-screen justify-center shadow-lg"
-      style={{ top, position }}
+      className={`navbar bg-neutral text-neutral-content absolute top-0 left-0 right-0 z-40 flex w-screen justify-center shadow-lg ${position} top-[S${top}]`}
+      // style={{ top, position }}
     >
-      <div className="flex w-full max-w-[1200px] items-center justify-between">
+      <div className="flex w-full max-w-[1370px] items-center justify-between">
         <Link to="/" className="navbar-start z-20 ml-4 text-lg font-bold md:w-1/3">
           Finpok
         </Link>

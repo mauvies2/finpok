@@ -411,7 +411,7 @@
     "estree-walker" "^2.0.1"
     "picomatch" "^2.2.2"
 
-"@styled-icons/bootstrap@10.34.0":
+"@styled-icons/bootstrap@^10.34.0", "@styled-icons/bootstrap@10.34.0":
   "integrity" "sha512-UpzdVUR7r9BNqEfPrMchJdgMZEg9eXQxLQJUXM0ouvbI5o9j21/y1dGameO4PZtYbutT/dWv5O6y24z5JWzd5w=="
   "resolved" "https://registry.npmjs.org/@styled-icons/bootstrap/-/bootstrap-10.34.0.tgz"
   "version" "10.34.0"

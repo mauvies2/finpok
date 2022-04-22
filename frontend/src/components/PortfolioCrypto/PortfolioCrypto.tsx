@@ -1,8 +1,11 @@
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
+import { PlusLg } from '@styled-icons/bootstrap/PlusLg'
+import { MoreVertical } from '@styled-icons/fluentui-system-regular'
+
 import formatNumber from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import { ICrypto, IOwnedCrypto } from 'finpok-core/domain'
-import { Link } from 'react-router-dom'
 
 interface PortfolioCryptoProps {
   ownedCrypto: IOwnedCrypto
@@ -34,6 +37,9 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
       </div>
       <div className="flex-1 justify-end text-right font-semibold">
         <p className="mb-1">{formatNumber(cryptoPrices.price, { symbol: '$', fractionDigits: 2 })}</p>
+        <p className={`${change24hStyle} lg:hidden`}>{change24h}</p>
+      </div>
+      <div className="hidden flex-1 justify-end text-right font-semibold md:block">
         <p className={change24hStyle}>{change24h}</p>
       </div>
       <Link
@@ -59,6 +65,13 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
           })}
         </p>
       </Link>
+      <div className="hidden flex-1 justify-end text-right font-semibold md:block">
+        <p className="mb-1">{formatNumber(ownedCrypto.buyAvgPrice, { symbol: '$', fractionDigits: 2 })}</p>
+      </div>
+      <div className="hidden items-center justify-end text-right font-semibold md:flex md:w-24">
+        <PlusLg className="h-[15px] w-[15px] text-gray-400" />
+        <MoreVertical className="ml-3 h-[21px] w-[21px] text-gray-400" />
+      </div>
     </div>
   )
 }
