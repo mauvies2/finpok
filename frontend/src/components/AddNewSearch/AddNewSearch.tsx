@@ -79,7 +79,7 @@ const AddNewSearch: FC = () => {
           </button>
         </div>
       </form>
-      <div className="relative h-full overflow-y-scroll p-2">
+      <div className="relative overflow-y-scroll p-2">
         {filteredCryptos.map((crypto, index) => (
           <div
             id={`item-${index}`}
