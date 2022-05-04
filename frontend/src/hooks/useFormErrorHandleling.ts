@@ -67,7 +67,9 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
   )
 
   // validate form data
-  const errorValidation = () => {
+  const validateForm = (): boolean => {
+    let hasError: boolean = true
+
     for (const field of fields) {
       const passesValidation = fieldValidation[field.type]
 
@@ -75,8 +77,12 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
 
       if (field.value !== undefined && !passesValidation(field.value)) {
         dispatch({ type: 'SET_FORM_FIELD_SHOW_ERROR', payload: field.name })
+
+        hasError = false
       }
     }
+
+    return hasError
   }
 
   // validate form data on change
@@ -110,5 +116,5 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { formData, errorValidation }
+  return { formData, validateForm }
 }

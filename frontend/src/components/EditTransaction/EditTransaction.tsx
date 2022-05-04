@@ -2,7 +2,7 @@ import formatNumber from 'finpok-core/utils/formatNumber'
 import Button from '../Shared/Button'
 import FormInput from '../Shared/FormInput/FormInput'
 import TabSelect from '../Shared/TabSelect/TabSelect'
-import { FormEvent, useState, FC } from 'react'
+import { FormEvent, useState, useEffect } from 'react'
 import { EditTransactionPayload, TransacionPayload } from 'finpok-core/domain'
 import { useEditTransaction } from 'finpok/hooks/useApi'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
@@ -10,33 +10,17 @@ import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
 import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
 import formatDate from 'finpok-core/utils/formatDate'
 
-const EditTransaction: FC = () => {
+const EditTransaction = () => {
+  const [extraFields, setExtraFields] = useState({ date: false, fee: false, notes: false })
+  const [transactionPayload, setTransactionPayload] = useState<EditTransactionPayload | null>(null)
+
   const { currentTransaction } = useUiState().portfolio
   const { clearSelectedCrypto, closeModal } = useUiDispatch()
-  const transactionDate = formatDate()
-
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()
   const updateTransaction = useEditTransaction()
+  const transactionDate = formatDate()
 
-  // local state
-  const [extraFields, setExtraFields] = useState({ date: false, fee: false, notes: false })
-  const [transactionPayload, setTransactionPayload] = useState<EditTransactionPayload | null>(() => {
-    if (currentOwnedCrypto && currentTransaction && currentTransaction._id) {
-      return {
-        id: currentTransaction._id,
-        symbol: currentOwnedCrypto.symbol,
-        amount: Math.abs(currentTransaction.amount),
-        price: currentTransaction.price,
-        type: currentTransaction.type,
-        notes: '',
-        fee: 0,
-        time: new Date(),
-      }
-    }
-    return null
-  })
-
-  const { formData, errorValidation } = useFormErrorHandleling([
+  const { formData, validateForm } = useFormErrorHandleling([
     { name: 'amount', type: 'numeric', value: transactionPayload?.amount, required: true },
     { name: 'price', type: 'numeric', value: transactionPayload?.price, required: true },
     { name: 'fee', type: 'numeric', value: transactionPayload?.fee },
@@ -46,10 +30,10 @@ const EditTransaction: FC = () => {
   // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    errorValidation()
+    const isFormvalid = validateForm()
 
     if (transactionPayload) {
-      if (!formData.amount.hasError && !formData.price.hasError) {
+      if (isFormvalid) {
         updateTransaction.mutate(transactionPayload)
         clearSelectedCrypto()
         closeModal(2)
@@ -75,6 +59,21 @@ const EditTransaction: FC = () => {
       setTransactionPayload({ ...transactionPayload, type })
     }
   }
+
+  useEffect(() => {
+    if (currentOwnedCrypto && currentTransaction && currentTransaction._id && !transactionPayload) {
+      setTransactionPayload({
+        id: currentTransaction._id,
+        symbol: currentOwnedCrypto.symbol,
+        amount: Math.abs(currentTransaction.amount),
+        price: currentTransaction.price,
+        type: currentTransaction.type,
+        notes: '',
+        fee: 0,
+        time: new Date(),
+      })
+    }
+  }, [currentOwnedCrypto, currentTransaction, transactionPayload])
 
   if (!currentOwnedCrypto || !transactionPayload || !currentTransaction) return null
 
@@ -143,9 +142,8 @@ const EditTransaction: FC = () => {
         )}
 
         <div className="mb-4 flex">
-          <Button className="btn btn-light">{transactionDate}</Button>
           {!extraFields.fee && (
-            <Button className="btn btn-light ml-2" onClick={() => addField('fee')}>
+            <Button className="btn btn-light" onClick={() => addField('fee')}>
               Fee
             </Button>
           )}
@@ -154,6 +152,7 @@ const EditTransaction: FC = () => {
               Notes
             </Button>
           )}
+          <div className="btn btn-light ml-2 h-10 cursor-default">{transactionDate}</div>
         </div>
 
         <div className="items-center rounded-lg bg-gray-100 p-4 text-xs">

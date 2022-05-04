@@ -1,6 +1,6 @@
+import { ReactNode } from 'react'
 import useClickOutside from 'finpok/hooks/useClickOutside'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
-import { ReactNode, useRef } from 'react'
 
 interface ModalProps {
   goBack?: number
@@ -11,18 +11,18 @@ interface ModalProps {
 
 const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: ModalProps) => {
   const { closeModal } = useUiDispatch()
-  const modal = useRef<HTMLDivElement | null>(null)
-  useClickOutside(modal, () => closeModal(goBack))
+  const { element: modal, wasClickOutside } = useClickOutside<HTMLDivElement>(() => closeModal(goBack))
 
   if (!children) return null
 
   return (
     <div
-      className="animate-modalBg fixed top-0 left-0 right-0 z-50 flex h-screen items-center justify-center"
+      className="animate-modalBg fixed top-0 left-0 right-0 z-50 h-screen items-center justify-center md:overflow-y-scroll md:py-20"
       style={{ backgroundColor: 'rgb(0, 0, 0, 0.2)' }}
+      onClick={(e) => wasClickOutside(e)}
     >
       <div
-        className="animate-modal fixed top-0 left-0 right-0 z-50 flex h-screen flex-col items-center bg-white md:static md:h-[70vh] md:w-96 md:rounded-lg"
+        className="animate-modal fixed top-0 left-0 right-0 z-50 flex h-screen flex-col items-center justify-center bg-white md:static md:mx-auto md:h-auto md:w-[40rem] md:rounded-lg"
         ref={modal}
       >
         <div className="flex h-16 w-full flex-shrink-0 items-center justify-between px-6">

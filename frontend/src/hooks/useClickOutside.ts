@@ -1,22 +1,15 @@
-import { MutableRefObject, useCallback, useEffect } from 'react'
+import { MouseEvent, useRef } from 'react'
 
-const useClickOutside = <T extends Element>(element: MutableRefObject<T | null>, cb: () => void) => {
-  const handleClick = useCallback(
-    (e: MouseEvent) => {
-      if (element.current && !element.current.contains(e.target as HTMLDivElement)) {
-        cb()
-      }
-    },
-    [cb, element]
-  )
+const useClickOutside = <T extends Element>(cb: () => void) => {
+  const element = useRef<T | null>(null)
 
-  useEffect(() => {
-    document.addEventListener('click', handleClick)
-
-    return () => {
-      document.removeEventListener('click', handleClick)
+  const wasClickOutside = (e: MouseEvent<HTMLDivElement>) => {
+    if (element.current && !element.current.contains(e.target as HTMLDivElement)) {
+      cb()
     }
-  }, [handleClick])
+  }
+
+  return { element, wasClickOutside }
 }
 
 export default useClickOutside

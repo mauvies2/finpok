@@ -15,13 +15,6 @@ interface Props {
 }
 
 const AddNewTransaction: FC<Props> = ({ goBack }) => {
-  // computed
-  const { clearSelectedCrypto, closeModal } = useUiDispatch()
-  const addTransaction = useAddTransaction()
-  const currentCrypto = useGetCurrentCrypto()
-  const transactionDate = formatDate()
-
-  // local state
   const [showExtraFields, setShowExtraFields] = useState({ date: false, fee: false, notes: false })
   const [transactionPayload, setTransactionPayload] = useState<TransacionPayload>({
     type: 'buy',
@@ -33,31 +26,26 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
     time: new Date(),
   })
 
-  useEffect(() => {
-    if (currentCrypto && !transactionPayload.price && !transactionPayload.symbol) {
-      setTransactionPayload({
-        ...transactionPayload,
-        price: parseFloat(currentCrypto.quote.USD.price.toFixed(2)),
-        symbol: currentCrypto.symbol,
-      })
-    }
-  }, [currentCrypto, transactionPayload])
+  const { clearSelectedCrypto, closeModal } = useUiDispatch()
+  const addTransaction = useAddTransaction()
+  // TODO: remove and use prop instead
+  const currentCrypto = useGetCurrentCrypto()
+  const transactionDate = formatDate()
 
-  const { formData, errorValidation } = useFormErrorHandleling([
+  const { formData, validateForm } = useFormErrorHandleling([
     { name: 'amount', type: 'numeric', value: transactionPayload.amount, required: true },
     { name: 'price', type: 'numeric', value: transactionPayload.price, required: true },
     { name: 'fee', type: 'numeric', value: transactionPayload.fee },
     { name: 'notes', type: 'text', value: transactionPayload.notes },
   ])
 
-  if (!currentCrypto) return null
-
   // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    errorValidation()
 
-    if (!formData.amount.hasError && !formData.price.hasError) {
+    const isFormValid = validateForm()
+
+    if (isFormValid) {
       addTransaction.mutate(transactionPayload)
       clearSelectedCrypto()
       closeModal(goBack)
@@ -84,6 +72,18 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
   }
 
   const transactionTotal = (Number(transactionPayload.price) || 0) * (Number(transactionPayload.amount) || 0)
+
+  useEffect(() => {
+    if (currentCrypto && !transactionPayload.price && !transactionPayload.symbol) {
+      setTransactionPayload({
+        ...transactionPayload,
+        price: parseFloat(currentCrypto.quote.USD.price.toFixed(2)),
+        symbol: currentCrypto.symbol,
+      })
+    }
+  }, [currentCrypto, transactionPayload])
+
+  if (!currentCrypto) return null
 
   return (
     <form className="flex min-h-full flex-col justify-between" onSubmit={handleSubmit}>

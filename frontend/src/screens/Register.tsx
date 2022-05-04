@@ -50,7 +50,7 @@ const Register = () => {
 
   const [showPasswordAlert, setShowPasswordAlert] = useState<boolean>(false)
 
-  const { formData, errorValidation } = useFormErrorHandleling([
+  const { formData, validateForm } = useFormErrorHandleling([
     { name: 'name', type: 'text', value: formValues.name, required: true },
     { name: 'email', type: 'email', value: formValues.email, required: true },
     { name: 'password', type: 'password', value: formValues.password, required: true },
@@ -78,14 +78,9 @@ const Register = () => {
 
   const submitAuth = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    errorValidation()
+    const isFormValid = validateForm()
 
-    if (
-      formValues.password === formValues.repeatedPassword &&
-      !formData.name.hasError &&
-      !formData.email.hasError &&
-      !formData.password.hasError
-    ) {
+    if (formValues.password === formValues.repeatedPassword && isFormValid) {
       handleRegister()
       return
     }

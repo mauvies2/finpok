@@ -19,7 +19,7 @@ const Login: FC = () => {
   const { login, clearAuthErrors } = useAuthDispatch()
   const { error } = useAuthState()
 
-  const { formData, errorValidation } = useFormErrorHandleling([
+  const { formData, validateForm } = useFormErrorHandleling([
     { name: 'email', type: 'email', value: loginForm.email, required: true },
     { name: 'password', type: 'text', value: loginForm.password, required: true },
   ])
@@ -31,9 +31,9 @@ const Login: FC = () => {
 
   const submitAuth = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    errorValidation()
+    const isFormValid = validateForm()
 
-    if (!formData.email.hasError && !formData.password.hasError) {
+    if (isFormValid) {
       await login(loginForm)
       setLoginForm({ ...loginForm, password: '' })
     }

@@ -10,6 +10,8 @@ import { InfoSquare } from '@styled-icons/boxicons-regular/InfoSquare'
 import { PermContactCalendar } from '@styled-icons/material-outlined/PermContactCalendar'
 import useShowOnScroll from 'finpok/hooks/useShowOnScroll'
 
+// TODO: fix top animation bug
+
 type NavProps = {
   showOnScroll?: boolean
 }
