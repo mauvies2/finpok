@@ -5,10 +5,8 @@ import { ICrypto } from 'finpok-core/domain'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 
 const AddNewSearch: FC = () => {
-  // local state
-  const [searchInput, setSearchInput] = useState<string>('')
+  const [searchInput, setSearchInput] = useState('')
 
-  // computed
   const cryptos = useGetCryptos()
   const filteredCryptos = searchFilter<ICrypto>(cryptos, searchInput)
   const { selectCrypto, openModal } = useUiDispatch()
@@ -20,19 +18,21 @@ const AddNewSearch: FC = () => {
     openModal(`/portfolio/transaction-operation/${cryptoSymbol}`)
   }
 
-  const hanldeInputKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
+  const handleInputKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     const firstListItem = document.getElementById('item-0')
-    if (e.key === '40' && firstListItem) {
+    if (e.key === 'ArrowDown' && firstListItem) {
+      e.preventDefault()
       firstListItem.focus()
     }
   }
 
   const handleKeyPress = (e: KeyboardEvent<HTMLDivElement>, index: number) => {
-    if (e.key === '40') {
+    e.preventDefault()
+    if (e.key === 'ArrowDown') {
       const nextListItem = document.getElementById(`item-${index + 1}`)
       nextListItem?.focus()
     }
-    if (e.key === '38') {
+    if (e.key === 'ArrowUp') {
       if (index === 0) {
         const input = document.getElementById('addNewSearch')
         input?.focus()
@@ -40,7 +40,7 @@ const AddNewSearch: FC = () => {
       const previousListItem = document.getElementById(`item-${index - 1}`)
       previousListItem?.focus()
     }
-    if (e.key === '13') {
+    if (e.key === 'Enter' || e.key === ' ') {
       const listItem = document.getElementById(`item-${index}`)
       listItem?.click()
     }
@@ -48,8 +48,8 @@ const AddNewSearch: FC = () => {
 
   return (
     <>
-      <form className="mb-1" onSubmit={(e) => e.preventDefault()}>
-        <div className="form-control relative">
+      <form className="bg-light-gray py-3 md:w-full" onSubmit={(e) => e.preventDefault()}>
+        <div className="form-control">
           <input
             id="addNewSearch"
             name="addNewSearch"
@@ -60,9 +60,9 @@ const AddNewSearch: FC = () => {
             autoComplete="off"
             className="input h-10 rounded-lg bg-[#F0F0F0] pl-10"
             onChange={(e) => setSearchInput(e.target.value)}
-            onKeyDown={hanldeInputKeyDown}
+            onKeyDown={handleInputKeyDown}
           />
-          <button className="absolute pl-3 pt-[0.5rem] text-gray-400" tabIndex={-1}>
+          <div className="absolute pl-3 pt-[0.5rem] text-gray-400" tabIndex={-1}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -76,15 +76,15 @@ const AddNewSearch: FC = () => {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-          </button>
+          </div>
         </div>
       </form>
-      <div className="relative overflow-y-scroll p-2">
+      <div className="h-full overflow-y-scroll md:max-h-[30rem]">
         {filteredCryptos.map((crypto, index) => (
           <div
             id={`item-${index}`}
             key={`${index}-${crypto.symbol}`}
-            className="my-1 flex cursor-pointer items-center rounded-lg py-2 pl-3 hover:bg-gray-100"
+            className="my-[2px] flex cursor-pointer items-center rounded-lg py-3 pl-3 hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none"
             onClick={(e) => handleSubmit(e, crypto.symbol)}
             onKeyDown={(e) => handleKeyPress(e, index)}
             tabIndex={0}
