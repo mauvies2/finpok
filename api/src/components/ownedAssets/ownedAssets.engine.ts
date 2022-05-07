@@ -1,7 +1,6 @@
-import { IOwnedCrypto, ITransaction } from 'finpok-core/domain'
-import { CryptoModel } from '../cryptos/Crypto'
+import { ICrypto, IOwnedCrypto, ITransaction } from 'finpok-core/domain'
 
-export const formatNewOwnedCrypto = (crypto: CryptoModel, transaction: ITransaction): IOwnedCrypto => ({
+export const formatNewOwnedCrypto = (crypto: ICrypto, transaction: ITransaction): IOwnedCrypto => ({
   _id: crypto._id,
   name: crypto.name,
   symbol: crypto.symbol,

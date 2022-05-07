@@ -36,21 +36,22 @@ module.exports = {
         },
         navMobileMenu: {
           '0%': { opacity: 0 },
-          // '50%': { opacity: 0.1 },
-          // '80%': { opacity: 0.5 },
           '100%': { opacity: 1 },
         },
-        navMobileLinks: {
-          '0%': { opacity: 0 },
-          '50%': { opacity: 0.1 },
-          '80%': { opacity: 0.5 },
-          '100%': { opacity: 1 },
+        modal: {
+          '0%': { transform: 'translateY(50vh)' },
+          '100%': { transform: 'translateY(0)' },
+        },
+        modalBg: {
+          '0%': { backgroundColor: 'transparent' },
+          '100%': { backgroundColor: 'rgb(0, 0, 0, 0.2)' },
         },
       },
       animation: {
         nav: 'nav .5s ease-in-out',
         navMobileMenu: 'navMobileMenu .15s linear',
-        navMobileLinks: 'navMobileLinks .3s linear',
+        modal: 'modal .2s ease-in-out',
+        modalBg: 'modalBg .2s linear',
       },
     },
   },

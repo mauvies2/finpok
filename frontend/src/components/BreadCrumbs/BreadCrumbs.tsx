@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const BreadCrumbs: FC = () => {
   return (
-    <section className="text-sm breadcrumbs">
+    <section className="breadcrumbs text-sm">
       <ul>
         <li>
           <Link to="/">Home</Link>

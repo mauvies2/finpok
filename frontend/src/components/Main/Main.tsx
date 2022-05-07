@@ -22,7 +22,7 @@ const Main: FC = () => {
   useBlockScroll(isModalOpen)
 
   return (
-    <main className="max-w-screen mt-16 overscroll-x-hidden p-4 text-sm min-h-[90vh]">
+    <main className="overscroll-x-hidden mx-auto mt-16 min-h-[90vh] max-w-[1370px] p-4 text-sm lg:px-8 lg:pt-10">
       <ClipLoader loading={!!isFetching} size={30} css={override} />
       <Router />
     </main>

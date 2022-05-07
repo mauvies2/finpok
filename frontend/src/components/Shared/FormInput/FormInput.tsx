@@ -4,6 +4,7 @@ import FieldError from '../FieldError/FieldError'
 
 type FormInputProps = {
   id?: string
+  className?: string
   name?: string
   type?: string
   min?: string
@@ -23,6 +24,7 @@ type FormInputProps = {
 const FormInput: FC<FormInputProps> = ({
   id = '',
   name = '',
+  className,
   type = 'number',
   min,
   step,
@@ -38,7 +40,7 @@ const FormInput: FC<FormInputProps> = ({
   onChange,
 }) => {
   return (
-    <label className="text-sm font-semibold">
+    <label className={`text-sm font-semibold ${className}`}>
       {label}
       <div className="form-control relative mb-4">
         <input

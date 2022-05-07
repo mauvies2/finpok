@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import User from '../users/User'
 import config from '../../config/default'
 import { encryptPassword, validatePassword } from '../users/users.engine'
+import { IUserSession } from 'finpok-core/domain'
 
 type UserRegisterData = {
   name: string
@@ -49,6 +50,24 @@ export const loginUser: RequestHandler = async (req: Request, res: Response) => 
       email,
       token,
     })
+  } catch (error) {
+    console.error(error)
+    return res.status(400).json({ status: 400, error: error.message })
+  }
+}
+
+export const handleGoogleAuth: RequestHandler = async (req: Request, res: Response) => {
+  const { email, name, token }: IUserSession = req.body
+
+  try {
+    const user = await User.findOne({ email })
+
+    if (!user) {
+      const newUser = new User({ name, email })
+      await newUser.save()
+    }
+
+    return res.status(200).header('auth-token', token).json({ name, email, token })
   } catch (error) {
     console.error(error)
     return res.status(400).json({ status: 400, error: error.message })

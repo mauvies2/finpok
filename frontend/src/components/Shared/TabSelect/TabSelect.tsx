@@ -9,12 +9,12 @@ type TabSelectProps = {
 
 const TabSelect: FC<TabSelectProps> = ({ tabs, value, onClick }) => {
   return (
-    <div className="tabs tabs-boxed w-full justify-between bg-gray-100 text-xs mb-6">
+    <div className="tabs tabs-boxed mb-6 w-full justify-between bg-gray-100 text-xs">
       {tabs.map((tab) => (
         <div
           key={tab}
-          className={`tab text-gray-700 text-xs font-bold flex-1 cursor-pointer capitalize ${
-            value === tab && 'bg-white rounded-lg'
+          className={`tab flex-1 cursor-pointer text-xs font-bold capitalize text-gray-700 ${
+            value === tab && 'rounded-lg bg-white'
           }`}
           onClick={() => onClick(tab as TransacionPayload['type'])}
         >

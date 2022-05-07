@@ -19,7 +19,7 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
 
   return (
     <div
-      className="md:flex md:items-center md:justify-end md:px-0 md:mt-0 md:flex-1 md:h-12 md:flex-row md:mr-4"
+      className="md:mt-0 md:mr-4 md:flex md:h-12 md:flex-1 md:flex-row md:items-center md:justify-end md:px-0"
       onClick={() => toggleMobileMenu(false)}
     >
       {isLoggedIn ? (
@@ -33,7 +33,7 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
               {isCurrentLocation('register') || (isMobile && !isCurrentLocation('login')) ? (
                 <Button
                   className={classNames(
-                    'btn w-full mt-2 md:mt-0 md:mb-0',
+                    'btn mt-2 w-full md:mt-0 md:mb-0',
                     isCurrentLocation('register') ? 'btn-primary' : 'btn-secondary'
                   )}
                   height="m"
@@ -41,13 +41,13 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
                   Login
                 </Button>
               ) : (
-                <p className="text-sm hover:underline mr-4">Login</p>
+                <p className="mr-4 text-sm hover:underline">Login</p>
               )}
             </Link>
           )}
           {!isCurrentLocation('register') && (
             <Link to="/register" className="w-full md:w-auto">
-              <Button className="btn mt-2 md:mt-0 btn-primary w-full md:w-auto" height="m">
+              <Button className="btn btn-primary mt-2 w-full md:mt-0 md:w-auto" height="m">
                 Sign up
               </Button>
             </Link>

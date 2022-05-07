@@ -11,6 +11,7 @@ export interface IAuthState {
 
 export interface IAuthDispatch {
   login: (credentials: LoginCredentials) => Promise<void>
+  googleLogin: (googleCredentials: IUserSession) => Promise<void>
   logout: () => void
   checkAuth: () => Promise<void>
   clearAuthErrors: () => void
@@ -88,6 +89,15 @@ const reducer = (state: IAuthState, event: { type: string; payload?: any }) => {
 export const useAuthActions = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
 
+  const googleLogin = async (googleCredentials: IUserSession) => {
+    try {
+      const authUser = await auth.googleLogin(googleCredentials)
+      dispatch({ type: 'LOGIN_SUCCESS', payload: authUser })
+    } catch (e) {
+      dispatch({ type: 'AUTH_ERROR', payload: { error: e } })
+    }
+  }
+
   const login = async (credentials: LoginCredentials) => {
     try {
       const authUser = await auth.login(credentials)
@@ -117,6 +127,7 @@ export const useAuthActions = () => {
 
   const events = {
     login,
+    googleLogin,
     logout,
     checkAuth,
     clearAuthErrors,

@@ -5,6 +5,8 @@ import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 import { LoginCredentials } from 'finpok-core/domain'
 import FieldError from 'finpok/components/Shared/FieldError/FieldError'
+import GoogleLogin from 'react-google-login'
+import { useAuthWithGoogle } from './Register'
 
 const Login: FC = () => {
   const [loginForm, setLoginForm] = useState<LoginCredentials>({
@@ -12,10 +14,12 @@ const Login: FC = () => {
     password: '',
   })
 
+  const { handleGoogleAuth, handleGoogleFailure, couldAuth } = useAuthWithGoogle()
+
   const { login, clearAuthErrors } = useAuthDispatch()
   const { error } = useAuthState()
 
-  const { formData, errorValidation } = useFormErrorHandleling([
+  const { formData, validateForm } = useFormErrorHandleling([
     { name: 'email', type: 'email', value: loginForm.email, required: true },
     { name: 'password', type: 'text', value: loginForm.password, required: true },
   ])
@@ -27,19 +31,19 @@ const Login: FC = () => {
 
   const submitAuth = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    errorValidation()
+    const isFormValid = validateForm()
 
-    if (!formData.email.hasError && !formData.password.hasError) {
+    if (isFormValid) {
       await login(loginForm)
       setLoginForm({ ...loginForm, password: '' })
     }
   }
 
   return (
-    <>
+    <section className="flex min-h-[85vh] items-center">
       <Head title="TOP PAGE" />
-      <div className="hero min-h-[85vh]">
-        <form className="p-10 card" onSubmit={submitAuth}>
+      <div className="mx-auto  w-[240px]">
+        <form onSubmit={submitAuth} className="mt-4">
           <FormInput
             id="login-email"
             name="email"
@@ -64,12 +68,27 @@ const Login: FC = () => {
             onChange={onChange}
           />
           <FieldError condition={!!error}>Email or password is incorrect</FieldError>
-          <button type="submit" className="btn btn-primary mt-4">
+          <button type="submit" className="btn btn-primary mt-4 w-full">
             Log in
           </button>
         </form>
+        <div className="relative mt-10 w-full border-b-2">
+          <p className="absolute left-1/2 flex w-14 -translate-x-1/2 -translate-y-1/2 transform justify-center bg-white">
+            or
+          </p>
+        </div>
+        <GoogleLogin
+          clientId={
+            typeof import.meta.env.VITE_GOOGLE_CLIENT_ID === 'string' ? import.meta.env.VITE_GOOGLE_CLIENT_ID : ''
+          }
+          buttonText="Log in with google"
+          onSuccess={handleGoogleAuth}
+          onFailure={handleGoogleFailure}
+          className="mt-10 flex w-[240px] justify-center"
+        ></GoogleLogin>
+        <FieldError condition={couldAuth === false}>Google authentication failed</FieldError>
       </div>
-    </>
+    </section>
   )
 }
 
