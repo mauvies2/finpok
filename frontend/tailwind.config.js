@@ -19,15 +19,20 @@ module.exports = {
       160: '40rem',
       200: '50rem',
     },
+    fontFamily: {
+      montserrat: ['Montserrat', 'sans-serif'],
+      inter: ['Inter', 'sans-serif'],
+    },
     extend: {
       colors: {
-        'primary-green': '#49cc68',
+        'primary-light': '#db5b77',
         'primary-dark': '#202936',
         'primary-dark-hover': '#303d50',
         'light-gray': '#FAFAFA',
       },
       boxShadow: {
-        input: '0 0 0 4px rgb(230, 240, 255)',
+        input: '0 0 0px 0px #2d185c',
+        button: ['0px 0px 0px 2px white', '0px 0px 0px 4px #ff325e'],
       },
       keyframes: {
         nav: {
@@ -58,6 +63,16 @@ module.exports = {
   variants: {},
   plugins: [require('daisyui'), require('tailwind-scrollbar-hide')],
   daisyui: {
-    themes: ['emerald'],
+    themes: [
+      {
+        mytheme: {
+          primary: '#ff325e',
+          'primary-light': '#db5b77',
+          secondary: '#2d185c',
+          'base-100': '#ffffff',
+        },
+      },
+      'emerald',
+    ],
   },
 }
