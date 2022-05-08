@@ -2,26 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Monserrat';
+  src: url('./assets/Montserrat-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/Inter-VariableFont_slnt.ttf');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: Inter;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  @apply tracking-wide text-gray-700;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: 'Monserrat', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .btn {
-  @apply leading-4 capitalize font-semibold min-h-0;
-}
-
-.input {
-  @apply focus:shadow-input focus:border-secondary;
+  @apply bg-primary border-primary hover:text-primary hover:border-primary min-h-0 rounded-full border font-semibold capitalize leading-4 text-white transition-all duration-150 ease-in-out hover:bg-white;
 }
 
 .btn-light {
-  @apply bg-gray-100 border-light-gray text-black text-xs hover:bg-gray-200 hover:border-gray-200;
+  @apply border-primary text-primary hover:border-primary hover:bg-primary focus:border-primary h-9 rounded-full border bg-white px-5 text-xs transition-all duration-150 ease-in-out hover:text-white focus:outline-none;
 }
