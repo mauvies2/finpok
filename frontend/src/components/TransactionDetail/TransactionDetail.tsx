@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import formatDate from 'finpok-core/utils/formatDate'
-import formatNumber from 'finpok-core/utils/formatNumber'
+import { formatNumber } from 'finpok-core/utils/formatNumber'
 import { useRemoveTransaction } from 'finpok/hooks/useApi'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
 import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'

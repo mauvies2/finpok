@@ -1,6 +1,6 @@
 import { FC, FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import formatNumber from 'finpok-core/utils/formatNumber'
+import { formatNumber } from 'finpok-core/utils/formatNumber'
 import formatDate from 'finpok-core/utils/formatDate'
 import Button from '../Shared/Button'
 import FormInput from '../Shared/FormInput/FormInput'

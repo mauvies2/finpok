@@ -1,7 +1,7 @@
-import formatNumber from 'finpok-core/utils/formatNumber'
-import Button from '../Shared/Button'
-import FormInput from '../Shared/FormInput/FormInput'
-import TabSelect from '../Shared/TabSelect/TabSelect'
+import { formatNumber } from 'finpok-core/utils/formatNumber'
+import Button from 'finpok/components/Shared/Button'
+import FormInput from 'finpok/components/Shared/FormInput/FormInput'
+import TabSelect from 'finpok/components/Shared/TabSelect/TabSelect'
 import { FormEvent, useState, useEffect } from 'react'
 import { EditTransactionPayload, TransacionPayload } from 'finpok-core/domain'
 import { useEditTransaction } from 'finpok/hooks/useApi'
@@ -166,6 +166,7 @@ const EditTransaction = () => {
           </div>
         </div>
       </div>
+
       <div className="text-right">
         <Button className="mt-8 mb-4 w-full md:w-auto" type="submit">
           Edit transaction

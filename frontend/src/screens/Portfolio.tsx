@@ -1,6 +1,6 @@
 import { FC, ReactChild } from 'react'
 import { useCryptos, usePortfolio } from 'finpok/hooks/useApi'
-import formatNumber from 'finpok-core/utils/formatNumber'
+import { formatNumber } from 'finpok-core/utils/formatNumber'
 import Head from 'finpok/components/Shared/Head'
 
 interface PortfolioProps {

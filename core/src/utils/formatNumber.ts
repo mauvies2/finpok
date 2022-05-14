@@ -1,4 +1,4 @@
-const formatNumber = (
+export const formatNumber = (
   value: number,
   {
     fractionDigits = undefined,
@@ -40,5 +40,3 @@ const formatNumber = (
 
   return `${parenthesisBeginningBuilder}${signBuilder}${symbolBeforeBuilder}${number}${symbolAfterBuilder}${unitBuilder}${parenthesisFinalBuilder}`
 }
-
-export default formatNumber

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { PlusLg } from '@styled-icons/bootstrap/PlusLg'
 import { MoreVertical } from '@styled-icons/fluentui-system-regular'
 
-import formatNumber from 'finpok-core/utils/formatNumber'
+import { formatNumber } from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import { ICrypto, IOwnedCrypto } from 'finpok-core/domain'
 
