@@ -10,7 +10,7 @@ const SERVICE_NAME = import.meta.env.VITE_SERVICE_NAME
 
 const Head: FC<Props> = ({ title, description }) => (
   <Helmet>
-    <title>{`${title} | ${SERVICE_NAME}`}</title>
+    <title>{`Finpok | ${title}`}</title>
     <meta name="description" content={description ?? `This is ${SERVICE_NAME}`} />
     <meta property="og:title" content={`${title} | ${SERVICE_NAME}`} />
     <meta property="og:description" content={description ?? `This is ${SERVICE_NAME}`} />

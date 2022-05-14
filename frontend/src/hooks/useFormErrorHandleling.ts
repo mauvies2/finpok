@@ -9,11 +9,9 @@ type FormField = {
   required?: boolean
 }
 
-type FormFieldData = {
+type FormFieldValidation = {
   [field: string]: { hasError: boolean; shouldShow: boolean }
 }
-
-type FormErrorHandleling = FormField[]
 
 const fieldValidation = {
   numeric: (value: string | number) => validator.isNumeric(value.toString()),
@@ -22,9 +20,9 @@ const fieldValidation = {
   password: (value: string | number) => validator.isStrongPassword(value.toString()),
 }
 
-export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
-  const initialState = (): FormFieldData => {
-    const formData: FormFieldData = {}
+export const useFormErrorHandleling = (fields: FormField[]) => {
+  const initialState = (): FormFieldValidation => {
+    const formData: FormFieldValidation = {}
     for (const field of fields) {
       formData[field.name] = { hasError: false, shouldShow: false }
     }
@@ -32,7 +30,7 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
   }
 
   const [formData, dispatch] = useReducer(
-    (state: FormFieldData, event: { type: string; payload?: unknown }): FormFieldData => {
+    (state: FormFieldValidation, event: { type: string; payload?: unknown }): FormFieldValidation => {
       switch (event.type) {
         case 'SET_FORM_FIELD_ERROR':
           return produce(state, (draft) => {
@@ -88,9 +86,9 @@ export const useFormErrorHandleling = (fields: FormErrorHandleling) => {
   // validate form data on change
   useEffect(() => {
     for (const field of fields) {
-      const passesValidation = fieldValidation[field.type]
-
       if (!field.required && field.value === '') continue
+
+      const passesValidation = fieldValidation[field.type]
 
       if (field.value !== undefined && !passesValidation(field.value)) {
         dispatch({ type: 'SET_FORM_FIELD_ERROR', payload: field.name })

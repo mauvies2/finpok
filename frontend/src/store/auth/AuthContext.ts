@@ -101,6 +101,7 @@ export const useAuthActions = () => {
   const login = async (credentials: LoginCredentials) => {
     try {
       const authUser = await auth.login(credentials)
+      if (!authUser) throw new Error('Authentication failed')
       dispatch({ type: 'LOGIN_SUCCESS', payload: authUser })
     } catch (e) {
       dispatch({ type: 'AUTH_ERROR', payload: { error: e } })

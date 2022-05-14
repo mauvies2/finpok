@@ -4,7 +4,7 @@ const Home = () => {
   return (
     <>
       <Head title="Homepage" />
-      <div className="hero min-h-screen">Welcome</div>
+      <div className="hero h-full">Welcome</div>
     </>
   )
 }

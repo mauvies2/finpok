@@ -1,10 +1,9 @@
-import classNames from 'classnames'
 import { FC } from 'react'
 import FieldError from '../FieldError/FieldError'
 
 type FormInputProps = {
   id?: string
-  className?: string
+  labelClass?: string
   name?: string
   type?: string
   min?: string
@@ -24,7 +23,7 @@ type FormInputProps = {
 const FormInput: FC<FormInputProps> = ({
   id = '',
   name = '',
-  className,
+  labelClass = '',
   type = 'number',
   min,
   step,
@@ -40,9 +39,9 @@ const FormInput: FC<FormInputProps> = ({
   onChange,
 }) => {
   return (
-    <label className={`text-sm font-semibold ${className}`}>
+    <label className={`pl-2 text-sm font-semibold ${labelClass}`}>
       {label}
-      <div className="form-control relative mb-4">
+      <div className="relative mb-4">
         <input
           id={id}
           name={name}
@@ -53,15 +52,13 @@ const FormInput: FC<FormInputProps> = ({
           placeholder={placeholder}
           autoComplete={autoComplete}
           autoFocus={autoFocus}
-          className={classNames('input mt-2 border border-gray-200 pl-6', [
-            {
-              inputClass,
-              'border-red-500 bg-red-50': shouldShowError,
-            },
-          ])}
+          className={`focus:shadow-input mt-2 h-10 w-full rounded-full border border-gray-200 px-6 focus:outline-none
+            ${shouldShowError && 'border-red-500 bg-red-50'}
+            ${inputClass}
+          `}
           onChange={onChange}
         />
-        {symbol && <p className="absolute top-[23px] left-3 ">{symbol}</p>}
+        {symbol && <p className="absolute top-[19px] left-3 ">{symbol}</p>}
         <FieldError condition={shouldShowError}>{labelOnError}</FieldError>
       </div>
     </label>

@@ -1,16 +1,17 @@
-import classNames from 'classnames'
-import { forwardRef, FC } from 'react'
+import { forwardRef } from 'react'
 
 interface ButtonProps {
   style?: React.CSSProperties | undefined
+  type?: 'button' | 'submit' | 'reset'
   children?: React.ReactNode
   disabled?: boolean
-  onClick?: (e: React.MouseEvent) => void
   className?: string
+  btnType?: 'primary' | 'secondary' | 'light'
   icon?: React.ReactNode
   square?: boolean
   height?: 'xs' | 's' | 'm' | 'l' | 'xl'
   name?: string
+  onClick?: (e: React.MouseEvent) => void
 }
 
 const buttonHeight = {
@@ -21,25 +22,35 @@ const buttonHeight = {
   xl: 'h-14',
 }
 
-const Button: FC<ButtonProps> = forwardRef(
+const Button = forwardRef(
   (
-    { children, style, icon, disabled, onClick, className, height = 'm', name },
+    {
+      children,
+      style,
+      icon,
+      disabled,
+      onClick,
+      className = '',
+      height = 'm',
+      name,
+      type = 'button',
+      btnType = 'primary',
+    }: ButtonProps,
     ref: React.ForwardedRef<HTMLButtonElement>
-  ) => {
-    return (
-      <button
-        name={name}
-        ref={ref}
-        disabled={disabled}
-        onClick={onClick}
-        style={style}
-        className={classNames(className, buttonHeight[height])}
-      >
-        {icon ? <span className="mr-2">{icon}</span> : null}
-        <p>{children}</p>
-      </button>
-    )
-  }
+  ) => (
+    <button
+      name={name}
+      type={type}
+      ref={ref}
+      disabled={disabled}
+      onClick={onClick}
+      style={style}
+      className={`btn ${className} ${buttonHeight[height]} btn-${btnType}`}
+    >
+      {icon ? <span className="mr-2">{icon}</span> : null}
+      <p>{children}</p>
+    </button>
+  )
 )
 
 export default Button

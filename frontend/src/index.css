@@ -2,26 +2,40 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Monserrat';
+  src: url('./assets/Montserrat-VariableFont_wght.ttf');
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('./assets/Inter-VariableFont_slnt.ttf');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans',
-    'Droid Sans', 'Helvetica Neue', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: Inter;
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  @apply bg-white tracking-wide text-gray-700;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: 'Monserrat', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 .btn {
-  @apply leading-4 capitalize font-semibold min-h-0;
+  @apply min-h-0 px-5 text-xs font-semibold capitalize leading-4;
 }
 
-.input {
-  @apply focus:shadow-input focus:border-secondary;
+.btn-primary {
+  @apply bg-primary border-primary focus-visible:shadow-button hover:bg-primary hover:border-primary rounded-full border font-semibold leading-4 text-white hover:scale-[0.96] hover:text-white active:shadow-none;
+}
+
+.btn-secondary {
+  @apply border-primary text-primary hover:border-primary focus:border-primary focus-visible:shadow-button hover:text-primary rounded-full border bg-white hover:scale-[0.96] focus:outline-none active:shadow-none;
 }
 
 .btn-light {
-  @apply bg-gray-100 border-light-gray text-black text-xs hover:bg-gray-200 hover:border-gray-200;
+  @apply rounded-xl border-gray-100 bg-gray-100 text-gray-600 hover:border-gray-100 hover:bg-gray-200 focus-visible:border-gray-500;
 }

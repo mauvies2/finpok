@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import formatDate from 'finpok-core/utils/formatDate'
-import formatNumber from 'finpok-core/utils/formatNumber'
+import { formatNumber } from 'finpok-core/utils/formatNumber'
 import { useRemoveTransaction } from 'finpok/hooks/useApi'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
 import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
@@ -29,7 +29,7 @@ const TransactionDetail: FC = () => {
   const { type, createdAt, price, amount, fee, notes } = currentTransaction
 
   return (
-    <div className="flex h-full flex-col justify-between p-2">
+    <div className="flex h-full flex-col justify-between">
       <div>
         <div className="flex justify-between border-b border-gray-100 py-5">
           <p>Type</p>
@@ -70,15 +70,12 @@ const TransactionDetail: FC = () => {
         </div>
       </div>
 
-      <div>
-        <Button className="btn btn-secondary w-full md:w-auto" onClick={handaleEditTransaction}>
+      <div className="w-full text-right">
+        <Button className="w-full md:w-auto" btnType="secondary" onClick={handaleEditTransaction}>
           Edit transaction
         </Button>
 
-        <Button
-          className="btn mt-2 w-full border-none bg-white text-red-500 hover:bg-gray-50 hover:text-gray-800 md:w-auto"
-          onClick={handleRemoveTransaction}
-        >
+        <Button className="mt-2 w-full md:mt-0 md:ml-2 md:w-auto" onClick={handleRemoveTransaction}>
           Remove transaction
         </Button>
       </div>

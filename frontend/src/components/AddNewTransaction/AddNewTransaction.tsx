@@ -1,5 +1,6 @@
 import { FC, FormEvent, useEffect, useState } from 'react'
-import formatNumber from 'finpok-core/utils/formatNumber'
+import { useNavigate } from 'react-router-dom'
+import { formatNumber } from 'finpok-core/utils/formatNumber'
 import formatDate from 'finpok-core/utils/formatDate'
 import Button from '../Shared/Button'
 import FormInput from '../Shared/FormInput/FormInput'
@@ -30,6 +31,7 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
   const addTransaction = useAddTransaction()
   // TODO: remove and use prop instead
   const currentCrypto = useGetCurrentCrypto()
+  const navigate = useNavigate()
   const transactionDate = formatDate()
 
   const { formData, validateForm } = useFormErrorHandleling([
@@ -90,7 +92,10 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
       <div className="flex-1">
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload.type} onClick={selectTransactionType} />
 
-        <div className="select select-bordered mb-4 w-full max-w-xs cursor-pointer">
+        <div
+          className="select mb-4 h-10 w-full max-w-xs cursor-pointer rounded-full border border-gray-200 bg-white"
+          onClick={() => navigate(-1)}
+        >
           <div className="my-1 flex cursor-pointer items-center  rounded-lg py-2  pl-3">
             <div>
               <img src={currentCrypto.logoUrl} className="mr-3" width="17" alt="logo" />
@@ -161,14 +166,14 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
         )}
 
         <div className="mb-4 flex">
-          <Button className="btn btn-light">{transactionDate}</Button>
+          <Button btnType="light">{transactionDate}</Button>
           {!showExtraFields.fee && (
-            <Button className="btn btn-light ml-2" onClick={() => addExtraField('fee')}>
+            <Button className="ml-2" btnType="light" onClick={() => addExtraField('fee')}>
               Fee
             </Button>
           )}
           {!showExtraFields.notes && (
-            <Button className="btn btn-light ml-2" onClick={() => addExtraField('notes')}>
+            <Button className="ml-2" btnType="light" onClick={() => addExtraField('notes')}>
               Notes
             </Button>
           )}
@@ -176,8 +181,8 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
 
         <div className="items-center rounded-lg bg-gray-100 p-4 text-xs">
           <label className="text-sm font-semibold">Total spent</label>
-          <div className="form-control relative ">
-            <div placeholder="0.00" className="input mt-2 h-8 border  bg-gray-100 pl-6 text-xl font-bold">
+          <div className="form-control relative">
+            <div placeholder="0.00" className="mt-2 h-8 bg-gray-100 pl-6 text-xl font-bold">
               {formatNumber(transactionTotal)}
             </div>
             <p className="absolute  top-[10px] left-2 text-xl font-bold">$</p>
@@ -185,7 +190,7 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
         </div>
       </div>
 
-      <Button className="btn btn-secondary mt-6 w-full md:w-auto" height="l">
+      <Button className="mt-6 w-full md:w-auto" type="submit">
         Add transaction
       </Button>
     </form>

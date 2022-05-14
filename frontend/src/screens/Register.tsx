@@ -7,6 +7,7 @@ import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
 import { useAuthDispatch } from 'finpok/store/auth/AuthProvider'
 import FieldError from 'finpok/components/Shared/FieldError/FieldError'
+import Button from 'finpok/components/Shared/Button'
 
 type FormValues = {
   name: string
@@ -25,6 +26,7 @@ export const useAuthWithGoogle = () => {
         _id: googleData.googleId,
         name: googleData.profileObj.name,
         email: googleData.profileObj.email,
+        imageUrl: googleData.profileObj.imageUrl,
         token: googleData.tokenId,
       })
     }
@@ -107,7 +109,7 @@ const Register = () => {
           <p className="text-center">Or use your info.</p>
           <FormInput
             id="register-name"
-            className="mt-4"
+            labelClass="mt-4"
             name="name"
             label="Name"
             labelOnError="Name is required"
@@ -150,9 +152,9 @@ const Register = () => {
             shouldShowError={showPasswordAlert}
             onChange={onChange}
           />
-          <button type="submit" className="btn btn-primary mt-4">
+          <Button type="submit" className="mt-4">
             Register
-          </button>
+          </Button>
         </form>
       </div>
     </>
