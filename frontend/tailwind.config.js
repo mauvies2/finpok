@@ -31,7 +31,7 @@ module.exports = {
         'light-gray': '#FAFAFA',
       },
       boxShadow: {
-        input: '0 0 0px 0px #2d185c',
+        input: '0 0 0px 0px #ffdbe3',
         button: ['0px 0px 0px 2px white', '0px 0px 0px 4px #ff325e'],
       },
       keyframes: {
