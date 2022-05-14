@@ -27,7 +27,11 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
   })
 
   return (
-    <div className="flex border-b py-5 ">
+    <Link
+      className="flex border-b py-5"
+      to={`/portfolio/${ownedCrypto.symbol}`}
+      onClick={() => selectOwnedCryptoDetail(ownedCrypto.symbol)}
+    >
       <div className="flex flex-1  items-center">
         <img src={crypto.logoUrl} className="mr-3" width="20" alt="logo" />
         <div>
@@ -42,11 +46,8 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
       <div className="hidden flex-1 justify-end text-right font-semibold md:block">
         <p className={change24hStyle}>{change24h}</p>
       </div>
-      <Link
-        to={`/portfolio/${ownedCrypto.symbol}`}
-        className="flex-1 cursor-pointer justify-end text-right"
-        onClick={() => selectOwnedCryptoDetail(ownedCrypto.symbol)}
-      >
+
+      <div className="flex-1 cursor-pointer justify-end text-right">
         <p className="mb-1 font-semibold">
           {cryptoPrices.price
             ? formatNumber(ownedCrypto.amount * cryptoPrices.price, {
@@ -64,7 +65,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
             sign: ownedCrypto.amount > 0 ? undefined : false,
           })}
         </p>
-      </Link>
+      </div>
       <div className="hidden flex-1 justify-end text-right font-semibold md:block">
         <p className="mb-1">{formatNumber(ownedCrypto.buyAvgPrice, { symbol: '$', fractionDigits: 2 })}</p>
       </div>
@@ -72,7 +73,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
         <PlusLg className="h-[15px] w-[15px] text-gray-400" />
         <MoreVertical className="ml-3 h-[21px] w-[21px] text-gray-400" />
       </div>
-    </div>
+    </Link>
   )
 }
 
