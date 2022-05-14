@@ -20,7 +20,7 @@ const AddNewSearch: FC = () => {
 
   const handleInputKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
     const firstListItem = document.getElementById('item-0')
-    if (e.key === 'ArrowDown' && firstListItem) {
+    if (firstListItem && e.key === 'ArrowDown') {
       e.preventDefault()
       firstListItem.focus()
     }
@@ -48,7 +48,7 @@ const AddNewSearch: FC = () => {
 
   return (
     <>
-      <form className="bg-light-gray py-3 md:w-full" onSubmit={(e) => e.preventDefault()}>
+      <form className="py-3 md:w-full" onSubmit={(e) => e.preventDefault()}>
         <div className="form-control">
           <input
             id="addNewSearch"
@@ -58,7 +58,7 @@ const AddNewSearch: FC = () => {
             placeholder="Search"
             autoFocus
             autoComplete="off"
-            className="input h-10 rounded-lg bg-[#F0F0F0] pl-10"
+            className="focus:shadow-input h-10 w-full rounded-full border border-gray-200 pl-10 focus:outline-none"
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleInputKeyDown}
           />
@@ -87,7 +87,7 @@ const AddNewSearch: FC = () => {
             className="my-[2px] flex cursor-pointer items-center rounded-lg py-3 pl-3 hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none"
             onClick={(e) => handleSubmit(e, crypto.symbol)}
             onKeyDown={(e) => handleKeyPress(e, index)}
-            tabIndex={0}
+            tabIndex={-1}
           >
             <img src={crypto.logoUrl} className="mr-3" width="17" alt="hola" />
             <div className="mr-3 text-sm font-bold">{crypto?.name === 'XRP' ? 'Ripple' : crypto.name}</div>

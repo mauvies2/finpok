@@ -70,15 +70,12 @@ const TransactionDetail: FC = () => {
         </div>
       </div>
 
-      <div>
-        <Button className="btn btn-secondary w-full md:w-auto" onClick={handaleEditTransaction}>
+      <div className="w-full text-right">
+        <Button className="btn w-full md:w-auto" onClick={handaleEditTransaction}>
           Edit transaction
         </Button>
 
-        <Button
-          className="btn mt-2 w-full border-none bg-white text-red-500 hover:bg-gray-50 hover:text-gray-800 md:w-auto"
-          onClick={handleRemoveTransaction}
-        >
+        <Button className="btn ml-2 w-full md:w-auto" onClick={handleRemoveTransaction}>
           Remove transaction
         </Button>
       </div>

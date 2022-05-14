@@ -25,6 +25,7 @@ export const useAuthWithGoogle = () => {
         _id: googleData.googleId,
         name: googleData.profileObj.name,
         email: googleData.profileObj.email,
+        imageUrl: googleData.profileObj.imageUrl,
         token: googleData.tokenId,
       })
     }
@@ -107,7 +108,7 @@ const Register = () => {
           <p className="text-center">Or use your info.</p>
           <FormInput
             id="register-name"
-            className="mt-4"
+            labelClass="mt-4"
             name="name"
             label="Name"
             labelOnError="Name is required"

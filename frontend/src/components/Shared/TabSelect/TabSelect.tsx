@@ -13,9 +13,10 @@ const TabSelect: FC<TabSelectProps> = ({ tabs, value, onClick }) => {
       {tabs.map((tab) => (
         <div
           key={tab}
-          className={`tab flex-1 cursor-pointer text-xs font-bold capitalize text-gray-700 ${
+          className={`tab flex-1 cursor-pointer rounded-lg text-xs font-bold capitalize text-gray-700 ${
             value === tab && 'rounded-lg bg-white'
           }`}
+          tabIndex={0}
           onClick={() => onClick(tab as TransacionPayload['type'])}
         >
           {tab}

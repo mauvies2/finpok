@@ -3,7 +3,7 @@ import Head from 'finpok/components/Shared/Head'
 const Page404 = () => {
   return (
     <>
-      <Head title="The page is not found" />
+      <Head title="Not found" />
       <div className="hero min-h-screen ">
         <div className="hero-content text-center text-3xl font-bold">
           <div>

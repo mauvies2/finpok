@@ -9,6 +9,7 @@ import { Suitcase2 } from '@styled-icons/remix-line/Suitcase2'
 import { InfoSquare } from '@styled-icons/boxicons-regular/InfoSquare'
 import { PermContactCalendar } from '@styled-icons/material-outlined/PermContactCalendar'
 import useShowOnScroll from 'finpok/hooks/useShowOnScroll'
+import Logo from '../Logo/Logo'
 
 // TODO: fix top animation bug
 
@@ -25,43 +26,48 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
   useBlockScroll(isMobileMenuOpen)
 
   const shouldShowNavMenu = !isMobile || (isMobile && isMobileMenuOpen)
+  const showNavMenu = false
 
   return (
     <nav
-      className="navbar bg-neutral text-neutral-content absolute top-0 left-0 right-0 z-40 flex w-screen justify-center shadow-lg"
+      className="navbar absolute top-0 left-0 right-0 z-40 flex w-screen justify-center bg-white shadow"
       style={{ top, position }}
     >
       <div className="flex w-full max-w-[1370px] items-center justify-between">
-        <Link to="/" className="navbar-start z-20 ml-4 text-lg font-bold md:w-1/3">
-          Finpok
-        </Link>
+        <div className="navbar-start z-20 flex md:w-1/3">
+          <Link to="/" className="ml-4 text-lg font-bold">
+            <Logo />
+          </Link>
+        </div>
 
         <div
           className={
             shouldShowNavMenu
-              ? 'animate-navMobileMenu bg-neutral fixed left-0 right-0 top-0 flex h-screen flex-1 flex-col justify-between p-4 pt-20 md:static md:z-40 md:h-12 md:flex-row md:justify-between md:p-0'
+              ? 'animate-navMobileMenu fixed left-0 right-0 top-0 flex h-screen flex-1 flex-col justify-between p-4 pt-20 md:static md:z-40 md:h-12 md:flex-row md:justify-between md:p-0'
               : 'hidden'
           }
         >
-          <div
-            className="flex flex-col items-start justify-between md:flex-row"
-            onClick={() => toggleMobileMenu(false)}
-          >
-            <NavLink to="portfolio" icon={<Suitcase2 size="24" />}>
-              Portfolio
-            </NavLink>
-            <NavLink to="about" icon={<InfoSquare size="24" />}>
-              About
-            </NavLink>
-            <NavLink to="contact" icon={<PermContactCalendar size="24" />}>
-              Contact
-            </NavLink>
-          </div>
+          {showNavMenu && (
+            <div
+              className="flex flex-col items-start justify-between md:flex-row"
+              onClick={() => toggleMobileMenu(false)}
+            >
+              <NavLink to="portfolio" icon={<Suitcase2 size="24" />}>
+                Portfolio
+              </NavLink>
+              <NavLink to="about" icon={<InfoSquare size="24" />}>
+                About
+              </NavLink>
+              <NavLink to="contact" icon={<PermContactCalendar size="24" />}>
+                Contact
+              </NavLink>
+            </div>
+          )}
           <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
         </div>
 
         <div className="navbar-end mr-4 flex w-full md:hidden">
-          <Button name="search-btn" className="btn btn-square btn-ghost h-auto w-auto">
+          <Button name="search-btn" className="h-auto w-auto text-gray-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -77,8 +83,8 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
             </svg>
           </Button>
           <Button
-            name="menu-open-close-btn"
-            className="btn btn-square btn-ghost z-50 ml-4 h-auto w-auto"
+            name="menu-open-close-btn text-gray-500"
+            className="z-50 ml-4 h-auto w-auto"
             onClick={() => toggleMobileMenu(!isMobileMenuOpen)}
           >
             <svg

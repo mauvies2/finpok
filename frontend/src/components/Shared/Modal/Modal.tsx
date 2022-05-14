@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react'
+import { ReactNode, useRef, useState } from 'react'
 import useClickOutside from 'finpok/hooks/useClickOutside'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 
@@ -11,9 +11,10 @@ interface ModalProps {
 
 const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: ModalProps) => {
   const [modalRef, setModalRef] = useState<HTMLDivElement | null>()
+  const modal = useRef<HTMLDivElement | null>(null)
 
   const { closeModal } = useUiDispatch()
-  const { element: modal, wasClickOutside } = useClickOutside<HTMLDivElement>(() => closeModal(goBack))
+  useClickOutside(modal, () => closeModal(goBack))
 
   const heighFixed = modalRef && modalRef.offsetHeight > window.innerHeight * 0.6
 
@@ -24,7 +25,6 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
       className="animate-modalBg fixed top-0 left-0 right-0 z-50 h-screen md:flex md:items-center md:justify-center md:py-10"
       style={{ backgroundColor: 'rgb(0, 0, 0, 0.2)' }}
       ref={(newRef) => setModalRef(newRef)}
-      onClick={(e) => wasClickOutside(e)}
     >
       <div
         className={`animate-modal fixed top-0 left-0 right-0 z-50 h-screen bg-white md:static md:mx-auto md:h-auto md:w-[40rem] md:rounded-lg ${
@@ -63,7 +63,7 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
             <div />
           )}
         </div>
-        <div className="bg-light-gray h-full w-full p-4 md:rounded-lg">{children}</div>
+        <div className="h-full w-full p-4 md:rounded-lg">{children}</div>
       </div>
     </div>
   )
