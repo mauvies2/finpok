@@ -27,7 +27,7 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
       ref={(newRef) => setModalRef(newRef)}
     >
       <div
-        className={`animate-modal fixed top-0 left-0 right-0 z-50 h-screen bg-white md:static md:mx-auto md:h-auto md:w-[40rem] md:rounded-lg ${
+        className={`animate-modal fixed top-0 left-0 right-0 z-50 flex h-screen flex-col bg-white md:static md:mx-auto md:h-auto md:w-[40rem] md:rounded-lg ${
           heighFixed && 'md:max-h-[80vh]'
         }`}
         ref={modal}
@@ -47,7 +47,9 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
           ) : (
             <div />
           )}
+
           <div className="text-lg font-bold text-black">{modalTitle}</div>
+
           {closeModalIcon ? (
             <button onClick={() => closeModal(goBack)}>
               <svg
@@ -63,7 +65,7 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
             <div />
           )}
         </div>
-        <div className="h-full w-full p-4 md:rounded-lg">{children}</div>
+        <div className="flex w-full flex-1 flex-col overflow-y-hidden p-4 md:rounded-lg">{children}</div>
       </div>
     </div>
   )
