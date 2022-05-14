@@ -1,15 +1,20 @@
-import { MouseEvent, useRef } from 'react'
+import { useEffect } from 'react'
 
-const useClickOutside = <T extends Element>(cb: () => void) => {
-  const element = useRef<T | null>(null)
-
-  const wasClickOutside = (e: MouseEvent<HTMLDivElement>) => {
-    if (element.current && !element.current.contains(e.target as HTMLDivElement)) {
-      cb()
+const useClickOutside = <T extends Element>(element: React.MutableRefObject<T | null>, cb: () => void) => {
+  useEffect(() => {
+    const wasClickOutside = (e: globalThis.MouseEvent) => {
+      if (element.current && !element.current.contains(e.target as HTMLDivElement)) {
+        cb()
+      }
     }
-  }
+    document.addEventListener('click', wasClickOutside, true)
 
-  return { element, wasClickOutside }
+    return () => {
+      document.removeEventListener('click', wasClickOutside, true)
+    }
+  }, [cb, element])
+
+  return { element }
 }
 
 export default useClickOutside

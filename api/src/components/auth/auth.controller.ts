@@ -57,17 +57,17 @@ export const loginUser: RequestHandler = async (req: Request, res: Response) => 
 }
 
 export const handleGoogleAuth: RequestHandler = async (req: Request, res: Response) => {
-  const { email, name, token }: IUserSession = req.body
+  const { email, name, token, imageUrl }: IUserSession = req.body
 
   try {
     const user = await User.findOne({ email })
 
     if (!user) {
-      const newUser = new User({ name, email })
+      const newUser = new User({ name, email, imageUrl })
       await newUser.save()
     }
 
-    return res.status(200).header('auth-token', token).json({ name, email, token })
+    return res.status(200).header('auth-token', token).json({ name, email, token, imageUrl })
   } catch (error) {
     console.error(error)
     return res.status(400).json({ status: 400, error: error.message })

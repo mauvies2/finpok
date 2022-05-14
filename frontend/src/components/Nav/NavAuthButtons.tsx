@@ -4,17 +4,23 @@ import Button from '../Shared/Button'
 import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
 import { useLocation, Link } from 'react-router-dom'
 import useMediaQuery from 'finpok/hooks/useMediaQuery'
-import { FC } from 'react'
+import { FC, useRef, useState } from 'react'
+import useClickOutside from 'finpok/hooks/useClickOutside'
 
 interface Props {
   toggleMobileMenu: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
-  const { isLoggedIn } = useAuthState()
+  const [isAuthUserDetailsOpened, setIsAuthUserDetailOpened] = useState(false)
+  const authUserButton = useRef<HTMLDivElement | null>(null)
+
+  const { authUser, isLoggedIn } = useAuthState()
   const { logout } = useAuthDispatch()
   const currentLocation = useLocation()
   const isMobile = useMediaQuery()
+  useClickOutside(authUserButton, () => setIsAuthUserDetailOpened(false))
+
   const isCurrentLocation = (path: string): boolean => currentLocation.pathname === `/${path}`
 
   return (
@@ -23,13 +29,23 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
       onClick={() => toggleMobileMenu(false)}
     >
       {isLoggedIn ? (
-        <Button onClick={logout} className="btn btn-primary w-full md:w-auto" height="m">
-          Logout
-        </Button>
+        <div onClick={() => setIsAuthUserDetailOpened(!isAuthUserDetailsOpened)} ref={authUserButton}>
+          <button className="w-12 overflow-hidden rounded-full border">
+            <img src={authUser?.imageUrl} alt="" className="avatar" />
+          </button>
+          {isAuthUserDetailsOpened && (
+            <div
+              className="dropdown-content bg-base-100 min-w-40 absolute top-16 right-4 cursor-pointer rounded-lg p-3 text-center text-sm font-extralight font-bold text-red-500 shadow"
+              onClick={logout}
+            >
+              <p>Logout</p>
+            </div>
+          )}
+        </div>
       ) : (
         <>
           {!isCurrentLocation('login') && (
-            <Link to="/login" className="w-full md:w-auto ">
+            <Link to="/login" className="w-full md:w-auto" tabIndex={0}>
               {isCurrentLocation('register') || (isMobile && !isCurrentLocation('login')) ? (
                 <Button
                   className={classNames(
@@ -46,8 +62,8 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
             </Link>
           )}
           {!isCurrentLocation('register') && (
-            <Link to="/register" className="w-full md:w-auto">
-              <Button className="btn btn-primary mt-2 w-full md:mt-0 md:w-auto" height="m">
+            <Link to="/register" className="w-full md:w-auto" tabIndex={-1}>
+              <Button className="btn-light mt-2 w-full md:mt-0 md:w-auto" height="m">
                 Sign up
               </Button>
             </Link>

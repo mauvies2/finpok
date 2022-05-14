@@ -103,6 +103,7 @@ export interface IUserSession {
   _id: string
   name: string
   email: string
+  imageUrl: string
   token: string
 }
 

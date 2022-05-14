@@ -14,6 +14,11 @@ const userSchema: Schema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
+    imageUrl: {
+      type: String,
+      default: '',
+      trim: true,
+    },
     password: {
       type: String,
       trim: true,

@@ -1,5 +1,5 @@
 import mongoose, { ConnectOptions } from 'mongoose'
-import config from './config/default';
+import config from './config/default'
 
 (async () => {
   console.log('Database is connecting')
