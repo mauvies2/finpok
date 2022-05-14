@@ -43,13 +43,13 @@ const OwnedCryptoDetail = () => {
     <>
       <section className="mt-8 flex justify-between">
         <Link to="/portfolio" tabIndex={-1}>
-          <Button className="btn btn-light" icon="<-">
+          <Button btnType="light" icon="<-">
             Back
           </Button>
         </Link>
         <div className="relative">
           <div onClick={() => setIsRemoveAssetPromptOpen(!isRemoveAssetPromptOpen)} ref={removeAssetOption}>
-            <Button className="btn btn-light" icon={'...'}>
+            <Button btnType="light" icon={'...'}>
               More
             </Button>
             {isRemoveAssetPromptOpen && (
@@ -102,7 +102,7 @@ const OwnedCryptoDetail = () => {
 
       <section className="mb-6 mt-10 flex items-center justify-between">
         <p className="text-lg font-bold text-black">Transactions</p>
-        <Button className="btn btn-secondary" icon={'+'} onClick={handleAddTransaction}>
+        <Button icon="+" onClick={handleAddTransaction}>
           Add transaction
         </Button>
       </section>

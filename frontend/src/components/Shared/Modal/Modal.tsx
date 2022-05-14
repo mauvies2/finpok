@@ -28,7 +28,7 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
     >
       <div
         className={`animate-modal fixed top-0 left-0 right-0 z-50 flex h-screen flex-col bg-white md:static md:mx-auto md:h-auto md:w-[40rem] md:rounded-lg ${
-          heighFixed && 'md:max-h-[80vh]'
+          heighFixed && 'md:max-h-[85vh]'
         }`}
         ref={modal}
       >

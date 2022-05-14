@@ -25,9 +25,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        'primary-light': '#db5b77',
-        'primary-dark': '#202936',
-        'primary-dark-hover': '#303d50',
+        'primary-light': '#ff4a71',
+        'base-100': '#ffffff',
+        'primary-dark': '#ff1245',
         'light-gray': '#FAFAFA',
       },
       boxShadow: {
@@ -67,9 +67,11 @@ module.exports = {
       {
         mytheme: {
           primary: '#ff325e',
-          'primary-light': '#db5b77',
           secondary: '#2d185c',
           'base-100': '#ffffff',
+          'primary-dark': '#ff2151',
+          'primary-dark-hover': '#303d50',
+          'light-gray': '#FAFAFA',
         },
       },
       'emerald',

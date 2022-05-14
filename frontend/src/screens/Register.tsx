@@ -7,6 +7,7 @@ import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
 import { useAuthDispatch } from 'finpok/store/auth/AuthProvider'
 import FieldError from 'finpok/components/Shared/FieldError/FieldError'
+import Button from 'finpok/components/Shared/Button'
 
 type FormValues = {
   name: string
@@ -151,9 +152,9 @@ const Register = () => {
             shouldShowError={showPasswordAlert}
             onChange={onChange}
           />
-          <button type="submit" className="btn btn-primary mt-4">
+          <Button type="submit" className="mt-4">
             Register
-          </button>
+          </Button>
         </form>
       </div>
     </>

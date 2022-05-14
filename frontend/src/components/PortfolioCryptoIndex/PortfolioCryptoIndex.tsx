@@ -22,7 +22,7 @@ const PortfolioCryptoIndex: FC = () => {
     <>
       <section className="my-8 flex items-center justify-between">
         <p className="text-lg font-bold">Your assets</p>
-        <Button className="btn" icon="+" height="s" onClick={handleSelect}>
+        <Button icon="+" height="s" onClick={handleSelect}>
           Add new
         </Button>
       </section>

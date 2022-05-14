@@ -68,7 +68,7 @@ const Login: FC = () => {
           onChange={onChange}
         />
         <FieldError condition={!!error}>Email or password is incorrect</FieldError>
-        <Button type="submit" className="btn mt-3 w-full">
+        <Button type="submit" className="mt-3 w-full">
           Log in
         </Button>
       </form>

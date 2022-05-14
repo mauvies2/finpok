@@ -78,7 +78,7 @@ const EditTransaction = () => {
   if (!currentOwnedCrypto || !transactionPayload || !currentTransaction) return null
 
   return (
-    <form className="flex h-full flex-col justify-between" onSubmit={handleSubmit}>
+    <form className="flex h-full flex-col justify-between overflow-y-scroll" onSubmit={handleSubmit}>
       <div>
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload?.type} onClick={selectTransactionType} />
         <FormInput
@@ -143,29 +143,33 @@ const EditTransaction = () => {
 
         <div className="mb-4 flex">
           {!extraFields.fee && (
-            <Button className="btn btn-light" onClick={() => addField('fee')}>
+            <Button className="mr-2" btnType="light" onClick={() => addField('fee')}>
               Fee
             </Button>
           )}
           {!extraFields.notes && (
-            <Button className="btn btn-light ml-2" onClick={() => addField('notes')}>
+            <Button className="mr-2" btnType="light" onClick={() => addField('notes')}>
               Notes
             </Button>
           )}
-          <div className="btn btn-light ml-2 h-10 cursor-default">{transactionDate}</div>
+          <Button className="cursor-default" btnType="light">
+            {transactionDate}
+          </Button>
         </div>
 
         <div className="items-center rounded-lg bg-gray-100 p-4 text-xs">
           <label className="text-sm font-semibold">Total spent</label>
           <div className="form-control relative ">
-            <div placeholder="0.00" className="input mt-2 h-8 border  bg-gray-100 pl-2 text-xl font-bold">
+            <div placeholder="0.00" className="mt-2 h-8 bg-gray-100 pl-2 text-xl font-bold">
               {formatNumber(currentTransaction.price * currentTransaction.amount, { symbol: '$' })}
             </div>
           </div>
         </div>
       </div>
-      <div>
-        <button className="btn btn-secondary mt-8 mb-4 w-full md:w-auto">Edit transaction</button>
+      <div className="text-right">
+        <Button className="mt-8 mb-4 w-full md:w-auto" type="submit">
+          Edit transaction
+        </Button>
       </div>
     </form>
   )

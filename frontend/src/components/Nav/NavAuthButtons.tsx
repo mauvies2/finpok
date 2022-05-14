@@ -49,10 +49,9 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
               {isCurrentLocation('register') || (isMobile && !isCurrentLocation('login')) ? (
                 <Button
                   className={classNames(
-                    'btn mt-2 w-full md:mt-0 md:mb-0',
+                    'mt-2 w-full md:mt-0 md:mb-0',
                     isCurrentLocation('register') ? 'btn-primary' : 'btn-secondary'
                   )}
-                  height="m"
                 >
                   Login
                 </Button>
@@ -63,7 +62,7 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
           )}
           {!isCurrentLocation('register') && (
             <Link to="/register" className="w-full md:w-auto" tabIndex={-1}>
-              <Button className="btn-light mt-2 w-full md:mt-0 md:w-auto" height="m">
+              <Button className="mt-2 w-full md:mt-0 md:w-auto" btnType="secondary">
                 Sign up
               </Button>
             </Link>

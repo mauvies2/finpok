@@ -29,7 +29,7 @@ const TransactionDetail: FC = () => {
   const { type, createdAt, price, amount, fee, notes } = currentTransaction
 
   return (
-    <div className="flex h-full flex-col justify-between p-2">
+    <div className="flex h-full flex-col justify-between">
       <div>
         <div className="flex justify-between border-b border-gray-100 py-5">
           <p>Type</p>
@@ -71,11 +71,11 @@ const TransactionDetail: FC = () => {
       </div>
 
       <div className="w-full text-right">
-        <Button className="btn w-full md:w-auto" onClick={handaleEditTransaction}>
+        <Button className="w-full md:w-auto" btnType="secondary" onClick={handaleEditTransaction}>
           Edit transaction
         </Button>
 
-        <Button className="btn ml-2 w-full md:w-auto" onClick={handleRemoveTransaction}>
+        <Button className="mt-2 w-full md:mt-0 md:ml-2 md:w-auto" onClick={handleRemoveTransaction}>
           Remove transaction
         </Button>
       </div>

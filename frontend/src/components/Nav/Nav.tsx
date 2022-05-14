@@ -67,7 +67,7 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
         </div>
 
         <div className="navbar-end mr-4 flex w-full md:hidden">
-          <Button name="search-btn" className="h-auto w-auto text-gray-500">
+          <button name="search-btn" className="h-auto w-auto text-gray-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -81,8 +81,8 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
               />
             </svg>
-          </Button>
-          <Button
+          </button>
+          <button
             name="menu-open-close-btn text-gray-500"
             className="z-50 ml-4 h-auto w-auto"
             onClick={() => toggleMobileMenu(!isMobileMenuOpen)}
@@ -100,7 +100,7 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
                 d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
               />
             </svg>
-          </Button>
+          </button>
         </div>
       </div>
     </nav>

@@ -166,14 +166,14 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
         )}
 
         <div className="mb-4 flex">
-          <Button className="btn btn-light">{transactionDate}</Button>
+          <Button btnType="light">{transactionDate}</Button>
           {!showExtraFields.fee && (
-            <Button className="btn btn-light ml-2" onClick={() => addExtraField('fee')}>
+            <Button className="ml-2" btnType="light" onClick={() => addExtraField('fee')}>
               Fee
             </Button>
           )}
           {!showExtraFields.notes && (
-            <Button className="btn btn-light ml-2" onClick={() => addExtraField('notes')}>
+            <Button className="ml-2" btnType="light" onClick={() => addExtraField('notes')}>
               Notes
             </Button>
           )}
@@ -190,7 +190,7 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
         </div>
       </div>
 
-      <Button className="btn btn-secondary mt-6 w-full md:w-auto" height="l">
+      <Button className="mt-6 w-full md:w-auto" type="submit">
         Add transaction
       </Button>
     </form>

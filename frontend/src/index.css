@@ -15,9 +15,9 @@
 body {
   margin: 0;
   font-family: Inter;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  @apply tracking-wide text-gray-700;
+  /* -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; */
+  @apply bg-white tracking-wide text-gray-700;
 }
 
 code {
@@ -25,9 +25,17 @@ code {
 }
 
 .btn {
-  @apply bg-primary border-primary hover:text-primary hover:border-primary min-h-0 rounded-full border font-semibold capitalize leading-4 text-white transition-all duration-150 ease-in-out hover:bg-white;
+  @apply min-h-0 px-5 text-xs font-semibold capitalize leading-4;
+}
+
+.btn-primary {
+  @apply bg-primary border-primary focus-visible:shadow-button hover:bg-primary hover:border-primary rounded-full border font-semibold leading-4 text-white hover:scale-[0.96] hover:text-white active:shadow-none;
+}
+
+.btn-secondary {
+  @apply border-primary text-primary hover:border-primary focus:border-primary focus-visible:shadow-button hover:text-primary rounded-full border bg-white hover:scale-[0.96] focus:outline-none active:shadow-none;
 }
 
 .btn-light {
-  @apply border-primary text-primary hover:border-primary hover:bg-primary focus:border-primary h-9 rounded-full border bg-white px-5 text-xs transition-all duration-150 ease-in-out hover:text-white focus:outline-none;
+  @apply rounded-xl border-gray-100 bg-gray-100 text-gray-600 hover:border-gray-100 hover:bg-gray-200 focus-visible:border-gray-500;
 }
