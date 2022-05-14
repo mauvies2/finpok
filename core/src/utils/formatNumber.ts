@@ -30,10 +30,12 @@ export const formatNumber = (
     maximumFractionDigits: fractionDigits,
   }).format(absValue)
 
+  const valueIsCloseToZero = value.toString().split('.')[0] === '0'
+
   const parenthesisBeginningBuilder = parenthesis ? '(' : ''
   const parenthesisFinalBuilder = parenthesis ? ')' : ''
   // eslint-disable-next-line no-nested-ternary
-  const signBuilder = sign !== undefined ? (sign ? (noPositiveSign ? '' : '+') : '-') : ''
+  const signBuilder = sign !== undefined && !valueIsCloseToZero ? (sign ? (noPositiveSign ? '' : '+') : '-') : ''
   const symbolBeforeBuilder = symbolPosition === 'before' || symbolPosition === undefined ? symbol : ''
   const symbolAfterBuilder = symbolPosition === 'after' ? symbol : ''
   const unitBuilder = unit ? ` ${unit}` : ''

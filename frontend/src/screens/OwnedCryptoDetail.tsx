@@ -76,6 +76,7 @@ const OwnedCryptoDetail = () => {
           {
             <p className="text-3xl font-bold text-black">
               {formatNumber(currentOwnedCrypto.amount * crypto.quote.USD.price, {
+                fractionDigits: 2,
                 symbol: '$',
                 sign: currentOwnedCrypto.amount > 0,
                 noPositiveSign: true,
