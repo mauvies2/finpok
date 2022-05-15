@@ -34,7 +34,7 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
       style={{ top, position }}
     >
       <div className="flex w-full max-w-[1370px] items-center justify-between px-5">
-        <div className="navbar-start z-20 flex md:w-1/3">
+        <div className="z-20 w-auto">
           <Link to="/" className="text-lg font-bold">
             <Logo />
           </Link>
