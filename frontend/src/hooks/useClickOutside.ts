@@ -7,7 +7,6 @@ const useClickOutside = <T extends Element>(element: React.MutableRefObject<T | 
         cb()
       }
     }
-
     document.addEventListener('click', wasClickOutside, true)
 
     return () => {

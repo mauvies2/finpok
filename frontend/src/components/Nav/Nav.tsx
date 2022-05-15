@@ -30,12 +30,12 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
 
   return (
     <nav
-      className="navbar absolute top-0 left-0 right-0 z-40 flex w-screen justify-center bg-white shadow"
+      className="absolute top-0 left-0 right-0 z-40 flex h-20 w-screen justify-center bg-white shadow"
       style={{ top, position }}
     >
-      <div className="flex w-full max-w-[1370px] items-center justify-between">
+      <div className="flex w-full max-w-[1370px] items-center justify-between px-5">
         <div className="navbar-start z-20 flex md:w-1/3">
-          <Link to="/" className="ml-4 text-lg font-bold">
+          <Link to="/" className="text-lg font-bold">
             <Logo />
           </Link>
         </div>
@@ -66,8 +66,9 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
           <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
         </div>
 
-        <div className="navbar-end mr-4 flex w-full md:hidden">
-          <button name="search-btn" className="h-auto w-auto text-gray-500">
+        <div className="navbar-end flex w-full md:hidden">
+          <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
+          {/* <button name="search-btn" className="h-auto w-auto text-gray-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -100,7 +101,7 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
                 d={isMobileMenuOpen ? 'M6 18L18 6M6 6l12 12' : 'M4 6h16M4 12h16M4 18h16'}
               />
             </svg>
-          </button>
+          </button> */}
         </div>
       </div>
     </nav>

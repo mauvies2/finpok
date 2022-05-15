@@ -20,7 +20,7 @@ export const Router = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={isLoggedIn ? <Navigate to="/portfolio" /> : <Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="login" element={isLoggedIn ? <Navigate to="/portfolio" /> : <Login />} />
         <Route path="register" element={isLoggedIn ? <Navigate to="/portfolio" /> : <Register />} />
         <Route

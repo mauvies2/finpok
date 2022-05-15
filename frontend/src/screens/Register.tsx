@@ -93,7 +93,7 @@ const Register = () => {
   return (
     <>
       <Head title="Register user" />
-      <div className="flex min-h-[85vh] flex-col items-center justify-center pt-10">
+      <section className="mx-auto flex min-h-[calc(100vh-7rem)] w-[300px] flex-col justify-center text-center">
         <p>Continue with a Google account.</p>
         <GoogleLogin
           clientId={
@@ -102,14 +102,14 @@ const Register = () => {
           buttonText="Log in with google"
           onSuccess={handleGoogleAuth}
           onFailure={handleGoogleFailure}
-          className="my-4 block w-[240px] p-0"
+          className="my-7 flex w-[300px] justify-center"
         ></GoogleLogin>
         <FieldError condition={couldAuth === false}>Google authentication failed</FieldError>
-        <form className="card w-[20rem] p-10" onSubmit={submitAuth}>
-          <p className="text-center">Or use your info.</p>
+        <p className="mb-7">Or use your info.</p>
+        <form className="w-[300px] text-left" onSubmit={submitAuth}>
           <FormInput
             id="register-name"
-            labelClass="mt-4"
+            labelClass="mt-8"
             name="name"
             label="Name"
             labelOnError="Name is required"
@@ -152,11 +152,11 @@ const Register = () => {
             shouldShowError={showPasswordAlert}
             onChange={onChange}
           />
-          <Button type="submit" className="mt-4">
+          <Button type="submit" className="mt-4 w-full">
             Register
           </Button>
         </form>
-      </div>
+      </section>
     </>
   )
 }

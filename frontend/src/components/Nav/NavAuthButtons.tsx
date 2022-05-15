@@ -25,7 +25,7 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
 
   return (
     <div
-      className="md:mt-0 md:mr-4 md:flex md:h-12 md:flex-1 md:flex-row md:items-center md:justify-end md:px-0"
+      className="md:mt-0 md:flex md:h-12 md:flex-1 md:flex-row md:items-center md:justify-end"
       onClick={() => toggleMobileMenu(false)}
     >
       {isLoggedIn ? (

@@ -15,8 +15,8 @@
 body {
   margin: 0;
   font-family: Inter;
-  /* -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   @apply bg-white tracking-wide text-gray-700;
 }
 
@@ -29,11 +29,11 @@ code {
 }
 
 .btn-primary {
-  @apply bg-primary border-primary focus-visible:shadow-button hover:bg-primary hover:border-primary rounded-full border font-semibold leading-4 text-white hover:scale-[0.96] hover:text-white active:shadow-none;
+  @apply bg-primary border-primary focus-visible:shadow-button hover:bg-primary hover:border-primary rounded-full border font-semibold leading-4 text-white hover:text-white active:shadow-none;
 }
 
 .btn-secondary {
-  @apply border-primary text-primary hover:border-primary focus:border-primary focus-visible:shadow-button hover:text-primary rounded-full border bg-white hover:scale-[0.96] focus:outline-none active:shadow-none;
+  @apply border-primary text-primary hover:border-primary focus:border-primary focus-visible:shadow-button hover:text-primary rounded-full border bg-white focus:outline-none active:shadow-none;
 }
 
 .btn-light {

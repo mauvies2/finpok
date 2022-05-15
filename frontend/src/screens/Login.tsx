@@ -41,7 +41,7 @@ const Login: FC = () => {
   }
 
   return (
-    <section className="mx-auto flex h-full w-[300px] flex-col justify-center">
+    <section className="mx-auto flex min-h-[calc(100vh-7rem)] w-[300px] flex-col justify-center">
       <Head title="Login" />
       <form onSubmit={submitAuth} className="mt-4">
         <FormInput

@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useState } from 'react'
+import { KeyboardEvent, ReactNode, useRef, useState } from 'react'
 import useClickOutside from 'finpok/hooks/useClickOutside'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 
@@ -16,15 +16,22 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
   const { closeModal } = useUiDispatch()
   useClickOutside(modal, () => closeModal(goBack))
 
+  const handleKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Escape') {
+      closeModal(goBack)
+    }
+  }
+
   const heighFixed = modalRef && modalRef.offsetHeight > window.innerHeight * 0.6
 
   if (!children) return null
 
   return (
     <div
-      className="animate-modalBg fixed top-0 left-0 right-0 z-50 h-screen md:flex md:items-center md:justify-center md:py-10"
+      className="fixed top-0 left-0 right-0 z-50 h-screen md:flex md:items-center md:justify-center md:py-10"
       style={{ backgroundColor: 'rgb(0, 0, 0, 0.2)' }}
       ref={(newRef) => setModalRef(newRef)}
+      onKeyDown={(e) => handleKeyPress(e)}
     >
       <div
         className={`animate-modal fixed top-0 left-0 right-0 z-50 flex h-screen flex-col bg-white md:static md:mx-auto md:h-auto md:w-[40rem] md:rounded-lg ${

@@ -69,7 +69,7 @@ const EditTransaction = () => {
         price: currentTransaction.price,
         type: currentTransaction.type,
         notes: '',
-        fee: 0,
+        fee: '',
         time: new Date(),
       })
     }
@@ -137,7 +137,7 @@ const EditTransaction = () => {
             placeholder="Write your note here"
             value={transactionPayload.notes}
             shouldShowError={formData.notes.shouldShow}
-            onChange={handleChange}
+            onChange={(e) => setTransactionPayload({ ...transactionPayload, notes: e.target.value })}
           />
         )}
 

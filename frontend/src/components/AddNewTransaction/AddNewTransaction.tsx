@@ -88,7 +88,7 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
   if (!currentCrypto) return null
 
   return (
-    <form className="flex min-h-full flex-col justify-between" onSubmit={handleSubmit}>
+    <form className="flex min-h-full flex-col justify-between overflow-y-scroll" onSubmit={handleSubmit}>
       <div className="flex-1">
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload.type} onClick={selectTransactionType} />
 
@@ -112,7 +112,7 @@ const AddNewTransaction: FC<Props> = ({ goBack }) => {
           labelOnError="Quantity is required"
           placeholder="0.00"
           min="0.00"
-          step=".01"
+          step=".00001"
           value={transactionPayload.amount}
           shouldShowError={formData.amount.shouldShow}
           onChange={handleChange}

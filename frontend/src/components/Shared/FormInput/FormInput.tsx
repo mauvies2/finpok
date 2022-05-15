@@ -58,7 +58,7 @@ const FormInput: FC<FormInputProps> = ({
           `}
           onChange={onChange}
         />
-        {symbol && <p className="absolute top-[19px] left-3 ">{symbol}</p>}
+        {symbol && <p className="absolute top-[18px] left-3 ">{symbol}</p>}
         <FieldError condition={shouldShowError}>{labelOnError}</FieldError>
       </div>
     </label>
