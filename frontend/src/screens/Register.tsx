@@ -4,39 +4,16 @@ import FormInput from '../components/Shared/FormInput/FormInput'
 import { useNavigate } from 'react-router-dom'
 import { register } from 'finpok/services/ApiService'
 import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
-import GoogleLogin, { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
-import { useAuthDispatch } from 'finpok/store/auth/AuthProvider'
 import FieldError from 'finpok/components/Shared/FieldError/FieldError'
 import Button from 'finpok/components/Shared/Button'
+import { useAuthWithGoogle } from 'finpok/hooks/useAuthWithGoogle'
+import { GoogleLogin } from 'finpok/components/GoogleLogin/GoogleLogin'
 
 type FormValues = {
   name: string
   email: string
   password: string
   repeatedPassword: string
-}
-
-export const useAuthWithGoogle = () => {
-  const [couldAuth, setCouldAuth] = useState<null | boolean>(null)
-  const { googleLogin } = useAuthDispatch()
-
-  const handleGoogleAuth = async (googleData: GoogleLoginResponse | GoogleLoginResponseOffline) => {
-    if ('tokenId' in googleData) {
-      await googleLogin({
-        _id: googleData.googleId,
-        name: googleData.profileObj.name,
-        email: googleData.profileObj.email,
-        imageUrl: googleData.profileObj.imageUrl,
-        token: googleData.tokenId,
-      })
-    }
-  }
-
-  const handleGoogleFailure = () => {
-    setCouldAuth(false)
-  }
-
-  return { handleGoogleAuth, handleGoogleFailure, couldAuth }
 }
 
 const Register = () => {
@@ -95,16 +72,10 @@ const Register = () => {
       <Head title="Register user" />
       <section className="mx-auto flex min-h-[calc(100vh-7rem)] w-[300px] flex-col justify-center text-center">
         <p>Continue with a Google account.</p>
-        <GoogleLogin
-          clientId={
-            typeof import.meta.env.VITE_GOOGLE_CLIENT_ID === 'string' ? import.meta.env.VITE_GOOGLE_CLIENT_ID : ''
-          }
-          buttonText="Log in with google"
-          onSuccess={handleGoogleAuth}
-          onFailure={handleGoogleFailure}
-          className="my-7 flex w-[300px] justify-center"
-        ></GoogleLogin>
-        <FieldError condition={couldAuth === false}>Google authentication failed</FieldError>
+        <div className="my-8">
+          <GoogleLogin />
+          <FieldError condition={couldAuth === false}>Google authentication failed</FieldError>
+        </div>
         <p className="mb-7">Or use your info.</p>
         <form className="w-[300px] text-left" onSubmit={submitAuth}>
           <FormInput
