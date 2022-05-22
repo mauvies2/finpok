@@ -1,12 +1,12 @@
 import { useRef, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import useGetCrypto from 'finpok/store/server/selectors/useGetCrypto'
 import { useRemoveAsset } from 'finpok/hooks/useApi'
 import { formatNumber } from 'finpok-core/utils/formatNumber'
 import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
 import Button from 'finpok/components/Shared/Button'
-import Transaction from '../components/Transaction'
+import Transaction from 'finpok/components/Transaction'
 import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
 import useClickOutside from 'finpok/hooks/useClickOutside'
 
@@ -42,25 +42,25 @@ const OwnedCryptoDetail = () => {
   return (
     <>
       <section className="mt-8 flex justify-between">
-        <Link to="/portfolio" tabIndex={-1}>
-          <Button btnType="light" icon="<-">
-            Back
+        <Button btnType="light" icon="<-" onClick={() => navigate(-1)}>
+          Back
+        </Button>
+        <div
+          className="relative"
+          onClick={() => setIsRemoveAssetPromptOpen(!isRemoveAssetPromptOpen)}
+          ref={removeAssetOption}
+        >
+          <Button btnType="light" icon={'...'}>
+            More
           </Button>
-        </Link>
-        <div className="relative">
-          <div onClick={() => setIsRemoveAssetPromptOpen(!isRemoveAssetPromptOpen)} ref={removeAssetOption}>
-            <Button btnType="light" icon={'...'}>
-              More
-            </Button>
-            {isRemoveAssetPromptOpen && (
-              <div
-                className="menu dropdown-content bg-base-100 min-w-40  absolute top-10 right-0 cursor-pointer rounded-lg p-3 text-center font-bold text-red-500 shadow"
-                onClick={handleRemoveAsset}
-              >
-                <p>Remove asset</p>
-              </div>
-            )}
-          </div>
+          {isRemoveAssetPromptOpen && (
+            <div
+              className="menu dropdown-content bg-base-100 min-w-40 absolute top-12 right-8 cursor-pointer rounded-lg p-3 text-center font-extralight text-red-500 shadow hover:bg-gray-50"
+              onClick={handleRemoveAsset}
+            >
+              <p>Remove asset</p>
+            </div>
+          )}
         </div>
       </section>
 
