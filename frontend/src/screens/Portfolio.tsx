@@ -25,7 +25,7 @@ const Portfolio: FC<PortfolioProps> = ({ children }) => {
           </div>
           <div>
             <p className="font-bold">My Main Portfolio</p>
-            <p>{formatNumber(portfolio.total, { fractionDigits: 2, symbol: '$' })}</p>
+            <p>{formatNumber(portfolio.total || 0, { fractionDigits: 2, symbol: '$' })}</p>
           </div>
         </section>
         <div className="mt-10 flex-1 md:mt-0">
@@ -33,7 +33,7 @@ const Portfolio: FC<PortfolioProps> = ({ children }) => {
             <p className="mb-2">Current balance</p>
             <div className="mb-1 mt-3 flex justify-between">
               <p className="text-3xl font-bold text-black">
-                {formatNumber(portfolio.total, {
+                {formatNumber(portfolio.total || 0, {
                   fractionDigits: 2,
                   symbol: '$',
                   sign: portfolio.total === 0 ? undefined : portfolio.total > 0,
