@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { PlusLg } from '@styled-icons/bootstrap/PlusLg'
 import { MoreVertical } from '@styled-icons/fluentui-system-regular'
@@ -6,6 +6,8 @@ import { MoreVertical } from '@styled-icons/fluentui-system-regular'
 import { formatNumber } from 'finpok-core/utils/formatNumber'
 import { useUiDispatch } from 'finpok/store/ui/UiProvider'
 import { ICrypto, IOwnedCrypto } from 'finpok-core/domain'
+import { useRemoveAsset } from 'finpok/hooks/useApi'
+import useClickOutside from 'finpok/hooks/useClickOutside'
 
 interface PortfolioCryptoProps {
   ownedCrypto: IOwnedCrypto
@@ -13,7 +15,18 @@ interface PortfolioCryptoProps {
 }
 
 const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
+  const menuRef = useRef<HTMLDivElement | null>(null)
+  const [isMenuOpened, setIsMenuOpened] = useState(false)
+
   const { selectOwnedCryptoDetail, openModal } = useUiDispatch()
+  const removeAsset = useRemoveAsset()
+  useClickOutside(menuRef, () => setIsMenuOpened(false))
+
+  const handleRemoveAsset = () => {
+    if (ownedCrypto) {
+      removeAsset.mutate(ownedCrypto._id || '')
+    }
+  }
 
   if (!ownedCrypto || !crypto) return null
 
@@ -74,9 +87,19 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
       <div className="hidden items-center justify-end text-right font-semibold md:flex md:w-24">
         <PlusLg
           className="h-[15px] w-[15px] cursor-pointer text-gray-400"
-          onClick={() => openModal(`/portfolio/transaction-operation/${ownedCrypto.symbol}`)}
+          onClick={() => openModal(`/portfolio/add-new-transaction/${ownedCrypto.symbol}`)}
         />
-        <MoreVertical className="ml-3 h-[21px] w-[21px] cursor-pointer text-gray-400" />
+        <div onClick={() => setIsMenuOpened(!isMenuOpened)} ref={menuRef} className="relative">
+          <MoreVertical className="ml-3 h-[21px] w-[21px] cursor-pointer text-gray-400" />
+          {isMenuOpened && (
+            <div
+              className="dropdown-content bg-base-100 min-w-40 absolute top-5 right-2 cursor-pointer rounded-lg p-3 text-center text-sm font-extralight text-red-500 shadow-xl hover:bg-gray-50"
+              onClick={handleRemoveAsset}
+            >
+              <p>Remove</p>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   )
