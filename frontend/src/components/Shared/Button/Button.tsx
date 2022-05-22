@@ -45,7 +45,7 @@ const Button = forwardRef(
       disabled={disabled}
       onClick={onClick}
       style={style}
-      className={`btn ${className} ${buttonHeight[height]} btn-${btnType}`}
+      className={`btn ${buttonHeight[height]} btn-${btnType} animate-none ${className}`}
     >
       {icon ? <span className="mr-2">{icon}</span> : null}
       <p>{children}</p>
