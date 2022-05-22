@@ -63,10 +63,9 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
               </NavLink>
             </div>
           )}
-          <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
         </div>
 
-        <div className="navbar-end flex w-full md:hidden">
+        <div className="flex">
           <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
           {/* <button name="search-btn" className="h-auto w-auto text-gray-500">
             <svg

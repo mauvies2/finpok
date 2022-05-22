@@ -2,6 +2,7 @@ import produce from 'immer'
 import { useReducer } from 'react'
 import { LoginCredentials, IUserSession } from 'finpok-core/domain'
 import { auth } from 'finpok/services/AuthService'
+import { useNavigate } from 'react-router-dom'
 
 export interface IAuthState {
   authUser: IUserSession | null
@@ -88,6 +89,7 @@ const reducer = (state: IAuthState, event: { type: string; payload?: any }) => {
 // events
 export const useAuthActions = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
+  const navigate = useNavigate()
 
   const googleLogin = async (googleCredentials: IUserSession) => {
     try {
@@ -111,6 +113,7 @@ export const useAuthActions = () => {
   const logout = () => {
     auth.logout()
     dispatch({ type: 'LOGOUT' })
+    navigate('login')
   }
 
   const checkAuth = async () => {
