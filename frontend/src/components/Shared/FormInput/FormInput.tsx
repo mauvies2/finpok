@@ -39,7 +39,7 @@ const FormInput: FC<FormInputProps> = ({
   onChange,
 }) => {
   return (
-    <label className={`pl-2 text-sm font-semibold ${labelClass}`}>
+    <label className={`pl-2 text-sm font-normal ${labelClass}`}>
       {label}
       <div className="relative mb-4">
         <input
