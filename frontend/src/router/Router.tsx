@@ -16,13 +16,20 @@ import Page404 from 'finpok/screens/404'
 
 export const Router = () => {
   const { isLoggedIn } = useAuthState()
+  const location = useLocation()
 
   return (
     <>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="login" element={isLoggedIn ? <Navigate to="/portfolio" /> : <Login />} />
-        <Route path="register" element={isLoggedIn ? <Navigate to="/portfolio" /> : <Register />} />
+        <Route
+          path="login"
+          element={isLoggedIn ? <Navigate to="/portfolio" state={{ from: location }} replace /> : <Login />}
+        />
+        <Route
+          path="register"
+          element={isLoggedIn ? <Navigate to="/portfolio" state={{ from: location }} replace /> : <Register />}
+        />
         <Route
           path="portfolio/*"
           element={
@@ -59,6 +66,17 @@ const PortfolioRoutes = () => {
           </>
         }
       />
+      <Route
+        path="add-new-transaction/:symbol"
+        element={
+          <>
+            <PortfolioCryptoIndex />
+            <Modal>
+              <AddNewTransaction />
+            </Modal>
+          </>
+        }
+      />
       <Route path=":symbol/*" element={<OwnedCryptoRoutes />} />
     </Routes>
   )
@@ -74,7 +92,7 @@ const OwnedCryptoRoutes = () => {
           path="transaction-operation"
           element={
             <Modal>
-              <AddNewTransaction goBack={1} />
+              <AddNewTransaction />
             </Modal>
           }
         />
