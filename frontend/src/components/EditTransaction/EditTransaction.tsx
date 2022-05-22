@@ -7,7 +7,7 @@ import { EditTransactionPayload, TransacionPayload } from 'finpok-core/domain'
 import { useEditTransaction } from 'finpok/hooks/useApi'
 import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
 import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
-import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
+import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
 import formatDate from 'finpok-core/utils/formatDate'
 
 const EditTransaction = () => {
