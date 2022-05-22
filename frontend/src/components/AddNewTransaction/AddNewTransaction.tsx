@@ -12,10 +12,10 @@ import { useGetCurrentCrypto } from 'finpok/store/ui/UiSelectors'
 import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
 
 interface Props {
-  goBack: number
+  goBack?: number
 }
 
-const AddNewTransaction: FC<Props> = ({ goBack }) => {
+const AddNewTransaction: FC<Props> = ({ goBack = 1 }) => {
   const [showExtraFields, setShowExtraFields] = useState({ date: false, fee: false, notes: false })
   const [transactionPayload, setTransactionPayload] = useState<TransacionPayload>({
     type: 'buy',
