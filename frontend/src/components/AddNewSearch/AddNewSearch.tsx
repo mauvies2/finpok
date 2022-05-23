@@ -48,7 +48,7 @@ const AddNewSearch: FC = () => {
 
   return (
     <>
-      <form className="py-3 md:w-full" onSubmit={(e) => e.preventDefault()}>
+      <form className="pb-2 md:w-full" onSubmit={(e) => e.preventDefault()}>
         <div className="form-control">
           <input
             id="addNewSearch"
