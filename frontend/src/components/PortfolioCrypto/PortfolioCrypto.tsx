@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom'
 import { PlusLg } from '@styled-icons/bootstrap/PlusLg'
 import { MoreVertical } from '@styled-icons/fluentui-system-regular'
 
-import { formatNumber } from 'finpok-core/utils/formatNumber'
-import { useUiDispatch } from 'finpok/store/ui/UiProvider'
-import { ICrypto, IOwnedCrypto } from 'finpok-core/domain'
-import { useRemoveAsset } from 'finpok/hooks/useApi'
-import useClickOutside from 'finpok/hooks/useClickOutside'
+import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
+import { ICrypto, IOwnedCrypto } from 'finpoq-core/domain'
+import { useRemoveAsset } from 'finpoq/hooks/useApi'
+import useClickOutside from 'finpoq/hooks/useClickOutside'
 
 interface PortfolioCryptoProps {
   ownedCrypto: IOwnedCrypto

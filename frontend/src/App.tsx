@@ -3,10 +3,10 @@ import { HelmetProvider } from 'react-helmet-async'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import { QueryClient, QueryClientProvider } from 'react-query'
 
-import Main from 'finpok/components/Main/Main'
-import Nav from 'finpok/components/Nav/Nav'
-import { AuthProvider } from 'finpok/store/auth/AuthProvider'
-import { UiProvider } from 'finpok/store/ui/UiProvider'
+import Main from 'finpoq/components/Main/Main'
+import Nav from 'finpoq/components/Nav/Nav'
+import { AuthProvider } from 'finpoq/store/auth/AuthProvider'
+import { UiProvider } from 'finpoq/store/ui/UiProvider'
 
 const queryClient = new QueryClient({
   defaultOptions: {

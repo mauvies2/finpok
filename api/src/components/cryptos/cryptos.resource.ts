@@ -1,4 +1,4 @@
-import { ICrypto } from 'finpok-core/domain'
+import { ICrypto } from 'finpoq-core/domain'
 import { FetchedCrypto, FetchedCryptos } from '../../services/fetchApi'
 
 export const formatCryptos = (cryptos: FetchedCryptos): ICrypto[] =>

@@ -13,9 +13,9 @@ Accept: application/json
 X-CMC_PRO_API_KEY: d5bd8462-ee1a-4816-9f02-c9cac813cca5
 Accept-Encoding: deflate, gzip
 
-### Get cryptos finpok
+### Get cryptos finpoq
 GET {{api}}/cryptocurrencies
 
-### Update cryptos finpok
+### Update cryptos finpoq
 GET {{api}}/cryptocurrencies/update
 

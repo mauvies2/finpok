@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import User from '../users/User'
 import config from '../../config/default'
 import { encryptPassword, validatePassword } from '../users/users.engine'
-import { IUserSession } from 'finpok-core/domain'
+import { IUserSession } from 'finpoq-core/domain'
 
 type UserRegisterData = {
   name: string

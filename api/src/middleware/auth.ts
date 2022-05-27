@@ -3,7 +3,7 @@ import jwt from 'jsonwebtoken'
 import { OAuth2Client } from 'google-auth-library'
 import { getUserEmail } from '../components/auth/auth.engine'
 import User from '../components/users/User'
-import config from 'finpok/config/default'
+import config from 'finpoq/config/default'
 
 const client = new OAuth2Client({ clientId: config.clientId })
 

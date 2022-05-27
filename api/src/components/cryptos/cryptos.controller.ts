@@ -1,6 +1,6 @@
 import { RequestHandler, Response, Request } from 'express'
 import Crypto from './Crypto'
-import { updateCryptosPrice } from 'finpok/components/cryptos/cryptos.engine'
+import { updateCryptosPrice } from 'finpoq/components/cryptos/cryptos.engine'
 
 export const getCryptos: RequestHandler = async (req: Request, res: Response) => {
   try {

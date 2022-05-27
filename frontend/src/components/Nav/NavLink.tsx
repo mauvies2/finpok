@@ -1,4 +1,4 @@
-import useMediaQuery from 'finpok/hooks/useMediaQuery'
+import useMediaQuery from 'finpoq/hooks/useMediaQuery'
 import { FC, ReactElement, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 import { StyledIcon } from '@styled-icons/styled-icon'

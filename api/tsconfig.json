@@ -10,8 +10,8 @@
     "skipLibCheck": true,                           /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true,        /* Disallow inconsistently-cased references to the same file. */
 		"paths": {
-			"finpok/*": ["./src/*"],
-			"finpok-core/*": ["../core/src/*"]
+			"finpoq/*": ["./src/*"],
+			"finpoq-core/*": ["../core/src/*"]
 		},
   },
 	"include": ["src"],

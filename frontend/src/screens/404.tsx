@@ -1,4 +1,4 @@
-import Head from 'finpok/components/Shared/Head'
+import Head from 'finpoq/components/Shared/Head'
 
 const Page404 = () => {
   return (

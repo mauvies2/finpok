@@ -1,9 +1,9 @@
-import { GoogleLogin } from 'finpok/components/GoogleLogin/GoogleLogin'
-import Button from 'finpok/components/Shared/Button'
-import FieldError from 'finpok/components/Shared/FieldError/FieldError'
-import Head from 'finpok/components/Shared/Head'
-import { useAuthWithGoogle } from 'finpok/hooks/useAuthWithGoogle'
-import { useAuthState } from 'finpok/store/auth/AuthProvider'
+import { GoogleLogin } from 'finpoq/components/GoogleLogin/GoogleLogin'
+import Button from 'finpoq/components/Shared/Button'
+import FieldError from 'finpoq/components/Shared/FieldError/FieldError'
+import Head from 'finpoq/components/Shared/Head'
+import { useAuthWithGoogle } from 'finpoq/hooks/useAuthWithGoogle'
+import { useAuthState } from 'finpoq/store/auth/AuthProvider'
 import { Link } from 'react-router-dom'
 
 const Home = () => {

@@ -2,8 +2,8 @@ import * as path from 'path'
 import moduleAlias from 'module-alias'
 
 moduleAlias.addAliases({
-  finpok: __dirname,
-  'finpok-core': path.join(__dirname, '../..', 'core/src'),
+  finpoq: __dirname,
+  'finpoq-core': path.join(__dirname, '../..', 'core/src'),
 })
 
 import express from 'express'

@@ -1,7 +1,7 @@
 import Crypto from './Crypto'
 import { fetchCryptos } from '../../services/fetchApi'
 // import { formatCryptos } from './cryptos.resource'
-// import { request } from 'finpok/services/http'
+// import { request } from 'finpoq/services/http'
 
 export const updateCryptosPrice = async (): Promise<boolean> => {
   try {

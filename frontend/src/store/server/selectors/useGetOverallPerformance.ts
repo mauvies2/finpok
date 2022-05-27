@@ -1,5 +1,5 @@
 import { useQueryClient } from 'react-query'
-import { ICrypto, IPortfolio } from 'finpok-core/domain'
+import { ICrypto, IPortfolio } from 'finpoq-core/domain'
 import { useMemo } from 'react'
 
 const useGetOverallPerformance = () => {

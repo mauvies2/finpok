@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { LoginCredentials, IUserSession } from 'finpok-core/domain'
+import { LoginCredentials, IUserSession } from 'finpoq-core/domain'
 
 export const auth = {
   _user: (user?: IUserSession): IUserSession | undefined => {

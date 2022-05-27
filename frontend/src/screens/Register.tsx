@@ -1,13 +1,13 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
-import Head from 'finpok/components/Shared/Head'
+import Head from 'finpoq/components/Shared/Head'
 import FormInput from '../components/Shared/FormInput/FormInput'
 import { useNavigate } from 'react-router-dom'
-import { register } from 'finpok/services/ApiService'
-import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
-import FieldError from 'finpok/components/Shared/FieldError/FieldError'
-import Button from 'finpok/components/Shared/Button'
-import { useAuthWithGoogle } from 'finpok/hooks/useAuthWithGoogle'
-import { GoogleLogin } from 'finpok/components/GoogleLogin/GoogleLogin'
+import { register } from 'finpoq/services/ApiService'
+import { useFormErrorHandleling } from 'finpoq/hooks/useFormErrorHandleling'
+import FieldError from 'finpoq/components/Shared/FieldError/FieldError'
+import Button from 'finpoq/components/Shared/Button'
+import { useAuthWithGoogle } from 'finpoq/hooks/useAuthWithGoogle'
+import { GoogleLogin } from 'finpoq/components/GoogleLogin/GoogleLogin'
 
 type FormValues = {
   name: string

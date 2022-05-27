@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import PortfolioCrypto from 'finpok/components/PortfolioCrypto/PortfolioCrypto'
-import useGetCryptos from 'finpok/store/server/selectors/useGetCryptos'
-import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
+import PortfolioCrypto from 'finpoq/components/PortfolioCrypto/PortfolioCrypto'
+import useGetCryptos from 'finpoq/store/server/selectors/useGetCryptos'
+import useGetPortfolio from 'finpoq/store/server/selectors/useGetPortfolio'
 import Button from '../Shared/Button'
-import { useUiDispatch } from 'finpok/store/ui/UiProvider'
+import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 
 const PortfolioCryptoIndex: FC = () => {
   // computed

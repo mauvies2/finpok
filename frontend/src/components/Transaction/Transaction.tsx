@@ -1,9 +1,9 @@
 import { FC } from 'react'
 import classNames from 'classnames'
-import { ITransaction } from 'finpok-core/domain'
-import { formatNumber } from 'finpok-core/utils/formatNumber'
-import formatDate from 'finpok-core/utils/formatDate'
-import { useUiDispatch } from 'finpok/store/ui/UiProvider'
+import { ITransaction } from 'finpoq-core/domain'
+import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import formatDate from 'finpoq-core/utils/formatDate'
+import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 
 interface TransactionProps {
   transaction: ITransaction

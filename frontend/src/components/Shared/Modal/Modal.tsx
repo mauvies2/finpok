@@ -1,6 +1,6 @@
 import { KeyboardEvent, ReactNode, useRef, useState } from 'react'
-import useClickOutside from 'finpok/hooks/useClickOutside'
-import { useUiDispatch } from 'finpok/store/ui/UiProvider'
+import useClickOutside from 'finpoq/hooks/useClickOutside'
+import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 
 interface ModalProps {
   goBack?: number

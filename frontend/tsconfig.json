@@ -17,8 +17,8 @@
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
-			"finpok/*": ["./src/*"],
-			"finpok-core/*": ["../core/src/*"]
+			"finpoq/*": ["./src/*"],
+			"finpoq-core/*": ["../core/src/*"]
 		},
   },
   "include": ["./src"]

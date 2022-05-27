@@ -1,8 +1,8 @@
 import Button from '../Shared/Button'
-import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
+import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { FC, useEffect, useRef, useState } from 'react'
-import useClickOutside from 'finpok/hooks/useClickOutside'
+import useClickOutside from 'finpoq/hooks/useClickOutside'
 
 interface Props {
   toggleMobileMenu: React.Dispatch<React.SetStateAction<boolean>>

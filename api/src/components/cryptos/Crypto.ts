@@ -1,5 +1,5 @@
 import mongoose, { model, Schema } from 'mongoose'
-import { ICrypto } from 'finpok-core/domain'
+import { ICrypto } from 'finpoq-core/domain'
 
 const CryptoSchema: Schema = new mongoose.Schema(
   {

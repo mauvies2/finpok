@@ -11,7 +11,7 @@ import {
   RemoveTransactionPayload,
   IOwnedCrypto,
   EditTransactionPayload,
-} from 'finpok-core/domain'
+} from 'finpoq-core/domain'
 
 export const getPortfolio: RequestHandler = async (req: Request, res: Response) => {
   const { portfolio }: { portfolio: IPortfolio } = req.body.user

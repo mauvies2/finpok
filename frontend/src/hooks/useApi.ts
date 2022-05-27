@@ -7,7 +7,7 @@ import {
   fetchPortfolio,
   removeAsset,
   removeTransaction,
-} from 'finpok/services/ApiService'
+} from 'finpoq/services/ApiService'
 import {
   IPortfolio,
   ICrypto,
@@ -15,7 +15,7 @@ import {
   EditTransactionPayload,
   RemoveTransactionPayload,
   IOwnedCrypto,
-} from 'finpok-core/domain'
+} from 'finpoq-core/domain'
 
 export const useCryptos = () => useQuery<ICrypto[], Error>('cryptocurrencies', fetchCryptos)
 

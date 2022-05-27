@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import formatDate from 'finpok-core/utils/formatDate'
-import { formatNumber } from 'finpok-core/utils/formatNumber'
-import { useRemoveTransaction } from 'finpok/hooks/useApi'
-import { useUiDispatch, useUiState } from 'finpok/store/ui/UiProvider'
-import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
+import formatDate from 'finpoq-core/utils/formatDate'
+import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import { useRemoveTransaction } from 'finpoq/hooks/useApi'
+import { useUiDispatch, useUiState } from 'finpoq/store/ui/UiProvider'
+import { useGetCurrentOwnedCrypto } from 'finpoq/store/ui/UiSelectors'
 import Button from '../Shared/Button'
 
 const TransactionDetail: FC = () => {

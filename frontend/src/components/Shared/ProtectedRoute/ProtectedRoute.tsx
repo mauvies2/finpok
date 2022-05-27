@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
-import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
+import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
 
 interface ProtectedRouteProps {
   children: React.ReactChild

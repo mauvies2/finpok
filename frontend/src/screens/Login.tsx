@@ -1,13 +1,13 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react'
-import Head from 'finpok/components/Shared/Head'
+import Head from 'finpoq/components/Shared/Head'
 import FormInput from '../components/Shared/FormInput/FormInput'
-import { useAuthDispatch, useAuthState } from 'finpok/store/auth/AuthProvider'
-import { useFormErrorHandleling } from 'finpok/hooks/useFormErrorHandleling'
-import { LoginCredentials } from 'finpok-core/domain'
-import FieldError from 'finpok/components/Shared/FieldError/FieldError'
-import Button from 'finpok/components/Shared/Button'
-import { useAuthWithGoogle } from 'finpok/hooks/useAuthWithGoogle'
-import { GoogleLogin } from 'finpok/components/GoogleLogin/GoogleLogin'
+import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
+import { useFormErrorHandleling } from 'finpoq/hooks/useFormErrorHandleling'
+import { LoginCredentials } from 'finpoq-core/domain'
+import FieldError from 'finpoq/components/Shared/FieldError/FieldError'
+import Button from 'finpoq/components/Shared/Button'
+import { useAuthWithGoogle } from 'finpoq/hooks/useAuthWithGoogle'
+import { GoogleLogin } from 'finpoq/components/GoogleLogin/GoogleLogin'
 
 const Login: FC = () => {
   const [loginForm, setLoginForm] = useState<LoginCredentials>({

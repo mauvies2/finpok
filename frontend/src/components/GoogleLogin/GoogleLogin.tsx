@@ -1,6 +1,6 @@
 import Button from '../Shared/Button'
 import GoogleAuth from 'react-google-login'
-import { useAuthWithGoogle } from 'finpok/hooks/useAuthWithGoogle'
+import { useAuthWithGoogle } from 'finpoq/hooks/useAuthWithGoogle'
 
 export const GoogleLogin = () => {
   const { handleGoogleAuth, handleGoogleFailure } = useAuthWithGoogle()

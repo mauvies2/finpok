@@ -1,10 +1,10 @@
 import { useIsFetching } from 'react-query'
 import ClipLoader from 'react-spinners/ClipLoader'
-import { Router } from 'finpok/router/Router'
+import { Router } from 'finpoq/router/Router'
 import { css } from '@emotion/react'
 import { FC } from 'react'
-import { useUiState } from 'finpok/store/ui/UiProvider'
-import useBlockScroll from 'finpok/hooks/useBlockScroll'
+import { useUiState } from 'finpoq/store/ui/UiProvider'
+import useBlockScroll from 'finpoq/hooks/useBlockScroll'
 
 const override = css`
   position: fixed;

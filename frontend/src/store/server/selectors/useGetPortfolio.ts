@@ -1,5 +1,5 @@
 import { useQueryClient } from 'react-query'
-import { IPortfolio } from 'finpok-core/domain'
+import { IPortfolio } from 'finpoq-core/domain'
 
 const useGetPortfolio = () => {
   const queryClient = useQueryClient()

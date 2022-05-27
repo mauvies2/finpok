@@ -1,7 +1,7 @@
 import produce from 'immer'
 import { useReducer } from 'react'
-import { LoginCredentials, IUserSession } from 'finpok-core/domain'
-import { auth } from 'finpok/services/AuthService'
+import { LoginCredentials, IUserSession } from 'finpoq-core/domain'
+import { auth } from 'finpoq/services/AuthService'
 import { useNavigate } from 'react-router-dom'
 
 export interface IAuthState {

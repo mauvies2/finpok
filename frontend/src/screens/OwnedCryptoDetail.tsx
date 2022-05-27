@@ -1,14 +1,14 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { useUiDispatch } from 'finpok/store/ui/UiProvider'
-import useGetCrypto from 'finpok/store/server/selectors/useGetCrypto'
-import { useRemoveAsset } from 'finpok/hooks/useApi'
-import { formatNumber } from 'finpok-core/utils/formatNumber'
-import useGetPortfolio from 'finpok/store/server/selectors/useGetPortfolio'
-import Button from 'finpok/components/Shared/Button'
-import Transaction from 'finpok/components/Transaction'
-import { useGetCurrentOwnedCrypto } from 'finpok/store/ui/UiSelectors'
-import useClickOutside from 'finpok/hooks/useClickOutside'
+import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
+import useGetCrypto from 'finpoq/store/server/selectors/useGetCrypto'
+import { useRemoveAsset } from 'finpoq/hooks/useApi'
+import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import useGetPortfolio from 'finpoq/store/server/selectors/useGetPortfolio'
+import Button from 'finpoq/components/Shared/Button'
+import Transaction from 'finpoq/components/Transaction'
+import { useGetCurrentOwnedCrypto } from 'finpoq/store/ui/UiSelectors'
+import useClickOutside from 'finpoq/hooks/useClickOutside'
 
 const OwnedCryptoDetail = () => {
   const removeAssetOption = useRef<HTMLDivElement | null>(null)

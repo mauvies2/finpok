@@ -1,4 +1,4 @@
-import { ICrypto } from 'finpok-core/domain'
+import { ICrypto } from 'finpoq-core/domain'
 import { request } from './http'
 
 export type FetchedCrypto = ICrypto & { id: string } & { [name: string]: string | number | boolean | null }
