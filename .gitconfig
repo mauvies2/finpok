@@ -1,3 +1,3 @@
 [remote "origin"]
         fetch = +refs/heads/*:refs/remotes/origin/*
-        url = git@github.com:mauvies2/finpok.git
+        url = git@github.com:mauvies2/finpoq.git
