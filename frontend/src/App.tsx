@@ -16,20 +16,18 @@ const queryClient = new QueryClient({
   },
 })
 
-export const App = () => {
-  return (
-    <HelmetProvider>
-      <QueryClientProvider client={queryClient}>
-        <BrowserRouter>
-          <AuthProvider>
-            <UiProvider>
-              <Nav showOnScroll />
-              <Main />
-            </UiProvider>
-          </AuthProvider>
-        </BrowserRouter>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
-    </HelmetProvider>
-  )
-}
+export const App = () => (
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <AuthProvider>
+          <UiProvider>
+            <Nav showOnScroll />
+            <Main />
+          </UiProvider>
+        </AuthProvider>
+      </BrowserRouter>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
+  </HelmetProvider>
+)

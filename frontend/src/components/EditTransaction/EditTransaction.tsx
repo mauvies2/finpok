@@ -157,10 +157,10 @@ const EditTransaction = () => {
           </Button>
         </div>
 
-        <div className="items-center rounded-lg bg-gray-100 p-4 text-xs">
+        <div className="dark:bg-dark-modal dark:border-dark-line dark:text-dark-text items-center rounded-lg bg-gray-100 p-4 text-xs">
           <label className="text-sm font-semibold">Total spent</label>
           <div className="form-control relative ">
-            <div placeholder="0.00" className="mt-2 h-8 bg-gray-100 pl-2 text-xl font-bold">
+            <div placeholder="0.00" className="mt-2 h-8 pl-2 text-xl font-bold">
               {formatNumber(currentTransaction.price * currentTransaction.amount, { symbol: '$' })}
             </div>
           </div>

@@ -93,7 +93,7 @@ const AddNewTransaction: FC<Props> = ({ goBack = 1 }) => {
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload.type} onClick={selectTransactionType} />
 
         <div
-          className="select mb-4 h-10 w-full max-w-xs cursor-pointer rounded-full border border-gray-200 bg-white"
+          className="select dark:bg-dark-modal dark:border-dark-line dark:text-dark-text mb-4 h-10 w-full max-w-xs cursor-pointer rounded-full border border-gray-200 dark:border"
           onClick={() => navigate(-1)}
         >
           <div className="my-1 flex cursor-pointer items-center  rounded-lg py-2  pl-3">
@@ -179,10 +179,10 @@ const AddNewTransaction: FC<Props> = ({ goBack = 1 }) => {
           )}
         </div>
 
-        <div className="items-center rounded-lg bg-gray-100 p-4 text-xs">
+        <div className="dark:bg-dark-modal dark:border-dark-line dark:text-dark-text items-center rounded-lg bg-gray-100 p-4 text-xs dark:border">
           <label className="text-sm font-semibold">Total spent</label>
           <div className="form-control relative">
-            <div placeholder="0.00" className="mt-2 h-8 bg-gray-100 pl-6 text-xl font-bold">
+            <div placeholder="0.00" className="mt-2 h-8  pl-6 text-xl font-bold">
               {formatNumber(transactionTotal)}
             </div>
             <p className="absolute  top-[10px] left-2 text-xl font-bold">$</p>

@@ -31,22 +31,22 @@ const TransactionDetail: FC = () => {
   return (
     <div className="flex h-full flex-col justify-between">
       <div>
-        <div className="flex justify-between border-b border-gray-100 py-5">
+        <div className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
           <p>Type</p>
           <p className="text-sm font-semibold capitalize">{type}</p>
         </div>
 
-        <div className="flex justify-between border-b border-gray-100 py-5">
+        <div className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
           <p>Date</p>
           {formatDate(createdAt)}
         </div>
 
-        <div className="flex justify-between border-b border-gray-100 py-5">
+        <div className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
           <p>Price per coin</p>
           {formatNumber(price, { symbol: '$', fractionDigits: 2 })}
         </div>
 
-        <div className="flex justify-between border-b border-gray-100 py-5">
+        <div className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
           <p>Quantity</p>
           <p>
             {amount}
@@ -54,17 +54,17 @@ const TransactionDetail: FC = () => {
           </p>
         </div>
 
-        <div className="flex justify-between border-b border-gray-100 py-5">
+        <div className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
           <p>Fees</p>
           {fee ? formatNumber(fee, { symbol: '$', fractionDigits: 2 }) : 'No fee'}
         </div>
 
-        <div className="flex justify-between border-b border-gray-100 py-5">
+        <div className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
           <p>Total spent</p>
           {formatNumber(price * amount, { symbol: '$', fractionDigits: 2 })}
         </div>
 
-        <div className="border-b border-gray-100 py-5">
+        <div className="dark:border-dark-line border-b border-gray-100 py-5">
           <p>Notes</p>
           <p>{notes || '--'}</p>
         </div>

@@ -40,7 +40,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
   })
 
   return (
-    <div className="flex border-b">
+    <div className="dark:border-dark-line flex border-b">
       <Link
         className="flex flex-1 py-5"
         to={`/portfolio/${ownedCrypto.symbol}`}
@@ -93,7 +93,7 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
           <MoreVertical className="ml-3 h-[21px] w-[21px] cursor-pointer text-gray-400" />
           {isMenuOpened && (
             <div
-              className="dropdown-content bg-base-100 min-w-40 absolute top-5 right-2 cursor-pointer rounded-lg p-3 text-center text-sm font-extralight text-red-500 shadow-xl hover:bg-gray-50"
+              className="dropdown-content dark:bg-dark-modal dark:border-dark-line dark:text-dark-text bg-base-100  min-w-40 absolute top-5 right-2 cursor-pointer rounded-lg p-3 text-center text-sm font-extralight text-red-500 shadow-xl hover:bg-gray-50 dark:border"
               onClick={handleRemoveAsset}
             >
               <p>Remove</p>

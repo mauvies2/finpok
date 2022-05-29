@@ -29,7 +29,7 @@ const PortfolioCryptoIndex: FC = () => {
       <section>
         {portfolio.cryptocurrencies && portfolio.cryptocurrencies.length ? (
           <>
-            <div className="flex border-b border-t py-2 font-bold">
+            <div className="dark:border-dark-line flex border-b border-t py-2 font-bold">
               <div className="flex flex-1">Name</div>
               <div className="flex flex-1 justify-end">Price</div>
               <div className="hidden flex-1 justify-end md:flex">24H</div>

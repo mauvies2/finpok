@@ -1,6 +1,5 @@
 import { FC, useState } from 'react'
 import NavAuthButtons from './NavAuthButtons'
-import Button from '../Shared/Button'
 import { Link } from 'react-router-dom'
 import NavLink from './NavLink'
 import useBlockScroll from 'finpoq/hooks/useBlockScroll'
@@ -10,6 +9,7 @@ import { InfoSquare } from '@styled-icons/boxicons-regular/InfoSquare'
 import { PermContactCalendar } from '@styled-icons/material-outlined/PermContactCalendar'
 import useShowOnScroll from 'finpoq/hooks/useShowOnScroll'
 import Logo from '../Logo/Logo'
+import Toggle from '../ThemeToggle/ThemeToggle'
 
 // TODO: fix top animation bug
 
@@ -30,10 +30,10 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
 
   return (
     <nav
-      className="absolute top-0 left-0 right-0 z-40 flex h-20 w-screen justify-center bg-white shadow"
+      className="dark:bg-dark dark:border-dark-line absolute top-0 left-0 right-0 z-40 flex h-20 w-screen justify-center bg-white shadow transition-all dark:border-b"
       style={{ top, position }}
     >
-      <div className="flex w-full max-w-[1220px] items-center justify-between px-5">
+      <div className="flex w-full max-w-[1150px] items-center justify-between px-5">
         <div className="z-20 w-auto">
           <Link to="/" className="text-lg font-bold">
             <Logo />
@@ -67,6 +67,7 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
 
         <div className="flex">
           <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
+          <Toggle />
           {/* <button name="search-btn" className="h-auto w-auto text-gray-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"

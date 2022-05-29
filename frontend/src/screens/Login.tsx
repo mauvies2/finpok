@@ -72,8 +72,8 @@ const Login: FC = () => {
           Log in
         </Button>
       </form>
-      <div className="relative my-10 w-full border-b-2">
-        <p className="absolute left-1/2 flex w-14 -translate-x-1/2 -translate-y-1/2 transform justify-center bg-white">
+      <div className="dark:border-dark-text relative my-10 w-full border-b-2">
+        <p className="dark:bg-dark absolute left-1/2 flex w-14 -translate-x-1/2 -translate-y-1/2 transform justify-center bg-white">
           or
         </p>
       </div>

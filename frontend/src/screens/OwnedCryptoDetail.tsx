@@ -55,7 +55,7 @@ const OwnedCryptoDetail = () => {
           </Button>
           {isRemoveAssetPromptOpen && (
             <div
-              className="menu dropdown-content bg-base-100 min-w-40 absolute top-12 right-8 cursor-pointer rounded-lg p-3 text-center font-extralight text-red-500 shadow hover:bg-gray-50"
+              className="menu dark:bg-dark-modal dark:border-dark-line dark:text-dark-text dropdown-content bg-base-100 min-w-40 absolute top-12 right-8 cursor-pointer rounded-lg p-3 text-center font-extralight text-red-500 shadow hover:bg-gray-50 dark:border"
               onClick={handleRemoveAsset}
             >
               <p>Remove asset</p>
@@ -74,7 +74,7 @@ const OwnedCryptoDetail = () => {
         <div className="flex items-center">
           <img src={crypto.logoUrl.replace('16x16', '32x32')} className="mr-3 w-10 flex-shrink-0" alt="logox" />
           {
-            <p className="text-3xl font-bold text-black">
+            <p className="text-3xl font-bold ">
               {formatNumber(currentOwnedCrypto.amount * crypto.quote.USD.price, {
                 fractionDigits: 2,
                 symbol: '$',
@@ -88,7 +88,7 @@ const OwnedCryptoDetail = () => {
 
       <section className="mt-10 text-xs">
         <ul>
-          <li className="flex justify-between border-b border-gray-100 py-5">
+          <li className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
             <p>Quantity</p>
             <p className="text-sm font-semibold">
               {currentOwnedCrypto.amount} {currentOwnedCrypto.symbol}
@@ -102,14 +102,14 @@ const OwnedCryptoDetail = () => {
       </section>
 
       <section className="mb-6 mt-10 flex items-center justify-between">
-        <p className="text-lg font-bold text-black">Transactions</p>
+        <p className="text-lg font-bold ">Transactions</p>
         <Button icon="+" onClick={handleAddTransaction}>
           Add transaction
         </Button>
       </section>
 
       <section className="my-5">
-        <ul className="flex justify-between border-b border-t py-2 font-bold">
+        <ul className="dark:border-dark-line flex justify-between border-b border-t py-2 font-bold">
           <li>Type</li>
           <li>Amount</li>
         </ul>

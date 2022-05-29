@@ -58,7 +58,7 @@ const AddNewSearch: FC = () => {
             placeholder="Search"
             autoFocus
             autoComplete="off"
-            className="focus:shadow-input h-10 w-full rounded-full border border-gray-200 pl-10 focus:outline-none"
+            className="focus:shadow-input dark:bg-dark-modal dark:border-dark-line  h-10 w-full rounded-full border border-gray-200 pl-10 focus:outline-none"
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleInputKeyDown}
           />
@@ -84,7 +84,7 @@ const AddNewSearch: FC = () => {
           <div
             id={`item-${index}`}
             key={`${index}-${crypto.symbol}`}
-            className="my-[2px] flex cursor-pointer items-center rounded-lg py-3 pl-3 hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none"
+            className="dark:hover:bg-dark-modal dark:focus-visible:bg-dark-modal my-[2px] flex cursor-pointer items-center rounded-lg py-3 pl-3 hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none"
             onClick={(e) => handleSubmit(e, crypto.symbol)}
             onKeyDown={(e) => handleKeyPress(e, index)}
             tabIndex={-1}

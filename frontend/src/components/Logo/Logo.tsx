@@ -17,7 +17,6 @@ const Logo = () => {
           </g>
         </svg>
       </span>
-      <span className="">q</span>
     </p>
   )
 }

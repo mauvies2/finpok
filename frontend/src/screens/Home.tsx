@@ -13,10 +13,10 @@ const Home = () => {
   return (
     <>
       <Head title="Homepage" />
-      <header className="flex h-[calc(100vh-7rem)] max-w-[1220px] flex-col py-8 md:flex-row">
+      <header className="flex h-[calc(100vh-7rem)] max-w-[1150px] flex-col py-8 md:flex-row">
         <div className="flex h-full flex-1 flex-col justify-center md:pr-4">
           <section className="flex w-full flex-col justify-center md:w-full lg:w-4/5">
-            <h1 className="pr-4 text-[3rem] font-extralight leading-[1.1] text-gray-600 md:text-[4rem]">
+            <h1 className="dark:text-dark-text pr-4 text-[3rem] font-extralight leading-[1.1] text-gray-600 md:text-[4rem]">
               Welcome {isLoggedIn ? <span>back {authUser?.name}</span> : <span>to your financial pocket!</span>}
             </h1>
           </section>
@@ -29,13 +29,13 @@ const Home = () => {
               </Link>
             ) : (
               <>
-                <Link to="/login" className="mt-8 w-full">
+                <Link to="/login" className="mt-8 w-full" tabIndex={-1}>
                   <Button className="w-full" height="l">
                     Log in
                   </Button>
                 </Link>
-                <div className="relative my-10 w-full border-b-2">
-                  <p className="absolute left-1/2 flex w-14 -translate-x-1/2 -translate-y-1/2 transform justify-center bg-white">
+                <div className="dark:border-dark-text relative my-10 w-full border-b-2">
+                  <p className="dark:bg-dark absolute left-1/2 flex w-14 -translate-x-1/2 -translate-y-1/2 transform justify-center bg-white">
                     or
                   </p>
                 </div>

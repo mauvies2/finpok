@@ -483,7 +483,7 @@
     "@babel/runtime" "^7.14.0"
     "@styled-icons/styled-icon" "^10.6.3"
 
-"@styled-icons/evil@10.34.0":
+"@styled-icons/evil@^10.34.0", "@styled-icons/evil@10.34.0":
   "integrity" "sha512-rU5MrgMow9I0Vkqo6V5WkTcj0o1toDzn8kQSQywTL1N7JuyATKZgN3kgkzNUgHd5LorcsGMetPsvDmgS31XAPw=="
   "resolved" "https://registry.npmjs.org/@styled-icons/evil/-/evil-10.34.0.tgz"
   "version" "10.34.0"

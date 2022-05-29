@@ -2,6 +2,7 @@
 
 module.exports = {
   mode: 'jit',
+  darkMode: 'class',
   purge: {
     enabled: process.env.NODE_ENV === 'production',
     safeList: [],
@@ -29,10 +30,15 @@ module.exports = {
         'base-100': '#ffffff',
         'primary-dark': '#ff1245',
         'light-gray': '#FAFAFA',
+        dark: '#1a1d21',
+        'dark-text': '#d2d2d2',
+        'dark-line': '#323232',
+        'dark-modal': '#222529',
       },
       boxShadow: {
         input: '0 0 0px 0px #ffdbe3',
-        button: ['0px 0px 0px 2px white', '0px 0px 0px 4px #ff325e'],
+        button: ['0px 0px 0px 2px #1a1d21', '0px 0px 0px 4px #ff325e'],
+        'dark-button': ['0px 0px 0px 2px #1a1d21', '0px 0px 0px 3px #ff325e'],
       },
       keyframes: {
         nav: {
