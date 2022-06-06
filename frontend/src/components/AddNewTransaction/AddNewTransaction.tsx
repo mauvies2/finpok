@@ -7,7 +7,7 @@ import FormInput from '../Shared/FormInput/FormInput'
 import TabSelect from '../Shared/TabSelect/TabSelect'
 import { useAddTransaction } from 'finpoq/hooks/useApi'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
-import { TransacionPayload } from 'finpoq/types'
+import { TransacionPayload } from 'finpoq-core/types'
 import { useGetCurrentCrypto } from 'finpoq/store/ui/UiSelectors'
 import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
 

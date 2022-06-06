@@ -11,7 +11,7 @@ import {
   RemoveTransactionPayload,
   IOwnedCrypto,
   EditTransactionPayload,
-} from 'finpoq/types'
+} from 'finpoq-core/types'
 
 export const getPortfolio: RequestHandler = async (req: Request, res: Response) => {
   const { portfolio }: { portfolio: IPortfolio } = req.body.user

@@ -1,4 +1,4 @@
-import { ICrypto, IPortfolio } from 'finpoq/types'
+import { ICrypto, IPortfolio } from 'finpoq-core/types'
 import { useMemo } from 'react'
 
 const usePortfolioYield = (portfolio: IPortfolio | undefined, cryptos: ICrypto[] | undefined) => {

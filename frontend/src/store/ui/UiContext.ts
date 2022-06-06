@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { ITransaction } from 'finpoq/types'
+import { ITransaction } from 'finpoq-core/types'
 import { useNavigate } from 'react-router-dom'
 
 export interface IUiState {

@@ -2,14 +2,11 @@ version: "3"
 services:
   finpo:
     image: finpo
-    build: ./
+    build: .
     ports:
       - "3000:3000"
       - "5000:5000"
-    networks:
-      - finpo-network
     working_dir: '/usr/src/app'
-    command: ['make', 'run-app']
     volumes:
       - ./frontend/:/usr/src/app/frontend
       - ./api/:/usr/src/app/api
@@ -17,6 +14,7 @@ services:
       - /usr/src/app/frontend/node_modules
       - /usr/src/app/api/node_modules
       - /usr/src/app/node_modules
+    command: ['make', 'run-app']
 
   # frontend:
   #   image: finpo-frontend
@@ -43,15 +41,6 @@ services:
     # depends_on:
     #   - mongo
 
-
-  # mongo:
-  #   image: mongo:3.4.1
-  #   ports:
-  #     - "27017:27017"
-  #   networks:
-  #     - finpo-network
-  #   volumes:
-
-networks:
-  finpo-network:
-    driver: bridge
+# networks:
+#   finpo-network:
+#     driver: bridge

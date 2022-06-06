@@ -15,7 +15,7 @@ import {
   EditTransactionPayload,
   RemoveTransactionPayload,
   IOwnedCrypto,
-} from 'finpoq/types'
+} from 'finpoq-core/types'
 
 export const useCryptos = () => useQuery<ICrypto[], Error>('cryptocurrencies', fetchCryptos)
 

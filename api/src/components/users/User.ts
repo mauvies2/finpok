@@ -1,6 +1,6 @@
 import mongoose, { model, Schema } from 'mongoose'
 import { PortfolioModel, portfolioSchema } from '../portfolio/Portfolio'
-import { IUser } from 'finpoq/types'
+import { IUser } from 'finpoq-core/types'
 
 const userSchema: Schema = new mongoose.Schema(
   {

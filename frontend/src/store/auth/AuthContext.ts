@@ -1,6 +1,6 @@
 import produce from 'immer'
 import { useReducer } from 'react'
-import { LoginCredentials, IUserSession } from 'finpoq/types'
+import { LoginCredentials, IUserSession } from 'finpoq-core/types'
 import { auth } from 'finpoq/services/AuthService'
 import { useNavigate } from 'react-router-dom'
 

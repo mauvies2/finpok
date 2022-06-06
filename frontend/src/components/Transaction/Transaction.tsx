@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { ITransaction } from 'finpoq/types'
+import { ITransaction } from 'finpoq-core/types'
 import { formatNumber } from 'finpoq/utils/formatNumber'
 import formatDate from 'finpoq/utils/formatDate'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'

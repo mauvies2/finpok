@@ -1,5 +1,5 @@
 import { useQueryClient } from 'react-query'
-import { ICrypto, IPortfolio } from 'finpoq/types'
+import { ICrypto, IPortfolio } from 'finpoq-core/types'
 import { useMemo } from 'react'
 
 const useGetOverallPerformance = () => {

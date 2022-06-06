@@ -5,7 +5,7 @@ import DotsVertical from 'finpoq/assets/icons/DotsVertical'
 import Add from 'finpoq/assets/icons/Add'
 import { formatNumber } from 'finpoq/utils/formatNumber'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
-import { ICrypto, IOwnedCrypto } from 'finpoq/types'
+import { ICrypto, IOwnedCrypto } from 'finpoq-core/types'
 import { useRemoveAsset } from 'finpoq/hooks/useApi'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
 
@@ -85,7 +85,9 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
         </div>
       </Link>
       <div className="hidden items-center justify-end text-right font-semibold md:flex md:w-24">
-        <Add />
+        <div onClick={() => openModal(`/portfolio/add-new-transaction/${ownedCrypto.symbol}`)}>
+          <Add />
+        </div>
         <div onClick={() => setIsMenuOpened(!isMenuOpened)} ref={menuRef} className="relative">
           <DotsVertical />
           {isMenuOpened && (

@@ -1,4 +1,4 @@
-import { EditTransactionPayload, IOwnedCrypto, ITransaction, IUser } from 'finpoq/types'
+import { EditTransactionPayload, IOwnedCrypto, ITransaction, IUser } from 'finpoq-core/types'
 
 export const addAssetOrTransaction = (user: IUser, newCryptoToOwned: IOwnedCrypto, transaction: ITransaction): void => {
   let owned = false
