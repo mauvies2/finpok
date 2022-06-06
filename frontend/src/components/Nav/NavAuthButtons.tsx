@@ -1,15 +1,15 @@
-import Button from '../Shared/Button'
-import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
-import { FC, useEffect, useRef, useState } from 'react'
-import useClickOutside from 'finpoq/hooks/useClickOutside'
 import Close from 'finpoq/assets/icons/Close'
+import Button from 'finpoq/components/Shared/Button'
+import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
+import useClickOutside from 'finpoq/hooks/useClickOutside'
 
 interface Props {
   toggleMobileMenu: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
+const NavAuthButtons = ({ toggleMobileMenu }: Props) => {
   const [isAuthUserDetailsOpened, setIsAuthUserDetailOpened] = useState(false)
   const [navButton, setNavButton] = useState<'close' | 'user' | 'buttons' | null>(null)
   const authUserButton = useRef<HTMLDivElement | null>(null)

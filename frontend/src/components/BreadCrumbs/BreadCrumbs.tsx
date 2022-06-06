@@ -1,7 +1,6 @@
-import { FC } from 'react'
 import { Link } from 'react-router-dom'
 
-const BreadCrumbs: FC = () => {
+const BreadCrumbs = () => {
   return (
     <section className="breadcrumbs text-sm">
       <ul>

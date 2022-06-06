@@ -10,7 +10,7 @@ const Toggle = () => {
 
   return (
     <div onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} className="flex flex-col justify-center">
-      <button className="dark:text-dark-text dark:hover:bg-dark-modal ml-2 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100">
+      <button className="dark:text-dark-text dark:hover:bg-dark-modal mr-4 flex h-8 w-8 items-center justify-center rounded-full hover:bg-gray-100">
         {theme === 'dark' ? <Moon /> : <Sun />}
       </button>
     </div>

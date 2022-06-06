@@ -1,6 +1,6 @@
 import { forwardRef } from 'react'
 
-interface ButtonProps {
+interface Props {
   style?: React.CSSProperties | undefined
   type?: 'button' | 'submit' | 'reset'
   children?: React.ReactNode
@@ -35,7 +35,7 @@ const Button = forwardRef(
       name,
       type = 'button',
       btnType = 'primary',
-    }: ButtonProps,
+    }: Props,
     ref: React.ForwardedRef<HTMLButtonElement>
   ) => (
     <button

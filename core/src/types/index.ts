@@ -25,7 +25,7 @@ export interface ITransaction {
 }
 
 export interface IOwnedCrypto {
-  _id: string
+  _id?: string
   name: string
   symbol: string
   slug: string

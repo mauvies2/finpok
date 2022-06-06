@@ -1,15 +1,14 @@
-import { FC } from 'react'
 import { ITransaction } from 'finpoq-core/types'
 import { formatNumber } from 'finpoq/utils/formatNumber'
 import formatDate from 'finpoq/utils/formatDate'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 
-interface TransactionProps {
+interface Props {
   transaction: ITransaction
   cryptoSymbol: string
 }
 
-const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
+const Transaction = ({ transaction, cryptoSymbol }: Props) => {
   const { selectCurrentTransaction, openModal } = useUiDispatch()
 
   const openTransactionDetail = () => {

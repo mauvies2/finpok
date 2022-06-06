@@ -1,6 +1,5 @@
-import { FC, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-
 import DotsVertical from 'finpoq/assets/icons/DotsVertical'
 import Add from 'finpoq/assets/icons/Add'
 import { formatNumber } from 'finpoq/utils/formatNumber'
@@ -9,12 +8,12 @@ import { ICrypto, IOwnedCrypto } from 'finpoq-core/types'
 import { useRemoveAsset } from 'finpoq/hooks/useApi'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
 
-interface PortfolioCryptoProps {
+interface Props {
   ownedCrypto: IOwnedCrypto
   crypto: ICrypto | undefined
 }
 
-const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
+const PortfolioCrypto = ({ ownedCrypto, crypto }: Props) => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [isMenuOpened, setIsMenuOpened] = useState(false)
 

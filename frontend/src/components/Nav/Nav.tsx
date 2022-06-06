@@ -1,4 +1,4 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import NavAuthButtons from './NavAuthButtons'
 import { Link } from 'react-router-dom'
 import NavLink from './NavLink'
@@ -6,16 +6,16 @@ import useBlockScroll from 'finpoq/hooks/useBlockScroll'
 import useMediaQuery from 'finpoq/hooks/useMediaQuery'
 import Suitcase from 'finpoq/assets/icons/Suitcase'
 import useShowOnScroll from 'finpoq/hooks/useShowOnScroll'
-import Logo from '../Logo/Logo'
-import Toggle from '../ThemeToggle/ThemeToggle'
+import Logo from 'finpoq/components/Logo/Logo'
+import Toggle from 'finpoq/components/ThemeToggle/ThemeToggle'
 
 // TODO: fix top animation bug
 
-type NavProps = {
+interface Props {
   showOnScroll?: boolean
 }
 
-const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
+const Nav = ({ showOnScroll = false }: Props) => {
   const [isMobileMenuOpen, toggleMobileMenu] = useState(false)
 
   // computed
@@ -64,8 +64,8 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
         </div>
 
         <div className="flex">
-          <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
           <Toggle />
+          <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
           {/* <button name="search-btn" className="h-auto w-auto text-gray-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"

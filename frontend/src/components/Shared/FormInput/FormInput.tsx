@@ -1,7 +1,6 @@
-import { FC } from 'react'
 import FieldError from '../FieldError/FieldError'
 
-type FormInputProps = {
+interface Props {
   id?: string
   labelClass?: string
   name?: string
@@ -20,7 +19,7 @@ type FormInputProps = {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
-const FormInput: FC<FormInputProps> = ({
+const FormInput = ({
   id = '',
   name = '',
   labelClass = '',
@@ -37,7 +36,7 @@ const FormInput: FC<FormInputProps> = ({
   label,
   labelOnError = 'This field is required',
   onChange,
-}) => {
+}: Props) => {
   return (
     <label className={`dark:text-dark-text pl-2 text-sm font-normal ${labelClass}`}>
       {label}

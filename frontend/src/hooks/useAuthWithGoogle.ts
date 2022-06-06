@@ -1,6 +1,6 @@
-import { useAuthDispatch } from 'finpoq/store/auth/AuthProvider'
 import { useState } from 'react'
 import { GoogleLoginResponse, GoogleLoginResponseOffline } from 'react-google-login'
+import { useAuthDispatch } from 'finpoq/store/auth/AuthProvider'
 
 export const useAuthWithGoogle = () => {
   const [couldAuth, setCouldAuth] = useState<null | boolean>(null)

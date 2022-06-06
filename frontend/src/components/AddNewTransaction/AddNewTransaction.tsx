@@ -1,21 +1,21 @@
-import { FC, FormEvent, useEffect, useState } from 'react'
+import { FormEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { formatNumber } from 'finpoq/utils/formatNumber'
 import formatDate from 'finpoq/utils/formatDate'
-import Button from '../Shared/Button'
-import FormInput from '../Shared/FormInput/FormInput'
-import TabSelect from '../Shared/TabSelect/TabSelect'
+import Button from 'finpoq/components/Shared/Button'
+import FormInput from 'finpoq/components/Shared/FormInput/FormInput'
+import TabSelect from 'finpoq/components/Shared/TabSelect/TabSelect'
 import { useAddTransaction } from 'finpoq/hooks/useApi'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 import { TransacionPayload } from 'finpoq-core/types'
 import { useGetCurrentCrypto } from 'finpoq/store/ui/UiSelectors'
-import { useFormErrorHandleling } from '../../hooks/useFormErrorHandleling'
+import { useFormErrorHandleling } from 'finpoq/hooks/useFormErrorHandleling'
 
 interface Props {
   goBack?: number
 }
 
-const AddNewTransaction: FC<Props> = ({ goBack = 1 }) => {
+const AddNewTransaction = ({ goBack = 1 }: Props) => {
   const [showExtraFields, setShowExtraFields] = useState({ date: false, fee: false, notes: false })
   const [transactionPayload, setTransactionPayload] = useState<TransacionPayload>({
     type: 'buy',

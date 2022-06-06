@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, FormEvent, useState } from 'react'
 import Head from 'finpoq/components/Shared/Head'
-import FormInput from '../components/Shared/FormInput/FormInput'
+import FormInput from 'finpoq/components/Shared/FormInput/FormInput'
 import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
 import { useFormErrorHandleling } from 'finpoq/hooks/useFormErrorHandleling'
 import { LoginCredentials } from 'finpoq-core/types'
