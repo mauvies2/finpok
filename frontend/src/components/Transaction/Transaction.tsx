@@ -1,5 +1,4 @@
 import { FC } from 'react'
-import classNames from 'classnames'
 import { ITransaction } from 'finpoq/types'
 import { formatNumber } from 'finpoq/utils/formatNumber'
 import formatDate from 'finpoq/utils/formatDate'
@@ -49,7 +48,7 @@ const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
             fractionDigits: 2,
           })}
         </p>
-        <p className={classNames('text-xs', transactionStyle)}>
+        <p className={`text-xs' ${transactionStyle}`}>
           {formatNumber(transaction.amount, {
             fractionDigits: 2,
             sign: transaction.type === 'buy',

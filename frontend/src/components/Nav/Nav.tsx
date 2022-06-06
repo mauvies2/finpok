@@ -4,9 +4,7 @@ import { Link } from 'react-router-dom'
 import NavLink from './NavLink'
 import useBlockScroll from 'finpoq/hooks/useBlockScroll'
 import useMediaQuery from 'finpoq/hooks/useMediaQuery'
-import { Suitcase2 } from '@styled-icons/remix-line/Suitcase2'
-import { InfoSquare } from '@styled-icons/boxicons-regular/InfoSquare'
-import { PermContactCalendar } from '@styled-icons/material-outlined/PermContactCalendar'
+import Suitcase from 'finpoq/assets/icons/Suitcase'
 import useShowOnScroll from 'finpoq/hooks/useShowOnScroll'
 import Logo from '../Logo/Logo'
 import Toggle from '../ThemeToggle/ThemeToggle'
@@ -52,13 +50,13 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
               className="flex flex-col items-start justify-between md:flex-row"
               onClick={() => toggleMobileMenu(false)}
             >
-              <NavLink to="portfolio" icon={<Suitcase2 size="24" />}>
+              <NavLink to="portfolio" icon={<Suitcase />}>
                 Portfolio
               </NavLink>
-              <NavLink to="about" icon={<InfoSquare size="24" />}>
+              <NavLink to="about" icon={<Suitcase />}>
                 About
               </NavLink>
-              <NavLink to="contact" icon={<PermContactCalendar size="24" />}>
+              <NavLink to="contact" icon={<Suitcase />}>
                 Contact
               </NavLink>
             </div>

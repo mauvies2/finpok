@@ -3,7 +3,7 @@ import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { FC, useEffect, useRef, useState } from 'react'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
-import { Close } from '@styled-icons/evil'
+import Close from 'finpoq/assets/icons/Close'
 
 interface Props {
   toggleMobileMenu: React.Dispatch<React.SetStateAction<boolean>>
@@ -39,7 +39,7 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
     >
       {navButton === 'close' && (
         <div className="cursor-pointer" onClick={() => navigate('/')}>
-          <Close className="h-10 w-10" />
+          <Close />
         </div>
       )}
 
