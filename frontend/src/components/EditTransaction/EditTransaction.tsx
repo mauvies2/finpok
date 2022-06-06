@@ -1,14 +1,14 @@
-import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import { formatNumber } from 'finpoq/utils/formatNumber'
 import Button from 'finpoq/components/Shared/Button'
 import FormInput from 'finpoq/components/Shared/FormInput/FormInput'
 import TabSelect from 'finpoq/components/Shared/TabSelect/TabSelect'
 import { FormEvent, useState, useEffect } from 'react'
-import { EditTransactionPayload, TransacionPayload } from 'finpoq-core/domain'
+import { EditTransactionPayload, TransacionPayload } from 'finpoq/types'
 import { useEditTransaction } from 'finpoq/hooks/useApi'
 import { useUiDispatch, useUiState } from 'finpoq/store/ui/UiProvider'
 import { useGetCurrentOwnedCrypto } from 'finpoq/store/ui/UiSelectors'
 import { useFormErrorHandleling } from 'finpoq/hooks/useFormErrorHandleling'
-import formatDate from 'finpoq-core/utils/formatDate'
+import formatDate from 'finpoq/utils/formatDate'
 
 const EditTransaction = () => {
   const [extraFields, setExtraFields] = useState({ date: false, fee: false, notes: false })

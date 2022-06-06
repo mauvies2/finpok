@@ -1,7 +1,7 @@
 import { FC, KeyboardEvent, MouseEvent, useState } from 'react'
 import searchFilter from 'finpoq/utils/searchFilter'
 import useGetCryptos from 'finpoq/store/server/selectors/useGetCryptos'
-import { ICrypto } from 'finpoq-core/domain'
+import { ICrypto } from 'finpoq/types'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 
 const AddNewSearch: FC = () => {

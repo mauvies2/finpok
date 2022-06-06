@@ -11,7 +11,7 @@ import {
   RemoveTransactionPayload,
   IOwnedCrypto,
   EditTransactionPayload,
-} from 'finpoq-core/domain'
+} from 'finpoq/types'
 
 export const getPortfolio: RequestHandler = async (req: Request, res: Response) => {
   const { portfolio }: { portfolio: IPortfolio } = req.body.user
@@ -19,6 +19,7 @@ export const getPortfolio: RequestHandler = async (req: Request, res: Response) 
     const cryptos = await Crypto.find()
 
     if (!cryptos) throw new Error()
+
     if (!portfolio.cryptocurrencies) return res.status(200).json({ status: 200, msg: 'portfolio', data: {} })
 
     let total = 0

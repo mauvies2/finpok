@@ -1,4 +1,4 @@
-import { TransacionPayload } from 'finpoq-core/domain'
+import { TransacionPayload } from 'finpoq/types'
 import { FC } from 'react'
 
 type TabSelectProps = {

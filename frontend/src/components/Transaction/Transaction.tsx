@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import classNames from 'classnames'
-import { ITransaction } from 'finpoq-core/domain'
-import { formatNumber } from 'finpoq-core/utils/formatNumber'
-import formatDate from 'finpoq-core/utils/formatDate'
+import { ITransaction } from 'finpoq/types'
+import { formatNumber } from 'finpoq/utils/formatNumber'
+import formatDate from 'finpoq/utils/formatDate'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 
 interface TransactionProps {

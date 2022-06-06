@@ -1,4 +1,4 @@
-import { ICrypto, IOwnedCrypto, ITransaction } from 'finpoq-core/domain'
+import { ICrypto, IOwnedCrypto, ITransaction } from 'finpoq/types'
 
 export const formatNewOwnedCrypto = (crypto: ICrypto, transaction: ITransaction): IOwnedCrypto => ({
   _id: crypto._id,

@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { PlusLg } from '@styled-icons/bootstrap/PlusLg'
 import { MoreVertical } from '@styled-icons/fluentui-system-regular'
 
-import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import { formatNumber } from 'finpoq/utils/formatNumber'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
-import { ICrypto, IOwnedCrypto } from 'finpoq-core/domain'
+import { ICrypto, IOwnedCrypto } from 'finpoq/types'
 import { useRemoveAsset } from 'finpoq/hooks/useApi'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
 

@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
-import { ITransaction } from 'finpoq-core/domain'
+import { ITransaction } from 'finpoq/types'
 
 export const transactionSchema: Schema = new mongoose.Schema(
   {
