@@ -4,7 +4,7 @@ dotenv.config()
 
 const config = {
   apiUrl: {
-    cryptocurrencies: process.env.COINMARKETCAP_URL || 'https://pro-api.coinmarketcap.com/v1',
+    cryptocurrencies: process.env.CMC_API_URL || 'https://pro-api.coinmarketcap.com/v1',
   },
 
   mongoDatabase: process.env.MONGO_DATABASE,
@@ -13,8 +13,7 @@ const config = {
 
   mongoPassword: process.env.MONGO_PASSWORD,
 
-  mongoHost:
-    process.env.MONGO_HOST || process.env.NODE_ENV === 'dev' ? 'finpok.tvwve.mongodb.net' : 'finpok.tvwve.mongodb.net',
+  mongoHost: process.env.NODE_ENV === 'dev' ? process.env.MONGO_HOST : 'finpok.tvwve.mongodb.net',
 
   mongoPort: process.env.NODE_ENV === 'dev' ? 27017 : 27015,
 
