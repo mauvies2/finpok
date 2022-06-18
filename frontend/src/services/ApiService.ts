@@ -5,7 +5,7 @@ import {
   IPortfolio,
   RemoveTransactionPayload,
   RegisterUserCredentials,
-} from 'finpoq-core/domain'
+} from 'finpoq-core/types'
 import { auth } from './AuthService'
 import { api } from './http'
 

@@ -1,12 +1,11 @@
-import { FC } from 'react'
-import formatDate from 'finpoq-core/utils/formatDate'
-import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import formatDate from 'finpoq/utils/formatDate'
+import { formatNumber } from 'finpoq/utils/formatNumber'
 import { useRemoveTransaction } from 'finpoq/hooks/useApi'
 import { useUiDispatch, useUiState } from 'finpoq/store/ui/UiProvider'
 import { useGetCurrentOwnedCrypto } from 'finpoq/store/ui/UiSelectors'
 import Button from '../Shared/Button'
 
-const TransactionDetail: FC = () => {
+const TransactionDetail = () => {
   const { currentTransaction } = useUiState().portfolio
   const { openModal, closeModal } = useUiDispatch()
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()

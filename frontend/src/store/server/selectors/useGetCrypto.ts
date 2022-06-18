@@ -1,5 +1,5 @@
 import { useQueryClient } from 'react-query'
-import { ICrypto } from 'finpoq-core/domain'
+import { ICrypto } from 'finpoq-core/types'
 
 const useGetCrypto = (symbol: string | undefined) => {
   const queryClient = useQueryClient()

@@ -1,0 +1,46 @@
+version: "3"
+services:
+  finpo:
+    image: finpo
+    build: .
+    ports:
+      - "3000:3000"
+      - "5000:5000"
+    working_dir: '/usr/src/app'
+    volumes:
+      - ./frontend/:/usr/src/app/frontend
+      - ./api/:/usr/src/app/api
+      - ./:/usr/src/app
+      - /usr/src/app/frontend/node_modules
+      - /usr/src/app/api/node_modules
+      - /usr/src/app/node_modules
+    command: ['make', 'run-app']
+
+  # frontend:
+  #   image: finpo-frontend
+  #   build: ./frontend/
+  #   stdin_open: true
+  #   ports:
+  #     - "3000:3000"
+  #   networks:
+  #     - finpo-network
+    # volumes:
+    #   - ./frontend/:/usr/src/app/frontend
+    #   - /usr/app/frontend/node_modules
+
+    # api:
+    #   image: finpo-api
+    #   build: ./api/
+    #   ports:
+    #     - "5000:5000"
+    #   networks:
+    #     - finpo-network
+    # volumes:
+    #   - ./api/:/usr/src/app/backend
+    #   - /usr/app/api/node_modules
+    # depends_on:
+    #   - mongo
+
+# networks:
+#   finpo-network:
+#     driver: bridge

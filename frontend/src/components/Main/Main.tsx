@@ -1,8 +1,7 @@
 import { useIsFetching } from 'react-query'
 import ClipLoader from 'react-spinners/ClipLoader'
-import { Router } from 'finpoq/router/Router'
 import { css } from '@emotion/react'
-import { FC } from 'react'
+import { Router } from 'finpoq/router/Router'
 import { useUiState } from 'finpoq/store/ui/UiProvider'
 import useBlockScroll from 'finpoq/hooks/useBlockScroll'
 
@@ -16,7 +15,7 @@ const override = css`
   margin: 0 auto;
 `
 
-const Main: FC = () => {
+const Main = () => {
   const isFetching = useIsFetching()
   const { isModalOpen } = useUiState()
   useBlockScroll(isModalOpen)

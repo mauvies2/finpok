@@ -1,15 +1,15 @@
-import Button from '../Shared/Button'
-import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
-import { FC, useEffect, useRef, useState } from 'react'
+import Close from 'finpoq/assets/icons/Close'
+import Button from 'finpoq/components/Shared/Button'
+import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
-import { Close } from '@styled-icons/evil'
 
 interface Props {
   toggleMobileMenu: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
+const NavAuthButtons = ({ toggleMobileMenu }: Props) => {
   const [isAuthUserDetailsOpened, setIsAuthUserDetailOpened] = useState(false)
   const [navButton, setNavButton] = useState<'close' | 'user' | 'buttons' | null>(null)
   const authUserButton = useRef<HTMLDivElement | null>(null)
@@ -39,7 +39,7 @@ const NavAuthButtons: FC<Props> = ({ toggleMobileMenu }) => {
     >
       {navButton === 'close' && (
         <div className="cursor-pointer" onClick={() => navigate('/')}>
-          <Close className="h-10 w-10" />
+          <Close />
         </div>
       )}
 

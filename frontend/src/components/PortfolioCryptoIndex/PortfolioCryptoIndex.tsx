@@ -1,11 +1,11 @@
-import { FC } from 'react'
 import PortfolioCrypto from 'finpoq/components/PortfolioCrypto/PortfolioCrypto'
 import useGetCryptos from 'finpoq/store/server/selectors/useGetCryptos'
 import useGetPortfolio from 'finpoq/store/server/selectors/useGetPortfolio'
-import Button from '../Shared/Button'
+import Button from 'finpoq/components/Shared/Button'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
+import Add from 'finpoq/assets/icons/Add'
 
-const PortfolioCryptoIndex: FC = () => {
+const PortfolioCryptoIndex = () => {
   // computed
   const portfolio = useGetPortfolio()
   const cryptos = useGetCryptos()
@@ -22,7 +22,7 @@ const PortfolioCryptoIndex: FC = () => {
     <>
       <section className="my-8 flex items-center justify-between">
         <p className="text-lg font-bold">Your assets</p>
-        <Button icon="+" height="s" onClick={handleSelect}>
+        <Button icon={<Add />} height="s" onClick={handleSelect}>
           Add new
         </Button>
       </section>

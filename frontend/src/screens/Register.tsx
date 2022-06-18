@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import Head from 'finpoq/components/Shared/Head'
-import FormInput from '../components/Shared/FormInput/FormInput'
+import FormInput from 'finpoq/components/Shared/FormInput/FormInput'
 import { useNavigate } from 'react-router-dom'
 import { register } from 'finpoq/services/ApiService'
 import { useFormErrorHandleling } from 'finpoq/hooks/useFormErrorHandleling'
@@ -18,7 +18,7 @@ type FormValues = {
 
 const Register = () => {
   const navigate = useNavigate()
-  const { handleGoogleAuth, handleGoogleFailure, couldAuth } = useAuthWithGoogle()
+  const { couldAuth } = useAuthWithGoogle()
 
   const [formValues, setFormValues] = useState<FormValues>({
     name: '',

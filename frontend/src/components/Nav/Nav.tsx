@@ -1,23 +1,21 @@
-import { FC, useState } from 'react'
+import { useState } from 'react'
 import NavAuthButtons from './NavAuthButtons'
 import { Link } from 'react-router-dom'
 import NavLink from './NavLink'
 import useBlockScroll from 'finpoq/hooks/useBlockScroll'
 import useMediaQuery from 'finpoq/hooks/useMediaQuery'
-import { Suitcase2 } from '@styled-icons/remix-line/Suitcase2'
-import { InfoSquare } from '@styled-icons/boxicons-regular/InfoSquare'
-import { PermContactCalendar } from '@styled-icons/material-outlined/PermContactCalendar'
+import Suitcase from 'finpoq/assets/icons/Suitcase'
 import useShowOnScroll from 'finpoq/hooks/useShowOnScroll'
-import Logo from '../Logo/Logo'
-import Toggle from '../ThemeToggle/ThemeToggle'
+import Logo from 'finpoq/components/Logo/Logo'
+import Toggle from 'finpoq/components/ThemeToggle/ThemeToggle'
 
 // TODO: fix top animation bug
 
-type NavProps = {
+interface Props {
   showOnScroll?: boolean
 }
 
-const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
+const Nav = ({ showOnScroll = false }: Props) => {
   const [isMobileMenuOpen, toggleMobileMenu] = useState(false)
 
   // computed
@@ -30,7 +28,7 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
 
   return (
     <nav
-      className="dark:bg-dark dark:border-dark-line absolute top-0 left-0 right-0 z-40 flex h-20 w-screen justify-center bg-white shadow transition-all dark:border-b"
+      className="dark:bg-dark dark:border-dark-line absolute top-0 left-0 right-0 z-40 flex h-20 w-screen justify-center bg-white shadow dark:border-b"
       style={{ top, position }}
     >
       <div className="flex w-full max-w-[1150px] items-center justify-between px-5">
@@ -52,13 +50,13 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
               className="flex flex-col items-start justify-between md:flex-row"
               onClick={() => toggleMobileMenu(false)}
             >
-              <NavLink to="portfolio" icon={<Suitcase2 size="24" />}>
+              <NavLink to="portfolio" icon={<Suitcase />}>
                 Portfolio
               </NavLink>
-              <NavLink to="about" icon={<InfoSquare size="24" />}>
+              <NavLink to="about" icon={<Suitcase />}>
                 About
               </NavLink>
-              <NavLink to="contact" icon={<PermContactCalendar size="24" />}>
+              <NavLink to="contact" icon={<Suitcase />}>
                 Contact
               </NavLink>
             </div>
@@ -66,8 +64,8 @@ const Nav: FC<NavProps> = ({ showOnScroll = false }) => {
         </div>
 
         <div className="flex">
-          <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
           <Toggle />
+          <NavAuthButtons toggleMobileMenu={toggleMobileMenu} />
           {/* <button name="search-btn" className="h-auto w-auto text-gray-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"

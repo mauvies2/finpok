@@ -1,4 +1,3 @@
-import { FC } from 'react'
 import { Helmet } from 'react-helmet-async'
 
 type Props = {
@@ -8,7 +7,7 @@ type Props = {
 
 const SERVICE_NAME = import.meta.env.VITE_SERVICE_NAME
 
-const Head: FC<Props> = ({ title, description }) => (
+const Head = ({ title, description }: Props) => (
   <Helmet>
     <title>{`Finpoq | ${title}`}</title>
     <meta name="description" content={description ?? `This is ${SERVICE_NAME}`} />

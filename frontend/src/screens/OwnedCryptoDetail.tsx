@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 import useGetCrypto from 'finpoq/store/server/selectors/useGetCrypto'
 import { useRemoveAsset } from 'finpoq/hooks/useApi'
-import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import { formatNumber } from 'finpoq/utils/formatNumber'
 import useGetPortfolio from 'finpoq/store/server/selectors/useGetPortfolio'
 import Button from 'finpoq/components/Shared/Button'
 import Transaction from 'finpoq/components/Transaction'
 import { useGetCurrentOwnedCrypto } from 'finpoq/store/ui/UiSelectors'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
+import Add from 'finpoq/assets/icons/Add'
 
 const OwnedCryptoDetail = () => {
   const removeAssetOption = useRef<HTMLDivElement | null>(null)
@@ -103,7 +104,7 @@ const OwnedCryptoDetail = () => {
 
       <section className="mb-6 mt-10 flex items-center justify-between">
         <p className="text-lg font-bold ">Transactions</p>
-        <Button icon="+" onClick={handleAddTransaction}>
+        <Button icon={<Add />} onClick={handleAddTransaction}>
           Add transaction
         </Button>
       </section>

@@ -1,13 +1,12 @@
-import { TransacionPayload } from 'finpoq-core/domain'
-import { FC } from 'react'
+import { TransacionPayload } from 'finpoq-core/types'
 
-type TabSelectProps = {
+interface Props {
   value: string
   tabs: Array<string>
   onClick: (type: TransacionPayload['type']) => void
 }
 
-const TabSelect: FC<TabSelectProps> = ({ tabs, value, onClick }) => {
+const TabSelect = ({ tabs, value, onClick }: Props) => {
   return (
     <div className="tabs tabs-boxed dark:bg-dark-modal dark:text-dark-text mb-6 w-full justify-between bg-gray-100 text-xs">
       {tabs.map((tab) => (

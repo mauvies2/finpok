@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { LoginCredentials, IUserSession } from 'finpoq-core/domain'
+import { LoginCredentials, IUserSession } from 'finpoq-core/types'
 
 export const auth = {
   _user: (user?: IUserSession): IUserSession | undefined => {
@@ -14,7 +14,7 @@ export const auth = {
     return JSON.parse(storedUser)
   },
 
-  googleLogin: async (googleCredentials: IUserSession): Promise<IUserSession | null> =>
+  googleLogin: async (googleCredentials: IUserSession): Promise<IUserSession> =>
     await axios
       .post<IUserSession, AxiosResponse<IUserSession>>('http://localhost:5000/auth/google-login', googleCredentials)
       .then((res) => {
@@ -22,7 +22,7 @@ export const auth = {
         return res.data
       }),
 
-  login: async (credentials: LoginCredentials): Promise<IUserSession | null> =>
+  login: async (credentials: LoginCredentials): Promise<IUserSession> =>
     await axios
       .post<LoginCredentials, AxiosResponse<IUserSession>>('http://localhost:5000/auth/login', credentials)
       .then((res) => {

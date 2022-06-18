@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
-import { IPortfolio } from 'finpoq-core/domain'
+import { IPortfolio } from 'finpoq-core/types'
 import { OwnedCryptoModel, ownedCryptoSchema } from '../ownedAssets/OwnedCrypto'
 
 export const portfolioSchema: Schema = new mongoose.Schema(

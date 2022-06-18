@@ -1,15 +1,14 @@
 import useMediaQuery from 'finpoq/hooks/useMediaQuery'
-import { FC, ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
-import { StyledIcon } from '@styled-icons/styled-icon'
 
-interface NavLinkProps {
+interface Props {
   to: string
-  icon: ReactElement<StyledIcon>
+  icon: ReactElement
   children: ReactNode
 }
 
-const NavLink: FC<NavLinkProps> = ({ children, to, icon }) => {
+const NavLink = ({ children, to, icon }: Props) => {
   const isMobile = useMediaQuery()
   return (
     <Link

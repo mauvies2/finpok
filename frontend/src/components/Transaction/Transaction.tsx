@@ -1,16 +1,14 @@
-import { FC } from 'react'
-import classNames from 'classnames'
-import { ITransaction } from 'finpoq-core/domain'
-import { formatNumber } from 'finpoq-core/utils/formatNumber'
-import formatDate from 'finpoq-core/utils/formatDate'
+import { ITransaction } from 'finpoq-core/types'
+import { formatNumber } from 'finpoq/utils/formatNumber'
+import formatDate from 'finpoq/utils/formatDate'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 
-interface TransactionProps {
+interface Props {
   transaction: ITransaction
   cryptoSymbol: string
 }
 
-const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
+const Transaction = ({ transaction, cryptoSymbol }: Props) => {
   const { selectCurrentTransaction, openModal } = useUiDispatch()
 
   const openTransactionDetail = () => {
@@ -49,7 +47,7 @@ const Transaction: FC<TransactionProps> = ({ transaction, cryptoSymbol }) => {
             fractionDigits: 2,
           })}
         </p>
-        <p className={classNames('text-xs', transactionStyle)}>
+        <p className={`text-xs' ${transactionStyle}`}>
           {formatNumber(transaction.amount, {
             fractionDigits: 2,
             sign: transaction.type === 'buy',

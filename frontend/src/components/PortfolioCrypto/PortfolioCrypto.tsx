@@ -1,20 +1,19 @@
-import { FC, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { PlusLg } from '@styled-icons/bootstrap/PlusLg'
-import { MoreVertical } from '@styled-icons/fluentui-system-regular'
-
-import { formatNumber } from 'finpoq-core/utils/formatNumber'
+import DotsVertical from 'finpoq/assets/icons/DotsVertical'
+import Add from 'finpoq/assets/icons/Add'
+import { formatNumber } from 'finpoq/utils/formatNumber'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
-import { ICrypto, IOwnedCrypto } from 'finpoq-core/domain'
+import { ICrypto, IOwnedCrypto } from 'finpoq-core/types'
 import { useRemoveAsset } from 'finpoq/hooks/useApi'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
 
-interface PortfolioCryptoProps {
+interface Props {
   ownedCrypto: IOwnedCrypto
   crypto: ICrypto | undefined
 }
 
-const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
+const PortfolioCrypto = ({ ownedCrypto, crypto }: Props) => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [isMenuOpened, setIsMenuOpened] = useState(false)
 
@@ -85,12 +84,11 @@ const PortfolioCrypto: FC<PortfolioCryptoProps> = ({ ownedCrypto, crypto }) => {
         </div>
       </Link>
       <div className="hidden items-center justify-end text-right font-semibold md:flex md:w-24">
-        <PlusLg
-          className="h-[15px] w-[15px] cursor-pointer text-gray-400"
-          onClick={() => openModal(`/portfolio/add-new-transaction/${ownedCrypto.symbol}`)}
-        />
+        <div onClick={() => openModal(`/portfolio/add-new-transaction/${ownedCrypto.symbol}`)}>
+          <Add />
+        </div>
         <div onClick={() => setIsMenuOpened(!isMenuOpened)} ref={menuRef} className="relative">
-          <MoreVertical className="ml-3 h-[21px] w-[21px] cursor-pointer text-gray-400" />
+          <DotsVertical />
           {isMenuOpened && (
             <div
               className="dropdown-content dark:bg-dark-modal dark:border-dark-line dark:text-dark-text bg-base-100  min-w-40 absolute top-5 right-2 cursor-pointer rounded-lg p-3 text-center text-sm font-extralight text-red-500 shadow-xl hover:bg-gray-50 dark:border"

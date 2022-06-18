@@ -1,10 +1,10 @@
-import { FC, KeyboardEvent, MouseEvent, useState } from 'react'
+import { KeyboardEvent, MouseEvent, useState } from 'react'
 import searchFilter from 'finpoq/utils/searchFilter'
 import useGetCryptos from 'finpoq/store/server/selectors/useGetCryptos'
-import { ICrypto } from 'finpoq-core/domain'
+import { ICrypto } from 'finpoq-core/types'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 
-const AddNewSearch: FC = () => {
+const AddNewSearch = () => {
   const [searchInput, setSearchInput] = useState('')
 
   const cryptos = useGetCryptos()
