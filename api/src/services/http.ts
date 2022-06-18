@@ -3,11 +3,11 @@ import config from '../config/default'
 import { FetchedCrypto, FetchedCryptos } from './fetchApi'
 
 const cryptoInstance = axios.create({
-  baseURL: config.apiUrl.cryptocurrencies,
+  baseURL: config.api.cryptocurrencies.url,
   timeout: 15000,
   headers: {
     Accept: 'application/json',
-    'X-CMC_PRO_API_KEY': 'd5bd8462-ee1a-4816-9f02-c9cac813cca5',
+    'X-CMC_PRO_API_KEY': config.api.cryptocurrencies.key,
     'Accept-Encoding': 'deflate, gzip',
   },
 })

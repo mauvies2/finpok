@@ -1,14 +1,11 @@
-import mongoose, { ConnectOptions } from 'mongoose'
+import mongoose from 'mongoose'
 import config from './config/default'
 
 (async () => {
   console.log('Database is connecting')
   try {
-    const mongooseOptions: ConnectOptions = {
-      useNewUrlParser: true,
+    const mongooseOptions = {
       useUnifiedTopology: true,
-      useFindAndModify: false,
-      useCreateIndex: true,
       user: config.mongoUser,
       pass: config.mongoPassword,
     }
