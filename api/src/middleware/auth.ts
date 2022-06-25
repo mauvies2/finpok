@@ -9,7 +9,9 @@ const client = new OAuth2Client({ clientId: config.clientId })
 
 const auth: RequestHandler = async (req: Request, res: Response, next) => {
   const token = req.header('Authorization')
-  if (!token) return res.status(401).json({ error: 'Access denied' })
+  if (!token) {
+    return res.status(401).json({ error: 'Access denied' })
+  }
 
   try {
     const decoded = jwt.decode(token)
