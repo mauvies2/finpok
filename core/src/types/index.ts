@@ -29,11 +29,11 @@ export interface IOwnedCrypto {
   name: string
   symbol: string
   slug: string
+  logoUrl: string
   amount: number
   buyAvgPrice: number
   transactions: ITransaction[]
-  price?: number
-  holdingsPercent?: number
+  price?: Quote
   createdAt?: string
   updatedAt?: string
 }

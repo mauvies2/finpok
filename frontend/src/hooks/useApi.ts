@@ -8,14 +8,8 @@ import {
   removeAsset,
   removeTransaction,
 } from 'finpoq/services/ApiService'
-import {
-  IPortfolio,
-  ICrypto,
-  TransacionPayload,
-  EditTransactionPayload,
-  RemoveTransactionPayload,
-  IOwnedCrypto,
-} from 'finpoq-core/types'
+import { ICrypto, TransacionPayload, EditTransactionPayload, RemoveTransactionPayload } from 'finpoq-core/types'
+import { IOwnedCrypto, IPortfolio } from 'finpoq/types'
 
 export const useCryptos = () => useQuery<ICrypto[], Error>('cryptocurrencies', fetchCryptos)
 
@@ -53,13 +47,18 @@ export const useAddTransaction = () => {
       }
 
       const newOwnedCrypto = {
-        _id: crypto._id,
+        _id: crypto._id as string,
         name: crypto.name,
         symbol: crypto.symbol,
         slug: crypto.slug,
         amount: transaction.amount,
         buyAvgPrice: transaction.price,
         transactions: [transaction],
+        price: {
+          current: crypto.quote.USD.price,
+          change24h: crypto.quote.USD.percent_change_24h,
+        },
+        logoUrl: crypto.logoUrl,
       }
 
       const portfolioUpdated = { ...portfolio }

@@ -33,7 +33,7 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
   const currentCrypto = useGetCurrentCrypto()
   const navigate = useNavigate()
   const transactionDate = formatDate()
-
+  console.log(currentCrypto)
   const { formData, validateForm } = useFormErrorHandleling([
     { name: 'amount', type: 'numeric', value: transactionPayload.amount, required: true },
     { name: 'price', type: 'numeric', value: transactionPayload.price, required: true },

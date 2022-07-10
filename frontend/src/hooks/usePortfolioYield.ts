@@ -1,4 +1,5 @@
-import { ICrypto, IPortfolio } from 'finpoq-core/types'
+import { ICrypto } from 'finpoq-core/types'
+import { IPortfolio } from 'finpoq/types'
 import { useMemo } from 'react'
 
 const usePortfolioYield = (portfolio: IPortfolio | undefined, cryptos: ICrypto[] | undefined) => {
@@ -8,16 +9,12 @@ const usePortfolioYield = (portfolio: IPortfolio | undefined, cryptos: ICrypto[]
 
     if (portfolio && portfolio.cryptocurrencies && cryptos) {
       portfolio.cryptocurrencies.forEach((ownedCrypto) => {
-        const crypto = cryptos.find((crypto) => crypto.symbol === ownedCrypto.symbol)
-
-        if (crypto) {
-          currentValue += Math.abs(ownedCrypto.amount) * crypto.quote.USD.price
-          transactionValue += ownedCrypto.transactions.reduce(
-            (total, transaction) =>
-              total + transaction.amount * transaction.price * (transaction.type === 'sell' ? -1 : 1),
-            0
-          )
-        }
+        currentValue += Math.abs(ownedCrypto.amount) * ownedCrypto.price.current
+        transactionValue += ownedCrypto.transactions.reduce(
+          (total, transaction) =>
+            total + transaction.amount * transaction.price * (transaction.type === 'sell' ? -1 : 1),
+          0
+        )
       })
     }
     const total = currentValue - transactionValue

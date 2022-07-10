@@ -61,8 +61,8 @@ module.exports = {
       animation: {
         nav: 'nav .5s ease-in-out',
         navMobileMenu: 'navMobileMenu .15s linear',
-        modal: 'modal .2s ease-in-out',
-        modalBg: 'modalBg .2s linear',
+        modal: 'modal .2s linear',
+        modalBg: 'modalBg .1s linear',
       },
     },
   },

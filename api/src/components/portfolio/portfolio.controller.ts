@@ -14,7 +14,7 @@ import {
 } from 'finpoq-core/types'
 
 export const getPortfolio: RequestHandler = async (req: Request, res: Response) => {
-  const { portfolio }: { portfolio: IPortfolio } = req.body.user
+  const { portfolio }: { portfolio: IPortfolio } = req.body.user.toObject()
 
   if (!portfolio.cryptocurrencies) {
     return res.status(200).json({ status: 200, msg: 'portfolio', data: {} })
@@ -22,24 +22,35 @@ export const getPortfolio: RequestHandler = async (req: Request, res: Response) 
 
   try {
     const cryptos = await Crypto.find()
-    if (!cryptos) throw new Error()
+    const cryptocurrencies = portfolio.cryptocurrencies.map((ownedCrypto) => {
+      const crypto = cryptos.find((crypto) => ownedCrypto.symbol === crypto.symbol)
+      if (!crypto) return null
 
-    let total = 0
+      portfolio.total += crypto.quote.USD.price * ownedCrypto.amount
 
-    if (portfolio.cryptocurrencies) {
-      total = portfolio.cryptocurrencies
-        .map((ownedCrypto) => {
-          const crypto = cryptos?.find((crypto) => ownedCrypto.symbol === crypto.symbol)
-          if (!crypto) return 0
-          return crypto.quote.USD.price * ownedCrypto.amount
-        })
-        .reduce((a = 0, b = 0) => a + b, 0)
+      return {
+        _id: ownedCrypto._id,
+        name: ownedCrypto.name,
+        symbol: ownedCrypto.symbol,
+        slug: ownedCrypto.slug,
+        logoUrl: crypto.logoUrl,
+        amount: ownedCrypto.amount,
+        buyAvgPrice: ownedCrypto.buyAvgPrice,
+        transactions: ownedCrypto.transactions,
+        price: {
+          current: crypto.quote.USD.price,
+          change24h: crypto.quote.USD.percent_change_24h,
+        },
+      }
+    })
+
+    const portfolioResource = {
+      total: portfolio.total,
+      cryptocurrencies,
     }
 
-    portfolio.total = total
-
-    console.log({ domain: 'Api', msg: 'Portoflio' })
-    return res.status(200).json({ status: 200, msg: 'portfolio', data: portfolio })
+    console.log({ domain: 'Api', msg: 'Portfolio' })
+    return res.status(200).json({ status: 200, msg: 'portfolio', data: portfolioResource })
   } catch (error) {
     console.error({ domain: 'Api', error })
     return res.status(200).json({ status: 500, msg: 'Server error' })
@@ -52,19 +63,14 @@ export const addTransaction: RequestHandler = async (req: Request, res: Response
 
   try {
     const crypto = await Crypto.findOne({ symbol })
-    if (!crypto) return new Error('Cryptocurrency was not found')
-
     const transaction = formatTransaction(type, amount as number, price as number, notes, fee as number, time)
     const newOwnedCrypto: IOwnedCrypto = formatNewOwnedCrypto(crypto, transaction)
 
     addAssetOrTransaction(user, newOwnedCrypto, transaction)
+    await user.save()
 
-    const successfullyUpdated = await user.save()
-
-    if (successfullyUpdated) {
-      console.log({ domain: 'Api', msg: 'Transaction was successfully added to portfolio' })
-      return res.json({ status: 200, msg: 'Transaction was successfully added to portfolio' })
-    }
+    console.log({ domain: 'Api', msg: 'Transaction was successfully added to portfolio' })
+    return res.json({ status: 200, msg: 'Transaction was successfully added to portfolio' })
   } catch (error) {
     console.error({ status: 500, error: error.message })
     return res.json({ status: 500, error: 'Server error' })
@@ -77,13 +83,10 @@ export const updateTransaction: RequestHandler = async (req: Request, res: Respo
 
   try {
     updateCryptoTransaction(user, editTransactionPayload)
+    await user.save()
 
-    const successfullyUpdated = await user.save()
-
-    if (successfullyUpdated) {
-      console.log({ domain: 'Api', msg: 'Transaction was successfully updated' })
-      return res.json({ status: 200, msg: 'Transaction was successfully updated' })
-    }
+    console.log({ domain: 'Api', msg: 'Transaction was successfully updated' })
+    return res.json({ status: 200, msg: 'Transaction was successfully updated' })
   } catch (error) {
     console.error({ status: 500, error })
     return res.json({ status: 500, error })
@@ -127,7 +130,7 @@ export const removeTransaction: RequestHandler = async (req: Request, res: Respo
 export const removeCrypto: RequestHandler = async (req: Request, res: Response) => {
   const { user }: { user: UserModel } = req.body
   try {
-    await user.portfolio.cryptocurrencies.pull(req.params.id)
+    user.portfolio.cryptocurrencies.pull(req.params.id)
     await user.save()
 
     console.log({ domain: 'Api', msg: 'Cryptorrency was successfully removed from portfolio' })

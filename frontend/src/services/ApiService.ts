@@ -2,10 +2,10 @@ import {
   TransacionPayload,
   EditTransactionPayload,
   ICrypto,
-  IPortfolio,
   RemoveTransactionPayload,
   RegisterUserCredentials,
 } from 'finpoq-core/types'
+import { IPortfolio } from 'finpoq/types'
 import { auth } from './AuthService'
 import { api } from './http'
 
