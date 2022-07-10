@@ -1,13 +1,13 @@
 import { KeyboardEvent, MouseEvent, useState } from 'react'
 import searchFilter from 'finpoq/utils/searchFilter'
-import useGetCryptos from 'finpoq/store/server/selectors/useGetCryptos'
 import { ICrypto } from 'finpoq-core/types'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
+import { useCryptos } from 'finpoq/hooks/useApi'
 
 const AddNewSearch = () => {
   const [searchInput, setSearchInput] = useState('')
 
-  const cryptos = useGetCryptos()
+  const { data: cryptos } = useCryptos()
   const filteredCryptos = searchFilter<ICrypto>(cryptos, searchInput)
   const { selectCrypto, openModal } = useUiDispatch()
 

@@ -2,6 +2,12 @@ import mongoose, { model, Schema } from 'mongoose'
 import { PortfolioModel, portfolioSchema } from '../portfolio/Portfolio'
 import { IUser } from 'finpoq-core/types'
 
+interface SinglePortfolio {
+  portfolio: PortfolioModel
+}
+
+export type UserModel = IUser & mongoose.Document & SinglePortfolio & Omit<IUser, 'portfolio'>
+
 const userSchema: Schema = new mongoose.Schema(
   {
     name: {
@@ -34,10 +40,9 @@ const userSchema: Schema = new mongoose.Schema(
   }
 )
 
-interface SinglePortfolio {
-  portfolio: PortfolioModel
-}
-
-export type UserModel = IUser & mongoose.Document & SinglePortfolio & Omit<IUser, 'portfolio'>
+userSchema.set('toObject', {
+  virtuals: true,
+  flattenMaps: true,
+})
 
 export default model<UserModel>('User', userSchema)

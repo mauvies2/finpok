@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
-import useGetCrypto from 'finpoq/store/server/selectors/useGetCrypto'
 import { useRemoveAsset } from 'finpoq/hooks/useApi'
 import { formatNumber } from 'finpoq/utils/formatNumber'
 import useGetPortfolio from 'finpoq/store/server/selectors/useGetPortfolio'
@@ -20,7 +19,6 @@ const OwnedCryptoDetail = () => {
   const navigate = useNavigate()
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()
   const { selectCrypto, openModal } = useUiDispatch()
-  const crypto = useGetCrypto(currentOwnedCrypto?.symbol)
   useClickOutside(removeAssetOption, () => setIsRemoveAssetPromptOpen(false))
 
   // methods
@@ -73,10 +71,10 @@ const OwnedCryptoDetail = () => {
 
       <section className="mt-2 flex items-center justify-between">
         <div className="flex items-center">
-          <img src={crypto.logoUrl.replace('16x16', '32x32')} className="mr-3 w-10 flex-shrink-0" alt="logox" />
+          <img src={currentOwnedCrypto.logoUrl} className="mr-3 w-10 flex-shrink-0" alt="logox" />
           {
             <p className="text-3xl font-bold ">
-              {formatNumber(currentOwnedCrypto.amount * crypto.quote.USD.price, {
+              {formatNumber(currentOwnedCrypto.amount * currentOwnedCrypto.price.current, {
                 fractionDigits: 2,
                 symbol: '$',
                 sign: currentOwnedCrypto.amount > 0,
@@ -117,7 +115,7 @@ const OwnedCryptoDetail = () => {
 
         <ul>
           {portfolio.cryptocurrencies
-            ?.find((crypto) => crypto._id === currentOwnedCrypto._id)
+            .find((crypto) => crypto._id === currentOwnedCrypto._id)
             ?.transactions.map(
               (transaction) =>
                 transaction && (

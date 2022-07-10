@@ -6,7 +6,7 @@ Content-Type: application/json
 
 {
     "name": "maur",
-    "email": "mauricio.viera6@gmail.com",
+    "email": "mauricio@gmail.com",
     "password": "12345"
 }
 
@@ -15,6 +15,6 @@ POST {{api}}/auth/login
 Content-Type: application/json
 
 {
-    "email": "mauricio.viera6@gmail.com",
+    "email": "mauricio@gmail.com",
     "password": "12345"
 }

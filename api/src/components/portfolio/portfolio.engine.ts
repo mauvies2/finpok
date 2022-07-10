@@ -2,7 +2,7 @@ import { EditTransactionPayload, IOwnedCrypto, ITransaction, IUser } from 'finpo
 
 export const addAssetOrTransaction = (user: IUser, newCryptoToOwned: IOwnedCrypto, transaction: ITransaction): void => {
   let owned = false
-  const hasOwnedCryptos = user.portfolio.cryptocurrencies
+  const hasOwnedCryptos = !!user.portfolio.cryptocurrencies.length
 
   // don't have cryptocurrencies yet
   if (!hasOwnedCryptos) {

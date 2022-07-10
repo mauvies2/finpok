@@ -4,6 +4,7 @@ export const formatNewOwnedCrypto = (crypto: ICrypto, transaction: ITransaction)
   _id: crypto._id,
   name: crypto.name,
   symbol: crypto.symbol,
+  logoUrl: crypto.logoUrl,
   slug: crypto.slug,
   amount: transaction.amount,
   buyAvgPrice: transaction.price,

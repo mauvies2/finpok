@@ -3,18 +3,19 @@
 ### Portfolio
 GET {{api}}/portfolio
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTdhZDg3NzlkY2E5YjM2NDcwNjU1ZGMiLCJlbWFpbCI6Im1hdXJpY2lvLnZpZXJhNkBnbWFpbC5jb20iLCJpYXQiOjE2MzU3OTA4NDcsImV4cCI6MTYzNTk2MzY0N30.Hwima3WWHX1_L4x8rLOvfRf9JEBOPbUvd9lxGpi__Uo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmI2ZjQ3ZGQ0NDA5ZDAwOGE4NjcxYzYiLCJlbWFpbCI6Im1hdXJpY2lvQGdtYWlsLmNvbSIsImlhdCI6MTY1NjE1NzMyMSwiZXhwIjoxNjU2MzMwMTIxfQ.7RhRNjCt3bZoZvIJeG-HTkrYefuCfJ7dfyny29effOo
 
 ### Add transaction
 POST {{api}}/portfolio/cryptocurrency
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxM2Y2NTE5NGU3YjhiNmFmNjQyZTczZSIsIm5hbWUiOiJtYXUiLCJpYXQiOjE2MzE1NDQ2MTIsImV4cCI6MTYzMTcxNzQxMn0.1zlR4QOfxwtCfGCh33JyuDgreag8AfT24_jwkGl-hNM
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmI2ZjQ3ZGQ0NDA5ZDAwOGE4NjcxYzYiLCJlbWFpbCI6Im1hdXJpY2lvQGdtYWlsLmNvbSIsImlhdCI6MTY1NjE1NzMyMSwiZXhwIjoxNjU2MzMwMTIxfQ.7RhRNjCt3bZoZvIJeG-HTkrYefuCfJ7dfyny29effOo
 
 {
-	"symbol": "btc",
+	"symbol": "BTC",
 	"amount": 5,
 	"price": 18,
-	"time": "2021/08/23"
+	"time": "2021/08/23",
+  "type": "buy"
 }
 
 

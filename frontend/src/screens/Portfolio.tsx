@@ -1,5 +1,5 @@
 import { ReactChild } from 'react'
-import { useCryptos, usePortfolio } from 'finpoq/hooks/useApi'
+import { usePortfolio } from 'finpoq/hooks/useApi'
 import { formatNumber } from 'finpoq/utils/formatNumber'
 import Head from 'finpoq/components/Shared/Head'
 
@@ -9,7 +9,6 @@ interface Props {
 
 const Portfolio = ({ children }: Props) => {
   const { data: portfolio } = usePortfolio()
-  useCryptos()
 
   if (!portfolio) return null
 

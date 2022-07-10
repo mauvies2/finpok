@@ -1,6 +1,7 @@
 import { useQueryClient } from 'react-query'
-import { ICrypto, IOwnedCrypto, IPortfolio } from 'finpoq-core/types'
+import { ICrypto } from 'finpoq-core/types'
 import { useParams } from 'react-router-dom'
+import { IOwnedCrypto, IPortfolio } from 'finpoq/types'
 
 export const useGetCurrentOwnedCrypto = (): IOwnedCrypto | undefined => {
   const queryClient = useQueryClient()

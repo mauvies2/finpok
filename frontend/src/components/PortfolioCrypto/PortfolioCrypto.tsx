@@ -4,16 +4,15 @@ import DotsVertical from 'finpoq/assets/icons/DotsVertical'
 import Add from 'finpoq/assets/icons/Add'
 import { formatNumber } from 'finpoq/utils/formatNumber'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
-import { ICrypto, IOwnedCrypto } from 'finpoq-core/types'
 import { useRemoveAsset } from 'finpoq/hooks/useApi'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
+import { IOwnedCrypto } from 'finpoq/types'
 
 interface Props {
   ownedCrypto: IOwnedCrypto
-  crypto: ICrypto | undefined
 }
 
-const PortfolioCrypto = ({ ownedCrypto, crypto }: Props) => {
+const PortfolioCrypto = ({ ownedCrypto }: Props) => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [isMenuOpened, setIsMenuOpened] = useState(false)
 
@@ -27,14 +26,13 @@ const PortfolioCrypto = ({ ownedCrypto, crypto }: Props) => {
     }
   }
 
-  if (!ownedCrypto || !crypto) return null
+  if (!ownedCrypto) return null
 
-  const cryptoPrices = crypto.quote.USD
-  const change24hStyle = cryptoPrices.percent_change_24h > 0 ? 'text-green-400' : 'text-red-400'
-  const change24h = formatNumber(cryptoPrices.percent_change_24h, {
+  const change24hStyle = ownedCrypto.price.change24h > 0 ? 'text-green-400' : 'text-red-400'
+  const change24h = formatNumber(ownedCrypto.price.change24h, {
     symbol: '%',
     symbolPosition: 'after',
-    sign: cryptoPrices.percent_change_24h > 0,
+    sign: ownedCrypto.price.change24h > 0,
     fractionDigits: 2,
   })
 
@@ -46,14 +44,14 @@ const PortfolioCrypto = ({ ownedCrypto, crypto }: Props) => {
         onClick={() => selectOwnedCryptoDetail(ownedCrypto.symbol)}
       >
         <div className="flex flex-1 items-center">
-          <img src={crypto.logoUrl} className="mr-3" width="20" alt="logo" />
+          <img src={ownedCrypto.logoUrl} className="mr-3" width="20" alt="logo" />
           <div>
             <p className="font-bold">{ownedCrypto.name}</p>
             <p>{ownedCrypto.symbol}</p>
           </div>
         </div>
         <div className="flex-1 items-center justify-end text-right font-semibold">
-          <p className="mb-1">{formatNumber(cryptoPrices.price, { symbol: '$', fractionDigits: 2 })}</p>
+          <p className="mb-1">{formatNumber(ownedCrypto.price.current, { symbol: '$', fractionDigits: 2 })}</p>
           <p className={`${change24hStyle} lg:hidden`}>{change24h}</p>
         </div>
         <div className="hidden flex-1  text-right font-semibold md:block">
@@ -62,8 +60,8 @@ const PortfolioCrypto = ({ ownedCrypto, crypto }: Props) => {
 
         <div className="flex-1 cursor-pointer text-right">
           <p className="mb-1 font-semibold">
-            {cryptoPrices.price
-              ? formatNumber(ownedCrypto.amount * cryptoPrices.price, {
+            {ownedCrypto.price.current
+              ? formatNumber(ownedCrypto.amount * ownedCrypto.price.current, {
                   symbol: '$',
                   fractionDigits: 2,
                   sign: ownedCrypto.amount > 0 ? undefined : false,

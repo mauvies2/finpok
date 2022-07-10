@@ -1,38 +1,33 @@
 import { useQueryClient } from 'react-query'
-import { ICrypto, IPortfolio } from 'finpoq-core/types'
 import { useMemo } from 'react'
+import { IPortfolio } from 'finpoq/types'
 
 const useGetOverallPerformance = () => {
   const queryClient = useQueryClient()
-  const cryptos = queryClient.getQueryData<ICrypto[]>(['cryptocurrencies'])
   const portfolio = queryClient.getQueryData<IPortfolio>(['portfolio'])
 
-  const balance = useMemo(
-    () =>
-      portfolio?.cryptocurrencies?.reduce((total, ownedCrypto) => {
-        const crypto = cryptos?.find((coin) => coin.symbol === ownedCrypto.symbol)
-        if (!crypto) return 0
+  const balance = useMemo(() => {
+    if (!portfolio) return 0
 
-        return total + ownedCrypto.amount * crypto.quote.USD.price - ownedCrypto.buyAvgPrice * ownedCrypto.amount
-      }, 0),
-    [cryptos, portfolio?.cryptocurrencies]
-  )
+    return portfolio.cryptocurrencies.reduce(
+      (total, ownedCrypto) =>
+        total + ownedCrypto.amount * ownedCrypto.price.current - ownedCrypto.buyAvgPrice * ownedCrypto.amount,
+      0
+    )
+  }, [portfolio])
 
-  const balancePercentage = useMemo(
-    () =>
-      portfolio?.cryptocurrencies?.reduce((total, ownedCrypto) => {
-        const crypto = cryptos?.find((coin) => coin.symbol === ownedCrypto.symbol)
-        if (!crypto) return 0
+  const balancePercentage = useMemo(() => {
+    if (!portfolio) return 0
 
-        return (
-          total +
-          ((ownedCrypto.amount * crypto.quote.USD.price - ownedCrypto.buyAvgPrice * ownedCrypto.amount) /
-            (ownedCrypto.amount * crypto.quote.USD.price)) *
-            100
-        )
-      }, 0),
-    [cryptos, portfolio?.cryptocurrencies]
-  )
+    return portfolio?.cryptocurrencies?.reduce(
+      (total, ownedCrypto) =>
+        total +
+        ((ownedCrypto.amount * ownedCrypto.price.current - ownedCrypto.buyAvgPrice * ownedCrypto.amount) /
+          (ownedCrypto.amount * ownedCrypto.price.current)) *
+          100,
+      0
+    )
+  }, [portfolio])
 
   return { balance, balancePercentage }
 }
