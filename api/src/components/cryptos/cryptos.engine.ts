@@ -1,17 +1,13 @@
 import Crypto from './Crypto'
 import { fetchCryptos } from '../../services/fetchApi'
-// import { formatCryptos } from './cryptos.resource'
-// import { request } from 'finpoq/services/http'
+import { formatCryptos } from './cryptos.resource'
 
-export const updateCryptosPrice = async (): Promise<boolean> => {
+export const updateCryptosPrice = async (): Promise<void> => {
   const fetchedCryptos = await fetchCryptos()
-  if (!fetchedCryptos) throw new Error()
-
-  // await Crypto.deleteMany()
-  // const cryptosFormatted = formatCryptos(fetchedCryptos)
-  // const cryptos = await Crypto.create(cryptosFormatted)
+  if (!fetchedCryptos) throw new Error('CMC Cryptos could not be fetched')
 
   const cryptos = await Crypto.find()
+  if (!cryptos) throw new Error('DB Crypto collection could not be found')
 
   cryptos.forEach(async (crypto) => {
     fetchedCryptos.forEach(async (fetchedCrypto) => {
@@ -20,22 +16,24 @@ export const updateCryptosPrice = async (): Promise<boolean> => {
         await crypto.save()
       }
     })
-
-    // try {
-    //   const response = await request.isLogoUrlValid(crypto.cmcId)
-    //   if(!response) throw Error
-    //   crypto.logoUrl = `https://raw.githubusercontent.com/coinwink/cryptocurrency-logos/master/coins/32x32/${crypto.cmcId}.png`
-    // } catch (error) {
-    //   crypto.logoUrl = 'https://raw.githubusercontent.com/coinwink/cryptocurrency-logos/master/coins/dummy/coin_32x32.png'
-    // } finally {
-    //   await crypto.save()
-    // }
   })
 
   console.log({
     domain: 'Api',
-    msg: 'Cryptocurrencies has been fetched and stored in the database',
+    msg: 'Cryptocurrencies prices have been updated',
   })
+}
 
-  return true
+export const fetchAndSaveInDb = async (): Promise<void> => {
+  const fetchedCryptos = await fetchCryptos()
+  if (!fetchedCryptos) throw new Error()
+
+  await Crypto.deleteMany()
+  console.log({ domain: 'Api', msg: 'Cryptocurrencies deleted' })
+
+  const cryptosFormatted = await formatCryptos(fetchedCryptos)
+  console.log({ domain: 'Api', msg: 'Cryptocurrencies formatted' })
+
+  await Crypto.create(cryptosFormatted)
+  console.log({ domain: 'Api', msg: 'Cryptocurrencies collection created and successfully stored in the database' })
 }

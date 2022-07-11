@@ -6,9 +6,8 @@ import Button from 'finpoq/components/Shared/Button'
 import FormInput from 'finpoq/components/Shared/FormInput/FormInput'
 import TabSelect from 'finpoq/components/Shared/TabSelect/TabSelect'
 import { useAddTransaction } from 'finpoq/hooks/useApi'
-import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
+import { useUiDispatch, useUiState } from 'finpoq/store/ui/UiProvider'
 import { TransacionPayload } from 'finpoq-core/types'
-import { useGetCurrentCrypto } from 'finpoq/store/ui/UiSelectors'
 import { useFormErrorHandleling } from 'finpoq/hooks/useFormErrorHandleling'
 
 interface Props {
@@ -28,12 +27,12 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
   })
 
   const { clearSelectedCrypto, closeModal } = useUiDispatch()
+  const { selectedCrypto } = useUiState().portfolio
+
   const addTransaction = useAddTransaction()
-  // TODO: remove and use prop instead
-  const currentCrypto = useGetCurrentCrypto()
   const navigate = useNavigate()
   const transactionDate = formatDate()
-  console.log(currentCrypto)
+
   const { formData, validateForm } = useFormErrorHandleling([
     { name: 'amount', type: 'numeric', value: transactionPayload.amount, required: true },
     { name: 'price', type: 'numeric', value: transactionPayload.price, required: true },
@@ -76,16 +75,16 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
   const transactionTotal = (Number(transactionPayload.price) || 0) * (Number(transactionPayload.amount) || 0)
 
   useEffect(() => {
-    if (currentCrypto && !transactionPayload.price && !transactionPayload.symbol) {
+    if (selectedCrypto && !transactionPayload.price && !transactionPayload.symbol) {
       setTransactionPayload({
         ...transactionPayload,
-        price: parseFloat(currentCrypto.quote.USD.price.toFixed(2)),
-        symbol: currentCrypto.symbol,
+        price: parseFloat(selectedCrypto.price.toFixed(2)),
+        symbol: selectedCrypto.symbol,
       })
     }
-  }, [currentCrypto, transactionPayload])
+  }, [selectedCrypto, transactionPayload])
 
-  if (!currentCrypto) return null
+  if (!selectedCrypto) return null
 
   return (
     <form className="flex min-h-full flex-col justify-between overflow-y-scroll" onSubmit={handleSubmit}>
@@ -98,10 +97,10 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
         >
           <div className="my-1 flex cursor-pointer items-center  rounded-lg py-2  pl-3">
             <div>
-              <img src={currentCrypto.logoUrl} className="mr-3" width="17" alt="logo" />
+              <img src={selectedCrypto.logoUrl} className="mr-3" width="17" alt="logo" />
             </div>
-            <div className="mr-3 text-sm font-bold">{currentCrypto.name === 'XRP' ? 'Ripple' : currentCrypto.name}</div>
-            <div className="text-xs font-bold text-gray-400">{currentCrypto.symbol}</div>
+            <div className="mr-3 text-sm font-bold">{selectedCrypto.name}</div>
+            <div className="text-xs font-bold text-gray-400">{selectedCrypto.symbol}</div>
           </div>
         </div>
 

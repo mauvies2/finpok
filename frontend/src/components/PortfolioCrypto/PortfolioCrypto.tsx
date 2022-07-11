@@ -16,7 +16,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [isMenuOpened, setIsMenuOpened] = useState(false)
 
-  const { selectOwnedCryptoDetail, openModal } = useUiDispatch()
+  const { selectOwnedCryptoDetail, openModal, selectCrypto } = useUiDispatch()
   const removeAsset = useRemoveAsset()
   useClickOutside(menuRef, () => setIsMenuOpened(false))
 
@@ -24,6 +24,17 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
     if (ownedCrypto) {
       removeAsset.mutate(ownedCrypto._id || '')
     }
+  }
+
+  const handleAddTransaction = () => {
+    selectCrypto({
+      symbol: ownedCrypto.symbol,
+      name: ownedCrypto.name,
+      logoUrl: ownedCrypto.logoUrl,
+      price: ownedCrypto.price.current,
+    })
+
+    openModal(`/portfolio/add-new-transaction/${ownedCrypto.symbol}`)
   }
 
   if (!ownedCrypto) return null
@@ -82,7 +93,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
         </div>
       </Link>
       <div className="hidden items-center justify-end text-right font-semibold md:flex md:w-24">
-        <div onClick={() => openModal(`/portfolio/add-new-transaction/${ownedCrypto.symbol}`)}>
+        <div onClick={handleAddTransaction}>
           <Add />
         </div>
         <div onClick={() => setIsMenuOpened(!isMenuOpened)} ref={menuRef} className="relative">

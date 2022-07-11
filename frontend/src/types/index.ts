@@ -33,3 +33,10 @@ export type Quote = {
   volume_24h: number
   market_cap: number
 }
+
+export type SelectedCrypto = {
+  price: number
+  logoUrl: string
+  name: string
+  symbol: string
+}

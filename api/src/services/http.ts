@@ -24,7 +24,9 @@ export const request = {
 
   getCryptos: async (): Promise<FetchedCryptos> => {
     try {
-      const response: AxiosResponse = await cryptoInstance.get('/cryptocurrency/listings/latest?limit=500')
+      const response: AxiosResponse = await cryptoInstance.get(
+        '/cryptocurrency/listings/latest?limit=1000&sort=market_cap_strict'
+      )
       return response.data.data
     } catch (error) {
       throw new Error(`The API request failed: ${error}`)
@@ -51,12 +53,9 @@ export const request = {
 
   isLogoUrlValid: async (id: string): Promise<boolean> => {
     try {
-      const response = await axios.get(
-        `https://raw.githubusercontent.com/coinwink/cryptocurrency-logos/master/coins/32x32/${id}.png`
-      )
-      if (!response) throw Error
+      await axios.get(`https://raw.githubusercontent.com/coinwink/cryptocurrency-logos/master/coins/32x32/${id}.png`)
       return true
-    } catch (e) {
+    } catch (error) {
       return false
     }
   },

@@ -1,19 +1,20 @@
 import { useReducer } from 'react'
 import { ITransaction } from 'finpoq-core/types'
 import { useNavigate } from 'react-router-dom'
+import { SelectedCrypto } from 'finpoq/types'
 
 export interface IUiState {
   isModalOpen: boolean
 
   portfolio: {
     currentOwnedCrypto: string | null
-    currentCrypto: string | null
+    selectedCrypto: SelectedCrypto | null
     currentTransaction: ITransaction | null
   }
 }
 
 export interface IUiDispatch {
-  selectCrypto: (cryptoSymbol: string) => void
+  selectCrypto: (selectedCrypto: SelectedCrypto) => void
   clearSelectedCrypto: () => void
   selectOwnedCryptoDetail: (ownedCrypto: string) => void
   selectCurrentTransaction: (transaction: ITransaction) => void
@@ -26,7 +27,7 @@ const initialState: IUiState = {
   isModalOpen: false,
 
   portfolio: {
-    currentCrypto: null,
+    selectedCrypto: null,
     currentOwnedCrypto: null,
     currentTransaction: null,
   },
@@ -41,7 +42,7 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
         ...state,
         portfolio: {
           ...state.portfolio,
-          currentCrypto: event.payload,
+          selectedCrypto: event.payload,
         },
       }
 
@@ -50,7 +51,7 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
         ...state,
         portfolio: {
           ...state.portfolio,
-          currentCrypto: null,
+          selectedCrypto: null,
         },
       }
 
@@ -101,8 +102,8 @@ export const useUiActions = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
   const navigate = useNavigate()
 
-  const selectCrypto = (cryptoSymbol: string) => {
-    dispatch({ type: 'SELECT_ASSET_TO_ADD', payload: cryptoSymbol })
+  const selectCrypto = (selectedCrypto: SelectedCrypto) => {
+    dispatch({ type: 'SELECT_ASSET_TO_ADD', payload: selectedCrypto })
   }
 
   const clearSelectedCrypto = () => {

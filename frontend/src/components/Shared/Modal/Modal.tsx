@@ -1,6 +1,8 @@
 import { KeyboardEvent, ReactNode, useRef, useState } from 'react'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
+import ArrowLeft from 'finpoq/assets/icons/ArrowLeft'
+import Close from 'finpoq/assets/icons/Close'
 
 interface ModalProps {
   goBack?: number
@@ -43,14 +45,7 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
         <div className="flex h-16 w-full flex-shrink-0 items-center justify-between px-6">
           {goBack > 1 ? (
             <button onClick={() => closeModal(1)}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block h-5 w-5 stroke-current text-gray-400"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-              </svg>
+              <ArrowLeft className="h-5 w-5 text-gray-400" />
             </button>
           ) : (
             <div />
@@ -60,14 +55,7 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
 
           {closeModalIcon ? (
             <button onClick={() => closeModal(goBack)}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                className="inline-block h-5 w-5 stroke-current text-gray-300"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+              <Close className="h-6 w-6 text-gray-400" />
             </button>
           ) : (
             <div />

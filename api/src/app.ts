@@ -12,7 +12,7 @@ import cors from 'cors'
 
 import config from './config/default'
 import router from './routes/index'
-// import { updateCryptosPrice } from './components/fetchs/fetch.engine'
+import { updateCryptosPrice } from './components/cryptos/cryptos.engine'
 
 const app = express()
 
@@ -24,6 +24,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(router)
 
-// setInterval(() => updateCryptosPrice(), 1000 * 60)
+setInterval(() => updateCryptosPrice(), 1000 * 60)
 
 export default app

@@ -30,13 +30,18 @@ const OwnedCryptoDetail = () => {
   }
 
   const handleAddTransaction = () => {
-    if (currentOwnedCrypto && crypto) {
-      selectCrypto(currentOwnedCrypto.symbol)
+    if (currentOwnedCrypto) {
+      selectCrypto({
+        symbol: currentOwnedCrypto.symbol,
+        name: currentOwnedCrypto.name,
+        logoUrl: currentOwnedCrypto.logoUrl,
+        price: currentOwnedCrypto.price.current,
+      })
     }
     openModal(`/portfolio/${currentOwnedCrypto?.symbol}/transaction-operation`)
   }
 
-  if (!currentOwnedCrypto || !crypto || !portfolio) return null
+  if (!currentOwnedCrypto || !portfolio) return null
 
   return (
     <>

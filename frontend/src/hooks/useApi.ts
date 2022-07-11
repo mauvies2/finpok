@@ -3,15 +3,17 @@ import { useMutation, useQuery, useQueryClient } from 'react-query'
 import {
   addNewTransaction,
   updateTransaction,
-  fetchCryptos,
+  // fetchCryptos,
   fetchPortfolio,
   removeAsset,
   removeTransaction,
+  fetchCryptos,
 } from 'finpoq/services/ApiService'
 import { ICrypto, TransacionPayload, EditTransactionPayload, RemoveTransactionPayload } from 'finpoq-core/types'
 import { IOwnedCrypto, IPortfolio } from 'finpoq/types'
 
-export const useCryptos = () => useQuery<ICrypto[], Error>('cryptocurrencies', fetchCryptos)
+export const useCryptos = (queryParams?: { limit?: number; value?: string }) =>
+  useQuery<ICrypto[], Error>('cryptocurrencies', () => fetchCryptos(queryParams))
 
 export const usePortfolio = () => useQuery<IPortfolio, Error>('portfolio', fetchPortfolio)
 

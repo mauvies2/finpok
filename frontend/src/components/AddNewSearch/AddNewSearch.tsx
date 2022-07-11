@@ -1,21 +1,26 @@
-import { KeyboardEvent, MouseEvent, useState } from 'react'
-import searchFilter from 'finpoq/utils/searchFilter'
-import { ICrypto } from 'finpoq-core/types'
+import { KeyboardEvent, MouseEvent, useEffect, useState } from 'react'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
-import { useCryptos } from 'finpoq/hooks/useApi'
+import { fetchCryptos } from 'finpoq/services/ApiService'
+import { ICrypto } from 'finpoq-core/types'
+import Search from 'finpoq/assets/icons/Search'
 
 const AddNewSearch = () => {
   const [searchInput, setSearchInput] = useState('')
+  const [cryptos, setCryptos] = useState<ICrypto[] | null>(null)
 
-  const { data: cryptos } = useCryptos()
-  const filteredCryptos = searchFilter<ICrypto>(cryptos, searchInput)
   const { selectCrypto, openModal } = useUiDispatch()
 
-  // methods
-  const handleSubmit = (e: MouseEvent<HTMLDivElement>, cryptoSymbol: string) => {
+  const handleSubmit = (e: MouseEvent<HTMLDivElement>, crypto: ICrypto) => {
     e.preventDefault()
-    selectCrypto(cryptoSymbol)
-    openModal(`/portfolio/transaction-operation/${cryptoSymbol}`)
+
+    selectCrypto({
+      symbol: crypto.symbol,
+      name: crypto.name,
+      logoUrl: crypto.logoUrl,
+      price: crypto.quote.USD.price,
+    })
+
+    openModal(`/portfolio/transaction-operation/${crypto.symbol}`)
   }
 
   const handleInputKeyDown = (e: KeyboardEvent<HTMLDivElement>) => {
@@ -46,6 +51,24 @@ const AddNewSearch = () => {
     }
   }
 
+  useEffect(() => {
+    const timeout = setTimeout(
+      async () => {
+        const cryptos = await fetchCryptos({
+          limit: 20,
+          value: searchInput,
+        })
+
+        setCryptos(cryptos)
+      },
+      searchInput ? 400 : 0
+    )
+
+    return () => {
+      clearTimeout(timeout)
+    }
+  }, [searchInput])
+
   return (
     <>
       <form className="pb-2 md:w-full" onSubmit={(e) => e.preventDefault()}>
@@ -58,40 +81,28 @@ const AddNewSearch = () => {
             placeholder="Search"
             autoFocus
             autoComplete="off"
-            className="focus:shadow-input dark:bg-dark-modal dark:border-dark-line  h-10 w-full rounded-full border border-gray-200 pl-10 focus:outline-none"
+            className="dark:bg-dark-modal dark:border-dark-line  h-10 w-full rounded-full border border-gray-200 pl-10 focus:outline-none"
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleInputKeyDown}
           />
-          <div className="absolute pl-3 pt-[0.5rem] text-gray-400" tabIndex={-1}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block h-5 w-5 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+          <div className="absolute pl-3 pt-[0.6rem] text-gray-400" tabIndex={-1}>
+            <Search />
           </div>
         </div>
       </form>
       <div className="h-full overflow-y-scroll md:max-h-[30rem]">
-        {filteredCryptos.map((crypto, index) => (
+        {cryptos?.map((crypto, index) => (
           <div
             id={`item-${index}`}
             key={`${index}-${crypto.symbol}`}
             className="dark:hover:bg-dark-modal dark:focus-visible:bg-dark-modal my-[2px] flex cursor-pointer items-center rounded-lg py-3 pl-3 hover:bg-gray-100 focus-visible:bg-gray-100 focus-visible:outline-none"
-            onClick={(e) => handleSubmit(e, crypto.symbol)}
+            onClick={(e) => handleSubmit(e, crypto)}
             onKeyDown={(e) => handleKeyPress(e, index)}
             tabIndex={-1}
           >
-            <img src={crypto.logoUrl} className="mr-3" width="17" alt="hola" />
-            <div className="mr-3 text-sm font-bold">{crypto?.name === 'XRP' ? 'Ripple' : crypto.name}</div>
-            <div className="text-xs font-bold text-gray-400">{crypto?.symbol}</div>
+            <img src={crypto.logoUrl} className="mr-3" width="17" alt={crypto.slug} />
+            <div className="mr-3 text-sm font-bold">{crypto.name}</div>
+            <div className="text-xs font-bold text-gray-400">{crypto.symbol}</div>
           </div>
         ))}
       </div>

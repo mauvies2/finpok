@@ -5,7 +5,6 @@ import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 import Add from 'finpoq/assets/icons/Add'
 
 const PortfolioCryptoIndex = () => {
-  // computed
   const portfolio = useGetPortfolio()
   const { openModal } = useUiDispatch()
 
@@ -13,7 +12,6 @@ const PortfolioCryptoIndex = () => {
     openModal('/portfolio/transaction-operation/select')
   }
 
-  // methods
   if (!portfolio) return null
 
   return (

@@ -5,6 +5,8 @@ const router = Router()
 
 router.get('/', crypto.getCryptos)
 
+router.get('/fetch', crypto.fetchAndSaveCryptos)
+
 router.get('/update', crypto.updateCryptos)
 
 export default router

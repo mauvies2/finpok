@@ -23,9 +23,11 @@ const fieldValidation = {
 export const useFormErrorHandleling = (fields: FormField[]) => {
   const initialState = (): FormFieldValidation => {
     const formData: FormFieldValidation = {}
+
     for (const field of fields) {
       formData[field.name] = { hasError: false, shouldShow: false }
     }
+
     return formData
   }
 
