@@ -1,6 +1,6 @@
 import { ICrypto } from 'finpoq-core/types'
 import { request } from 'finpoq/services/http'
-import { FetchedCrypto, FetchedCryptos } from '../../services/fetchApi'
+import { FetchedCrypto, FetchedCryptos } from '../../../services/fetchApi'
 
 export const formatCryptos = async (cryptos: FetchedCryptos): Promise<ICrypto[]> => {
   return await Promise.all(

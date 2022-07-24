@@ -1,32 +1,22 @@
 import { RequestHandler, Response, Request } from 'express'
 import jwt from 'jsonwebtoken'
-import { OAuth2Client } from 'google-auth-library'
-import { getUserEmail } from '../components/auth/auth.engine'
-import User from '../components/users/User'
+import { getUserId } from '../components/auth/auth.engine'
 import config from 'finpoq/config/default'
-
-const client = new OAuth2Client({ clientId: config.clientId })
 
 const auth: RequestHandler = async (req: Request, res: Response, next) => {
   const token = req.header('Authorization')
+
   if (!token) {
     return res.status(401).json({ error: 'Access denied' })
   }
 
   try {
-    const decoded = jwt.decode(token)
+    jwt.verify(token, config.jwt)
 
-    if (decoded && typeof decoded !== 'string' && decoded.iss === 'accounts.google.com') {
-      await client.verifyIdToken({ idToken: token })
-    } else {
-      jwt.verify(token, config.jwt)
-    }
+    const userId = getUserId(token)
+    if (!userId) throw new Error('User could not be found')
 
-    const email = getUserEmail(token)
-    const user = await User.findOne({ email })
-    if (!user) throw new Error('User could not be found')
-
-    req.body.user = user
+    req.body.userId = userId
 
     next()
   } catch (error) {

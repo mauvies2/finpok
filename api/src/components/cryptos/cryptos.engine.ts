@@ -1,6 +1,6 @@
-import Crypto from './Crypto'
+import Crypto from './model/crypto.model'
 import { fetchCryptos } from '../../services/fetchApi'
-import { formatCryptos } from './cryptos.resource'
+import { formatCryptos } from './mappers/cryptos.mapper'
 
 export const updateCryptosPrice = async (): Promise<void> => {
   const fetchedCryptos = await fetchCryptos()

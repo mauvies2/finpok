@@ -6,7 +6,5 @@ export const formatNewOwnedCrypto = (crypto: ICrypto, transaction: ITransaction)
   symbol: crypto.symbol,
   logoUrl: crypto.logoUrl,
   slug: crypto.slug,
-  amount: transaction.amount,
-  buyAvgPrice: transaction.price,
   transactions: [transaction],
 })

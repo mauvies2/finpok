@@ -7,9 +7,6 @@ export interface IPortfolio {
   commodities?: []
   cryptocurrencies?: IOwnedCrypto[]
   other?: []
-  total: number
-  createdAt?: string
-  updatedAt?: string
 }
 
 export interface ITransaction {
@@ -30,8 +27,6 @@ export interface IOwnedCrypto {
   symbol: string
   slug: string
   logoUrl: string
-  amount: number
-  buyAvgPrice: number
   transactions: ITransaction[]
   price?: Quote
   createdAt?: string
@@ -88,6 +83,7 @@ export interface IUser {
   _id: string
   name: string
   email: string
+  imageUrl: string
   password?: string
   portfolio: IPortfolio
   createdAt: string

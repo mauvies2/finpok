@@ -8,5 +8,7 @@ export type FetchedCrypto = Omit<ICrypto, 'rank'> & { id: string } & {
 export type FetchedCryptos = FetchedCrypto[]
 
 export const fetchCrypto = (): Promise<Partial<ICrypto>> => request.getCrypto()
+
 export const fetchCryptos = (): Promise<FetchedCryptos> => request.getCryptos()
+
 export const fetchGlobalMetrics = (): Promise<Record<string, unknown>> => request.getGlobalMetrics()

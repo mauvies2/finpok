@@ -1,14 +1,10 @@
-import mongoose, { model, Schema } from 'mongoose'
-import { PortfolioModel, portfolioSchema } from '../portfolio/Portfolio'
+import { model, Schema, Document } from 'mongoose'
+import { portfolioSchema } from '../portfolio/model/portfolio.model'
 import { IUser } from 'finpoq-core/types'
 
-interface SinglePortfolio {
-  portfolio: PortfolioModel
-}
+export type UserModel = IUser & Document
 
-export type UserModel = IUser & mongoose.Document & SinglePortfolio & Omit<IUser, 'portfolio'>
-
-const userSchema: Schema = new mongoose.Schema(
+const userSchema = new Schema<UserModel>(
   {
     name: {
       type: String,

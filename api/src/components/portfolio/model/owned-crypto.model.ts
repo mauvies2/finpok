@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose'
 import { IOwnedCrypto, ITransaction } from 'finpoq-core/types'
-import { transactionSchema } from '../transactions/Transaction'
+import { transactionSchema } from './transaction.model'
 
 export const ownedCryptoSchema: Schema = new mongoose.Schema(
   {

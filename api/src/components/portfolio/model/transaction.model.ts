@@ -1,7 +1,7 @@
-import mongoose, { Schema } from 'mongoose'
+import { Schema } from 'mongoose'
 import { ITransaction } from 'finpoq-core/types'
 
-export const transactionSchema: Schema = new mongoose.Schema(
+export const transactionSchema = new Schema<ITransaction>(
   {
     type: {
       type: String,
@@ -33,12 +33,3 @@ export const transactionSchema: Schema = new mongoose.Schema(
     timestamps: true,
   }
 )
-
-export const formatTransaction = (
-  type: ITransaction['type'],
-  amount: ITransaction['amount'],
-  price: ITransaction['price'],
-  notes: ITransaction['notes'],
-  fee: ITransaction['fee'],
-  time: ITransaction['time']
-): ITransaction => ({ type, amount: type === 'buy' ? amount : -amount, price, notes, fee, time })

@@ -100,7 +100,9 @@ const OwnedCryptoDetail = () => {
           </li>
           <li className="flex justify-between border-gray-100 py-5">
             <p>Avg. buy price</p>
-            <p className="text-sm font-semibold">{formatNumber(currentOwnedCrypto.buyAvgPrice, { symbol: '$' })}</p>
+            <p className="text-sm font-semibold">
+              {formatNumber(currentOwnedCrypto.buyAvgPrice || 0, { symbol: '$' })}
+            </p>
           </li>
         </ul>
       </section>
@@ -119,18 +121,9 @@ const OwnedCryptoDetail = () => {
         </ul>
 
         <ul>
-          {portfolio.cryptocurrencies
-            .find((crypto) => crypto._id === currentOwnedCrypto._id)
-            ?.transactions.map(
-              (transaction) =>
-                transaction && (
-                  <Transaction
-                    key={transaction._id}
-                    transaction={transaction}
-                    cryptoSymbol={currentOwnedCrypto.symbol}
-                  />
-                )
-            )}
+          {currentOwnedCrypto.transactions.map((transaction) => (
+            <Transaction key={transaction._id} transaction={transaction} cryptoSymbol={currentOwnedCrypto.symbol} />
+          ))}
         </ul>
       </section>
     </>

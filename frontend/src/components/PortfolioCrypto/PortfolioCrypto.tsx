@@ -89,7 +89,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
           </p>
         </div>
         <div className="hidden flex-1 text-right font-semibold md:block">
-          <p className="mb-1">{formatNumber(ownedCrypto.buyAvgPrice, { symbol: '$', fractionDigits: 2 })}</p>
+          <p className="mb-1">{formatNumber(ownedCrypto.buyAvgPrice || 0, { symbol: '$', fractionDigits: 2 })}</p>
         </div>
       </Link>
       <div className="hidden items-center justify-end text-right font-semibold md:flex md:w-24">

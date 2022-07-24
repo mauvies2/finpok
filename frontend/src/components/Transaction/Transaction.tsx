@@ -16,7 +16,7 @@ const Transaction = ({ transaction, cryptoSymbol }: Props) => {
     openModal(`/portfolio/${cryptoSymbol}/transaction-detail`)
   }
 
-  if (!transaction || !transaction.createdAt) return null
+  if (!transaction) return null
 
   const transactionStyle = transaction.type === 'buy' ? 'text-green-400' : 'text-red-400'
   const transactionValue = transaction.amount * transaction.price
