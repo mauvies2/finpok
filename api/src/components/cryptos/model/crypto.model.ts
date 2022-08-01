@@ -1,5 +1,35 @@
 import mongoose, { model, Schema } from 'mongoose'
-import { ICrypto } from 'finpoq-core/types'
+
+export type Quote = {
+  price: number
+  volume_24h: number
+  percent_change_1h: number
+  percent_change_24h: number
+  percent_change_7d: number
+  percent_change_30d: number
+  percent_change_60d: number
+  percent_change_90d: number
+  market_cap: number
+}
+export interface ICrypto {
+  _id?: string
+  cmcId: string
+  name: string
+  symbol: string
+  slug: string
+  logoUrl: string
+  max_supply: number
+  circulating_supply: number
+  total_supply: number
+  rank: number
+  quote: {
+    USD: Quote
+  }
+  createdAt?: string
+  updatedAt?: string
+}
+
+export type Cryptos = Crypto[]
 
 const CryptoSchema: Schema = new mongoose.Schema(
   {

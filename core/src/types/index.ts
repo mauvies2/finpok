@@ -1,3 +1,14 @@
+export interface IUser {
+  _id: string
+  name: string
+  email: string
+  imageUrl: string
+  password?: string
+  portfolio: IPortfolio
+  createdAt: string
+  updatedAt: string
+}
+
 export interface IPortfolio {
   currency?: []
   business?: []
@@ -77,17 +88,6 @@ export type TransacionPayload = {
 
 export type EditTransactionPayload = TransacionPayload & {
   id: string
-}
-
-export interface IUser {
-  _id: string
-  name: string
-  email: string
-  imageUrl: string
-  password?: string
-  portfolio: IPortfolio
-  createdAt: string
-  updatedAt: string
 }
 
 export type RemoveTransactionPayload = {

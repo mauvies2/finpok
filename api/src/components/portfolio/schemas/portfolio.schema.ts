@@ -1,6 +1,6 @@
-import { Schema } from 'mongoose'
 import { IPortfolio } from 'finpoq-core/types'
-import { ownedCryptoSchema } from './owned-crypto.model'
+import { Schema } from 'mongoose'
+import { ownedCryptoSchema } from './owned-crypto.schema'
 
 export const portfolioSchema = new Schema<IPortfolio>(
   {

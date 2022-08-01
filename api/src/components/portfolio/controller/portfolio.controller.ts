@@ -35,7 +35,7 @@ export default class PortfolioController {
   }
 
   private addTransaction: RequestHandler = async (req: Request, res: Response) => {
-    const { type, amount, price, notes, fee, time }: ITransaction = req.body
+    const transaction: ITransaction = req.body
     const symbol: string = req.body.symbol
     const userId: string = req.body.userId
 
@@ -43,8 +43,8 @@ export default class PortfolioController {
       const getCryptoUseCase = new GetCryptoUseCase(this.cryptoRepo)
       const crypto = await getCryptoUseCase.get(symbol)
 
-      const transaction = formatTransaction({ type, amount, price, notes, fee, time })
-      const newOwnedCrypto: IOwnedCrypto = formatNewOwnedCrypto(crypto, transaction)
+      const transactionFormatted = formatTransaction(transaction)
+      const newOwnedCrypto: IOwnedCrypto = formatNewOwnedCrypto(crypto, transactionFormatted)
 
       const updatePortfolioUseCase = new UpdatePortfolioUseCase(this.portfolioRepo)
       await updatePortfolioUseCase.addTransaction(userId, symbol, newOwnedCrypto)

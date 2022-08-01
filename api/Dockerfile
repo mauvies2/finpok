@@ -2,11 +2,12 @@ FROM node:16.14.0
 
 WORKDIR /usr/src/app
 
-COPY package.json tsconfig.json /usr/src/app/api/
+COPY ./api/package.json ./api/tsconfig.json /usr/src/app/api/
 
 RUN cd api && npm install
 
-COPY . ./api
+COPY ./api/ ./api/
+COPY ./core/ ./core/
 
 EXPOSE 5000
 

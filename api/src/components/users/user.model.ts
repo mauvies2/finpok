@@ -1,10 +1,25 @@
-import { model, Schema, Document } from 'mongoose'
-import { portfolioSchema } from '../portfolio/model/portfolio.model'
-import { IUser } from 'finpoq-core/types'
+import { model, Schema, Document, Types } from 'mongoose'
+import { IPortfolio, portfolioSchema } from 'finpoq/components/portfolio/schemas/portfolio.schema'
 
-export type UserModel = IUser & Document
+export interface IDoc {
+  _id: string
+  createdAt: Date
+  updatedAt: Date
+}
 
-const userSchema = new Schema<UserModel>(
+export interface IUser {
+  _id: string
+  name: string
+  email: string
+  imageUrl: string
+  password?: string
+  portfolio: IPortfolio
+}
+
+export type UserDoc = IUser & IDoc
+export type UserModel = IUser & Document<Types.ObjectId, { _id: Types.ObjectId | string; email: string }, UserDoc>
+
+const userSchema = new Schema<IUser>(
   {
     name: {
       type: String,

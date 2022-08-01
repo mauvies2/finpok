@@ -1,5 +1,5 @@
-import { Schema } from 'mongoose'
 import { ITransaction } from 'finpoq-core/types'
+import { Schema } from 'mongoose'
 
 export const transactionSchema = new Schema<ITransaction>(
   {

@@ -1,0 +1,17 @@
+FROM node:16.14.0
+
+WORKDIR /usr/src/app
+
+COPY package.json tsconfig.json /usr/src/app/api/
+
+RUN cd api && npm install
+
+COPY . ./api
+COPY ../core/ /usr/src/app/core/
+
+RUN npm run build
+
+EXPOSE 5000
+
+CMD [ "node", "api/dist/index.js" ]
+

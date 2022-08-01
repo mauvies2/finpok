@@ -1,7 +1,7 @@
 import moment from 'moment'
 import Fetch from './Fetch'
 
-export const shouldFetchLogarithm = async (modelName: string): Promise<boolean> => {
+export const shouldFetch = async (modelName: string): Promise<boolean> => {
   if (modelName === 'Crypto') {
     try {
       const crypto = await Fetch.findOne({ modelName: 'Crypto' })

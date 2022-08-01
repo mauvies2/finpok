@@ -1,5 +1,5 @@
 {
-	"extends": "../tsconfig.json",
+	"extends": "../api/tsconfig.json",
   "compilerOptions": {
     "target": "es5",
     "lib": ["es2015", "dom", "es5"],
@@ -8,5 +8,4 @@
 		"listFiles": true,
 		"composite": true
   },
-  "include": ["src"],
 }

@@ -3,7 +3,6 @@
   "name": "finpoq",
   "description": "finpoq repo",
   "devDependencies": {
-    "@types/node": "^17.0.40",
     "@typescript-eslint/eslint-plugin": "4.15.1",
     "@typescript-eslint/parser": "4.15.1",
     "eslint": "7.20.0",
@@ -17,9 +16,7 @@
     "eslint-plugin-react-hooks": "4.2.0",
     "husky": "5.1.0",
     "lint-staged": "10.5.4",
-    "prettier": "2.2.1",
-    "ts-node": "^10.8.1",
-    "typescript": "^4.7.3"
+    "prettier": "2.2.1"
   },
   "lint-staged": {
     "*.{ts,tsx,css,js}": "prettier --config .prettierrc.json --check",

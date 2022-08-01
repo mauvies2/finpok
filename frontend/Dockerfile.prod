@@ -1,0 +1,19 @@
+FROM node:16.14.0
+
+WORKDIR /usr/src/app
+
+COPY package.json tsconfig.json yarn.lock /usr/src/app/frontend/
+
+WORKDIR /usr/src/app/frontend
+
+RUN npm install
+
+COPY . ./
+COPY ../core/ /usr/src/app/core/
+
+RUN npm run build
+
+EXPOSE 8080
+
+CMD [ "npm", "run", "serve" ]
+

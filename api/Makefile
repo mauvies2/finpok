@@ -1,2 +1,2 @@
 build:
-	docker build -t finpo-api . --no-cache-
+	docker build -t finpo-api . --no-cache

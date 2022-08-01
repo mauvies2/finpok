@@ -6,6 +6,7 @@ import config from '../../config/default'
 import { encryptPassword, validatePassword } from '../users/users.engine'
 import { IUserSession } from 'finpoq-core/types'
 import { OAuth2Client } from 'google-auth-library'
+import { Types } from 'mongoose'
 
 type UserRegisterData = {
   name: string
@@ -70,7 +71,7 @@ export const handleGoogleAuth: RequestHandler = async (req: Request, res: Respon
 
     const user = await User.findOne({ email })
 
-    let userId: string
+    let userId: Types.ObjectId
     if (!user) {
       const newUser = new User({ name, email, imageUrl })
       await newUser.save()
