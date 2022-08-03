@@ -5,5 +5,5 @@ services:
     ports:
       - "8080:8080"
       - "5000:5000"
-    working_dir: '/usr/src/app'
-    command: ['make', 'run-compose-prod']
+    working_dir: '/usr/src/app/api'
+    command: [sh, -c, "cd /usr/src/app/frontend && npm run serve & cd /usr/src/app/api && node dist/index.js"]

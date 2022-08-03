@@ -4,6 +4,9 @@ build:
 up-dev:
 	docker-compose -f docker-compose.yml up --build
 
+up-prod:
+	docker-compose -f docker-compose.prod.yml up --build
+
 run-compose-dev:
 	cd frontend && npm run dev &
 	cd api && npm run dev
