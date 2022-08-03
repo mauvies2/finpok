@@ -1,17 +1,17 @@
 build:
 	docker build -t finpo .
 
-up-dev:
+compose-dev:
 	docker-compose -f docker-compose.yml up --build
 
-up-prod:
+compose-prod:
 	docker-compose -f docker-compose.prod.yml up --build
 
-run-compose-dev:
+run-dev:
 	cd frontend && npm run dev &
 	cd api && npm run dev
 
-run-compose-prod:
+run-prod:
 	cd frontend && npm run serve &
 	cd api && node dist/index.js
 
