@@ -19,6 +19,8 @@ RUN cd api && npm run build
 EXPOSE 8080
 EXPOSE 5000
 
+CMD [""]
+
 
 
 
