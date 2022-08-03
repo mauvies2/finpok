@@ -21,7 +21,6 @@ jobs:
         with:
           image: mauvies/finpoq
           tags: v1, latest
-          registry: registry-url.io
           dockerfile: ./Dockerfile.prod
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
