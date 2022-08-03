@@ -4,9 +4,9 @@ import jwt from 'jsonwebtoken'
 import User from '../users/user.model'
 import config from '../../config/default'
 import { encryptPassword, validatePassword } from '../users/users.engine'
-import { IUserSession } from 'finpoq-core/types'
 import { OAuth2Client } from 'google-auth-library'
 import { Types } from 'mongoose'
+import { IUserSession } from 'finpoq-core/types'
 
 type UserRegisterData = {
   name: string

@@ -1,19 +1,11 @@
 import { model, Schema, Document, Types } from 'mongoose'
-import { IPortfolio, portfolioSchema } from 'finpoq/components/portfolio/schemas/portfolio.schema'
+import { portfolioSchema } from 'finpoq/components/portfolio/schemas/portfolio.schema'
+import { IUser } from 'finpoq-core/types'
 
 export interface IDoc {
   _id: string
   createdAt: Date
   updatedAt: Date
-}
-
-export interface IUser {
-  _id: string
-  name: string
-  email: string
-  imageUrl: string
-  password?: string
-  portfolio: IPortfolio
 }
 
 export type UserDoc = IUser & IDoc

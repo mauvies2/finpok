@@ -13,7 +13,10 @@ COPY ./frontend /usr/src/app/frontend
 COPY ./api /usr/src/app/api
 COPY ./Makefile /usr/src/app
 
-EXPOSE 3000
+RUN cd frontend && npm run build
+RUN cd api && npm run build
+
+EXPOSE 8080
 EXPOSE 5000
 
 

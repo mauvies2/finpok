@@ -1,19 +1,16 @@
-FROM node:16.14.0
+FROM node:lts-alpine
 
 WORKDIR /usr/src/app
 
-COPY ./frontend/package.json ./frontend/tsconfig.json ./frontend/yarn.lock /usr/src/app/frontend/
+COPY package.json tsconfig.json yarn.lock /usr/src/app/frontend/
 
 RUN cd frontend && npm install
 
-COPY ./frontend/ ./frontend/
-COPY ./core/ ./core/
+COPY . ./frontend/
 
 EXPOSE 3000
 
 WORKDIR /usr/src/app/frontend
-
-RUN npm -v
 
 CMD [ "npm", "run", "dev" ]
 

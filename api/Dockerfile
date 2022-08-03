@@ -1,13 +1,12 @@
-FROM node:16.14.0
+FROM node:lts-alpine
 
 WORKDIR /usr/src/app
 
-COPY ./api/package.json ./api/tsconfig.json /usr/src/app/api/
+COPY package.json tsconfig.json /usr/src/app/api/
 
 RUN cd api && npm install
 
-COPY ./api/ ./api/
-COPY ./core/ ./core/
+COPY . ./api/
 
 EXPOSE 5000
 

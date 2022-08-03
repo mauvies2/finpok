@@ -1,32 +1,45 @@
 version: "3"
 services:
-  frontend:
-    build:
-      context: ./
-      dockerfile: ./frontend/Dockerfile
-    stdin_open: true
+  finpo:
+    build: .
     ports:
       - "3000:3000"
-    networks:
-      - finpo-network
-    volumes:
-      - ./frontend/:/usr/src/app/frontend
-      - /usr/src/app/frontend/node_modules
-
-  api:
-    build:
-      context: ./
-      dockerfile: ./api/Dockerfile
-    ports:
       - "5000:5000"
-    networks:
-      - finpo-network
     volumes:
-      - ./api/:/usr/src/app/backend
+      - /usr/src/app/frontend/node_modules
       - /usr/src/app/api/node_modules
-    depends_on:
-      - mongo
+    working_dir: '/usr/src/app'
+    command: ['make', 'run-compose-dev']
 
-networks:
-  finpo-network:
-    driver: bridge
+#   frontend:
+#     build:
+#       context: ./frontend
+#       dockerfile: Dockerfile
+#     stdin_open: true
+#     ports:
+#       - "3000:3000"
+#     networks:
+#       - finpo-network
+#     volumes:
+#       - ./frontend/:/usr/src/app/frontend
+#       - ./core/:/usr/src/app/core
+#       - /usr/src/app/frontend/node_modules
+
+#   api:
+#     build:
+#       context: ./api
+#       dockerfile: Dockerfile
+#     ports:
+#       - "5000:5000"
+#     networks:
+#       - finpo-network
+#     volumes:
+#       - ./api/:/usr/src/app/backend
+#       - ./core/:/usr/src/app/core
+#       - /usr/src/app/api/node_modules
+#     depends_on:
+#       - mongo
+
+# networks:
+#   finpo-network:
+#     driver: bridge
