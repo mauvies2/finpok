@@ -16,10 +16,10 @@ jobs:
       - uses: actions/checkout@v2
         name: Check out code
 
-      - uses: mr-smithers-excellent/docker-build-push@v5
-        name: Build & push Docker image
+      - name: Build and push Docker images
+        uses: docker/build-push-action@v3.1.0
         with:
-          image: mauvies/finpoq
+          repository: mauvies/finpoq
           tags: v1, latest
           dockerfile: ./Dockerfile.prod
           username: ${{ secrets.DOCKER_USERNAME }}
