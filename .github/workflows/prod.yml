@@ -25,6 +25,7 @@ jobs:
       - name: Build and push Docker images
         uses: docker/build-push-action@v3.1.0
         with:
-          dockerfile: ./Dockerfile.prod
+          context: .
+          file: ./Dockerfile.prod
           push: true
           tags: mauvies/finpoq:latest
