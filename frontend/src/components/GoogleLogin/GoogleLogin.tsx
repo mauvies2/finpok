@@ -1,9 +1,22 @@
+import { useEffect } from 'react'
 import GoogleAuth from 'react-google-login'
+import { gapi } from 'gapi-script'
 import Button from 'finpoq/components/Shared/Button'
 import { useAuthWithGoogle } from 'finpoq/hooks/useAuthWithGoogle'
 
 export const GoogleLogin = () => {
   const { handleGoogleAuth, handleGoogleFailure } = useAuthWithGoogle()
+
+  useEffect(() => {
+    function start() {
+      gapi.client.init({
+        clientId: import.meta.env.VITE_GOOGLE_CLIENT_ID,
+        scope: 'email',
+      })
+    }
+
+    gapi.load('client:auth2', start)
+  }, [])
 
   return (
     <GoogleAuth

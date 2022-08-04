@@ -22,7 +22,7 @@ export const registerUser: RequestHandler = async (req: Request, res: Response) 
 
   try {
     const userAlreadyExists = await User.findOne({ email })
-    if (userAlreadyExists) throw new Error(`User with email ${email} already exists`)
+    if (userAlreadyExists) throw new Error('Email already in use')
 
     const encryptedPassword = await encryptPassword(password)
     const user = new User({ name, email, password: encryptedPassword })
@@ -31,7 +31,7 @@ export const registerUser: RequestHandler = async (req: Request, res: Response) 
     return res.json({ status: 200, msg: 'User registered', data: user })
   } catch (error) {
     console.error(error)
-    return res.status(400).json({ status: 400, error: 'User could not be registered' })
+    return res.status(400).json({ status: 400, error: error.message })
   }
 }
 
@@ -60,7 +60,7 @@ export const loginUser: RequestHandler = async (req: Request, res: Response) => 
 
 export const handleGoogleAuth: RequestHandler = async (req: Request, res: Response) => {
   const { email, name, token, imageUrl }: IUserSession = req.body
-
+  console.log(token)
   const client = new OAuth2Client({ clientId: config.clientId })
   const decoded = jwt.decode(token)
 

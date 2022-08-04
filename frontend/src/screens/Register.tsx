@@ -16,6 +16,8 @@ type FormValues = {
   repeatedPassword: string
 }
 
+// TODO: show error when email is already registered
+
 const Register = () => {
   const navigate = useNavigate()
   const { couldAuth } = useAuthWithGoogle()
