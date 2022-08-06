@@ -29,11 +29,3 @@ jobs:
           file: ./Dockerfile.prod
           push: true
           tags: mauvies/finpoq:latest
-
-      - name: Cache
-        uses: satackey/action-docker-layer-caching@v0.0.11
-        continue-on-error: true
-        with:
-          key: foo-docker-cache-{hash}
-          restore-keys: |
-            foo-docker-cache-

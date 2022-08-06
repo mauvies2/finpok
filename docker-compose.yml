@@ -23,7 +23,7 @@ services:
     networks:
       - finpo-network
     volumes:
-      - ./api/:/usr/src/app/backend
+      - ./api/:/usr/src/app/api
       - ./core/:/usr/src/app/core
       - /usr/src/app/api/node_modules
 

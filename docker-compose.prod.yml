@@ -6,8 +6,8 @@ services:
       - "3000:3000"
     networks:
       - finpo-network
-    env_file:
-      - ./frontend/.env
+    # env_file:
+    #   - ./frontend/.env.prod
 
   api:
     image: mauvies/finpoq_api:latest
@@ -15,8 +15,8 @@ services:
       - "5000:5000"
     networks:
       - finpo-network
-    env_file:
-      - ./frontend/.env
+    # env_file:
+    #   - ./frontend/.env.prod
 
 
 networks:
