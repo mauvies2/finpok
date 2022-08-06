@@ -3,3 +3,5 @@ node_modules
 /api/node_modules
 /api/.env/
 /api/.env.prod/
+/frontend/.env/
+/frontend/.env.prod/
