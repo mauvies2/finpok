@@ -8,7 +8,7 @@ frontend-image:
 	docker build -f ./frontend/Dockerfile -t mauvies/finpoq_frontend . --no-cache
 
 frontend-image-prod:
-	docker build -f ./frontend/Dockerfile.prod -t mauvies/finpoq_frontend .
+	docker build -f ./frontend/Dockerfile.prod -t mauvies/finpoq_frontend . --no-cache
 
 compose-dev:
 	docker-compose -f docker-compose.yml up --build

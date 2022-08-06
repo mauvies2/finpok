@@ -4,8 +4,7 @@ import { gapi } from 'gapi-script'
 import Button from 'finpoq/components/Shared/Button'
 import { useAuthWithGoogle } from 'finpoq/hooks/useAuthWithGoogle'
 
-const clientId =
-  process.env.NODE_ENV === 'production' ? import.meta.env.VITE_GOOGLE_CLIENT_ID : process.env.GOOGLE_CLIENT_ID
+const clientId = '495869494811-2feifu7ud0e79hje66atmvfmjbmcjd80.apps.googleusercontent.com'
 
 export const GoogleLogin = () => {
   const { handleGoogleAuth, handleGoogleFailure } = useAuthWithGoogle()
@@ -23,7 +22,7 @@ export const GoogleLogin = () => {
 
   return (
     <GoogleAuth
-      clientId={typeof clientId === 'string' ? clientId : ''}
+      clientId={clientId}
       render={(renderProps) => (
         <Button
           btnType="secondary"
