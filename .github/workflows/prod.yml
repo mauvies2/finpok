@@ -22,10 +22,18 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Build and push Docker images
+      - name: Build and push api Docker image
         uses: docker/build-push-action@v3.1.0
         with:
           context: .
-          file: ./Dockerfile.prod
+          file: ./api/Dockerfile.prod
           push: true
-          tags: mauvies/finpoq:latest
+          tags: mauvies/finpoq_api:latest
+
+      - name: Build and push frontend Docker image
+        uses: docker/build-push-action@v3.1.0
+        with:
+          context: .
+          file: ./frontend/Dockerfile.prod
+          push: true
+          tags: mauvies/finpoq_frontend:latest

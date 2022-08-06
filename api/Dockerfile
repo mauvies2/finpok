@@ -9,6 +9,7 @@ WORKDIR /usr/src/app/api
 RUN npm install
 
 COPY ./api ./
+COPY ./core/ /usr/src/app/core/
 
 EXPOSE 5000
 
