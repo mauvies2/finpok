@@ -3,6 +3,8 @@ services:
   frontend:
     image: mauvies/finpoq_frontend:latest
     restart: unless-stopped
+    ports:
+      - "80:80"
     networks:
       - finpo-network
 
