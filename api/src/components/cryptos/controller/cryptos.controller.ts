@@ -9,8 +9,8 @@ export default class CryptoController {
 
   constructor(private cryptoRepo: ICryptoRepo) {
     this.router.get('/', this.getCryptos)
-    this.router.get('/fetch', this.fetchAndSaveCryptos)
     this.router.get('/update', this.updateCryptos)
+    this.router.get('/fetch', this.fetchAndSaveCryptos)
   }
 
   private getCryptos: RequestHandler = async (req: Request, res: Response) => {

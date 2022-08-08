@@ -2,6 +2,7 @@ version: "3"
 services:
   frontend:
     image: mauvies/finpoq_frontend:latest
+    restart: unless-stopped
     ports:
       - "3000:3000"
     networks:
@@ -9,12 +10,20 @@ services:
 
   api:
     image: mauvies/finpoq_api:latest
+    restart: unless-stopped
     ports:
       - "5000:5000"
     networks:
       - finpo-network
     env_file:
       - ./api/.env.prod
+
+  watchtower:
+    image: containrrr/watchtower
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ${HOME}/.docker/config.json:/config.json
+    command: --interval 30
 
 
 networks:

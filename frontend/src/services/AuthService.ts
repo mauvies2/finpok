@@ -1,5 +1,6 @@
-import axios, { AxiosResponse } from 'axios'
+import { AxiosResponse } from 'axios'
 import { LoginCredentials, IUserSession } from 'finpoq-core/types'
+import { api } from './http'
 
 export const auth = {
   _user: (user?: IUserSession): IUserSession | undefined => {
@@ -15,20 +16,16 @@ export const auth = {
   },
 
   googleLogin: async (googleCredentials: IUserSession): Promise<IUserSession> =>
-    await axios
-      .post<IUserSession, AxiosResponse<IUserSession>>('http://localhost:5000/auth/google-login', googleCredentials)
-      .then((res) => {
-        auth._user(res.data)
-        return res.data
-      }),
+    await api.post<IUserSession, AxiosResponse<IUserSession>>('/auth/google-login', googleCredentials).then((res) => {
+      auth._user(res.data)
+      return res.data
+    }),
 
   login: async (credentials: LoginCredentials): Promise<IUserSession> =>
-    await axios
-      .post<LoginCredentials, AxiosResponse<IUserSession>>('http://localhost:5000/auth/login', credentials)
-      .then((res) => {
-        auth._user(res.data)
-        return res.data
-      }),
+    await api.post<LoginCredentials, AxiosResponse<IUserSession>>('/auth/login', credentials).then((res) => {
+      auth._user(res.data)
+      return res.data
+    }),
 
   logout: (): void => {
     localStorage.removeItem('user')
@@ -39,8 +36,8 @@ export const auth = {
       const user = auth._user()
       if (!user) return false
 
-      return await axios
-        .get<boolean>('http://localhost:5000/auth/validate', {
+      return await api
+        .get<boolean>('/auth/validate', {
           headers: { authorization: user.token },
         })
         .then((res) => res.data)
