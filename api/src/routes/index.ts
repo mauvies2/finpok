@@ -15,8 +15,8 @@ const portfolioRepo = new PortfolioRepo()
 const cryptoController = new CryptoController(cryptoRepo)
 const portfolioController = new PortfolioController(portfolioRepo, cryptoRepo)
 
-router.use('/api/cryptocurrencies', cryptoController.router)
-router.use('/api/portfolio', auth, portfolioController.router)
-router.use('/api/auth', authRoutes)
+router.use('/cryptocurrencies', cryptoController.router)
+router.use('/portfolio', auth, portfolioController.router)
+router.use('/auth', authRoutes)
 
 export default router
