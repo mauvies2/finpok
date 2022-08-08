@@ -3,8 +3,6 @@ services:
   frontend:
     image: mauvies/finpoq_frontend:latest
     restart: unless-stopped
-    ports:
-      - "3000:3000"
     networks:
       - finpo-network
 
