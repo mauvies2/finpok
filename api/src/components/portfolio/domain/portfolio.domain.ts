@@ -55,7 +55,10 @@ export default class Portfolio {
   }
 
   private getAmount(ownedCrypto: IOwnedCrypto): number {
-    return ownedCrypto.transactions.reduce((acc, transaction) => acc + transaction.amount, 0)
+    return ownedCrypto.transactions.reduce(
+      (acc, transaction) => (transaction.type === 'sell' ? acc - transaction.amount : acc + transaction.amount),
+      0
+    )
   }
 
   private getBuyAvgPrice(ownedCrypto: IOwnedCrypto): number {

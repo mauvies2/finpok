@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
+import { Img } from 'react-image'
 import Close from 'finpoq/assets/icons/Close'
 import Button from 'finpoq/components/Shared/Button'
 import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
@@ -50,7 +51,12 @@ const NavAuthButtons = ({ toggleMobileMenu }: Props) => {
           ref={authUserButton}
         >
           <button className="w-12 overflow-hidden rounded-full border dark:border-none">
-            <img src={authUser?.imageUrl} alt="" className="avatar" />
+            <Img
+              src={
+                authUser?.imageUrl ||
+                'https://thumbs.dreamstime.com/b/default-avatar-profile-flat-icon-social-media-user-vector-portrait-unknown-human-image-default-avatar-profile-flat-icon-184330869.jpg'
+              }
+            />
           </button>
           {isAuthUserDetailsOpened && (
             <ul className="menu dark:bg-dark-modal dark:border-dark-line dark:text-dark-text min-w-40 absolute top-16 right-4 cursor-pointer rounded-lg text-center text-sm font-extralight text-red-500 shadow dark:border">

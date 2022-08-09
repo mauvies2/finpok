@@ -83,7 +83,7 @@ export const handleGoogleAuth: RequestHandler = async (req: Request, res: Respon
     return res
       .status(200)
       .header('auth-token', newToken)
-      .json({ status: 200, msg: 'User logged in', data: { _id: userId, name, email, token: newToken } })
+      .json({ status: 200, msg: 'User logged in', data: { _id: userId, name, email, token: newToken, imageUrl } })
   } catch (error) {
     console.error(error)
     return res.status(400).json({ status: 400, error: error.message })
