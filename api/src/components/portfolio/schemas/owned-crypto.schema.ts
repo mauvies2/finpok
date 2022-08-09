@@ -20,6 +20,5 @@ export const ownedCryptoSchema = new Schema<IOwnedCrypto>(
   },
   {
     versionKey: false,
-    timestamps: true,
   }
 )

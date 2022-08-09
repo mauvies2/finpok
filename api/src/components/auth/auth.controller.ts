@@ -15,7 +15,7 @@ type UserRegisterData = {
 }
 
 export const validateToken: RequestHandler = async (req: Request, res: Response) =>
-  res.status(200).json(!!req.body.userId)
+  res.status(200).json({ status: 200, msg: 'Auth validated', data: !!req.body.userId })
 
 export const registerUser: RequestHandler = async (req: Request, res: Response) => {
   const { email, password, name }: UserRegisterData = req.body
@@ -46,12 +46,10 @@ export const loginUser: RequestHandler = async (req: Request, res: Response) => 
     const { _id, name, email } = user
     const token = jwt.sign({ _id, email }, config.jwt, { expiresIn: '2 days' })
 
-    return res.status(200).header('auth-token', token).json({
-      _id,
-      name,
-      email,
-      token,
-    })
+    return res
+      .status(200)
+      .header('auth-token', token)
+      .json({ status: 200, msg: 'User logged in', data: { _id, name, email, token } })
   } catch (error) {
     console.error(error)
     return res.status(400).json({ status: 400, error: error.message })
@@ -60,7 +58,7 @@ export const loginUser: RequestHandler = async (req: Request, res: Response) => 
 
 export const handleGoogleAuth: RequestHandler = async (req: Request, res: Response) => {
   const { email, name, token, imageUrl }: IUserSession = req.body
-  console.log(token)
+
   const client = new OAuth2Client({ clientId: config.clientId })
   const decoded = jwt.decode(token)
 
@@ -82,7 +80,10 @@ export const handleGoogleAuth: RequestHandler = async (req: Request, res: Respon
 
     const newToken = jwt.sign({ _id: userId, email }, config.jwt, { expiresIn: '2 days' })
 
-    return res.status(200).header('auth-token', newToken).json({ name, email, token: newToken, imageUrl })
+    return res
+      .status(200)
+      .header('auth-token', newToken)
+      .json({ status: 200, msg: 'User logged in', data: { _id: userId, name, email, token: newToken } })
   } catch (error) {
     console.error(error)
     return res.status(400).json({ status: 400, error: error.message })

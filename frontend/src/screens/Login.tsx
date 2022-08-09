@@ -1,4 +1,4 @@
-import { ChangeEvent, FC, FormEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, useState } from 'react'
 import Head from 'finpoq/components/Shared/Head'
 import FormInput from 'finpoq/components/Shared/FormInput/FormInput'
 import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
@@ -9,14 +9,13 @@ import Button from 'finpoq/components/Shared/Button'
 import { useAuthWithGoogle } from 'finpoq/hooks/useAuthWithGoogle'
 import { GoogleLogin } from 'finpoq/components/GoogleLogin/GoogleLogin'
 
-const Login: FC = () => {
+const Login = () => {
   const [loginForm, setLoginForm] = useState<LoginCredentials>({
     email: '',
     password: '',
   })
 
   const { couldAuth } = useAuthWithGoogle()
-
   const { login, clearAuthErrors } = useAuthDispatch()
   const { error } = useAuthState()
 
