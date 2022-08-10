@@ -1,4 +1,4 @@
-finpoq:443 {
+finpoq.com:443 {
   tls finpoq@gmail.com
   root * /srv
   route {
