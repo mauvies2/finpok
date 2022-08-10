@@ -164,7 +164,7 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
           />
         )}
 
-        <div className="mb-4 flex overflow-auto">
+        <div className="hide-scrollbar mb-4 flex overflow-auto">
           <Button btnType="light" height="s">
             {transactionDate}
           </Button>

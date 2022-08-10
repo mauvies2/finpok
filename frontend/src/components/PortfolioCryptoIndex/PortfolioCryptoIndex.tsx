@@ -19,7 +19,7 @@ const PortfolioCryptoIndex = () => {
       <section className="my-8 flex items-center justify-between">
         <p className="text-lg font-bold">Your assets</p>
         <Button icon={<Add />} height="s" onClick={handleSelect}>
-          Add new
+          Add
         </Button>
       </section>
       <section>

@@ -110,7 +110,7 @@ const OwnedCryptoDetail = () => {
       <section className="mb-6 mt-10 flex items-center justify-between">
         <p className="text-lg font-bold ">Transactions</p>
         <Button icon={<Add />} onClick={handleAddTransaction}>
-          Add transaction
+          Add
         </Button>
       </section>
 

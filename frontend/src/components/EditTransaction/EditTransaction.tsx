@@ -141,20 +141,20 @@ const EditTransaction = () => {
           />
         )}
 
-        <div className="mb-4 flex">
+        <div className="hide-scrollbar mb-4 flex overflow-auto">
+          <Button className="mr-2 cursor-default" btnType="light">
+            {transactionDate}
+          </Button>
           {!extraFields.fee && (
             <Button className="mr-2" btnType="light" onClick={() => addField('fee')}>
               Fee
             </Button>
           )}
           {!extraFields.notes && (
-            <Button className="mr-2" btnType="light" onClick={() => addField('notes')}>
+            <Button btnType="light" onClick={() => addField('notes')}>
               Notes
             </Button>
           )}
-          <Button className="cursor-default" btnType="light">
-            {transactionDate}
-          </Button>
         </div>
 
         <div className="dark:bg-dark-modal dark:border-dark-line dark:text-dark-text items-center rounded-lg bg-gray-100 p-4 text-xs">

@@ -24,6 +24,15 @@ code {
   font-family: 'Monserrat', source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .btn {
   @apply min-h-0 px-5 text-xs font-semibold capitalize leading-4 tracking-widest;
 }
