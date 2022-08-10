@@ -13,12 +13,22 @@ COPY ./core/ /usr/src/app/core/
 
 RUN npm run build
 
+### caddy
+FROM caddy:2.2.1-alpine
+
+COPY ./frontend/Caddyfile /etc/caddy/Caddyfile
+COPY --from=build /usr/src/app/frontend/dist/ /srv
+
+EXPOSE 80
+EXPOSE 443
+
+
 # EXPOSE 3000
 
 # CMD [ "npm", "run", "serve" ]
 
-FROM nginx
+# FROM nginx
 
-COPY ./frontend/nginx/nginx.conf /etc/nginx/conf.d/default.conf
+# COPY ./frontend/nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
-COPY --from=build /usr/src/app/frontend/dist /usr/share/nginx/html
+# COPY --from=build /usr/src/app/frontend/dist /usr/share/nginx/html

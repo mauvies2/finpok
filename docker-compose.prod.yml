@@ -1,15 +1,19 @@
 version: "3"
 services:
   frontend:
-    image: mauvies/finpoq_frontend:latest
+    image: mauvies/finpoq_frontend
     restart: unless-stopped
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+    - caddy-data:/data
+    - caddy-config:/config
     networks:
       - finpo-network
 
   api:
-    image: mauvies/finpoq_api:latest
+    image: mauvies/finpoq_api
     restart: unless-stopped
     ports:
       - "5000:5000"
@@ -29,3 +33,9 @@ services:
 networks:
   finpo-network:
     driver: bridge
+
+volumes:
+  caddy-data:
+    driver: local
+  caddy-config:
+    driver: local

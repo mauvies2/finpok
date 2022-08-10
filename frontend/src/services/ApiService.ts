@@ -21,9 +21,7 @@ export const fetchPortfolio = async (): Promise<IPortfolio> => {
 
   return await api
     .get<IPortfolio>('/portfolio', {
-      headers: {
-        Authorization: user.token,
-      },
+      headers: { Authorization: user.token },
     })
     .then((res) => res.data)
 }

@@ -24,3 +24,10 @@ run-prod:
 	cd frontend && npm run serve &
 	cd api && node dist/index.js
 
+SSH_STRING:=root@207.154.239.240
+
+ssh:
+	ssh ${SSH_STRING}
+
+cp-docker-compose:
+	scp -r docker-compose.prod.yml ${SSH_STRING}:/root/devops/
