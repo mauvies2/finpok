@@ -38,7 +38,7 @@ const FormInput = ({
   onChange,
 }: Props) => {
   return (
-    <label className={`dark:text-dark-text pl-2 text-sm font-normal ${labelClass}`}>
+    <label className={`dark:text-dark-text pl-3 text-sm font-normal ${labelClass}`}>
       {label}
       <div className="relative mb-4">
         <input
@@ -51,7 +51,7 @@ const FormInput = ({
           placeholder={placeholder}
           autoComplete={autoComplete}
           autoFocus={autoFocus}
-          className={`focus:shadow-input dark:bg-dark dark:border-dark-line mt-2 h-10 w-full rounded-full border border-gray-200 px-6 focus:outline-none
+          className={`dark:bg-dark dark:border-dark-line focus:shadow-input mt-2 h-10 w-full rounded-full border border-gray-200 px-6 focus:border focus:border-red-300 focus:outline-none
             ${shouldShowError && 'border-red-500 bg-red-50'}
             ${inputClass}
           `}

@@ -87,7 +87,7 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
   if (!selectedCrypto) return null
 
   return (
-    <form className="flex min-h-full flex-col justify-between overflow-y-scroll" onSubmit={handleSubmit}>
+    <form className="flex min-h-full flex-col justify-between" onSubmit={handleSubmit}>
       <div className="flex-1">
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload.type} onClick={selectTransactionType} />
 
@@ -164,15 +164,17 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
           />
         )}
 
-        <div className="mb-4 flex">
-          <Button btnType="light">{transactionDate}</Button>
+        <div className="mb-4 flex overflow-auto">
+          <Button btnType="light" height="s">
+            {transactionDate}
+          </Button>
           {!showExtraFields.fee && (
-            <Button className="ml-2" btnType="light" onClick={() => addExtraField('fee')}>
+            <Button className="ml-2" btnType="light" height="s" onClick={() => addExtraField('fee')}>
               Fee
             </Button>
           )}
           {!showExtraFields.notes && (
-            <Button className="ml-2" btnType="light" onClick={() => addExtraField('notes')}>
+            <Button className="ml-2" btnType="light" height="s" onClick={() => addExtraField('notes')}>
               Notes
             </Button>
           )}

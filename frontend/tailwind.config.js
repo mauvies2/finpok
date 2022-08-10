@@ -26,7 +26,9 @@ module.exports = {
     },
     extend: {
       colors: {
-        'primary-light': '#ff4a71',
+        'primary-light': '#e04a6a',
+        'primary-dlight': '#d96f85',
+        'primary-d': '#c26376',
         'base-100': '#ffffff',
         'primary-dark': '#ff1245',
         'light-gray': '#FAFAFA',
@@ -36,8 +38,8 @@ module.exports = {
         'dark-modal': '#222529',
       },
       boxShadow: {
-        input: '0 0 0px 0px #ffdbe3',
-        button: ['0px 0px 0px 2px #1a1d21', '0px 0px 0px 4px #ff325e'],
+        input: '0 0 3px #e04a6a',
+        button: ['0px 0px 0px 1px #1a1d21', '0px 0px 0px 4px #ff325e'],
         'dark-button': ['0px 0px 0px 2px #1a1d21', '0px 0px 0px 3px #ff325e'],
       },
       keyframes: {

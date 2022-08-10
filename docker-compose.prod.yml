@@ -28,7 +28,7 @@ services:
     image: containrrr/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30 web-server api
+    command: --interval 30 --cleanup web-server api
 
 
 networks:

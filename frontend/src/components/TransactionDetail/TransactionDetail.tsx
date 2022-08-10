@@ -63,7 +63,7 @@ const TransactionDetail = () => {
           {formatNumber(price * amount, { symbol: '$', fractionDigits: 2 })}
         </div>
 
-        <div className="py-5">
+        <div className="mb-8 py-5">
           <p>Notes</p>
           <p>{notes || '--'}</p>
         </div>
@@ -74,7 +74,7 @@ const TransactionDetail = () => {
           Edit transaction
         </Button>
 
-        <Button className="mt-2 w-full md:mt-0 md:ml-2 md:w-auto" onClick={handleRemoveTransaction}>
+        <Button className="mt-3 w-full md:mt-0 md:ml-2 md:w-auto" onClick={handleRemoveTransaction}>
           Remove transaction
         </Button>
       </div>

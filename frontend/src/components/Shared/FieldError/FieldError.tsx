@@ -7,7 +7,7 @@ interface Props {
 const FieldError = ({ children, condition }: Props) => {
   if (!condition) return null
 
-  return <p className="mt-1 pl-2 text-xs font-normal text-red-500">{children}</p>
+  return <p className="mt-2 pl-3 text-xs font-normal text-red-500">{children}</p>
 }
 
 export default FieldError
