@@ -19,7 +19,7 @@ const Login = () => {
   const { login, clearAuthErrors } = useAuthDispatch()
   const { error } = useAuthState()
 
-  const { formData, validateForm } = useFormErrorHandleling([
+  const { formData, isFormValid } = useFormErrorHandleling([
     { name: 'email', type: 'email', value: loginForm.email, required: true },
     { name: 'password', type: 'text', value: loginForm.password, required: true },
   ])
@@ -31,14 +31,13 @@ const Login = () => {
 
   const submitAuth = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const isFormValid = validateForm()
 
-    if (isFormValid) {
+    if (isFormValid()) {
       await login(loginForm)
       setLoginForm({ ...loginForm, password: '' })
     }
   }
-
+  console.log(formData)
   return (
     <section className="mx-auto flex min-h-[calc(100vh-7rem)] w-[300px] flex-col justify-center">
       <Head title="Login" />
@@ -47,7 +46,7 @@ const Login = () => {
           id="login-email"
           name="email"
           label="Email"
-          labelOnError="Email is required."
+          labelOnError={formData.email.errorMessage}
           placeholder="Write your email here"
           type="email"
           autoComplete="on"
@@ -59,7 +58,7 @@ const Login = () => {
           id="login-password"
           name="password"
           label="Password"
-          labelOnError="Password is required"
+          labelOnError={formData.password.errorMessage}
           placeholder="Write your password here"
           type="password"
           value={loginForm.password}

@@ -20,7 +20,7 @@ const EditTransaction = () => {
   const updateTransaction = useEditTransaction()
   const transactionDate = formatDate()
 
-  const { formData, validateForm } = useFormErrorHandleling([
+  const { formData, isFormValid } = useFormErrorHandleling([
     { name: 'amount', type: 'numeric', value: transactionPayload?.amount, required: true },
     { name: 'price', type: 'numeric', value: transactionPayload?.price, required: true },
     { name: 'fee', type: 'numeric', value: transactionPayload?.fee },
@@ -30,14 +30,11 @@ const EditTransaction = () => {
   // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const isFormvalid = validateForm()
 
-    if (transactionPayload) {
-      if (isFormvalid) {
-        updateTransaction.mutate(transactionPayload)
-        clearSelectedCrypto()
-        closeModal(2)
-      }
+    if (transactionPayload && isFormValid()) {
+      updateTransaction.mutate(transactionPayload)
+      clearSelectedCrypto()
+      closeModal(2)
     }
   }
 

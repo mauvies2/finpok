@@ -33,7 +33,7 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
   const navigate = useNavigate()
   const transactionDate = formatDate()
 
-  const { formData, validateForm } = useFormErrorHandleling([
+  const { formData, isFormValid } = useFormErrorHandleling([
     { name: 'amount', type: 'numeric', value: transactionPayload.amount, required: true },
     { name: 'price', type: 'numeric', value: transactionPayload.price, required: true },
     { name: 'fee', type: 'numeric', value: transactionPayload.fee },
@@ -44,9 +44,7 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const isFormValid = validateForm()
-
-    if (isFormValid) {
+    if (isFormValid()) {
       addTransaction.mutate(transactionPayload)
       clearSelectedCrypto()
       closeModal(goBack)

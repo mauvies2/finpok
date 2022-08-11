@@ -34,15 +34,15 @@ code {
 }
 
 .btn {
-  @apply min-h-0 px-5 text-xs font-semibold capitalize leading-4 tracking-widest;
+  @apply min-h-0 px-5 text-xs font-light capitalize leading-4 tracking-widest;
 }
 
 .btn-primary {
-  @apply bg-primary border-primary focus-visible:shadow-button dark:focus-visible:shadow-dark-button hover:bg-primary hover:border-primary rounded-full border font-semibold leading-4 text-white hover:text-white active:shadow-none;
+  @apply bg-primary border-primary focus-visible:shadow-button dark:focus-visible:shadow-dark-button hover:bg-primary hover:border-primary rounded-full border leading-4 text-white hover:text-white active:shadow-none;
 }
 
 .btn-secondary {
-  @apply border-primary text-primary hover:border-primary focus:border-primary focus-visible:shadow-button hover:text-primary dark:bg-dark dark:border-dark-line dark:text-dark-text rounded-full border bg-white focus:outline-none active:shadow-none;
+  @apply border-primary text-primary hover:border-primary focus:border-primary focus-visible:shadow-button hover:text-primary dark:bg-dark dark:border-gray-600 dark:text-dark-text rounded-full border bg-white focus:outline-none active:shadow-none;
 }
 
 .btn-light {

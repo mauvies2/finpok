@@ -81,7 +81,7 @@ const AddNewSearch = () => {
             placeholder="Search"
             autoFocus
             autoComplete="off"
-            className="dark:bg-dark-modal dark:border-dark-line focus:shadow-input h-10 w-full rounded-full border border-gray-200 pl-10 focus:border focus:border-red-300 focus:outline-none"
+            className="dark:bg-dark-modal dark:border-dark-line h-10 w-full rounded-full border border-gray-200 pl-10  focus:outline-none"
             onChange={(e) => setSearchInput(e.target.value)}
             onKeyDown={handleInputKeyDown}
           />

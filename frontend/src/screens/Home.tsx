@@ -15,8 +15,8 @@ const Home = () => {
       <Head title="Homepage" />
       <header className="flex h-[calc(100vh-7rem)] max-w-[1150px] flex-col py-8 md:flex-row">
         <div className="flex h-full flex-1 flex-col justify-center md:pr-4">
-          <section className="flex w-full flex-col justify-center md:w-full lg:w-4/5">
-            <h1 className="dark:text-dark-text pr-4 text-[3rem] font-extralight leading-[1.1] text-gray-600 md:text-[4rem]">
+          <section className="flex w-full justify-center md:w-full md:flex-col lg:w-4/5">
+            <h1 className="dark:text-dark-text text-center text-[2.5rem] font-extralight leading-[1.2] text-gray-600 md:pr-20 md:text-left md:text-[3rem]">
               Welcome {isLoggedIn ? <span>back {authUser?.name}</span> : <span>to your financial pocket!</span>}
             </h1>
           </section>
@@ -29,9 +29,9 @@ const Home = () => {
               </Link>
             ) : (
               <>
-                <Link to="/login" className="mt-8 w-full" tabIndex={-1}>
+                <Link to="/register" className="mt-8 w-full" tabIndex={-1}>
                   <Button className="w-full" height="l">
-                    Log in
+                    Sign up
                   </Button>
                 </Link>
                 <div className="dark:border-dark-text relative my-10 w-full border-b-2">
@@ -47,7 +47,7 @@ const Home = () => {
             )}
           </section>
         </div>
-        <div className="mt-20 flex-1 md:mt-0">
+        <div className="mt-10 flex-1 md:mt-0">
           <section className="flex h-full justify-center md:justify-end">
             <img
               src="https://static-exp1.licdn.com/sc/h/dxf91zhqd2z6b0bwg85ktm5s4"

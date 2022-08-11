@@ -26,7 +26,7 @@ export const GoogleLogin = () => {
       render={(renderProps) => (
         <Button
           btnType="secondary"
-          className="dark:text-dark-text dark:border-dark-text flex w-full justify-center border-[#777] text-[#777]"
+          className="dark:text-dark-text flex w-full justify-center border-[#777] text-[#777] dark:border-gray-600"
           onClick={renderProps.onClick}
           icon={
             <svg

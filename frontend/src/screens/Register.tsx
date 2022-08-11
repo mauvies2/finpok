@@ -29,9 +29,9 @@ const Register = () => {
     repeatedPassword: '',
   })
 
-  const [showPasswordAlert, setShowPasswordAlert] = useState<boolean>(false)
+  const [repeatedPasswordError, setRepeatedPasswordError] = useState<boolean>(false)
 
-  const { formData, validateForm } = useFormErrorHandleling([
+  const { formData, isFormValid } = useFormErrorHandleling([
     { name: 'name', type: 'text', value: formValues.name, required: true },
     { name: 'email', type: 'email', value: formValues.email, required: true },
     { name: 'password', type: 'password', value: formValues.password, required: true },
@@ -41,7 +41,7 @@ const Register = () => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
 
     if (formValues.password === e.target.value) {
-      setShowPasswordAlert(false)
+      setRepeatedPasswordError(false)
     }
   }
 
@@ -59,14 +59,14 @@ const Register = () => {
 
   const submitAuth = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    const isFormValid = validateForm()
-
-    if (formValues.password === formValues.repeatedPassword && isFormValid) {
-      handleRegister()
+    if (formValues.password !== formValues.repeatedPassword) {
+      setRepeatedPasswordError(true)
       return
     }
 
-    setShowPasswordAlert(true)
+    if (isFormValid()) {
+      handleRegister()
+    }
   }
 
   return (
@@ -85,7 +85,7 @@ const Register = () => {
             labelClass="mt-8"
             name="name"
             label="Name"
-            labelOnError="Name is required"
+            labelOnError={formData.name.errorMessage}
             placeholder="Write your name here"
             type="name"
             value={formValues.name}
@@ -96,7 +96,7 @@ const Register = () => {
             id="register-email"
             name="email"
             label="Email"
-            labelOnError="Email is required"
+            labelOnError={formData.email.errorMessage}
             placeholder="Write your email here"
             type="email"
             value={formValues.email}
@@ -107,7 +107,7 @@ const Register = () => {
             id="register-password"
             name="password"
             label="Password"
-            labelOnError="Password is required"
+            labelOnError={formData.password.errorMessage}
             placeholder="Write your password here"
             type="password"
             value={formValues.password}
@@ -122,7 +122,7 @@ const Register = () => {
             placeholder="Write your password again"
             type="password"
             value={formValues.repeatedPassword}
-            shouldShowError={showPasswordAlert}
+            shouldShowError={repeatedPasswordError}
             onChange={onChange}
           />
           <Button type="submit" className="mt-4 w-full">

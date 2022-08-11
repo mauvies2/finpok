@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react'
 import validator from 'validator'
 import produce from 'immer'
+import { capitalizeFirstLetter } from 'finpoq/utils/capitalizeString'
 
 type FormField = {
   type: 'numeric' | 'text' | 'email' | 'password'
@@ -10,14 +11,26 @@ type FormField = {
 }
 
 type FormFieldValidation = {
-  [field: string]: { hasError: boolean; shouldShow: boolean }
+  [field: string]: { hasError: boolean; shouldShow: boolean; errorMessage: string }
 }
 
 const fieldValidation = {
-  numeric: (value: string | number) => validator.isNumeric(value.toString()),
-  text: (value: string | number) => validator.isAscii(value.toString()),
-  email: (value: string | number) => validator.isEmail(value.toString()),
-  password: (value: string | number) => validator.isStrongPassword(value.toString()),
+  numeric: {
+    isValueValid: (value: string | number) => validator.isNumeric(value.toString()),
+    message: 'This field must be a number',
+  },
+  text: {
+    isValueValid: (value: string | number) => validator.isAscii(value.toString()),
+    message: 'This field must be text',
+  },
+  email: {
+    isValueValid: (value: string | number) => validator.isEmail(value.toString()),
+    message: 'This field must be a valid email',
+  },
+  password: {
+    isValueValid: (value: string | number) => validator.isStrongPassword(value.toString()),
+    message: 'The password must contain letters, numbers and symbols',
+  },
 }
 
 export const useFormErrorHandleling = (fields: FormField[]) => {
@@ -25,14 +38,14 @@ export const useFormErrorHandleling = (fields: FormField[]) => {
     const formData: FormFieldValidation = {}
 
     for (const field of fields) {
-      formData[field.name] = { hasError: false, shouldShow: false }
+      formData[field.name] = { hasError: false, shouldShow: false, errorMessage: '' }
     }
 
     return formData
   }
 
   const [formData, dispatch] = useReducer(
-    (state: FormFieldValidation, event: { type: string; payload?: unknown }): FormFieldValidation => {
+    (state: FormFieldValidation, event: { type: string; payload: unknown }): FormFieldValidation => {
       switch (event.type) {
         case 'SET_FORM_FIELD_ERROR':
           return produce(state, (draft) => {
@@ -59,6 +72,12 @@ export const useFormErrorHandleling = (fields: FormField[]) => {
             draft[field].shouldShow = false
           })
 
+        case 'SET_FORM_FIELD_ERROR_MESSAGE':
+          return produce(state, (draft) => {
+            const { field, message } = event.payload as { field: string; message: string }
+            draft[field].errorMessage = message
+          })
+
         default:
           return state
       }
@@ -67,22 +86,36 @@ export const useFormErrorHandleling = (fields: FormField[]) => {
   )
 
   // validate form data
-  const validateForm = (): boolean => {
-    let hasError: boolean = true
+  const isFormValid = (): boolean => {
+    let isValid: boolean = true
 
     for (const field of fields) {
-      const passesValidation = fieldValidation[field.type]
+      const fieldValidator = fieldValidation[field.type]
 
       if (!field.required && field.value === '') continue
 
-      if (field.value !== undefined && !passesValidation(field.value)) {
+      if (field.value === '' || field.value === undefined) {
         dispatch({ type: 'SET_FORM_FIELD_SHOW_ERROR', payload: field.name })
+        dispatch({
+          type: 'SET_FORM_FIELD_ERROR_MESSAGE',
+          payload: { field: field.name, message: `${capitalizeFirstLetter(field.name)} is required` },
+        })
 
-        hasError = false
+        isValid = false
+      }
+
+      if (field.value && !fieldValidator.isValueValid(field.value)) {
+        dispatch({ type: 'SET_FORM_FIELD_SHOW_ERROR', payload: field.name })
+        dispatch({
+          type: 'SET_FORM_FIELD_ERROR_MESSAGE',
+          payload: { field: field.name, message: fieldValidator.message },
+        })
+
+        isValid = false
       }
     }
 
-    return hasError
+    return isValid
   }
 
   // validate form data on change
@@ -90,9 +123,9 @@ export const useFormErrorHandleling = (fields: FormField[]) => {
     for (const field of fields) {
       if (!field.required && field.value === '') continue
 
-      const passesValidation = fieldValidation[field.type]
+      const fieldValidator = fieldValidation[field.type]
 
-      if (field.value !== undefined && !passesValidation(field.value)) {
+      if (field.value !== undefined && !fieldValidator.isValueValid(field.value)) {
         dispatch({ type: 'SET_FORM_FIELD_ERROR', payload: field.name })
       } else {
         if (formData[field.name].shouldShow) {
@@ -116,5 +149,5 @@ export const useFormErrorHandleling = (fields: FormField[]) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  return { formData, validateForm }
+  return { formData, isFormValid }
 }
