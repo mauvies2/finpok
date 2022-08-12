@@ -90,7 +90,7 @@ const OwnedCryptoDetail = () => {
         </div>
       </section>
 
-      <section className="mt-10 text-xs">
+      <section className="mt-10 text-sm">
         <ul>
           <li className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
             <p>Quantity</p>
@@ -108,14 +108,14 @@ const OwnedCryptoDetail = () => {
       </section>
 
       <section className="mb-6 mt-10 flex items-center justify-between">
-        <p className="text-lg font-bold ">Transactions</p>
+        <p className="text-lg">Transactions</p>
         <Button icon={<Add />} onClick={handleAddTransaction}>
           Add
         </Button>
       </section>
 
       <section className="my-5">
-        <ul className="dark:border-dark-line flex justify-between border-b border-t py-2 font-bold">
+        <ul className="dark:border-dark-line flex justify-between border-b border-t py-2 text-sm">
           <li>Type</li>
           <li>Amount</li>
         </ul>

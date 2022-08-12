@@ -24,7 +24,7 @@ const Transaction = ({ transaction, cryptoSymbol }: Props) => {
 
   return (
     <li
-      className="dark:border-dark-line flex cursor-pointer justify-between border-b py-5"
+      className="dark:border-dark-line flex cursor-pointer justify-between border-b py-5 text-sm"
       onClick={openTransactionDetail}
     >
       <div className="flex flex-1 items-center">
@@ -47,7 +47,7 @@ const Transaction = ({ transaction, cryptoSymbol }: Props) => {
             fractionDigits: 2,
           })}
         </p>
-        <p className={`text-sm ${transactionStyle}`}>
+        <p className={`text-xs ${transactionStyle}`}>
           {formatNumber(transaction.amount, {
             fractionDigits: 2,
             sign: transaction.type === 'buy',

@@ -48,7 +48,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
   })
 
   return (
-    <div className="dark:border-dark-line flex border-b">
+    <div className="dark:border-dark-line flex border-b text-sm">
       <Link
         className="flex flex-1 py-5"
         to={`/portfolio/${ownedCrypto.symbol}`}
@@ -57,13 +57,15 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
         <div className="flex flex-1 items-center">
           <img src={ownedCrypto.logoUrl} className="mr-3" width="20" alt="logo" />
           <div>
-            <p className="font-bold">{ownedCrypto.name}</p>
-            <p className="text-sm">{ownedCrypto.symbol}</p>
+            <p className="mb-1 font-semibold">{ownedCrypto.name}</p>
+            <p className="text-xs">{ownedCrypto.symbol}</p>
           </div>
         </div>
-        <div className="flex-1 items-center justify-end text-right font-semibold">
-          <p className="mb-1">{formatNumber(ownedCrypto.price.current, { symbol: '$', fractionDigits: 2 })}</p>
-          <p className={`${change24hStyle} text-sm lg:hidden`}>{change24h}</p>
+        <div className="flex-1 items-center justify-end text-right">
+          <p className="text-md mb-1 font-semibold">
+            {formatNumber(ownedCrypto.price.current, { symbol: '$', fractionDigits: 2 })}
+          </p>
+          <p className={`${change24hStyle} text-xs lg:hidden`}>{change24h}</p>
         </div>
         <div className="hidden flex-1 text-right font-semibold md:block">
           <p className={`${change24hStyle} text-sm text-red-400`}>{change24h}</p>
@@ -80,7 +82,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
                 })
               : 0}
           </p>
-          <p className="text-sm">
+          <p className="text-xs">
             {formatNumber(ownedCrypto.amount, {
               maximumSignificantDigits: 4,
               unit: ownedCrypto.symbol,
