@@ -11,13 +11,12 @@ export const updateCryptosPrice = async (): Promise<void> => {
 
   cryptos.forEach(async (crypto) => {
     fetchedCryptos.forEach(async (fetchedCrypto) => {
-      if (crypto.cmcId === fetchedCrypto.id) {
+      if (crypto.cmcId === String(fetchedCrypto.id)) {
         crypto.quote = fetchedCrypto.quote
         await crypto.save()
       }
     })
   })
-
   console.log({
     domain: 'Api',
     msg: 'Cryptocurrencies prices have been updated',
