@@ -47,7 +47,7 @@ const Transaction = ({ transaction, cryptoSymbol }: Props) => {
             fractionDigits: 2,
           })}
         </p>
-        <p className={`text-xs' ${transactionStyle}`}>
+        <p className={`text-sm ${transactionStyle}`}>
           {formatNumber(transaction.amount, {
             fractionDigits: 2,
             sign: transaction.type === 'buy',

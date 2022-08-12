@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 
-const useBlockScroll = (condition: boolean) => {
+const useBlockScroll = (condition: boolean = true) => {
   const scroll = useRef(false)
 
   const blockScroll = () => {

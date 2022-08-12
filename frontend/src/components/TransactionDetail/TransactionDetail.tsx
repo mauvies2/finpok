@@ -63,7 +63,7 @@ const TransactionDetail = () => {
           {formatNumber(price * amount, { symbol: '$', fractionDigits: 2 })}
         </div>
 
-        <div className="mb-8 py-5">
+        <div className="mb-6 py-5">
           <p>Notes</p>
           <p>{notes || '--'}</p>
         </div>

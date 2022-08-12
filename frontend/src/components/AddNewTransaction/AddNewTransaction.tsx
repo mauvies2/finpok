@@ -90,10 +90,10 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
         <TabSelect tabs={['buy', 'sell']} value={transactionPayload.type} onClick={selectTransactionType} />
 
         <div
-          className="select dark:bg-dark-modal dark:border-dark-line dark:text-dark-text mb-4 h-10 w-full max-w-xs cursor-pointer rounded-full border border-gray-200 dark:border"
+          className="select dark:bg-dark-modal dark:border-dark-line dark:text-dark-text mb-3 w-full max-w-xs cursor-pointer rounded-full border border-gray-200 dark:border"
           onClick={() => navigate(-1)}
         >
-          <div className="my-1 flex cursor-pointer items-center  rounded-lg py-2  pl-3">
+          <div className="flex cursor-pointer items-center rounded-lg pl-3">
             <div>
               <img src={selectedCrypto.logoUrl} className="mr-3" width="17" alt="logo" />
             </div>

@@ -16,7 +16,7 @@ const Portfolio = ({ children }: Props) => {
     <>
       <Head title="Portfolio" />
       <div className="lg:mt-6 lg:flex">
-        <section className="my-10 ml-4 flex items-center lg:my-0 lg:ml-0 lg:w-[25%] lg:items-start">
+        {/* <section className="my-10 ml-4 flex items-center lg:my-0 lg:ml-0 lg:w-[25%] lg:items-start">
           <div className="avatar placeholder mr-4">
             <div className="text-neutral-content dark:bg-dark dark:text-dark-text dark:border-dark-line h-12 w-12 rounded-full bg-gray-300 dark:border">
               <span className="text-lg">MX</span>
@@ -26,8 +26,8 @@ const Portfolio = ({ children }: Props) => {
             <p className="font-bold">My Main Portfolio</p>
             <p>{formatNumber(portfolio.total || 0, { fractionDigits: 2, symbol: '$' })}</p>
           </div>
-        </section>
-        <div className="mt-10 flex-1 md:mt-0">
+        </section> */}
+        <div className="mt-4 flex-1">
           <section>
             <p className="mb-2">Current balance</p>
             <div className="mb-1 mt-3 flex justify-between">

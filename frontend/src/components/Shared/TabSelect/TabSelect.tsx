@@ -8,7 +8,7 @@ interface Props {
 
 const TabSelect = ({ tabs, value, onClick }: Props) => {
   return (
-    <div className="tabs tabs-boxed dark:bg-dark-modal dark:text-dark-text mb-6 w-full justify-between bg-gray-100 text-xs">
+    <div className="tabs tabs-boxed dark:bg-dark-modal dark:text-dark-text mb-4 w-full justify-between bg-gray-100 text-xs">
       {tabs.map((tab) => (
         <div
           key={tab}

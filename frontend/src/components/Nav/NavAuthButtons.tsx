@@ -59,7 +59,7 @@ const NavAuthButtons = ({ toggleMobileMenu }: Props) => {
             />
           </button>
           {isAuthUserDetailsOpened && (
-            <ul className="menu dark:bg-dark-modal dark:border-dark-line dark:text-dark-text min-w-40 absolute top-16 right-4 cursor-pointer rounded-lg text-center text-sm font-extralight text-red-500 shadow dark:border">
+            <ul className="menu dark:bg-dark-modal dark:border-dark-line dark:text-dark-text min-w-40 absolute top-14 right-4 cursor-pointer rounded-lg bg-white text-center text-sm font-extralight text-red-500 shadow dark:border">
               {!currentLocation.pathname.includes('portfolio') && (
                 <li className="border-b p-3" onClick={() => navigate('/portfolio')}>
                   <p>Portfolio</p>

@@ -17,11 +17,11 @@ const override = css`
 
 const Main = () => {
   const isFetching = useIsFetching()
-  const { isModalOpen } = useUiState()
-  useBlockScroll(isModalOpen)
+  // const { isModalOpen } = useUiState()
+  // useBlockScroll(isModalOpen)
 
   return (
-    <main className="overscroll-x-hidden dark:bg-dark mx-auto mt-20 min-h-[calc(100vh-5rem)] max-w-[1150px] bg-white p-4 text-xs transition-all">
+    <main className="overscroll-x-hidden dark:bg-dark text- mx-auto mt-20 min-h-[calc(100vh-5rem)] max-w-[1150px] bg-white p-4 transition-all">
       <ClipLoader loading={!!isFetching} size={30} css={override} />
       <Router />
     </main>

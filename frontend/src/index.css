@@ -46,5 +46,5 @@ code {
 }
 
 .btn-light {
-  @apply dark:bg-dark-modal dark:border-dark-modal dark:text-dark-text rounded-xl border-gray-100 bg-gray-100 text-gray-600 hover:border-gray-100 hover:bg-gray-200 focus-visible:border-gray-500;
+  @apply dark:bg-dark-modal dark:border-dark-modal px-4 dark:text-dark-text rounded-xl border-gray-100 bg-gray-100 text-gray-600 hover:border-gray-100 hover:bg-gray-200 focus-visible:border-gray-500;
 }

@@ -58,15 +58,15 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
           <img src={ownedCrypto.logoUrl} className="mr-3" width="20" alt="logo" />
           <div>
             <p className="font-bold">{ownedCrypto.name}</p>
-            <p>{ownedCrypto.symbol}</p>
+            <p className="text-sm">{ownedCrypto.symbol}</p>
           </div>
         </div>
         <div className="flex-1 items-center justify-end text-right font-semibold">
           <p className="mb-1">{formatNumber(ownedCrypto.price.current, { symbol: '$', fractionDigits: 2 })}</p>
-          <p className={`${change24hStyle} lg:hidden`}>{change24h}</p>
+          <p className={`${change24hStyle} text-sm lg:hidden`}>{change24h}</p>
         </div>
-        <div className="hidden flex-1  text-right font-semibold md:block">
-          <p className={change24hStyle}>{change24h}</p>
+        <div className="hidden flex-1 text-right font-semibold md:block">
+          <p className={`${change24hStyle} text-sm text-red-400`}>{change24h}</p>
         </div>
 
         <div className="flex-1 cursor-pointer text-right">
@@ -80,7 +80,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
                 })
               : 0}
           </p>
-          <p className="text-xs">
+          <p className="text-sm">
             {formatNumber(ownedCrypto.amount, {
               maximumSignificantDigits: 4,
               unit: ownedCrypto.symbol,
@@ -88,6 +88,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
             })}
           </p>
         </div>
+
         <div className="hidden flex-1 text-right font-semibold md:block">
           <p className="mb-1">{formatNumber(ownedCrypto.buyAvgPrice || 0, { symbol: '$', fractionDigits: 2 })}</p>
         </div>
