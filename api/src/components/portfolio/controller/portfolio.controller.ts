@@ -44,7 +44,7 @@ export default class PortfolioController {
       const crypto = await getCryptoUseCase.get(symbol)
 
       const transactionFormatted = formatTransaction(transaction)
-      const newOwnedCrypto: IOwnedCrypto = formatNewOwnedCrypto(crypto, transactionFormatted)
+      const newOwnedCrypto = formatNewOwnedCrypto(crypto, transactionFormatted)
 
       const updatePortfolioUseCase = new UpdatePortfolioUseCase(this.portfolioRepo)
       await updatePortfolioUseCase.addTransaction(userId, symbol, newOwnedCrypto)

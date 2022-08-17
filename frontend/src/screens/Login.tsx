@@ -37,7 +37,7 @@ const Login = () => {
       setLoginForm({ ...loginForm, password: '' })
     }
   }
-  console.log(formData)
+
   return (
     <section className="mx-auto flex min-h-[calc(100vh-7rem)] w-[300px] flex-col justify-center">
       <Head title="Login" />

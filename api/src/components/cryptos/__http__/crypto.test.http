@@ -2,7 +2,7 @@
 @cmcApi = https://pro-api.coinmarketcap.com/v1
 
 ### Get cryptos
-GET {{cmcApi}}/cryptocurrency/listings/latest?limit=10&sort=market_cap_strict
+GET {{cmcApi}}/cryptocurrency/listings/latest?limit=200&sort=market_cap_strict
 Accept: application/json
 X-CMC_PRO_API_KEY: d5bd8462-ee1a-4816-9f02-c9cac813cca5
 Accept-Encoding: deflate, gzip

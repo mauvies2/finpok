@@ -9,14 +9,15 @@ export const updateCryptosPrice = async (): Promise<void> => {
   const cryptos = await Crypto.find()
   if (!cryptos) throw new Error('DB Crypto collection could not be found')
 
-  cryptos.forEach(async (crypto) => {
-    fetchedCryptos.forEach(async (fetchedCrypto) => {
+  cryptos.forEach((crypto) => {
+    fetchedCryptos.forEach((fetchedCrypto) => {
       if (crypto.cmcId === String(fetchedCrypto.id)) {
         crypto.quote = fetchedCrypto.quote
-        await crypto.save()
+        crypto.save()
       }
     })
   })
+
   console.log({
     domain: 'Api',
     msg: 'Cryptocurrencies prices have been updated',
