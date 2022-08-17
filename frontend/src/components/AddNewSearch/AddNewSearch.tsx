@@ -90,7 +90,7 @@ const AddNewSearch = () => {
           </div>
         </div>
       </form>
-      <div className="h-full overflow-y-scroll md:max-h-[30rem]">
+      <div className="h-full overflow-y-scroll">
         {cryptos?.map((crypto, index) => (
           <div
             id={`item-${index}`}
