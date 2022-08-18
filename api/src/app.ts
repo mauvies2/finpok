@@ -24,6 +24,6 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(router)
 
-setInterval(() => updateCryptosPrice(), 1000 * 1500) // 25 min
+setInterval(() => updateCryptosPrice(), 1000 * 300) // 25 min
 
 export default app
