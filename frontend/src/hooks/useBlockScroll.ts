@@ -1,15 +1,15 @@
-import { useEffect, useRef } from 'react'
+import { useCallback, useRef } from 'react'
 
 const useBlockScroll = (condition: boolean = true) => {
   const scroll = useRef(false)
 
-  const blockScroll = () => {
-    if (typeof document === 'undefined') return
+  const blockScroll = useCallback(() => {
+    if (typeof document === 'undefined' || scroll.current) return
 
     const html = document.documentElement
     const { body } = document
 
-    if (!body || !body.style || scroll.current) return
+    if (!body || !body.style) return
 
     const scrollBarWidth = window.innerWidth - html.clientWidth
     const bodyPaddingRight = parseInt(window.getComputedStyle(body).getPropertyValue('padding-right'), 10) || 0
@@ -18,29 +18,21 @@ const useBlockScroll = (condition: boolean = true) => {
     body.style.paddingRight = `${bodyPaddingRight + scrollBarWidth}px`
 
     scroll.current = true
-  }
+  }, [])
 
-  const allowScroll = () => {
-    if (typeof document === 'undefined') return
+  const allowScroll = useCallback(() => {
+    if (typeof document === 'undefined' || !scroll.current) return
 
     const html = document.documentElement
     const { body } = document
 
-    if (!body || !body.style || !scroll.current) return
+    if (!body || !body.style) return
 
     html.style.overflow = ''
     body.style.paddingRight = ''
 
     scroll.current = false
-  }
-
-  useEffect(() => {
-    if (condition) {
-      blockScroll()
-    } else {
-      allowScroll()
-    }
-  }, [condition])
+  }, [])
 
   return [blockScroll, allowScroll]
 }

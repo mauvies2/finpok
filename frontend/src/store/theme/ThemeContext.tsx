@@ -24,7 +24,7 @@ interface Props {
   children: ReactNode
 }
 
-export const ThemeProvider: FC<Props> = ({ initialTheme, children }) => {
+export const ThemeProvider = ({ initialTheme, children }: Props) => {
   const [theme, setTheme] = useState(getInitialTheme)
 
   const rawSetTheme = (rawTheme: string) => {
@@ -42,6 +42,7 @@ export const ThemeProvider: FC<Props> = ({ initialTheme, children }) => {
   }
 
   useEffect(() => {
+    console.log('hola')
     rawSetTheme(theme)
   }, [theme])
 

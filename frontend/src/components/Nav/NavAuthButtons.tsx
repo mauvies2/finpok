@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useLocation, Link, useNavigate } from 'react-router-dom'
 import { Img } from 'react-image'
 import Close from 'finpoq/assets/icons/Close'
@@ -14,12 +14,13 @@ const NavAuthButtons = ({ toggleMobileMenu }: Props) => {
   const [isAuthUserDetailsOpened, setIsAuthUserDetailOpened] = useState(false)
   const [navButton, setNavButton] = useState<'close' | 'user' | 'buttons' | null>(null)
   const authUserButton = useRef<HTMLDivElement | null>(null)
+  const isOpened = useCallback(() => setIsAuthUserDetailOpened(false), [])
 
   const { authUser, isLoggedIn } = useAuthState()
   const { logout } = useAuthDispatch()
   const currentLocation = useLocation()
   const navigate = useNavigate()
-  useClickOutside(authUserButton, () => setIsAuthUserDetailOpened(false))
+  useClickOutside(authUserButton, isOpened)
 
   useEffect(() => {
     const isCurrentLocation = (path: string): boolean => currentLocation.pathname === `/${path}`

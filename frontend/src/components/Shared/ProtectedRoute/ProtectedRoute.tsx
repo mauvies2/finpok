@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react'
+import { useEffect } from 'react'
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/AuthProvider'
 
@@ -12,13 +12,9 @@ const ProtectedRoute = ({ children, redirectTo }: Props) => {
   const { isLoggedIn } = useAuthState()
   const location = useLocation()
 
-  const isAuth = useCallback(async () => {
-    await checkAuth()
-  }, [checkAuth])
-
   useEffect(() => {
-    isAuth()
-  }, [isAuth])
+    ;(async () => await checkAuth())()
+  }, [checkAuth])
 
   return <>{isLoggedIn ? children : <Navigate to={redirectTo} state={{ from: location }} replace />}</>
 }

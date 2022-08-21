@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios'
 import {
   TransacionPayload,
   EditTransactionPayload,
@@ -12,8 +13,13 @@ import { api } from './http'
 export const register = async (credentials: RegisterUserCredentials) =>
   await api.post('/auth/register', credentials).then((res) => res.data)
 
-export const fetchCryptos = async (queryParams?: { limit?: number; value?: string }): Promise<ICrypto[]> =>
-  await api.get(`/cryptocurrencies?limit=${queryParams?.limit}&value=${queryParams?.value}`).then((res) => res.data)
+export const fetchCryptos = async (
+  queryParams?: { limit?: number; value?: string },
+  options?: AxiosRequestConfig
+): Promise<ICrypto[]> =>
+  await api
+    .get(`/cryptocurrencies?limit=${queryParams?.limit}&value=${queryParams?.value}`, options)
+    .then((res) => res.data)
 
 export const fetchPortfolio = async (): Promise<IPortfolio> => {
   const user = auth._user()

@@ -10,7 +10,7 @@ export const GoogleLogin = () => {
   const { handleGoogleAuth, handleGoogleFailure } = useAuthWithGoogle()
 
   useEffect(() => {
-    function start() {
+    const start = () => {
       gapi.client.init({
         clientId,
         scope: 'email',

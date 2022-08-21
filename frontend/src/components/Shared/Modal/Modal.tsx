@@ -1,4 +1,4 @@
-import { KeyboardEvent, ReactNode, useEffect, useRef, useState } from 'react'
+import { KeyboardEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import useClickOutside from 'finpoq/hooks/useClickOutside'
 import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
 import ArrowLeft from 'finpoq/assets/icons/ArrowLeft'
@@ -17,7 +17,11 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
   const modal = useRef<HTMLDivElement | null>(null)
   const { closeModal } = useUiDispatch()
   const [blockScroll, allowScroll] = useBlockScroll()
-  useClickOutside(modal, () => closeModal(goBack))
+
+  useClickOutside(
+    modal,
+    useCallback(() => closeModal(goBack), [closeModal, goBack])
+  )
 
   const handleKeyPress = (e: KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'Escape') {
@@ -43,7 +47,7 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
       onKeyDown={(e) => handleKeyPress(e)}
     >
       <div
-        className={`animate-modal dark:bg-dark dark:border-dark-line fixed top-0 left-0 right-0 z-50 flex h-full flex-col bg-white pb-2 dark:border md:static md:mx-auto md:h-auto md:w-[30rem] md:rounded-lg ${
+        className={`animate-modal dark:bg-dark dark:border-dark-line fixed top-0 left-0 right-0 z-50 flex h-full flex-col bg-white pb-3 dark:border md:static md:mx-auto md:h-auto md:w-[30rem] md:rounded-lg ${
           heighFixed && 'md:h-[85vh]'
         }`}
         ref={modal}

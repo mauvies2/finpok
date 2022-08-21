@@ -73,14 +73,14 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
   const transactionTotal = (Number(transactionPayload.price) || 0) * (Number(transactionPayload.amount) || 0)
 
   useEffect(() => {
-    if (selectedCrypto && !transactionPayload.price && !transactionPayload.symbol) {
-      setTransactionPayload({
-        ...transactionPayload,
+    if (selectedCrypto) {
+      setTransactionPayload((prev) => ({
+        ...prev,
         price: parseFloat(selectedCrypto.price.toFixed(2)),
         symbol: selectedCrypto.symbol,
-      })
+      }))
     }
-  }, [selectedCrypto, transactionPayload])
+  }, [selectedCrypto])
 
   if (!selectedCrypto) return null
 

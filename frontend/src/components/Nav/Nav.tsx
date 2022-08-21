@@ -19,7 +19,7 @@ const Nav = ({ showOnScroll = false }: Props) => {
   const [isMobileMenuOpen, toggleMobileMenu] = useState(false)
 
   // computed
-  const { top, position } = useShowOnScroll(showOnScroll)
+  // const { top, position } = useShowOnScroll(showOnScroll)
   const isMobile = useMediaQuery()
   useBlockScroll(isMobileMenuOpen)
 
@@ -29,7 +29,7 @@ const Nav = ({ showOnScroll = false }: Props) => {
   return (
     <nav
       className="dark:bg-dark dark:border-dark-line absolute top-0 left-0 right-0 z-40 flex h-20 w-screen justify-center bg-white shadow dark:border-b"
-      style={{ top, position }}
+      // style={{ top, position }}
     >
       <div className="flex w-full max-w-[1150px] items-center justify-between px-5">
         <div className="z-20 w-auto">

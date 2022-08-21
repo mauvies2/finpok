@@ -52,12 +52,17 @@ const AddNewSearch = () => {
   }
 
   useEffect(() => {
+    const controller = new AbortController()
+
     const timeout = setTimeout(
       async () => {
-        const cryptos = await fetchCryptos({
-          limit: 20,
-          value: searchInput,
-        })
+        const cryptos = await fetchCryptos(
+          {
+            limit: 20,
+            value: searchInput,
+          },
+          { signal: controller.signal }
+        )
 
         setCryptos(cryptos)
       },
@@ -65,6 +70,7 @@ const AddNewSearch = () => {
     )
 
     return () => {
+      controller.abort()
       clearTimeout(timeout)
     }
   }, [searchInput])
