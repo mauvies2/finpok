@@ -1,6 +1,6 @@
 import { useIsFetching } from 'react-query'
 import ClipLoader from 'react-spinners/ClipLoader'
-import { Router } from 'finpoq/router/Router'
+import { Router } from 'finpoq/router/router'
 
 const Main = () => {
   const isFetching = useIsFetching()

@@ -1,7 +1,7 @@
 import { ITransaction } from 'finpoq-core/types'
-import { formatNumber } from 'finpoq/utils/formatNumber'
-import formatDate from 'finpoq/utils/formatDate'
-import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
+import { formatNumber } from 'finpoq/utils/format-number'
+import formatDate from 'finpoq/utils/format-date'
+import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
 
 interface Props {
   transaction: ITransaction

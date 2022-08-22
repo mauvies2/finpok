@@ -1,3 +1,3 @@
-import Head from './Head'
+import Head from './head'
 
 export default Head

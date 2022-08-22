@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
-import { App } from 'finpoq/App'
-import { ThemeProvider } from './store/theme/ThemeContext'
+import { App } from 'finpoq/app'
+import { ThemeProvider } from './store/theme/theme-context'
 
 ReactDOM.render(
   <React.StrictMode>

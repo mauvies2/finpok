@@ -1,3 +1,3 @@
-import Transaction from './Transaction'
+import Transaction from './transaction'
 
 export default Transaction

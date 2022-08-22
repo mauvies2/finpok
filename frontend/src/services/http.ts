@@ -1,19 +1,20 @@
-import axios from 'axios'
+import { AxiosRequestConfig, AxiosResponse } from 'axios'
+import { axiosHttp } from './axios-http'
 
-export const api = axios.create({
-  baseURL: process.env.NODE_ENV === 'production' ? 'https://finpoq.com/api' : 'http://localhost:5000/api',
-  headers: {
-    Accept: 'application/json',
-  },
-})
+export const GET = <T = never, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig<T>): Promise<R> =>
+  axiosHttp.get(url, config)
 
-api.interceptors.response.use(
-  (response) => response.data,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      // eslint-disable-next-line
-      location.reload()
-    }
-    throw error
-  }
-)
+export const POST = <T = never, R = AxiosResponse<T>>(
+  url: string,
+  data?: T,
+  config?: AxiosRequestConfig<T>
+): Promise<R> => axiosHttp.post(url, data, config)
+
+export const PATCH = <T = never, R = AxiosResponse<T>>(
+  url: string,
+  data?: T,
+  config?: AxiosRequestConfig<T>
+): Promise<R> => axiosHttp.patch(url, data, config)
+
+export const DELETE = <T = never, R = AxiosResponse<T>>(url: string, config?: AxiosRequestConfig<T>): Promise<R> =>
+  axiosHttp.delete(url, config)

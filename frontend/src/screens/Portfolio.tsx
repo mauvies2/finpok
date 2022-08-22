@@ -1,7 +1,7 @@
 import { ReactChild } from 'react'
-import { usePortfolio } from 'finpoq/hooks/useApi'
-import { formatNumber } from 'finpoq/utils/formatNumber'
-import Head from 'finpoq/components/Shared/Head'
+import { usePortfolio } from 'finpoq/hooks/use-api'
+import { formatNumber } from 'finpoq/utils/format-number'
+import Head from 'finpoq/components/shared/head'
 
 interface Props {
   children: ReactChild

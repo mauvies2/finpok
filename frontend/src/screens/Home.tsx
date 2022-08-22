@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom'
-import { GoogleLogin } from 'finpoq/components/GoogleLogin/GoogleLogin'
-import Button from 'finpoq/components/Shared/Button'
-import FieldError from 'finpoq/components/Shared/FieldError/FieldError'
-import Head from 'finpoq/components/Shared/Head'
-import { useAuthWithGoogle } from 'finpoq/hooks/useAuthWithGoogle'
-import { useAuthState } from 'finpoq/store/auth/AuthProvider'
+import { GoogleLogin } from 'finpoq/components/google-login/google-login'
+import Button from 'finpoq/components/shared/button'
+import FieldError from 'finpoq/components/shared/field-error/field-error'
+import Head from 'finpoq/components/shared/head'
+import { useAuthWithGoogle } from 'finpoq/hooks/use-auth-with-google'
+import { useAuthState } from 'finpoq/store/auth/auth-provider'
 
 const Home = () => {
   const { couldAuth } = useAuthWithGoogle()

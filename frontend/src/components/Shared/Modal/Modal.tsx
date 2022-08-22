@@ -1,9 +1,9 @@
 import { KeyboardEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
-import useClickOutside from 'finpoq/hooks/useClickOutside'
-import { useUiDispatch } from 'finpoq/store/ui/UiProvider'
-import ArrowLeft from 'finpoq/assets/icons/ArrowLeft'
-import Close from 'finpoq/assets/icons/Close'
-import useBlockScroll from 'finpoq/hooks/useBlockScroll'
+import useClickOutside from 'finpoq/hooks/use-click-outside'
+import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
+import ArrowLeft from 'finpoq/assets/icons/arrow-left'
+import Close from 'finpoq/assets/icons/close'
+import useBlockScroll from 'finpoq/hooks/use-block-scroll'
 
 interface ModalProps {
   goBack?: number

@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import NavAuthButtons from './NavAuthButtons'
+import NavAuthButtons from './nav-auth-buttons'
 import { Link } from 'react-router-dom'
-import NavLink from './NavLink'
-import useBlockScroll from 'finpoq/hooks/useBlockScroll'
-import useMediaQuery from 'finpoq/hooks/useMediaQuery'
-import Suitcase from 'finpoq/assets/icons/Suitcase'
-import useShowOnScroll from 'finpoq/hooks/useShowOnScroll'
-import Logo from 'finpoq/components/Logo/Logo'
-import Toggle from 'finpoq/components/ThemeToggle/ThemeToggle'
+import NavLink from './nav-link'
+import useBlockScroll from 'finpoq/hooks/use-block-scroll'
+import useMediaQuery from 'finpoq/hooks/use-media-query'
+import Suitcase from 'finpoq/assets/icons/suitcase'
+import Logo from 'finpoq/components/logo/logo'
+import Toggle from 'finpoq/components/theme-toggle/theme-toggle'
 
 // TODO: fix top animation bug
 
