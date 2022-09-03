@@ -32,10 +32,10 @@ module.exports = {
         'base-100': '#ffffff',
         'primary-dark': '#ff1245',
         'light-gray': '#FAFAFA',
-        dark: '#1a1d21',
+        dark: '#202020',
         'dark-text': '#d2d2d2',
-        'dark-line': '#323232',
-        'dark-modal': '#222529',
+        'dark-line': '#2e3033',
+        'dark-modal': '#323232',
       },
       boxShadow: {
         input: '0 0 3px #e04a6a',

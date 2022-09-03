@@ -28,11 +28,11 @@ const TransactionDetail = () => {
   const { type, createdAt, price, amount, fee, notes } = currentTransaction
 
   return (
-    <div className="flex h-full flex-col justify-between">
+    <div className="flex h-full flex-col justify-between text-sm">
       <div>
         <div className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">
           <p>Type</p>
-          <p className="text-sm font-semibold capitalize">{type}</p>
+          <p className="text-sm capitalize">{type}</p>
         </div>
 
         <div className="dark:border-dark-line flex justify-between border-b border-gray-100 py-5">

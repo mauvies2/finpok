@@ -2,7 +2,7 @@ const DotsVertical = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      className="ml-3 h-5 w-5 cursor-pointer text-gray-400"
+      className="ml-3 h-5 w-5 cursor-pointer"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"

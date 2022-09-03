@@ -59,7 +59,7 @@ const OwnedCryptoDetail = () => {
           </Button>
           {isRemoveAssetPromptOpen && (
             <div
-              className="menu dark:bg-dark-modal dark:border-dark-line dark:text-dark-text dropdown-content bg-base-100 min-w-40 absolute top-12 right-8 cursor-pointer rounded-lg p-3 text-center font-extralight text-red-500 shadow hover:bg-gray-50 dark:border"
+              className="menu dark:bg-dark-modal dark:border-dark-line dark:text-dark-text dropdown-content bg-base-100 min-w-40 absolute top-12 right-8 cursor-pointer rounded-lg p-3 text-center text-sm font-extralight text-red-500 shadow hover:bg-gray-50 dark:border"
               onClick={handleRemoveAsset}
             >
               <p>Remove asset</p>
