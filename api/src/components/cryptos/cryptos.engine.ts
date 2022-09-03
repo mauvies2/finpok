@@ -1,22 +1,23 @@
 import Crypto from './model/crypto.model'
-import { fetchCryptos } from '../../services/fetchApi'
+import { fetchCryptos, FetchedCrypto } from '../../services/fetchApi'
 import { formatCryptos } from './mappers/cryptos.mapper'
 
 export const updateCryptosPrice = async (): Promise<void> => {
-  const fetchedCryptos = await fetchCryptos()
-  if (!fetchedCryptos) throw new Error('CMC Cryptos could not be fetched')
-
+  const fetchedCryptos = await fetchCryptos(200)
   const cryptos = await Crypto.find()
-  if (!cryptos) throw new Error('DB Crypto collection could not be found')
 
-  cryptos.forEach((crypto) => {
-    fetchedCryptos.forEach((fetchedCrypto) => {
-      if (crypto.cmcId === String(fetchedCrypto.id)) {
-        crypto.quote = fetchedCrypto.quote
-        crypto.save()
-      }
-    })
+  const map = new Map<string, FetchedCrypto>()
+  fetchedCryptos.forEach((fc) => {
+    map.set(fc.symbol, fc)
   })
+
+  cryptos.forEach(async (crypto) => {
+    const matchedCrypto = map.get(crypto.symbol)
+    if (matchedCrypto) {
+      crypto.quote = matchedCrypto.quote
+      await crypto.save()
+    }
+  }, [])
 
   console.log({
     domain: 'Api',
@@ -29,11 +30,8 @@ export const fetchAndSaveInDb = async (): Promise<void> => {
   if (!fetchedCryptos) throw new Error()
 
   await Crypto.deleteMany()
-  console.log({ domain: 'Api', msg: 'Cryptocurrencies deleted' })
-
   const cryptosFormatted = await formatCryptos(fetchedCryptos)
-  console.log({ domain: 'Api', msg: 'Cryptocurrencies formatted' })
-
   await Crypto.create(cryptosFormatted)
+
   console.log({ domain: 'Api', msg: 'Cryptocurrencies collection created and successfully stored in the database' })
 }

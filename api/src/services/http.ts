@@ -12,9 +12,11 @@ const cryptoInstance = axios.create({
 })
 
 export const request = {
-  getCryptos: async (): Promise<FetchedCryptos> => {
+  getCryptos: async (limit: number = 200): Promise<FetchedCryptos> => {
     try {
-      const response = await cryptoInstance.get('/cryptocurrency/listings/latest?limit=200&sort=market_cap_strict')
+      const response = await cryptoInstance.get(
+        `/cryptocurrency/listings/latest?limit=${limit > 200 ? 200 : limit}&sort=market_cap_strict`
+      )
       return response.data.data
     } catch (error) {
       throw new Error(`The API request failed: ${error}`)

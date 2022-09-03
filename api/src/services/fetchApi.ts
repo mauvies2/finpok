@@ -7,6 +7,6 @@ export type FetchedCrypto = Omit<ICrypto, 'rank'> & { id: string } & {
 
 export type FetchedCryptos = FetchedCrypto[]
 
-export const fetchCryptos = (): Promise<FetchedCryptos> => request.getCryptos()
+export const fetchCryptos = (limit?: number): Promise<FetchedCryptos> => request.getCryptos(limit)
 
 export const fetchGlobalMetrics = (): Promise<Record<string, unknown>> => request.getGlobalMetrics()
