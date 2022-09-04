@@ -37,3 +37,4 @@ jobs:
           file: ./frontend/Dockerfile.prod
           push: true
           tags: mauvies/finpoq_frontend:latest
+          no-cache: true
