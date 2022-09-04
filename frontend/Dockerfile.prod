@@ -7,6 +7,7 @@ COPY ./frontend/package.json ./frontend/tsconfig.json ./frontend/yarn.lock /usr/
 WORKDIR /usr/src/app/frontend
 
 RUN npm install
+RUN npm install -g npm@8.19.1
 
 COPY ./frontend/ ./
 COPY ./core/ /usr/src/app/core/
