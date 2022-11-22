@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import { KeyboardEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
 import useClickOutside from 'finpoq/hooks/use-click-outside'
 import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
@@ -9,10 +10,9 @@ interface ModalProps {
   goBack?: number
   closeModalIcon?: boolean
   modalTitle?: string
-  children: ReactNode
 }
 
-const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: ModalProps) => {
+const Modal = ({ closeModalIcon = true, modalTitle, goBack = 1 }: ModalProps) => {
   const [modalRef, setModalRef] = useState<HTMLDivElement | null>()
   const modal = useRef<HTMLDivElement | null>(null)
   const { closeModal } = useUiDispatch()
@@ -35,8 +35,6 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
   }, [allowScroll, blockScroll])
 
   const heighFixed = modalRef && modalRef.offsetHeight > window.innerHeight * 0.6
-
-  if (!children) return null
 
   return (
     <div
@@ -71,7 +69,9 @@ const Modal = ({ closeModalIcon = true, modalTitle, children, goBack = 1 }: Moda
             <div />
           )}
         </div>
-        <div className="flex w-full flex-1 flex-col overflow-y-auto px-4 pt-2 md:rounded-lg">{children}</div>
+        <div className="flex w-full flex-1 flex-col overflow-y-auto px-4 pt-2 md:rounded-lg">
+          <Outlet />
+        </div>
       </div>
     </div>
   )

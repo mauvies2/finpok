@@ -3,44 +3,27 @@ import { LoginCredentials, IUserSession } from 'finpoq-core/types'
 import { GET, POST } from './http'
 
 export const auth = {
-  _user: (user?: IUserSession): IUserSession | undefined => {
-    if (typeof user !== 'undefined') {
-      localStorage.setItem('user', JSON.stringify(user))
-      return
-    }
+  _user: (): IUserSession | undefined => {
+    const auth = localStorage.getItem('auth')
+    if (!auth) return
 
-    const storedUser = localStorage.getItem('user')
-    if (!storedUser) return
-
-    return JSON.parse(storedUser)
+    return JSON.parse(auth).authUser
   },
 
-  googleLogin: async (googleCredentials: IUserSession): Promise<IUserSession> =>
-    await POST<IUserSession, AxiosResponse<IUserSession>>('/auth/google-login', googleCredentials).then((res) => {
-      auth._user(res.data)
-      return res.data
+  googleLogin: async (googleCredentials: IUserSession): Promise<IUserSession> => {
+    const response = await POST<IUserSession>('/auth/google-login', googleCredentials)
+    return response.data
+  },
+
+  login: async (credentials: LoginCredentials): Promise<IUserSession> => {
+    const response = await POST<LoginCredentials, AxiosResponse<IUserSession>>('/auth/login', credentials)
+    return response.data
+  },
+
+  isLoggedIn: async (token: string): Promise<boolean> =>
+    await GET('/auth/validate', {
+      headers: {
+        authorization: token,
+      },
     }),
-
-  login: async (credentials: LoginCredentials): Promise<IUserSession> =>
-    await POST<LoginCredentials, AxiosResponse<IUserSession>>('/auth/login', credentials).then((res) => {
-      auth._user(res.data)
-      return res.data
-    }),
-
-  logout: (): void => {
-    localStorage.removeItem('user')
-  },
-
-  isLoggedIn: async (): Promise<boolean> => {
-    try {
-      const user = auth._user()
-      if (!user) return false
-
-      return await GET<boolean>('/auth/validate', {
-        headers: { authorization: user.token },
-      }).then((res) => res.data)
-    } catch (e) {
-      return false
-    }
-  },
 }

@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router-dom'
 import PortfolioCrypto from 'finpoq/components/portfolio-crypto/portfolio-crypto'
 import useGetPortfolio from 'finpoq/store/server/selectors/use-get-portfolio'
 import Button from 'finpoq/components/shared/button'
@@ -43,6 +44,7 @@ const PortfolioCryptoIndex = () => {
             <div className="flex w-full justify-center">Start adding some coins</div>
           </div>
         )}
+        <Outlet />
       </section>
     </>
   )

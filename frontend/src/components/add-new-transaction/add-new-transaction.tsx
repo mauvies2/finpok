@@ -40,7 +40,6 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
     { name: 'notes', type: 'text', value: transactionPayload.notes },
   ])
 
-  // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 

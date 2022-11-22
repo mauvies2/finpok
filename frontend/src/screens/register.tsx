@@ -16,18 +16,21 @@ type FormValues = {
   repeatedPassword: string
 }
 
+const formInitialValues = {
+  name: '',
+  email: '',
+  password: '',
+  repeatedPassword: '',
+}
+
 // TODO: show error when email is already registered
 
 const Register = () => {
   const navigate = useNavigate()
+
   const { couldAuth } = useAuthWithGoogle()
 
-  const [formValues, setFormValues] = useState<FormValues>({
-    name: '',
-    email: '',
-    password: '',
-    repeatedPassword: '',
-  })
+  const [formValues, setFormValues] = useState<FormValues>(formInitialValues)
 
   const [repeatedPasswordError, setRepeatedPasswordError] = useState<boolean>(false)
 
@@ -47,13 +50,13 @@ const Register = () => {
 
   const handleRegister = async () => {
     const { email, password, name } = formValues
-    const credentials = { email, password, name }
-
     try {
-      const response = await register(credentials)
+      const response = await register({ email, password, name })
       if (response) navigate('/login')
     } catch (e) {
       return e
+    } finally {
+      setFormValues(formInitialValues)
     }
   }
 

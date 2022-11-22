@@ -17,6 +17,7 @@ import Page404 from 'finpoq/screens/404'
 export const Router = () => {
   const { isLoggedIn } = useAuthState()
   const location = useLocation()
+  const { pathname } = useLocation()
 
   return (
     <>
@@ -33,84 +34,27 @@ export const Router = () => {
           path="register"
           element={isLoggedIn ? <Navigate to="/portfolio" state={{ from: location }} replace /> : <Register />}
         />
-        <Route
-          path="portfolio/*"
-          element={
-            <ProtectedRoute redirectTo="/login">
-              <Portfolio>
-                <PortfolioRoutes />
-              </Portfolio>
-            </ProtectedRoute>
-          }
-        />
+        <Route path="portfolio" element={<ProtectedRoute children={<Portfolio />} redirectTo="/login" />}>
+          <Route path="" element={<PortfolioCryptoIndex />}>
+            <Route path="transaction-operation" element={<Modal goBack={pathname.includes('select') ? 1 : 2} />}>
+              <Route path="select" element={<AddNewSearch />} />
+              <Route path=":symbol" element={<AddNewTransaction goBack={2} />} />
+            </Route>
+            <Route path="add-new-transaction" element={<Modal />}>
+              <Route path=":symbol" element={<AddNewTransaction />} />
+            </Route>
+          </Route>
+          <Route path=":symbol" element={<OwnedCryptoDetail />}>
+            <Route path="transaction-operation" element={<Modal />}>
+              <Route index element={<AddNewTransaction />} />
+            </Route>
+            <Route path="transaction-detail" element={<Modal goBack={pathname.includes('edit') ? 2 : 1} />}>
+              <Route index element={<TransactionDetail />} />
+              <Route path="edit" element={<EditTransaction />} />
+            </Route>
+          </Route>
+        </Route>
         <Route path="*" element={<Page404 />} />
-      </Routes>
-    </>
-  )
-}
-
-const PortfolioRoutes = () => {
-  const { pathname } = useLocation()
-
-  return (
-    <Routes>
-      <Route index element={<PortfolioCryptoIndex />} />
-      <Route
-        path="transaction-operation/*"
-        element={
-          <>
-            <PortfolioCryptoIndex />
-            <Modal goBack={pathname.includes('select') ? 1 : 2}>
-              <Routes>
-                <Route path="select" element={<AddNewSearch />} />
-                <Route path=":symbol" element={<AddNewTransaction goBack={2} />} />
-              </Routes>
-            </Modal>
-          </>
-        }
-      />
-      <Route
-        path="add-new-transaction/:symbol"
-        element={
-          <>
-            <PortfolioCryptoIndex />
-            <Modal>
-              <AddNewTransaction />
-            </Modal>
-          </>
-        }
-      />
-      <Route path=":symbol/*" element={<OwnedCryptoRoutes />} />
-    </Routes>
-  )
-}
-
-const OwnedCryptoRoutes = () => {
-  const { pathname } = useLocation()
-  return (
-    <>
-      <OwnedCryptoDetail />
-      <Routes>
-        <Route
-          path="transaction-operation"
-          element={
-            <Modal>
-              <AddNewTransaction />
-            </Modal>
-          }
-        />
-
-        <Route
-          path="transaction-detail/*"
-          element={
-            <Modal goBack={pathname.includes('edit') ? 2 : 1}>
-              <Routes>
-                <Route index element={<TransactionDetail />} />
-                <Route path="edit" element={<EditTransaction />} />
-              </Routes>
-            </Modal>
-          }
-        />
       </Routes>
     </>
   )

@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
 import { useRemoveAsset } from 'finpoq/hooks/use-api'
 import { formatNumber } from 'finpoq/utils/format-number'
@@ -126,6 +126,8 @@ const OwnedCryptoDetail = () => {
           ))}
         </ul>
       </section>
+
+      <Outlet />
     </>
   )
 }

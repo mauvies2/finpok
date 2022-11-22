@@ -1,13 +1,9 @@
-import { ReactChild } from 'react'
 import { usePortfolio } from 'finpoq/hooks/use-api'
 import { formatNumber } from 'finpoq/utils/format-number'
 import Head from 'finpoq/components/shared/head'
+import { Outlet } from 'react-router-dom'
 
-interface Props {
-  children: ReactChild
-}
-
-const Portfolio = ({ children }: Props) => {
+const Portfolio = () => {
   const { data: portfolio } = usePortfolio()
 
   if (!portfolio) return null
@@ -16,17 +12,6 @@ const Portfolio = ({ children }: Props) => {
     <>
       <Head title="Portfolio" />
       <div className="lg:mt-6 lg:flex">
-        {/* <section className="my-10 ml-4 flex items-center lg:my-0 lg:ml-0 lg:w-[25%] lg:items-start">
-          <div className="avatar placeholder mr-4">
-            <div className="text-neutral-content dark:bg-dark dark:text-dark-text dark:border-dark-line h-12 w-12 rounded-full bg-gray-300 dark:border">
-              <span className="text-lg">MX</span>
-            </div>
-          </div>
-          <div>
-            <p className="font-bold">My Main Portfolio</p>
-            <p>{formatNumber(portfolio.total || 0, { fractionDigits: 2, symbol: '$' })}</p>
-          </div>
-        </section> */}
         <div className="mt-4 flex-1">
           <section>
             <p className="mb-2">Current balance</p>
@@ -41,7 +26,7 @@ const Portfolio = ({ children }: Props) => {
               </p>
             </div>
           </section>
-          {children}
+          <Outlet />
         </div>
       </div>
     </>

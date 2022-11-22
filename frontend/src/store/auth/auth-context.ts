@@ -1,8 +1,8 @@
 import produce from 'immer'
 import { useReducer } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { LoginCredentials, IUserSession } from 'finpoq-core/types'
 import { auth } from 'finpoq/services/auth-service'
-import { useNavigate } from 'react-router-dom'
 
 export interface IAuthState {
   authUser: IUserSession | null
@@ -95,33 +95,36 @@ export const useAuthActions = () => {
     try {
       const authUser = await auth.googleLogin(googleCredentials)
       dispatch({ type: 'LOGIN_SUCCESS', payload: authUser })
-    } catch (e) {
-      dispatch({ type: 'AUTH_ERROR', payload: { error: e } })
+    } catch (error) {
+      dispatch({ type: 'AUTH_ERROR', payload: { error } })
+      console.error('Authentication failed: ', error)
     }
   }
 
   const login = async (credentials: LoginCredentials) => {
     try {
       const authUser = await auth.login(credentials)
-      if (!authUser) throw new Error('Authentication failed')
       dispatch({ type: 'LOGIN_SUCCESS', payload: authUser })
-    } catch (e) {
-      dispatch({ type: 'AUTH_ERROR', payload: { error: e } })
+    } catch (error) {
+      dispatch({ type: 'AUTH_ERROR', payload: { error } })
+      console.error('Authentication failed: ', error)
     }
   }
 
   const logout = () => {
-    auth.logout()
     dispatch({ type: 'LOGOUT' })
     navigate('login')
   }
 
   const checkAuth = async () => {
+    if (!state.authUser || !state.isLoggedIn) return
+
     try {
-      const authUser = await auth.isLoggedIn()
-      dispatch({ type: 'AUTH_USER', payload: authUser })
+      const isAuth = await auth.isLoggedIn(state.authUser.token)
+      if (!isAuth) throw Error
     } catch (error) {
       dispatch({ type: 'AUTH_ERROR', payload: { error } })
+      console.error('Authentication failed: ', error)
     }
   }
 

@@ -42,7 +42,6 @@ export const ThemeProvider = ({ initialTheme, children }: Props) => {
   }
 
   useEffect(() => {
-    console.log('hola')
     rawSetTheme(theme)
   }, [theme])
 

@@ -10,14 +10,7 @@ const useSearchCryptos = (searchInput: string) => {
 
     const timeout = setTimeout(
       async () => {
-        const cryptos = await fetchCryptos(
-          {
-            limit: 20,
-            value: searchInput,
-          },
-          { signal: controller.signal }
-        )
-
+        const cryptos = await fetchCryptos({ limit: 20, value: searchInput }, { signal: controller.signal })
         setCryptos(cryptos)
       },
       searchInput ? 400 : 0

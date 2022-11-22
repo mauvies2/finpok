@@ -4,8 +4,6 @@ import { useNavigate } from 'react-router-dom'
 import { SelectedCrypto } from 'finpoq/types'
 
 export interface IUiState {
-  isModalOpen: boolean
-
   portfolio: {
     currentOwnedCrypto: string | null
     selectedCrypto: SelectedCrypto | null
@@ -24,8 +22,6 @@ export interface IUiDispatch {
 
 // initial state
 const initialState: IUiState = {
-  isModalOpen: false,
-
   portfolio: {
     selectedCrypto: null,
     currentOwnedCrypto: null,
@@ -73,18 +69,6 @@ const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUi
         },
       }
 
-    case 'OPEN_MODAL':
-      return {
-        ...state,
-        isModalOpen: true,
-      }
-
-    case 'CLOSE_MODAL':
-      return {
-        ...state,
-        isModalOpen: false,
-      }
-
     default:
       return state
   }
@@ -125,7 +109,6 @@ export const useUiActions = () => {
 
   const closeModal = (goBack: number) => {
     navigate(-goBack)
-    dispatch({ type: 'CLOSE_MODAL' })
   }
 
   const events = {
