@@ -48,7 +48,6 @@ export const loginUser: RequestHandler = async (req: Request, res: Response) => 
 
     return res
       .status(200)
-      .header('auth-token', token)
       .json({ status: 200, msg: 'User logged in', data: { _id, name, email, token } })
   } catch (error) {
     console.error(error)
@@ -79,10 +78,8 @@ export const handleGoogleAuth: RequestHandler = async (req: Request, res: Respon
     }
 
     const newToken = jwt.sign({ _id: userId, email }, config.jwt, { expiresIn: '2 days' })
-
     return res
       .status(200)
-      .header('auth-token', newToken)
       .json({ status: 200, msg: 'User logged in', data: { _id: userId, name, email, token: newToken, imageUrl } })
   } catch (error) {
     console.error(error)

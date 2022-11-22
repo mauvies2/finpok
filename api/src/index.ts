@@ -1,6 +1,7 @@
+import config from './config/default'
 import app from './app'
 import './database'
 
-app.listen(app.get('port'), () => {
-  console.log('Server listening on port', app.get('port'))
+app.listen(config.port, () => {
+  console.log('Server listening on port', config.port)
 })

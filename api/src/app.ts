@@ -10,13 +10,10 @@ import express from 'express'
 import morgan from 'morgan'
 import cors from 'cors'
 
-import config from './config/default'
 import router from './routes/index'
 import { updateCryptosPrice } from './components/cryptos/cryptos.engine'
 
 const app = express()
-
-app.set('port', config.port)
 
 app.use(morgan('dev'))
 app.use(cors())
