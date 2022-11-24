@@ -2,42 +2,56 @@
 
 ## Finpoq
 
-An awesome quick and safe portfolio balance tracker!
+A great, quick and safe portfolio balance tracker!
 
 <!-- ABOUT THE PROJECT -->
 
-### About The Project
+## About The Project
 
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-
-- Your time should be focused on creating something amazing. A project that solves a problem and helps others
-- You shouldn't be doing the same tasks over and over like creating a README from scratch
-- You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-- aa
-- aa
-- aa
+This is a personal project both to satisfy a personal need and to continue improving as a full stack developer. The problem that the application solves is that it allows you to keep track of your cryptocurrency portfolio balance without having to access each of the wallets where the tokens are stored.
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+The first step is to clone the repository using the following command.
 
-### Prerequisites
+```sh
+git clone https://github.com/mauvies2/finpoq.git
+```
 
-This is an example of how to list things you need to use the software and how to install them.
+If docker is installed in your machine you can run the following commmand from the root directory to lift the containers and start the app.
 
-- npm
-  ```sh
-  npm install npm@latest -g
-  ```
+```sh
+docker compose up
+```
+
+In case of not having docker installed, first install dependencies from the root directory.
+
+```sh
+npm install
+```
+
+Move into the api directory and install dependencies.
+
+```sh
+cd api && npm run install
+```
+
+Lift the serve by running.
+
+```sh
+npm run dev
+```
+
+Now move into the frontend directory and follow the same procedure.
+
+```sh
+cd ../frontend && npm install
+```
+
+```sh
+npm run dev
+```
+
+Fantastic! The app should be running on port 3000 of localhost!
