@@ -39,6 +39,15 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
     openModal(`/portfolio/add-new-transaction/${ownedCrypto.symbol}`)
   }
 
+  const handleSelectOwnedCrypto = () => {
+    selectCrypto({
+      symbol: ownedCrypto.symbol,
+      name: ownedCrypto.name,
+      logoUrl: ownedCrypto.logoUrl,
+      price: ownedCrypto.price.current,
+    })
+  }
+
   if (!ownedCrypto) return null
 
   const change24hStyle = ownedCrypto.price.change24h > 0 ? 'text-green-400' : 'text-red-400'
@@ -51,7 +60,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
 
   return (
     <div className="dark:border-dark-line flex border-b text-sm">
-      <Link className="flex flex-1 py-5" to={`/portfolio/${ownedCrypto.symbol}`}>
+      <Link className="flex flex-1 py-5" to={`/portfolio/${ownedCrypto.symbol}`} onClick={handleSelectOwnedCrypto}>
         <div className="flex flex-1 items-center">
           <img src={ownedCrypto.logoUrl} className="mr-3" width="20" alt="logo" />
           <div>
