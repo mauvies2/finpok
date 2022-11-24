@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useRemoveAsset } from 'finpoq/hooks/use-api'
+import { useRemoveAsset } from 'finpoq/hooks/api/use-api'
 import { formatNumber } from 'finpoq/utils/format-number'
 import Button from 'finpoq/components/shared/button'
 import Transaction from 'finpoq/components/transaction'

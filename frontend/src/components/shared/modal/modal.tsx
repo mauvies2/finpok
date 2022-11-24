@@ -3,7 +3,7 @@ import { KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react'
 import useClickOutside from 'finpoq/hooks/use-click-outside'
 import ArrowLeft from 'finpoq/assets/icons/arrow-left'
 import Close from 'finpoq/assets/icons/close'
-import useBlockScroll from 'finpoq/hooks/use-block-scroll'
+import useBlockScroll from 'finpoq/hooks/utils/use-block-scroll'
 import { useModal } from 'finpoq/hooks/use-modal'
 
 interface ModalProps {

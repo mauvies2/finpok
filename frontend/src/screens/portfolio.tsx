@@ -1,4 +1,4 @@
-import { usePortfolio } from 'finpoq/hooks/use-api'
+import { usePortfolio } from 'finpoq/hooks/api/use-api'
 import { formatNumber } from 'finpoq/utils/format-number'
 import Head from 'finpoq/components/shared/head'
 import { Outlet } from 'react-router-dom'

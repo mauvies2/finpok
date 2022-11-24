@@ -1,6 +1,6 @@
 import formatDate from 'finpoq/utils/format-date'
 import { formatNumber } from 'finpoq/utils/format-number'
-import { useRemoveTransaction } from 'finpoq/hooks/use-api'
+import { useRemoveTransaction } from 'finpoq/hooks/api/use-api'
 import Button from '../shared/button'
 import { useModal } from 'finpoq/hooks/use-modal'
 import { useGetCurrentTransaction } from 'finpoq/hooks/use-get-current-transaction'
