@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom'
 import DotsVertical from 'finpoq/assets/icons/dots-vertical'
 import Add from 'finpoq/assets/icons/add'
 import { formatNumber } from 'finpoq/utils/format-number'
-import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
 import { useRemoveAsset } from 'finpoq/hooks/use-api'
 import useClickOutside from 'finpoq/hooks/use-click-outside'
 import { IOwnedCrypto } from 'finpoq/types'
+import { useModal } from 'finpoq/hooks/use-modal'
+import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
 
 interface Props {
   ownedCrypto: IOwnedCrypto
@@ -16,7 +17,8 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
   const menuRef = useRef<HTMLDivElement | null>(null)
   const [isMenuOpened, setIsMenuOpened] = useState(false)
 
-  const { selectOwnedCryptoDetail, openModal, selectCrypto } = useUiDispatch()
+  const { openModal } = useModal()
+  const { selectCrypto } = useUiDispatch()
   const removeAsset = useRemoveAsset()
   useClickOutside(menuRef, () => setIsMenuOpened(false))
 
@@ -49,11 +51,7 @@ const PortfolioCrypto = ({ ownedCrypto }: Props) => {
 
   return (
     <div className="dark:border-dark-line flex border-b text-sm">
-      <Link
-        className="flex flex-1 py-5"
-        to={`/portfolio/${ownedCrypto.symbol}`}
-        onClick={() => selectOwnedCryptoDetail(ownedCrypto.symbol)}
-      >
+      <Link className="flex flex-1 py-5" to={`/portfolio/${ownedCrypto.symbol}`}>
         <div className="flex flex-1 items-center">
           <img src={ownedCrypto.logoUrl} className="mr-3" width="20" alt="logo" />
           <div>

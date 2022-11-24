@@ -1,10 +1,10 @@
 import { Outlet } from 'react-router-dom'
-import { KeyboardEvent, ReactNode, useCallback, useEffect, useRef, useState } from 'react'
+import { KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react'
 import useClickOutside from 'finpoq/hooks/use-click-outside'
-import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
 import ArrowLeft from 'finpoq/assets/icons/arrow-left'
 import Close from 'finpoq/assets/icons/close'
 import useBlockScroll from 'finpoq/hooks/use-block-scroll'
+import { useModal } from 'finpoq/hooks/use-modal'
 
 interface ModalProps {
   goBack?: number
@@ -15,7 +15,7 @@ interface ModalProps {
 const Modal = ({ closeModalIcon = true, modalTitle, goBack = 1 }: ModalProps) => {
   const [modalRef, setModalRef] = useState<HTMLDivElement | null>()
   const modal = useRef<HTMLDivElement | null>(null)
-  const { closeModal } = useUiDispatch()
+  const { closeModal } = useModal()
   const [blockScroll, allowScroll] = useBlockScroll()
 
   useClickOutside(

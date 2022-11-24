@@ -4,69 +4,32 @@ import { useNavigate } from 'react-router-dom'
 import { SelectedCrypto } from 'finpoq/types'
 
 export interface IUiState {
-  portfolio: {
-    currentOwnedCrypto: string | null
-    selectedCrypto: SelectedCrypto | null
-    currentTransaction: ITransaction | null
-  }
+  selectedCrypto: SelectedCrypto | null
 }
 
 export interface IUiDispatch {
   selectCrypto: (selectedCrypto: SelectedCrypto) => void
   clearSelectedCrypto: () => void
-  selectOwnedCryptoDetail: (ownedCrypto: string) => void
-  selectCurrentTransaction: (transaction: ITransaction) => void
-  openModal: (route: string) => void
-  closeModal: (goBack: number) => void
 }
 
 // initial state
 const initialState: IUiState = {
-  portfolio: {
-    selectedCrypto: null,
-    currentOwnedCrypto: null,
-    currentTransaction: null,
-  },
+  selectedCrypto: null,
 }
 
 // reducer
 // eslint-disable-next-line
 const UiReducer = (state: IUiState, event: { type: string; payload?: any }): IUiState => {
   switch (event.type) {
-    case 'SELECT_ASSET_TO_ADD':
+    case 'SELECT_CRYPTO_TO_ADD':
       return {
         ...state,
-        portfolio: {
-          ...state.portfolio,
-          selectedCrypto: event.payload,
-        },
+        selectedCrypto: event.payload,
       }
 
-    case 'CLEAR_SELECTED_ASSET':
+    case 'CLEAR_SELECTED_CRYPTO':
       return {
         ...state,
-        portfolio: {
-          ...state.portfolio,
-          selectedCrypto: null,
-        },
-      }
-
-    case 'SELECT_OWNED_CRYPTO':
-      return {
-        ...state,
-        portfolio: {
-          ...state.portfolio,
-          currentOwnedCrypto: event.payload,
-        },
-      }
-
-    case 'SELECT_SINGLE_TRANSACTION':
-      return {
-        ...state,
-        portfolio: {
-          ...state.portfolio,
-          currentTransaction: event.payload,
-        },
       }
 
     default:
@@ -87,37 +50,16 @@ export const useUiActions = () => {
   const navigate = useNavigate()
 
   const selectCrypto = (selectedCrypto: SelectedCrypto) => {
-    dispatch({ type: 'SELECT_ASSET_TO_ADD', payload: selectedCrypto })
+    dispatch({ type: 'SELECT_CRYPTO_TO_ADD', payload: selectedCrypto })
   }
 
   const clearSelectedCrypto = () => {
-    dispatch({ type: 'CLEAR_SELECTED_ASSET' })
-  }
-
-  const selectOwnedCryptoDetail = (ownedCrypto: string) => {
-    dispatch({ type: 'SELECT_OWNED_CRYPTO', payload: ownedCrypto })
-  }
-
-  const selectCurrentTransaction = (transaction: ITransaction) => {
-    dispatch({ type: 'SELECT_SINGLE_TRANSACTION', payload: transaction })
-  }
-
-  const openModal = (route: string) => {
-    navigate(route)
-    dispatch({ type: 'OPEN_MODAL' })
-  }
-
-  const closeModal = (goBack: number) => {
-    navigate(-goBack)
+    dispatch({ type: 'CLEAR_SELECTED_CRYPTO' })
   }
 
   const events = {
     selectCrypto,
     clearSelectedCrypto,
-    selectOwnedCryptoDetail,
-    selectCurrentTransaction,
-    closeModal,
-    openModal,
   }
 
   return { state, events }

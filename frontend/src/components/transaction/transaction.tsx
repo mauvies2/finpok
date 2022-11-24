@@ -1,7 +1,7 @@
 import { ITransaction } from 'finpoq-core/types'
 import { formatNumber } from 'finpoq/utils/format-number'
 import formatDate from 'finpoq/utils/format-date'
-import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
+import { useModal } from 'finpoq/hooks/use-modal'
 
 interface Props {
   transaction: ITransaction
@@ -9,11 +9,10 @@ interface Props {
 }
 
 const Transaction = ({ transaction, cryptoSymbol }: Props) => {
-  const { selectCurrentTransaction, openModal } = useUiDispatch()
+  const { openModal } = useModal()
 
   const openTransactionDetail = () => {
-    selectCurrentTransaction(transaction)
-    openModal(`/portfolio/${cryptoSymbol}/transaction-detail`)
+    openModal(`/portfolio/${cryptoSymbol}/transaction-detail/${transaction._id}`)
   }
 
   if (!transaction) return null

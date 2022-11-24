@@ -1,20 +1,21 @@
 import formatDate from 'finpoq/utils/format-date'
 import { formatNumber } from 'finpoq/utils/format-number'
 import { useRemoveTransaction } from 'finpoq/hooks/use-api'
-import { useUiDispatch, useUiState } from 'finpoq/store/ui/ui-provider'
-import { useGetCurrentOwnedCrypto } from 'finpoq/store/ui/ui-selectors'
 import Button from '../shared/button'
+import { useModal } from 'finpoq/hooks/use-modal'
+import { useGetCurrentTransaction } from 'finpoq/hooks/use-get-current-transaction'
+import { useGetCurrentOwnedCrypto } from 'finpoq/hooks/use-get-current-owned-crypto'
 
 const TransactionDetail = () => {
-  const { currentTransaction } = useUiState().portfolio
-  const { openModal, closeModal } = useUiDispatch()
+  const { openModal, closeModal } = useModal()
+  const currentTransaction = useGetCurrentTransaction()
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()
   const removeTransaction = useRemoveTransaction()
 
   if (!currentTransaction || !currentOwnedCrypto) return null
 
   const handaleEditTransaction = () => {
-    openModal(`/portfolio/${currentOwnedCrypto.symbol}/transaction-detail/edit`)
+    openModal(`/portfolio/${currentOwnedCrypto.symbol}/transaction-detail/${currentTransaction._id}/edit`)
   }
 
   const handleRemoveTransaction = () => {

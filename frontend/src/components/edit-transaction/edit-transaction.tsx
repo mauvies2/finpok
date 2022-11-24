@@ -5,17 +5,18 @@ import TabSelect from 'finpoq/components/shared/tab-select/tab-select'
 import { FormEvent, useState, useEffect } from 'react'
 import { EditTransactionPayload, TransacionPayload } from 'finpoq-core/types'
 import { useEditTransaction } from 'finpoq/hooks/use-api'
-import { useUiDispatch, useUiState } from 'finpoq/store/ui/ui-provider'
-import { useGetCurrentOwnedCrypto } from 'finpoq/store/ui/ui-selectors'
 import { useFormErrorHandleling } from 'finpoq/hooks/use-form-error-handleling'
 import formatDate from 'finpoq/utils/format-date'
+import { useModal } from 'finpoq/hooks/use-modal'
+import { useGetCurrentTransaction } from 'finpoq/hooks/use-get-current-transaction'
+import { useGetCurrentOwnedCrypto } from 'finpoq/hooks/use-get-current-owned-crypto'
 
 const EditTransaction = () => {
   const [extraFields, setExtraFields] = useState({ date: false, fee: false, notes: false })
   const [transactionPayload, setTransactionPayload] = useState<EditTransactionPayload | null>(null)
 
-  const { currentTransaction } = useUiState().portfolio
-  const { clearSelectedCrypto, closeModal } = useUiDispatch()
+  const currentTransaction = useGetCurrentTransaction()
+  const { closeModal } = useModal()
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()
   const updateTransaction = useEditTransaction()
   const transactionDate = formatDate()
@@ -33,7 +34,6 @@ const EditTransaction = () => {
 
     if (transactionPayload && isFormValid()) {
       updateTransaction.mutate(transactionPayload)
-      clearSelectedCrypto()
       closeModal(2)
     }
   }

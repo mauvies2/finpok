@@ -6,9 +6,10 @@ import Button from 'finpoq/components/shared/button'
 import FormInput from 'finpoq/components/shared/form-input/form-input'
 import TabSelect from 'finpoq/components/shared/tab-select/tab-select'
 import { useAddTransaction } from 'finpoq/hooks/use-api'
-import { useUiDispatch, useUiState } from 'finpoq/store/ui/ui-provider'
 import { TransacionPayload } from 'finpoq-core/types'
 import { useFormErrorHandleling } from 'finpoq/hooks/use-form-error-handleling'
+import { useModal } from 'finpoq/hooks/use-modal'
+import { useUiDispatch, useUiState } from 'finpoq/store/ui/ui-provider'
 
 interface Props {
   goBack?: number
@@ -26,9 +27,9 @@ const AddNewTransaction = ({ goBack = 1 }: Props) => {
     time: new Date(),
   })
 
-  const { clearSelectedCrypto, closeModal } = useUiDispatch()
-  const { selectedCrypto } = useUiState().portfolio
-
+  const { closeModal } = useModal()
+  const { selectedCrypto } = useUiState()
+  const { clearSelectedCrypto } = useUiDispatch()
   const addTransaction = useAddTransaction()
   const navigate = useNavigate()
   const transactionDate = formatDate()

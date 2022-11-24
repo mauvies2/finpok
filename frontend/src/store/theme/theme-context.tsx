@@ -1,4 +1,4 @@
-import { createContext, FC, ReactNode, useEffect, useState } from 'react'
+import { createContext, ReactNode, useEffect, useState } from 'react'
 
 export const getInitialTheme = () => {
   if (typeof window !== 'undefined' && window.localStorage) {
@@ -8,7 +8,7 @@ export const getInitialTheme = () => {
     }
 
     const userMedia = window.matchMedia('(prefers-color-scheme: dark)')
-    console.log(userMedia)
+
     if (userMedia.matches) {
       return 'dark'
     }

@@ -1,24 +1,22 @@
 import { useRef, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
 import { useRemoveAsset } from 'finpoq/hooks/use-api'
 import { formatNumber } from 'finpoq/utils/format-number'
-import useGetPortfolio from 'finpoq/store/server/selectors/use-get-portfolio'
 import Button from 'finpoq/components/shared/button'
 import Transaction from 'finpoq/components/transaction'
-import { useGetCurrentOwnedCrypto } from 'finpoq/store/ui/ui-selectors'
 import useClickOutside from 'finpoq/hooks/use-click-outside'
 import Add from 'finpoq/assets/icons/add'
+import { useModal } from 'finpoq/hooks/use-modal'
+import { useGetCurrentOwnedCrypto } from 'finpoq/hooks/use-get-current-owned-crypto'
 
 const OwnedCryptoDetail = () => {
   const removeAssetOption = useRef<HTMLDivElement | null>(null)
   const [isRemoveAssetPromptOpen, setIsRemoveAssetPromptOpen] = useState(false)
 
-  const portfolio = useGetPortfolio()
   const removeAsset = useRemoveAsset()
   const navigate = useNavigate()
   const currentOwnedCrypto = useGetCurrentOwnedCrypto()
-  const { selectCrypto, openModal } = useUiDispatch()
+  const { openModal } = useModal()
   useClickOutside(removeAssetOption, () => setIsRemoveAssetPromptOpen(false))
 
   // methods
@@ -30,18 +28,10 @@ const OwnedCryptoDetail = () => {
   }
 
   const handleAddTransaction = () => {
-    if (currentOwnedCrypto) {
-      selectCrypto({
-        symbol: currentOwnedCrypto.symbol,
-        name: currentOwnedCrypto.name,
-        logoUrl: currentOwnedCrypto.logoUrl,
-        price: currentOwnedCrypto.price.current,
-      })
-    }
     openModal(`/portfolio/${currentOwnedCrypto?.symbol}/transaction-operation`)
   }
 
-  if (!currentOwnedCrypto || !portfolio) return null
+  if (!currentOwnedCrypto) return null
 
   return (
     <>

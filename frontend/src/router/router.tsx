@@ -48,7 +48,7 @@ export const Router = () => {
             <Route path="transaction-operation" element={<Modal />}>
               <Route index element={<AddNewTransaction />} />
             </Route>
-            <Route path="transaction-detail" element={<Modal goBack={pathname.includes('edit') ? 2 : 1} />}>
+            <Route path="transaction-detail/:id" element={<Modal goBack={pathname.includes('edit') ? 2 : 1} />}>
               <Route index element={<TransactionDetail />} />
               <Route path="edit" element={<EditTransaction />} />
             </Route>

@@ -2,12 +2,12 @@ import { Outlet } from 'react-router-dom'
 import PortfolioCrypto from 'finpoq/components/portfolio-crypto/portfolio-crypto'
 import useGetPortfolio from 'finpoq/store/server/selectors/use-get-portfolio'
 import Button from 'finpoq/components/shared/button'
-import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
 import Add from 'finpoq/assets/icons/add'
+import { useModal } from 'finpoq/hooks/use-modal'
 
 const PortfolioCryptoIndex = () => {
   const portfolio = useGetPortfolio()
-  const { openModal } = useUiDispatch()
+  const { openModal } = useModal()
 
   const handleSelect = () => {
     openModal('/portfolio/transaction-operation/select')
