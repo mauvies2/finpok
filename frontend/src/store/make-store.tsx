@@ -1,14 +1,14 @@
-import { createContext, FC, ReactNode, useContext } from 'react'
+import { createContext, ReactNode, useContext } from 'react'
+
+interface ProviderProps {
+  children: ReactNode
+}
 
 export default function makeStore<T, K>(useEvents: () => { state: T; events: K }) {
   const State = createContext<T>({} as T)
   const Dispatch = createContext<K>({} as K)
 
-  interface ProviderProps {
-    children: ReactNode
-  }
-
-  const Provider: FC<ProviderProps> = ({ children }) => {
+  const Provider = ({ children }: ProviderProps) => {
     const { state, events } = useEvents()
 
     return (
