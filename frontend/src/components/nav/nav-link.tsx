@@ -1,4 +1,4 @@
-import useMediaQuery from 'finpoq/hooks/use-media-query'
+import useMediaQuery from 'finpoq/hooks/utils/use-media-query'
 import { ReactElement, ReactNode } from 'react'
 import { Link } from 'react-router-dom'
 

@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom'
 import { KeyboardEvent, useCallback, useEffect, useRef, useState } from 'react'
-import useClickOutside from 'finpoq/hooks/use-click-outside'
+import useClickOutside from 'finpoq/hooks/utils/use-click-outside'
 import ArrowLeft from 'finpoq/assets/icons/arrow-left'
 import Close from 'finpoq/assets/icons/close'
 import useBlockScroll from 'finpoq/hooks/utils/use-block-scroll'

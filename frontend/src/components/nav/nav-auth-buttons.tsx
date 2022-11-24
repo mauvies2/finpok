@@ -4,7 +4,7 @@ import { Img } from 'react-image'
 import Close from 'finpoq/assets/icons/close'
 import Button from 'finpoq/components/shared/button'
 import { useAuthDispatch, useAuthState } from 'finpoq/store/auth/auth-provider'
-import useClickOutside from 'finpoq/hooks/use-click-outside'
+import useClickOutside from 'finpoq/hooks/utils/use-click-outside'
 
 interface Props {
   toggleMobileMenu: React.Dispatch<React.SetStateAction<boolean>>

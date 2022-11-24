@@ -3,10 +3,10 @@ import NavAuthButtons from './nav-auth-buttons'
 import { Link } from 'react-router-dom'
 import NavLink from './nav-link'
 import useBlockScroll from 'finpoq/hooks/utils/use-block-scroll'
-import useMediaQuery from 'finpoq/hooks/use-media-query'
 import Suitcase from 'finpoq/assets/icons/suitcase'
 import Logo from 'finpoq/components/logo/logo'
 import Toggle from 'finpoq/components/theme-toggle/theme-toggle'
+import useMediaQuery from 'finpoq/hooks/utils/use-media-query'
 
 // TODO: fix top animation bug
 

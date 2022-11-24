@@ -4,10 +4,10 @@ import DotsVertical from 'finpoq/assets/icons/dots-vertical'
 import Add from 'finpoq/assets/icons/add'
 import { formatNumber } from 'finpoq/utils/format-number'
 import { useRemoveAsset } from 'finpoq/hooks/api/use-api'
-import useClickOutside from 'finpoq/hooks/use-click-outside'
 import { IOwnedCrypto } from 'finpoq/types'
 import { useModal } from 'finpoq/hooks/use-modal'
 import { useUiDispatch } from 'finpoq/store/ui/ui-provider'
+import useClickOutside from 'finpoq/hooks/utils/use-click-outside'
 
 interface Props {
   ownedCrypto: IOwnedCrypto
