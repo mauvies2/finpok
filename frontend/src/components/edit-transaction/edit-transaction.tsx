@@ -28,7 +28,6 @@ const EditTransaction = () => {
     { name: 'notes', type: 'text', value: transactionPayload?.notes },
   ])
 
-  // methods
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 

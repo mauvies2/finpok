@@ -19,7 +19,6 @@ const OwnedCryptoDetail = () => {
   const { openModal } = useModal()
   useClickOutside(removeAssetOption, () => setIsRemoveAssetPromptOpen(false))
 
-  // methods
   const handleRemoveAsset = () => {
     if (currentOwnedCrypto) {
       removeAsset.mutate(currentOwnedCrypto._id || '')
