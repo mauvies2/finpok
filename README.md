@@ -38,7 +38,7 @@ Move into the api directory and install dependencies.
 cd api && npm run install
 ```
 
-Lift the serve by running.
+Lift the server by running.
 
 ```sh
 npm run dev
